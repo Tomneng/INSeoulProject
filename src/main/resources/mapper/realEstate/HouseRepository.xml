@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.real_estate.repository.HouseRepository">
+    <insert id="write" parameterType="com.inseoul.real_estate.domain.Housedata"
+            useGeneratedKeys="true" keyColumn="house_id" keyProperty="houseId">
+        INSERT INTO house_Contract
+            (acc_year, ssg_code,
+             ssg_name, dong_code, dong_name,
+             land_kind, land_kind_name, bobn,
+             bubn, floor, contract_date,
+             rent_kind, rent_area, rent_deposit,
+             rent_fee, building_name, build_year,
+             house_kind_name, contract_period, new_ron_secd)
+        VALUES
+            (#{accYear}, #{ssgCode},
+             #{ssgName}, #{dongCode}, #{dongName},
+             #{landKind}, #{landKindName}, #{bobn},
+             #{bubn}, #{floor}, #{contractDate},
+             #{rentKind}, #{rentArea}, #{rentDeposit},
+             #{rentFee}, #{buildingName}, #{buildYear},
+             #{houseKindName}, #{contractPeriod}, #{newRonSecd})
+    </insert>
+</mapper>
