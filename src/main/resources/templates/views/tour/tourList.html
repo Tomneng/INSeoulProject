@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/tour/js/tour.js}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+<div id="container_tourlist">
+    <select name="sigunguCode" id="sigunguCode">
+        <option value="%20" selected>전체</option>
+        <option value="1">강남구</option>
+        <option value="2">강동구</option>
+        <option value="3">강북구</option>
+        <option value="4">강서구</option>
+        <option value="5">관악구</option>
+        <option value="6">광진구</option>
+        <option value="7">구로구</option>
+        <option value="8">금천구</option>
+        <option value="9">노원구</option>
+        <option value="10">도봉구</option>
+        <option value="11">동대문구</option>
+        <option value="12">동작구</option>
+        <option value="13">마포구</option>
+        <option value="14">서대문구</option>
+        <option value="15">서초구</option>
+        <option value="16">성동구</option>
+        <option value="17">성북구</option>
+        <option value="18">송파구</option>
+        <option value="19">양천구</option>
+        <option value="20">영등포구</option>
+        <option value="21">용산구</option>
+        <option value="22">은평구</option>
+        <option value="23">종로구</option>
+        <option value="24">중구</option>
+        <option value="25">중랑구</option>
+    </select>
+    <input type="text" name="keyword" placeholder="관광지명을 검색하세요.">
+    <button type="button" id="btn_tour">검색</button>
+    <br><br>
+    <hr>
+</div>
+
+<table id="demoJSON_tour"></table><br><br><br>
+
+
+</body>
+
+</html>
