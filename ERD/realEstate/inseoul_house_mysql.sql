@@ -1,3 +1,6 @@
+
+DROP TABLE IF EXISTS housecontract;
+
 DROP TABLE IF EXISTS house_Contract;
 
 CREATE TABLE house_Contract
@@ -19,10 +22,12 @@ CREATE TABLE house_Contract
     rent_deposit int NOT NULL,
     rent_fee int NOT NULL,
     building_name varchar(20),
-    build_year int NOT NULL,
+    build_year int,
     house_kind_name varchar(20),
     contract_period varchar(20),
     new_ron_secd varchar(2),
     contract_score int,
-    place_score int
+    place_score int,
+    distinguish varchar(150),
+    address varchar(100)
 )
