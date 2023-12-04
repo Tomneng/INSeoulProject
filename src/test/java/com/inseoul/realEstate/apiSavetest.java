@@ -1,6 +1,7 @@
 package com.inseoul.realEstate;
 
 import com.inseoul.real_estate.domain.Housedata;
+import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
@@ -15,24 +16,26 @@ public class apiSavetest {
     void test1(){
         HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
 
-        Housedata housedata = Housedata.builder()
-                .accYear("2023")
-                .ssgCode(11230)
-                .ssgName("동대문구")
-                .dongCode(10700)
-                .dongName("청량리동")
-                .contractDate("20231123")
-                .rentKind("전세")
-                .rentArea(31.37)
-                .rentDeposit(12000)
-                .rentFee(0)
-                .buildYear(1987)
-                .houseKindName("단독다가구")
-                .contractPeriod("24.01~26.01")
-                .newRonSecd("갱신")
-                .build();
-        int cnt = houseRepository.write(housedata);
-        System.out.println("make() 결과 = " + cnt);
+        int cnt = houseRepository.compare("202311170용산구12000도원동1대지002300001320231125전세84.69570000삼성래미안2001아파트23.12~25.12갱신");
+        System.out.println("compare() 결과 = " + cnt);
     }
+
+    @Test
+    void test2(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        System.out.println(houseRepository.selectById(1L));
+    }
+
+    @Test
+    void test3(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        Row row = new Row();
+        row.setHouseId(1L);
+        row.setContractScore(80);
+        row.setPlaceScore(90);
+
+        System.out.println(houseRepository.updateScore(row));
+    }
+
 
 }

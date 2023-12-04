@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.inseoul.real_estate.repository.HouseRepository">
-    <insert id="write" parameterType="com.inseoul.real_estate.domain.Housedata"
+    <insert id="write" parameterType="com.inseoul.real_estate.domain.Row"
             useGeneratedKeys="true" keyColumn="house_id" keyProperty="houseId">
         INSERT INTO house_Contract
             (acc_year, ssg_code,
@@ -13,7 +13,7 @@
              bubn, floor, contract_date,
              rent_kind, rent_area, rent_deposit,
              rent_fee, building_name, build_year,
-             house_kind_name, contract_period, new_ron_secd)
+             house_kind_name, contract_period, new_ron_secd, distinguish, address)
         VALUES
             (#{accYear}, #{ssgCode},
              #{ssgName}, #{dongCode}, #{dongName},
@@ -21,6 +21,27 @@
              #{bubn}, #{floor}, #{contractDate},
              #{rentKind}, #{rentArea}, #{rentDeposit},
              #{rentFee}, #{buildingName}, #{buildYear},
-             #{houseKindName}, #{contractPeriod}, #{newRonSecd})
+             #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{distinguish}, #{address})
     </insert>
+
+    <select id="compare" resultType="java.lang.Integer">
+        SELECT count(distinguish)
+        FROM house_Contract
+        WHERE distinguish = #{distinguish}
+    </select>
+
+    <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address",
+               rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
+               contract_period "contractPeriod", new_ron_secd "newRonSecd"
+        FROM house_Contract
+        WHERE house_id = #{houseId}
+    </select>
+
+    <update id="updateScore">
+        UPDATE house_contract
+        SET contract_score = #{contractScore},
+            place_score = #{placeScore}
+        WHERE house_id = #{houseId}
+    </update>
 </mapper>
