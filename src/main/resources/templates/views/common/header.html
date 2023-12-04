@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>ddSDa
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-</body>
+<th:block th:fragment="header">
+    <nav class="navbar navbar-expand-lg sticky-top" aria-label="Offcanvas navbar large"
+         data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main">
+                <img th:src="@{/common/image/seoul/Seoul_illust.jpg}" alt="Logo" style="width:80px;"
+                     class="rounded-pill ">
+                in 서울
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
+                    aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- offcanvas -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2"
+                 aria-labelledby="offcanvasNavbar2Label">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label"></i> 로그인 정보</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">서비스 소개</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="page2.html">관광</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="page3.html">부동산</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="page4.html">MBTI게시판</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3 mt-lg-0" role="search">
+                        <button type="button" class="btn btn-light">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</th:block>
 </html>
