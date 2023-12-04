@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="pagination">
+    <div class="container mt-1">
+        <ul class="pagination justify-content-center">
+            <!--/* << 표시 여부 */-->
+            <li class="page-item" th:if="${page > 1}"><a class="page-link" th:href="${url }" title="처음"><i class='fas fa-angle-double-left'></i></a></li>
+
+
+            <!--/* < 표시 여부 */-->
+            <li class="page-item" th:if="${startPage > 1 }"><a class="page-link" th:href="@{${url }(page=${startPage - 1 })}"><i class='fas fa-angle-left'></i></a></li>
+
+
+            <!--/* 페이징 안의 '숫자' 표시 */-->
+            <th:block th:if="${totalPage > 1 }">
+                <th:block th:each="k: ${#numbers.sequence(startPage, endPage)}">
+                    <li class="page-item" th:unless="${k == page }"><a class="page-link" th:href="@{${url }(page=${k})}" th:text="${k}"></a></li>
+                    <li class="page-item active" th:if="${k == page }"><a class="page-link" href="javascript:void(0);" th:text="${k}"></a></li>
+                </th:block>
+            </th:block>
+
+
+            <!--/* > 표시 여부 */-->
+            <li class="page-item" th:if="${totalPage > endPage }"><a class="page-link" th:href="@{${url }(page=${endPage + 1 })}"><i class='fas fa-angle-right'></i></a></li>
+
+
+            <!--/* >> 표시 여부 */-->
+            <li class="page-item" th:if="${page < totalPage }"><a class="page-link" th:href="@{${url }(page=${totalPage })}"><i class='fas fa-angle-double-right'></i></a></li>
+
+        </ul>
+    </div>
+
+</th:block>
+
+
+</html>
