@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inseoul.food.repository.FoodRepository">
+    <sql id="SELECT_BASE">
+        SELECT f.foodId, f.storeName, f.storeAddr, f.storeTel, f.storeImage
+            FROM food f
+    </sql>
+    <insert id="save" flushCache="true" parameterType="com.inseoul.food.domain.FoodData"
+    useGeneratedKeys="true" keyColumn="foodId" keyProperty="foodId">
+        INSERT INTO food(storeName, storeAddr, storeTel)
+        VALUES (#{storeName}, #{storeAddr}, #{storeTel})
+    </insert>
+    <select id="findAll" resultType="com.inseoul.food.domain.FoodData">
+        <include refid="SELECT_BASE"/>
+            f.foodId = #{foodId}
+            ORDER BY f.foodId DESC
+    </select>
+
+</mapper>
