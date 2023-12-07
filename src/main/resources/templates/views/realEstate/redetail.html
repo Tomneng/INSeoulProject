@@ -115,9 +115,10 @@ history.back();
     <div class="container" style="display: flex">
         <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.contractScore}]] / 100</div>
         <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.placeScore}]] / 100</div>
-        <form th:action="@{/realEstate/putScore}" method="post" enctype="multipart/form-data">
-        <input id="contract_ScorePut" th:value="${contractScore}">
-        <input id="place_ScorePut" th:value="${placeScore}">
+        <form th:action="@{/realEstate/putScore}" method="post">
+        <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
+        <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
+        <input id="houseId" name="houseId" th:value="${row.houseId}">
             <button type="submit" class="btn btn-outline-dark">작성완료</button>
         </form>
     </div>

@@ -37,5 +37,27 @@ public class apiSavetest {
         System.out.println(houseRepository.updateScore(row));
     }
 
+    @Test
+    void test4(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        Row row = new Row();
+        row.setAccYear("2023");
+        row.setSsgName("관악구");
+        row.setDongCode(10200);
+        row.setHouseKindName("아파트");
+
+        System.out.println(houseRepository.filteredSearch(row.getAccYear(),row.getSsgName(),row.getDongCode(),row.getHouseKindName(), 1, 10));
+    }
+    @Test
+    void test5(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        Row row = new Row();
+        row.setAccYear("2023");
+        row.setSsgName("관악구");
+        row.setDongCode(10200);
+        row.setHouseKindName("아파트");
+        System.out.println(houseRepository.countAll(row));
+    }
+
 
 }

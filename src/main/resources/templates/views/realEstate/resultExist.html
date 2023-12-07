@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:if="${result <= 0 && alreadyResulted != 1}">
+    alert("검색된 결과가 없습니다.");
+    history.back();
+</script>
+
+<script th:if="${result > 0 || alreadyResulted == 1}" th:inline="javascript">
+    location.href = `infoList`;
+</script>
+
+</html>

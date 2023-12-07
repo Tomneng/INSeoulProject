@@ -26,8 +26,25 @@ CREATE TABLE house_Contract
     house_kind_name varchar(20),
     contract_period varchar(20),
     new_ron_secd varchar(2),
-    contract_score int,
-    place_score int,
     distinguish varchar(150),
     address varchar(100)
-)
+);
+
+CREATE TABLE User
+(
+    user_id int PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(50) NOT NULL,
+    password varchar(200) NOT NULL,
+    user_regdate VARCHAR(10) NOT NULL,
+    nickname VARCHAR(20) NOT NULL,
+    mbti VARCHAR(4)
+);
+
+
+CREATE TABLE house_Contract_Score
+(
+    user_id int PRIMARY KEY REFERENCES User(user_id),
+    house_id int PRIMARY KEY REFERENCES house_contract(house_id),
+    contract_score int,
+    place_score int
+);
