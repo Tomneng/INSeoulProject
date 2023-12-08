@@ -4,18 +4,17 @@ server:
 
 # 콘솔 ANSI 색상
 spring:
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: ${spring.mail.username}
-#    password: ${spring.mail.password}
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          timeout: 5000
-#          starttls:
-#            enable: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kchanghee59
+    password: mhje wrtz ygvq zckh
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
   output:
     ansi:
