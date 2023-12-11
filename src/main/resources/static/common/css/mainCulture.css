@@ -1,0 +1,87 @@
+/* 문화 행사 이벤트, 전시회 부분 */
+/* 문화 행사 이벤트, 전시회 전체*/
+#eventSection {
+    /* 배경이미지 경로를 변경해야할 것임. */
+    /* 첫번째 center는 background-position-x 50% 와 background-position-y 50% */
+    /* fixed 는 위치가 고정되어 있어서 스크롤을 움직여도 이미지는 고정되어 있음. */
+    /*  background 이미지는 내용이 없으면 보이지 않음, 그래서 높이를 지정해줘야함. */
+    background-image: url(../image/background/christmas-5740350_1920.png); /* 백그라운드 이미지의 경로*/
+    background-position-x: center; /* 백그라운드 이미지의 위치, 현재 설정은 가로 중앙 */
+    background-position-y: 10vh;
+    background-size: 100%; /* 비율을 유지한 상태로 꽉 채운다. */
+    background-repeat: no-repeat; /* 이미지 반복없이 1개만 나온다. */
+    background-color: #45434c; /* 백그라운드 이미지를 제외한 나머지 공간을 채운 색상. */
+    background-attachment: fixed;
+    position: relative; /* 자식 요소의 위치를 설정할 수 있게 한다. */
+    height: 100vh; /* 이 요소의 높이를 설정한다. */
+    display: flex; /* flex 는 부모 요소 안의 내용을 가운데 정렬할 수 있게 해주고, */
+    justify-content: center; /* 는 가로 방향에서 가운데 정렬하게 해주고, */
+    align-items: center; /* 는 세로 방향에서 가운데 정렬하게 해줘요. */
+}
+
+/* 행사 글자 */
+#eventText {
+    position: absolute; /* 는 부모 요소를 기준으로 위치를 정할 수 있게 해줘요. */
+    top: 50vh; /* 는 이미지를 세로 방향으로 부모 요소의 중앙에 위치시켜요. */
+    left: 35vw; /* 는 이미지를 가로 방향으로 부모 요소의 오른쪽에서 2/3 지점에 위치시켜요. */
+    transform: translate(-50%, -50%); /* 는 이미지를 정확하게 가운데로 맞추기 위한 특별한 설정이에요. 이미지의 중심을 기준으로 정렬해줘요. */
+    color: aliceblue; /* 글자색 */
+}
+
+/* 행사 포스터 */
+#eventPoster {
+    position: absolute; /* 는 부모 요소를 기준으로 위치를 정할 수 있게 해줘요. */
+    top: 50vh; /* 는 이미지를 세로 방향으로 부모 요소의 중앙에 위치시켜요. */
+    right: 35vw; /* 는 이미지를 가로 방향으로 부모 요소의 오른쪽에서 2/3 지점에 위치시켜요. */
+    transform: translate(50%, -50%); /* 는 이미지를 정확하게 가운데로 맞추기 위한 특별한 설정이에요. 이미지의 중심을 기준으로 정렬해줘요. */
+    height: 60vh; /* 이미지의 높이를 설정 */
+}
+
+
+/* 왼쪽 끝에서 왼쪽의 1/3지점까지 슬라이딩하면서 나타남. */
+@keyframes leftRightSliding {
+    from {
+        left: 15vw;
+        opacity: 0;
+    }
+    to {
+        left: 35vw;
+        opacity: 1;
+    }
+}
+
+/* 왼쪽의 1/3지점에서 왼쪽 끝까지 슬라이딩하면서 사라짐. */
+@keyframes leftRightReverse {
+    from {
+        left: 35vw;
+        opacity: 1;
+    }
+    to {
+        left: 15vw;
+        opacity: 0;
+    }
+}
+
+/* 오른쪽 끝에서 오른쪽의 1/3지점까지 슬라이딩하면서 나타남. */
+@keyframes rightLeftSliding {
+    from {
+        right: 15vw;
+        opacity: 0;
+    }
+    to {
+        right: 35vw;
+        opacity: 1;
+    }
+}
+
+/* 오른쪽 1/3지점에서 오른쪽 끝까지 슬라이딩하면서 사라짐. */
+@keyframes rightLeftReverse {
+    from {
+        right: 35vw;
+        opacity: 1;
+    }
+    to {
+        right: 15vw;
+        opacity: 0;
+    }
+}

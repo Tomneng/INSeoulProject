@@ -17,12 +17,12 @@ public class MainController {
     public void common(Model model) {
     }
 
-    @RequestMapping("/testscroll")
+    @RequestMapping("/map")
     public String testScroll() {
-        return "redirect:/home/scroll";
+        return "redirect:/home/map";
     }
 
-    @RequestMapping("/home/scroll")
+    @RequestMapping("/home/map")
     public void scroll(Model model) {
     }
 
