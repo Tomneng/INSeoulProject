@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inseoul.food.repository.AttachmentRepository">
+    <insert id="insert" flushCache="true" parameterType="arraylist">
+        INSERT INTO review_image(sourceName, fileName, reviewId)
+        VALUES
+            <foreach collection="list" item="e" separator=",">
+                (#{e.sourceName}, #{e.fileName}, #{param2})
+            </foreach>
+    </insert>
+    <insert id="save" flushCache="true" parameterType="com.inseoul.food.domain.Attachment">
+        INSERT INTO review_image(sourceName, fileName, reviewId)
+        VALUES (#{sourceName}, #{fileName}, #{reviewId})
+    </insert>
+    <sql id="SELECT_FILE">
+        SELECT reviewImgId, reviewId, sourceName, fileName
+        FROM review_image
+        WHERE 1 = 1;
+    </sql>
+    <select id="findByReview" resultType="com.inseoul.food.domain.Attachment">
+        <include refid="SELECT_FILE"/>
+            AND reviewId = #{reviewId}
+            ORDER BY reviewImgId ASC;
+    </select>
+    <select id="findById" resultType="com.inseoul.food.domain.Attachment">
+        <include refid="SELECT_FILE"/>
+        AND reviewImgId = #{reviewImgId}
+    </select>
+
+</mapper>

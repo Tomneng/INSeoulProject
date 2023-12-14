@@ -1,5 +1,4 @@
-package com.inseoul.real_estate.domain;
-
+package com.inseoul.food.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -13,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TbLnOpendataRentV {
+
+public class TbVwRestaurants {
 
     @JsonProperty("row")
-    private List<Row> row;
-
+    private List<FoodRow> row;
 }

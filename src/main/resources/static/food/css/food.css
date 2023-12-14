@@ -1,4 +1,4 @@
-.modal{
+/* .modal{
     position: absolute;
     display: none;
 
@@ -11,4 +11,296 @@
     height: 100%;
 
     background-color: antiquewhite;
+} */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: roboto;
 }
+
+/* 모달 */
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#modal .modal-window {
+    background: rgba(0, 92, 61, 0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 100%;
+    position: relative;
+    /* top: -100px; */
+    padding: 10px;
+}
+#modal .title {
+    padding-left: 10px;
+    display: inline;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+#modal .title h2 {
+    display: inline;
+}
+#modal .title span{
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+#modal .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: white;
+}
+
+#modal #content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: white;
+}
+#modal #content img{
+    width: 380px;
+    height: 240px;
+    text-align: center;
+    align-items: center;
+}
+
+input[type="button"]{
+    background-color: rgb(141, 190, 223);
+    width: 100px;
+}
+
+/* 리뷰 이미지 */
+.foodImage{
+    cursor: pointer;
+}
+.real-upload{
+    display: none;
+}
+.upload{
+    width: 100%;
+    height: 150px;
+    background-color: rgb(19, 192, 85);
+    color: #444;
+}
+#fooodImage img{
+    width: 400px;
+    height: 200px;
+}
+.image-preview{
+    width: 100px;
+    height: 150px;
+    background-color: #FD4;
+    display: flex;
+    margin-right: 5px;
+    gap:20px;
+}
+
+.mid{
+    margin-top: 5px;
+}
+/* 회원 아이디 */
+
+#userId{
+    float: left;
+    /* display: inline-block; */
+    /* margin-right: 50px; */
+}
+#userId input{
+    margin-top: 5px;
+    width: 50px;
+    height: 20px;
+    background-color: #bebebe;
+    border-color: 1px solid black;
+}
+span{
+    font-weight: 550;
+    color: black;
+    font-size: 17px;
+}
+.userId{
+    background-color: grey;
+}
+
+/* 평점 */
+#reviewStar{
+    float: right;
+}
+
+/* 평점 별*/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { 
+    display: inline-block; 
+    border: 0; 
+    margin-right: 15px;
+}
+.rate input {
+    display: none;
+}
+.rate label {
+    float: right;
+    color: #000000
+}
+.rate label:before {
+    display: inline-block;
+    font-size: 1rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 ";
+}
+.rate .half:before {
+    content: "\f089 ";
+    position: absolute;
+    padding-right: 0;
+}
+.rate input:checked ~ label, 
+.rate label:hover,.rate label:hover ~ label { 
+    color: #fbff00 !important;
+} 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label {
+    color: #fbff00 !important;
+} 
+
+/* 리뷰 카테코리 */
+#reviewCategory{
+    display: block;
+    /* float: left; */
+    min-height: 21px;
+    font-size: 1.5rem;
+    color: rgba(var(--place-color-text1), 1);
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+}
+/* .category{
+    margin-top:15px;
+    text-align: left;
+    float: left;
+} */
+.keyword{
+    float: left;
+    /*margin-left: 50px;*/
+}
+/* ul */
+.category{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    /* margin-block-start: 1em; */
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.category .category-comment .label-comment{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    padding: 0 17px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 2.6rem;
+    white-space: nowrap;
+    width: 140px;
+}
+.category-comment{
+    
+}
+#reviewCategory .checkComment{
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rlect(0,0,0,0);
+}
+/* 리뷰 입력창 */
+.category-content{
+    /* display: inline-block; */
+    float: right;
+    /* margin-top: 20px; */
+     margin-left: 20px;
+    /* margin-bottom: 1500px; */
+}
+.reviewComment{
+    
+    /* float: left; */
+    /* margin-bottom: 500px; */
+}
+/* 버튼들 */
+input{
+    font-size: 15px;
+    letter-spacing: -.3px;
+    line-height: 2rem;
+    width: 70px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+input[type="checkbox"]{
+    box-sizing: border-box;
+    display: none;
+}
+input[type="checkbox"] + label{
+    cursor: pointer;
+    display: inline-block;
+    background: rgb(0, 192, 112);
+}
+/* 선택시 색상 변경 */
+input[type="checkbox"]:checked + label{
+    background: rgb(141, 190, 223);
+}
+
+input[type="submit"]{
+    background-color: rgb(141, 190, 223);
+    border-radius: 5px;
+    border: 1px solid black;
+    /* size: 600px; */
+    /* display: inline-block; */
+    float: left;
+    /* margin-left: 90px; */
+}
+
+.foodMap span{
+    /* margin-top: 50px; */
+    float: left;
+}
+#map{
+    margin-top:100px;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 200px;
+
+     width: 200px;
+}
+  
