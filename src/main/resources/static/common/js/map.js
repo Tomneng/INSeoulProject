@@ -1,7 +1,12 @@
 // 주소를 좌표로 바꾸기
 // 지도의 중심이 될 주소, 주소를 좌표로 변경할때 사용됨.
 // 현재 임의의 값으로 코리아it아카데미 2관의 주소가 들어있음(서울 강남구 테헤란로26길 12)
-var centralAddress = '서울특별시 강남구 테헤란로26길 12'; // 서울특별시 강남구 테헤란로26길 12
+let centralAddress = '';
+centralAddress = $('.store_address').text()
+
+// 서울특별시 강남구 테헤란로26길 12
+console.log("주소:" + centralAddress);
+
 
 
 // 지도의 중심이 될 위도, 경도를 입력

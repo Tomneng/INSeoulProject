@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Detail/Review</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/food/css/food.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/map.css}">
+<!--    <link rel="stylesheet" href="/src/main/resources/static/food/css/food.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/821e8d3801.js" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="container">
+        <h2>관광상세페이지</h2>
+        <div id="">관광상세페이지</div>
+        <!-- 임시 -->
+        <input type="button" value="모달창 열기" onclick="openBtn()">
+    </div>
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="close-area">X</div>
+            <div class="title">
+                <div class="store_name"><span th:text="${foodrow?.storeName}"></span></div>
+                <div class="store_address"><span th:text="${foodrow?.storeAddress}"></span></div>
+                <div class="store_tel"><span th:text="${foodrow?.storeTel}"></span></div>
+            </div>
+            <hr>
+            <div id="showContent">
+                <div id="foodImage">음식점 이미지</div>
+                <div id="reviewShowStar">
+                    <span>평점</span> 
+                    <span class="reviewShowStar" th:text="${foodrow?.reviewAvg}"></span>
+                </div>
+                <!-- 여러개 -->
+                <div id="reviewShowCategory">
+                    <span>리뷰</span>
+                    <span class="reviewShowCategory" th:text="${review?.reviewCategory}">리뷰 키워드</span>
+                </div>
+                <input type="button" value="리뷰남기기" onclick="getShow()">
+            </div>
+
+            <div id="content" style="display: none;">
+                <div class="container mt-3 mb-3 border rounded">
+                <div class="foodImage">
+                    <span>음식점 이미지</span>
+                    <!-- 이미지 파일만 -->
+<!--                    <input type="file" class="real-upload" accept="image/*" required multiple>-->
+
+<!--                    &lt;!&ndash; 다중 파일 업로드 &ndash;&gt;-->
+<!--                    <span>+</span>-->
+<!--                    <div class="upload">-->
+<!--                        <ul class="image-preview">이미지 db에서 띄워줘</ul>-->
+<!--                    </div>-->
+                    <!-- 이미지 보여주기 -->
+<!--                    <div th:each="attachment : ${foodrow?.fileList}">-->
+<!--                        <img src = "@{'/upload/' + ${attachment.fileName}}" class="img-thumbnail">-->
+<!--                    </div>-->
+                </div>
+                </div>
+                <div class="mid">
+                    <div id="userId">
+                        <span>회원ID</span>
+                        <span class="userId" th:text="${user?.userId}">asdfdsfaasdfasfd</span>
+                    </div>
+                    <div id="reviewStar">
+                        <fieldset class="rate">
+                        <span>평점</span> 
+                            <input type="radio" id="rating10" name="rating" value="5.0">                            <label for="rating10" title="5점"></label>
+                            <input type="radio" id="rating9" name="rating" value="4.5">
+                            <label class="half" for="rating9" title="4.5점"></label>
+                            <input type="radio" id="rating8" name="rating" value="4.0">
+                            <label for="rating8" title="4점"></label>
+                            <input type="radio" id="rating7" name="rating" value="3.5">
+                            <label class="half" for="rating7" title="3.5점"></label>
+                            <input type="radio" id="rating6" name="rating" value="3.0">
+                            <label for="rating6" title="3점"></label>
+                            <input type="radio" id="rating5" name="rating" value="2.5">
+                            <label class="half" for="rating5" title="2.5점"></label>
+                            <input type="radio" id="rating4" name="rating" value="2.0">
+                            <label for="rating4" title="2점"></label>
+                            <input type="radio" id="rating3" name="rating" value="1.5">
+                            <label class="half" for="rating3" title="1.5점"></label>
+                            <input type="radio" id="rating2" name="rating" value="1.0">
+                            <label for="rating2" title="1점"></label>
+                            <input type="radio" id="rating1" name="rating" value="0.5">
+                            <label class="half" for="rating1" title="0.5점"></label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div id="reviewCategory">
+                    <span>리뷰</span>
+                    <div class="keyword">
+                        <ul class="category">
+                            <li class="category-comment">
+                                <input type="checkbox" class="checkComment" id="keyword-delicious" value="😊 음식이 맛있어요">
+                                <label for="keyword-delicious" class="label-comment">
+                                    😊 음식이 맛있어요
+                                </label>
+                            </li>
+                            <li class="category-comment">
+                                <input type="checkbox" class="checkComment" id="keyword-kind" value="💓 친절해요">
+                                <label for="keyword-kind" class="label-comment">
+                                    💓 친절해요
+                                </label>
+                            </li>
+                            <li class="category-comment">
+                                <input type="checkbox" class="checkComment" id="keyword-viewGood" value="🌉 뷰가 좋아요">
+                                <label for="keyword-viewGood" class="label-comment">
+                                    🌉 뷰가 좋아요
+                                </label>
+                            </li>
+                            <li class="category-comment">
+                                <input type="checkbox" class="checkComment" id="keyword-aloneEat" value="🍙 혼밥하기 좋아요">
+                                <label for="keyword-aloneEat" class="label-comment">
+                                    🍙 혼밥하기 좋아요
+                                </label>
+                            </li>
+                            <li class="category-comment">
+                                <input type="checkbox" class="checkComment" id="keyword-hall" value="👀 매장이 넓어요">
+                                <label for="keyword-hall" class="label-comment">
+                                    👀 매장이 넓어요
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="category-content">
+                        <textarea class="reviewComment" cols="15" rows="10" placeholder="직접 후기를 작성해주세요" th:value="${reviewContent}"></textarea>
+                    </div>
+                    <input type="submit" class="cancel" value="취소" onclick="getCancel()">
+                    <input type="submit" class="ok" value="작성완료" onclick="getHide()">
+                </div>
+<!--                <div class="foodMap">-->
+<!--                    <span>지도</span>-->
+<!--                    <div id="map">지도 api</div>-->
+<!--                </div>-->
+<!--                <th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
+            </div>
+        </div>
+    </div>
+</body>
+<script th:src="@{/food/js/food.js}"></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>
+<!--<script src="/src/main/resources/static/food/js/food.js"></script>-->
+<!-- <script th:src="@{/food/js/food_image.js}"></script> -->
+<script th:src="@{/common/js/map.js}"></script>
+</html>
