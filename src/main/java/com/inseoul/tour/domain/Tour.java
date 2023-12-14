@@ -9,5 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Tour {
+    @JsonProperty("response")
     private Response response;
 }
