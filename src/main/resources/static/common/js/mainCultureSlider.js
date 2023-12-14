@@ -79,11 +79,11 @@ const makeTrandingSlider = () => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        autoplay: {
-          delay: 1500,
-          disableOnInteraction: false,
-          // pauseOnMouseEnter: true,
-        },
+        // autoplay: {
+        //   delay: 1500,
+        //   disableOnInteraction: false,
+        //   // pauseOnMouseEnter: true,
+        // },
         // freeMode: {
         //   enabled: true,
         //   momentum: false,
