@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.authority.repository.AuthorityRepository">
+
+    <insert id="addAuthority">
+        INSERT INTO user_authorities(user_id, authority_id)
+        VALUES (#{param1}, #{param2})
+    </insert>
+    <select id="findByNames" resultType="com.inseoul.authority.domain.Authority">
+        SELECT
+            id "id",
+            name "name"
+        FROM
+            authority
+        WHERE
+            name = #{name}
+    </select>
+    <select id="findByUser" resultType="com.inseoul.authority.domain.Authority">
+        SELECT
+            a.id "id",
+            a.name "name"
+        FROM
+            authority a, user_authorities u
+        WHERE
+            a.id = u.authority_id AND u.user_id = #{id}
+    </select>
+</mapper>

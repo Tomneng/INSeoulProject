@@ -4,6 +4,8 @@ import com.inseoul.real_estate.domain.Housedata;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.service.HouseService;
 import com.inseoul.real_estate.util.U;
+import com.inseoul.user.domain.ScrapQryResult;
+import com.inseoul.user.service.UserScraptedService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -23,6 +25,9 @@ public class HouseInfoCardController {
     @Autowired
     public HouseService houseService;
 
+    @Autowired
+    private UserScraptedService userScraptedService;
+
     /**
      * 실제로 db에 없는 값들은 그때그때마다 getapi를 써서 api 호출 및 DB에 저장
      * moreThanOnce()메소드로 일단 이 검색조건으로 검색됬는지를 확인하기 위해 DB를 조회함
@@ -34,11 +39,11 @@ public class HouseInfoCardController {
     @RequestMapping("/infoList")
     public void getApi(@Valid Row row2, Model model, Integer page) {
         if (houseService.moreThanOnce(row2) <= 0){
-            System.out.println(houseService.moreThanOnce(row2));
             houseService.getapi(row2, model, page);
         }
         houseService.list(row2, page, model);
     }
+
 
 
     @GetMapping("/redetail/{houseId}")
@@ -49,16 +54,13 @@ public class HouseInfoCardController {
 
     @PostMapping("/putScore")
     public String setScore(@Valid Row row, Model model){
-        System.out.println("이거안되나?");
         model.addAttribute("result", houseService.putScore(row));
         return "redirect:/realEstate/redetail/" + row.getHouseId();
     }
 
-    @PostMapping("/pageRows")
-    public String pageRows(Integer page, Integer pageRows){
-        U.getSession().setAttribute("pageRows", pageRows);
-        return "redirect:/board/list?page=" + page;
-    }
+
+
+
 
 
 

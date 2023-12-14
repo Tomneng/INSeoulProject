@@ -39,8 +39,15 @@
                             <a class="nav-link" href="page4.html">MBTI게시판</a>
                         </li>
                     </ul>
-                    <form class="d-flex mt-3 mt-lg-0" role="search">
-                        <button type="button" class="btn btn-light">Login</button>
+                    <a class="btn btn-primary" sec:authorize="isAnonymous()" type="submit" th:href="@{/user/login2}">Login</a>
+
+                    <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
+                    <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
+                        <!--TODO : 로그아웃후 다시 돌아오기 -->
+                        <span class="d-flex">
+                        <span class="text-light p-2"><span TODO="">[[${user.username}]]([[${user.name}]])</span> 님 환영합니다</span>
+            <span><button class="btn btn-danger" type="submit">Logout</button></span>
+          </span>
                     </form>
                 </div>
             </div>

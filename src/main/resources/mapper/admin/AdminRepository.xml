@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.admin.repository.AdminRepository">
+<!--    <insert id="complained" parameterType="com.inseoul.admin.domain.Complain"-->
+<!--            useGeneratedKeys="true" keyColumn="house_id" keyProperty="houseId">-->
+<!--        INSERT INTO complain-->
+<!--            (complain_id, content, answer, is_answered)-->
+<!--        VALUES-->
+<!--            (#{complainId}, #{})-->
+<!--    </insert>-->
+
+
+</mapper>

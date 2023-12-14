@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.user.repository.UserScraptedRepository">
+
+    <insert id="addHouseScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedHouse"
+            useGeneratedKeys="true" keyColumn="house_scrapted_id" keyProperty="houseScraptedId">
+       INSERT INTO houseinfosaved(user_id, house_id)
+       VALUES (#{userId}, #{houseId})
+    </insert>
+
+    <select id="selectScrapted" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee"
+        FROM house_contract
+        WHERE house_id = #{houseId}
+    </select>
+    <select id="getids" resultType="java.lang.Long">
+        SELECT house_id "houseId"
+        FROM houseinfosaved
+        WHERE user_id = #{userId}
+    </select>
+    <select id="scrapCheck" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM houseinfosaved
+        WHERE user_id = #{userId} AND house_id = #{houseId}
+    </select>
+    <delete id="deleteScrap" flushCache="true">
+        DELETE FROM houseinfosaved WHERE user_id = #{userId} AND house_id = ${houseId}
+    </delete>
+</mapper>

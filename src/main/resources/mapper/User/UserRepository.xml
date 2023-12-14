@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.user.repository.UserRepository">
+    <sql id="SELECT_BASE">
+        SELECT id         "id"
+             , username   "username"
+             , password   "password"
+             , name       "name"
+             , regdate    "regDate"
+             , provider   "provider"
+             , providerId "providerId"
+        FROM user
+        WHERE 1 = 1
+    </sql>
+
+    <select id="findById" resultType="com.inseoul.user.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND
+        id = #{id}
+    </select>
+    <select id="findByUsername" resultType="com.inseoul.user.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND
+        username = #{username}
+    </select>
+
+    <insert id="save" flushCache="true" parameterType="com.inseoul.user.domain.User"
+            keyProperty="id" useGeneratedKeys="true" keyColumn="id">
+        INSERT INTO user(username, password, name, provider, providerId)
+        VALUES (#{username}, #{password}, #{name}, #{provider}, #{providerId})
+    </insert>
+
+    <update id="update" flushCache="true" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET username = #{username}, password = #{password}, name = #{name}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,7 +39,7 @@ public class HouseServiceImpl implements HouseService {
     public int save(Row row) {
         return houseRepository.write(row);
     }
-
+    //
     @Override
     public int moreThanOnce(Row row) {
         HttpSession session = U.getSession();
@@ -47,7 +48,7 @@ public class HouseServiceImpl implements HouseService {
             row.setSsgName((String) session.getAttribute("ssgname"));
             row.setDongCode((Integer) session.getAttribute("dongcode"));
             row.setHouseKindName((String) session.getAttribute("hkind"));
-        }else {
+        } else {
             session.setAttribute("accyear", row.getAccYear());
             session.setAttribute("ssgname", row.getSsgName());
             session.setAttribute("dongcode", row.getDongCode());
@@ -56,10 +57,6 @@ public class HouseServiceImpl implements HouseService {
         return houseRepository.countAll(row);
     }
 
-    @Override
-    public int isDuplicated(String string) {
-        return houseRepository.compare(string);
-    }
 
     @Override
     public Row findById(Long id) {
@@ -77,8 +74,10 @@ public class HouseServiceImpl implements HouseService {
      * U.getSession()을 해서 session을 받아오면 검색조건이 있을때는 session의 attribute값을 넣어줌
      * -> 그래야 이후에 검색 인자값을 넘겨주지 않아도 session에서 그 값들을 빼서 사용할 수 있음
      * 기본적인 스타일이나 구성은 그냥 우리 게시판할때 페이징이랑 동일함(대신에 한번에 몇개 보여줄지 하는 기능은 그냥 뺐음)
-     * @param row : 검색조건 담을 객체
-     * @param page : 페이지 번호
+     * + 이 기능을 morethanOnece()에서 해주기 때문에 아래에는 더이상 필요없음
+     *
+     * @param row   : 검색조건 담을 객체
+     * @param page  : 페이지 번호
      * @param model
      * @return 검색조건에 맞는 객체들을 담은 list
      */
@@ -92,19 +91,6 @@ public class HouseServiceImpl implements HouseService {
         // writePages: 한 [페이징] 당 몇개의 페이지가 표시되나
         // pageRows: 한 '페이지'에 몇개의 글을 리스트 할것인가?
         HttpSession session = U.getSession();
-        if (row.getAccYear() == null) {
-            row.setAccYear((String) session.getAttribute("accyear"));
-            row.setSsgName((String) session.getAttribute("ssgname"));
-            row.setDongCode((Integer) session.getAttribute("dongcode"));
-            row.setHouseKindName((String) session.getAttribute("hkind"));
-        }else {
-            session.setAttribute("accyear", row.getAccYear());
-            session.setAttribute("ssgname", row.getSsgName());
-            session.setAttribute("dongcode", row.getDongCode());
-            session.setAttribute("hkind", row.getHouseKindName());
-        }
-
-
         Integer writePages = (Integer) session.getAttribute("writePages");
         if (writePages == null) writePages = WRITE_PAGES;  // 만약 session 에 없으면 기본값으로 동작
         Integer pageRows = (Integer) session.getAttribute("pageRows");
@@ -157,25 +143,30 @@ public class HouseServiceImpl implements HouseService {
         return list;
     }
 
+
     /**
      * 실제로 db에 없는 값들은 그때그때마다 getapi를 써서 api 호출 및 DB에 저장
      * 여기는 그냥 controller에 있던 api호출 및 저장 기능을 함
-     * @param row2 : 넘겨받은 검색값
+     *
+     * @param row2  : 넘겨받은 검색값
      * @param model : 얘는 사실 필요없을지도 모름
-     * @param page : 페이지값 넘겨주기인데 얘도 사실 필요없을지도
+     * @param page  : 페이지값 넘겨주기인데 얘도 사실 필요없을지도
      */
     @Override
     public void getapi(Row row2, Model model, Integer page) {
         String url = String.format("http://openapi.seoul.go.kr:8088/%s/json/tbLnOpendataRentV/1/120/%s/%%20/%s/%d/%%20/%%20/%%20/%%20/%s"
-                , "5146444173746f6d32346f53767a56", row2.getAccYear(), row2.getSsgName(),  row2.getDongCode(), row2.getHouseKindName());
+                , "5146444173746f6d32346f53767a56", row2.getAccYear(), row2.getSsgName(), row2.getDongCode(), row2.getHouseKindName());
 
         RestTemplate restTemplate = new RestTemplate();
+//        String rrr = restTemplate.getForObject(url, String.class);
+//        System.out.println(rrr);
+
         ResponseEntity<Housedata> response = restTemplate.getForEntity(url, Housedata.class);
         Row row = null;
 
-        if (response.getBody().getTbLnOpendataRentV() == null){
+        if (response.getBody().getTbLnOpendataRentV() == null) {
             model.addAttribute("result", 0);
-        }else {
+        } else {
             for (int i = 0; i < response.getBody().getTbLnOpendataRentV().getRow().size(); i++) {
                 row = response.getBody().getTbLnOpendataRentV().getRow().get(i);
 

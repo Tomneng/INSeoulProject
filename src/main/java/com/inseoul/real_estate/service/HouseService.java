@@ -12,13 +12,12 @@ public interface HouseService {
 
     int moreThanOnce(Row row);
 
-    int isDuplicated(String string);
-
     Row findById(Long id);
 
     int putScore(Row row);
 
     List<Row> list(Row row, Integer page, Model model);
+
 
     void getapi(Row row, Model model, Integer page);
 }

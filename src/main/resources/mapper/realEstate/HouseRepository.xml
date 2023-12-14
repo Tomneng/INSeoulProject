@@ -20,18 +20,12 @@
              #{landKind}, #{landKindName}, #{bobn},
              #{bubn}, #{floor}, #{contractDate},
              #{rentKind}, #{rentArea}, #{rentDeposit},
-             #{rentFee}, #{buildingName}, #{buildYear},
+             #{                                                                                                                                                                          rentFee}, #{buildingName}, #{buildYear},
              #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{distinguish}, #{address})
     </insert>
 
-    <select id="compare" resultType="java.lang.Integer">
-        SELECT count(distinguish)
-        FROM house_Contract
-        WHERE distinguish = #{distinguish}
-    </select>
-
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
-        SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address", contract_score "contractScore", place_score "placeScore",
+        SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address",
                rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
                contract_period "contractPeriod", new_ron_secd "newRonSecd"
         FROM house_Contract
@@ -39,14 +33,14 @@
     </select>
 
     <update id="updateScore">
-        UPDATE house_contract
+        UPDATE house_contract_score
         SET place_score = #{placeScore}, contract_score = #{contractScore}
         WHERE house_id = #{houseId}
     </update>
 
 
     <select id="filteredSearch" resultType="com.inseoul.real_estate.domain.Row">
-        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", contract_score "contractScore", place_score "placeScore", rent_deposit "rentDeposit", rent_fee "rentFee"
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee"
         FROM house_contract
         WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
         ORDER BY house_id DESC
@@ -58,5 +52,6 @@
         FROM house_contract
         WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
     </select>
+
 
 </mapper>

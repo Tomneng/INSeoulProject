@@ -3,10 +3,15 @@ package com.inseoul.realEstate;
 import com.inseoul.real_estate.domain.Housedata;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
+import com.inseoul.user.domain.UserScraptedHouse;
+import com.inseoul.user.repository.UserScraptedRepository;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 public class apiSavetest {
@@ -59,5 +64,33 @@ public class apiSavetest {
         System.out.println(houseRepository.countAll(row));
     }
 
+    @Test
+    void test06(){
+        UserScraptedRepository userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
+        UserScraptedHouse userScraptedHouse = new UserScraptedHouse();
+        userScraptedHouse.setUserId(1L);
+        userScraptedHouse.setHouseId(3L);
+
+        System.out.println(userScraptedRepository.addHouseScrapt(userScraptedHouse));
+    }
+
+    @Test
+    void test07(){
+        UserScraptedRepository userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
+        List<Long> list =  userScraptedRepository.getids(1L);
+        System.out.println(list);
+    }
+
+
+    @Test
+    void test08(){
+        UserScraptedRepository userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
+        List<Long> list = userScraptedRepository.getids(1L);
+        List<Row> list1 = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++){
+            list1.add(i,userScraptedRepository.selectScrapted(list.get(i)));
+        }
+        System.out.println(list1);
+    }
 
 }

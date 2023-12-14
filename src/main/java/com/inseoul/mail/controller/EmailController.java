@@ -4,9 +4,8 @@ import com.inseoul.mail.domain.EmailAuthRequestDto;
 import com.inseoul.mail.service.EmailService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
@@ -16,11 +15,14 @@ import java.io.UnsupportedEncodingException;
 public class EmailController {
 
     private final EmailService emailService;
+    //아직 손봐야됨 난 다했는데~~~~~~~
 
-    @PostMapping("login/mailConfirm")
-    public String mailConfirm(@RequestBody EmailAuthRequestDto emailDto) throws MessagingException, UnsupportedEncodingException {
-
+    @RequestMapping("/mailConfirm")
+    public String mailConfirm(@RequestBody EmailAuthRequestDto emailDto, Model model) throws MessagingException, UnsupportedEncodingException {
+        emailDto.setEmail((String) model.getAttribute("email"));
         String authCode = emailService.sendEmail(emailDto.getEmail());
-        return authCode;
+        model.addAttribute("authCode", authCode);
+        return "/user/codeConfirm";
     }
+
 }

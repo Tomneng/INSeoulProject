@@ -12,7 +12,75 @@ $(document).ready(function () {
         frm.attr("action", "pageRows")
         frm.submit();
     })
-})
+    const userId = {
+        "user_id": logged_id,
+    };
+    $.ajax({
+        url: "/house/scrapted",
+        type: "GET",
+        data: userId,
+        cache: false,
+        success: function(data, status) {
+            if(status == "success"){
+                for (i = 225; i<225+12; i++){
+                    if (data.includes(i)){
+                        document.getElementById(`${i}`).checked=true;
+                    }
+                }
+            }
+        },
+    })
+
+
+
+
+    $(".divider input").change(function(){
+        const houseId = $(this).val();
+        const data = {
+            "house_id": houseId,
+            "user_id": logged_id,
+        };
+        if ($(".divider input").is(":checked")){
+        $.ajax({
+            url: "/house/scrapt",
+            type: "POST",
+            data: data,
+            cache: false,
+            success: function(data, status) {
+                if(status == "success"){
+                    if(data.status !== "OK"){
+                        alert(data.status);
+                        return;
+                    }
+                }
+            },
+        });
+        }
+        else {
+            $.ajax({
+                url: "/house/scrapt",
+                type: "POST",
+                data: data,
+                cache: false,
+                success: function(data, status) {
+                    if(status == "success"){
+                        if(data.status !== "DELETED"){
+                            alert(data.status);
+                            return;
+                        }
+                    }
+                },
+            });
+        }
+
+    });
+
+
+
+});
+
+function repaging(){
+}
 
 
 function selyear() {
@@ -300,4 +368,5 @@ function selHKind() {
             `)
     }
 }
+
 
