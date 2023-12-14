@@ -1,4 +1,8 @@
 /* 관광/부동산 추천 카드 */
+#cardPart {
+    overflow: hidden;
+}
+
 .card {
     text-align: end; /* 글자 좌우 정렬 위치 */
     color: #fde955; /* 글자색 */
@@ -6,7 +10,6 @@
     /*border: solid #333333 3px; !* 테두리 *!*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* 그림자 효과 */
     opacity: 0;
-    overflow: hidden;
 }
 
 /* 카드가 오른쪽에서 왼쪽으로 나타남. */

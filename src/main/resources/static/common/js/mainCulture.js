@@ -1,6 +1,64 @@
 // 공공데이터 서울시 문화행사 정보 api를 Jquery ajax로 xml파일
+const baseUrl = 'http://openapi.seoul.go.kr:8088'
+const apiKey = '6b426777777368693630474b695441'
+const fileType = 'json'
+const serviceName = 'culturalEventInfo'
+let startIndex = 1
+let endIndex = 20
+const apiUrl = `${baseUrl}/${apiKey}/${fileType}/${serviceName}/${startIndex}/${endIndex}/`
+// console.log('apiUrl = ' + apiUrl)
 
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(jsonData => {
+        const rowItems = jsonData['culturalEventInfo']['row'];
+        // console.log('imgUrl = ' + rowItems)
+        // console.log('imgUrl길이 = ' + rowItems.length)
+        rowItems.forEach(rowItem => {
+            const cultureLink = rowItem['ORG_LINK'];
+            console.log('cultureLink = ' + cultureLink);
+            const cultureImg = rowItem['MAIN_IMG'];
+            console.log('cultureImg = ' + cultureImg);
+        })
+    })
 
+// // xml parsing
+// $.ajax({
+//     url: apiUrl,
+//     method: 'get',
+//     success: function (response) {
+//         console.log(response)
+//         $(response).find('row').each(function () {
+//             var strDOM = '';
+//
+//             strDOM += `<div class="posterImg">`;
+//
+//             $(this).find('ORG_LINK').each(function () {
+//                 const cultureLink = $(this).text();
+//                 // console.log('link = ' + cultureLink)
+//                 strDOM += `<a href="${cultureLink}">`
+//             });
+//
+//             $(this).find('MAIN_IMG').each(function () {
+//                 const culturePosterUrl = $(this).text();
+//                 // console.log('img = ' + culturePosterUrl)
+//                 strDOM += `<img src="${culturePosterUrl}" alt="${culturePosterUrl}">`
+//             });
+//
+//             strDOM += `</a>`
+//             strDOM += `</div>`
+//             console.log(strDOM);
+//
+//             var $imgSection = $('#eventSection');
+//             $imgSection.append(strDOM);
+//
+//         })
+//
+//     },
+//     error: function (error) {
+//         console.log('에러메시지가 나올까? ' + error);
+//     }
+// })
 
 
 // 메인의 행사파트를 스크롤에 위치에 따라 애니메이션 효과 주기
@@ -40,5 +98,4 @@ window.addEventListener('scroll', function () {
 
     }
 });
-
 
