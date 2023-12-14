@@ -17,13 +17,6 @@ import java.util.List;
 public class apiSavetest {
     @Autowired
     private SqlSession sqlSession;
-    @Test
-    void test1(){
-        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
-
-        int cnt = houseRepository.compare("202311170용산구12000도원동1대지002300001320231125전세84.69570000삼성래미안2001아파트23.12~25.12갱신");
-        System.out.println("compare() 결과 = " + cnt);
-    }
 
     @Test
     void test2(){
