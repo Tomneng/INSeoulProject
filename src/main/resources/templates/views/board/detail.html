@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<!--<script th:unless="${post}">-->
-<!--    alert("해당 정보가 삭제되거나 없습니다")-->
-<!--    history.back();-->
-<!--</script>-->
+<script th:unless="${post}">
+    alert("해당 정보가 삭제되거나 없습니다")
+    history.back();
+</script>
 
 <th:block>
 
@@ -27,31 +27,31 @@
         <h2>조회</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">id :</span>
-            <span class="float-start me-3">MBTI : </span>
-            <span class="float-end ms-4">작성일:</span>
-            <span class="float-end">조회수:</span>
+            <span class="float-start me-2">Email :[[${post.user.email}]]</span>
+            <span class="float-start me-2">Id : [[${post.user.mbti}]]</span>
+            <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+            <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
 
         <section>
             <form name="frmDelete" method="post">
-                <input type="hidden" name="id">
+                <input type="hidden" name="postId">
             </form>
 
             <div class="mb-3 mt-3">
                 <label>제목:</label>
-                <span class="form-control"></span>
+                <span class="form-control" th:text="${post.title}"></span>
             </div>
             <div class="mb-3 mt-3">
                 <label>내용:</label>
-                <div class="border bg-light rounded p-2"></div>
+                <div class="border bg-light rounded p-2" th:text="${post.content}"></div>
             </div>
 
             <!-- 하단 링크 -->
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <a class="btn btn-outline-dark" th:href="@{/board/update}">수정</a>
+                <a class="btn btn-outline-dark" th:href="@{'/board/update/' + ${post.postId}}">수정</a>
                 <a class="btn btn-outline-dark" th:href="@{/board/list}">목록</a>
-                <button type="button" class="btn btn-outline-primary">삭제</button>
+                <button type="button" class="btn btn-outline-danger ms-2" id="btnDel">삭제</button>
                 <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>
             </div>
 
