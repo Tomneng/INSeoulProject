@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/map.css}">
+    <title>상세페이지 지도 표시하기</title>
+
+</head>
+<body>
+<th:block th:insert="~{common/commonMap::commonMap}"></th:block>
+<br>
+
+</body>
+<!--/* kakaomap Javascript API */-->
+<!--/* appkey= 여기에 JavaScript 키를 입력하면 된다.(kakao deleopers -> 내 애플리케이션 -> 앱 키 -> JavaScript 키)*/-->
+<!--/* 라이브러리 추가, JavaScript 키 뒤에 services,clusterer,drawing 라이브러리를 추가함 */-->
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script th:src="@{/common/js/map.js}"></script>
+</html>

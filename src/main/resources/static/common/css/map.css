@@ -1,0 +1,315 @@
+/* 지도가 들어가는 div */
+#map {
+    width: 70vw; /* 지도의 폭 */
+    height: 70vh; /* 지도의 높이 */
+    margin: auto !important; /* !important로 이전에 css 설정을 무시함 */
+}
+
+#mapEX > img {
+    width: 70vw;
+}
+
+/* '카테고리별 장소 검색하기' 시작 */
+.map_wrap, .map_wrap * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-size: 12px;
+}
+
+.map_wrap {
+    position: relative;
+}
+
+#category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    border: 1px solid #909090;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* 원위치로 이동하는 버튼 */
+#centerCoordinates {
+    /*background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-heart-4551298.png?alt=media&token=f5c167ae-87ab-4401-863b-7c974a859b06) no-repeat;*/
+    /*background-size: 27px 27px;*/
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    border: 1px solid #909090;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#centerCoordinates li:active {
+    background-color: #eee;
+    box-shadow: 0 5px #eee;
+    transform: translateY(4px);
+}
+
+#category li, #centerCoordinates li {
+    float: left;
+    list-style: none;
+    width: 50px;
+    px;
+    border-right: 1px solid #acacac;
+    padding: 6px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#category li.on, #centerCoordinates li.on {
+    background: #eee;
+}
+
+#category li:hover, #centerCoordinates li:hover {
+    background: #ffe6e6;
+    /*border-left: 1px solid #acacac;*/
+    /*margin-left: -1px;*/
+}
+
+#category li:last-child {
+    margin-right: 0;
+    border-right: 0;
+}
+
+#category li span, #centerCoordinates li span {
+    display: block;
+    margin: 0 auto 3px;
+    width: 27px;
+    height: 28px;
+}
+
+#category li .food {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-restaurant-4550858.png?alt=media&token=97f92935-bb93-476d-bcf1-f73d9a93c89f) no-repeat;
+    background-size: 27px 27px;
+}
+
+#category li.on .food {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-restaurant-4551357.png?alt=media&token=df77b245-abab-4110-a756-db6b88915b96) no-repeat;
+    background-size: 27px 27px;
+}
+
+#category li .cafe {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-coffee-4550770.png?alt=media&token=b8b009a6-f6f6-4cd4-b8e0-2d512e744197) no-repeat;
+    background-size: 27px 27px;
+}
+
+#category li.on .cafe {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-coffee-4551276.png?alt=media&token=671f27b2-5975-467a-b9a0-2ed6e57b2e9b) no-repeat;
+    background-size: 27px 27px;
+}
+
+#category li .attractions {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-camera-4550744.png?alt=media&token=c8829fac-d795-4ef4-97ee-6ede0b0f04db) no-repeat;
+    background-size: 27px 27px;
+}
+
+#category li.on .attractions {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-camera-4551261.png?alt=media&token=8e23ef9e-43af-4532-9a03-00d1dc97e0ec) no-repeat;
+    background-size: 27px 27px;
+}
+
+#centerCoordinates li .cc {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-heart-4551298.png?alt=media&token=f5c167ae-87ab-4401-863b-7c974a859b06) no-repeat;
+    background-size: 27px 27px;
+}
+
+#centerCoordinates li.on .cc {
+    background: url(https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-heart-4551298.png?alt=media&token=f5c167ae-87ab-4401-863b-7c974a859b06) no-repeat;
+    background-size: 27px 27px;
+}
+
+.placeinfo_wrap {
+    position: absolute;
+    bottom: 28px;
+    left: -150px;
+    width: 300px;
+}
+
+.placeinfo {
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    background: #fff;
+}
+
+.placeinfo:nth-of-type(n) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.placeinfo_wrap .after {
+    content: '';
+    position: relative;
+    margin-left: -12px;
+    left: 50%;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.placeinfo a, .placeinfo a:hover, .placeinfo a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+.placeinfo a, .placeinfo span {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.placeinfo span {
+    margin: 5px 5px 0 5px;
+    cursor: default;
+    font-size: 13px;
+}
+
+.placeinfo .title {
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px 6px 0 0;
+    margin: -1px -1px 0 -1px;
+    padding: 10px;
+    color: #fff;
+    background: #d95050;
+    background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+
+.placeinfo .tel {
+    color: #0f7833;
+}
+
+.placeinfo .jibun {
+    color: #999;
+    font-size: 11px;
+    margin-top: 0;
+}
+
+/* '카테고리별 장소 검색하기' 끝 */
+
+
+/* '닫기가 가능한 커스텀 오버레이' 시작 */
+.wrap {
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    width: 288px;
+    height: 132px;
+    margin-left: -144px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 12px;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    line-height: 1.5;
+}
+
+.wrap * {
+    padding: 0;
+    margin: 0;
+}
+
+.wrap .info {
+    width: 286px;
+    height: 120px;
+    border-radius: 5px;
+    border-bottom: 2px solid #ccc;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+    padding: 5px 0 0 10px;
+    height: 30px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #888;
+    width: 17px;
+    height: 17px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+    cursor: pointer;
+}
+
+.info .body {
+    position: relative;
+    overflow: hidden;
+}
+
+.info .desc {
+    position: relative;
+    margin: 13px 0 0 90px;
+    height: 75px;
+}
+
+.desc .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.desc .jibun {
+    font-size: 11px;
+    color: #888;
+    margin-top: -2px;
+}
+
+.info .img {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    width: 73px;
+    height: 71px;
+    border: 1px solid #ddd;
+    color: #888;
+    overflow: hidden;
+}
+
+.info:after {
+    content: '';
+    position: absolute;
+    margin-left: -12px;
+    left: 50%;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+    color: #5085BB;
+}
+
+.placeinfoTitle {
+}
+
+/* '닫기가 가능한 커스텀 오버레이' 끝 */
+

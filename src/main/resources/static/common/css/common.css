@@ -4,7 +4,10 @@ body {
 
 /* 헤더 & 푸터 배경색 */
 .navbar, .offcanvas, footer {
-    background-color: #f8496c;
+    background-color: #F8496C; /* 2024년 서울의 색 '스카이 코랄(#F8496C)' */
+}
+.navbar {
+    height: 10vh;
 }
 
 /* 헤더 안 로고 옆 글자 "in 서울" */
@@ -26,97 +29,6 @@ body {
     width: 100px;
 }
 
-/* 캐러셀 전체 */
-.carousel {
-    width: 100%;
-    /*height: auto; !*이미지 높이 만큼 나타남*!*/
-    /*height: 450px; !* 브레이크포인트에 상관없이 높이 450px *!*/
-    height: 90vh;
-}
-
-/* 캐러셀 전체의 자식 태그, carousel-item을 담고 있는 div태그 */
-.carousel-inner {
-    height: 100%;
-}
-
-/* .carousel-inner의 자식 태그, img태그를 담고있는 div태그 */
-.carousel-item {
-    height: 100%; /* 높이 100%로 하니까 캡션(이미지 하단의 글자)이 나왔다! */
-}
-
-/* 캐러셀의 이미지 태그 */
-.carousel-item > img {
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 캐러셀 이전, 다음 버튼 */
-.carousel-control-prev, .carousel-control-next {
-}
-
-/* 관광/부동산 카드 탭 */
-.nav-link {
-    color: #23e00e;
-}
-
-.nav-link:active {
-}
-
-.nav-link:hover {
-    background-color: #3498db
-}
-
-#carouselExampleCaptions, #cardTab, #mbtiPart {
-    opacity: 0; /* 0은 보이지 않는다. js에서 1로 바꾸면 보이게 된다. */
-    transition: ease-in 1s; /* opacity가 변경이 될 때 화면에 보이는 속도 */
-}
-
-#cardTab {
-}
-
-/* 관광/부동산 추천 카드 */
-.card {
-    text-align: end; /* 글자 좌우 정렬 위치 */
-    color: #fde955; /* 글자색 */
-    background-color: #ff8080; /* 배경색 */
-    /*border: solid #333333 3px; !* 테두리 *!*/
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* 그림자 효과 */
-}
-
-/* 카드가 오른쪽에서 왼쪽으로 나타남. */
-@keyframes cardAnimation {
-    from {
-        left: 100%;
-        opacity: 0;
-    }
-    to {
-        left: 0%;
-        opacity: 1;
-    }
-}
-
-/* 카드가 사라짐. */
-@keyframes cardAnimationHidden {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-/* 카드의 링크 */
-.card .card-body .card-link {
-    text-decoration: none;
-    color: aliceblue;
-}
-
-/* 카드의 버튼 */
-.card .card-body .btn {
-    background: #2e6e6e;
-    color: chartreuse;
-}
-
 /* 경계에 있는 그림자 효과 */
 .b-example-divider {
     width: 100%;
@@ -127,104 +39,7 @@ body {
     box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
 
-/* 문화 행사 이벤트, 전시회 부분 */
-/* 문화 행사 이벤트, 전시회 전체*/
-#eventSection {
-    /* 배경이미지 경로를 변경해야할 것임. */
-    background: url('https://image.istarbucks.co.kr/upload/common/img/main/2023/231116_1_pc_pick_bg.jpg') center center fixed no-repeat #45434c;
-    /* 첫번째 center는 background-position-x 50% 와 background-position-y 50% */
-    /* fixed 는 위치가 고정되어 있어서 스크롤을 움직여도 이미지는 고정되어 있음. */
-    /*  background 이미지는 내용이 없으면 보이지 않음, 그래서 높이를 지정해줘야함. */
-    position: relative; /* 자식 요소의 위치를 설정할 수 있게 한다. */
-    height: 100vh; /* 이 요소의 높이를 화면 전체 높이로 만든다. */
-    display: flex; /* 는 부모 요소 안의 내용물을 가운데로 정렬할 수 있게 해주고, */
-    justify-content: center; /* 는 가로 방향에서 가운데 정렬하게 해주고, */
-    align-items: center; /* 는 세로 방향에서 가운데 정렬하게 해줘요. */
-}
-
-/* 행사 글자 */
-#eventText {
-    position: absolute; /* 는 부모 요소를 기준으로 위치를 정할 수 있게 해줘요. */
-    top: 50%; /* 는 이미지를 세로 방향으로 부모 요소의 중앙에 위치시켜요. */
-    left: 33.333%; /* 는 이미지를 가로 방향으로 부모 요소의 오른쪽에서 2/3 지점에 위치시켜요. */
-    transform: translate(-50%, -50%); /* 는 이미지를 정확하게 가운데로 맞추기 위한 특별한 설정이에요. 이미지의 중심을 기준으로 정렬해줘요. */
-    color: aliceblue; /* 글자색 */
-}
-
-/* 행사 포스터 */
-#eventPoster {
-    position: absolute; /* 는 부모 요소를 기준으로 위치를 정할 수 있게 해줘요. */
-    top: 50%; /* 는 이미지를 세로 방향으로 부모 요소의 중앙에 위치시켜요. */
-    right: 33.333%; /* 는 이미지를 가로 방향으로 부모 요소의 오른쪽에서 2/3 지점에 위치시켜요. */
-    transform: translate(50%, -50%); /* 는 이미지를 정확하게 가운데로 맞추기 위한 특별한 설정이에요. 이미지의 중심을 기준으로 정렬해줘요. */
-    height: 60vh; /* 이미지의 높이를 전체 화면 높이로 설정 */
-}
-
-
-/* 왼쪽 끝에서 왼쪽의 1/3지점까지 슬라이딩하면서 나타남. */
-@keyframes leftRightSliding {
-    from {
-        left: 10%;
-        opacity: 0;
-    }
-    to {
-        left: 33.333%;
-        opacity: 1;
-    }
-}
-
-/* 왼쪽의 1/3지점에서 왼쪽 끝까지 슬라이딩하면서 사라짐. */
-@keyframes leftRightReverse {
-    from {
-        left: 33.333%;
-        opacity: 1;
-    }
-    to {
-        left: 10%;
-        opacity: 0;
-    }
-}
-
-/* 오른쪽 끝에서 오른쪽의 1/3지점까지 슬라이딩하면서 나타남. */
-@keyframes rightLeftSliding {
-    from {
-        right: 10%;
-        opacity: 0;
-    }
-    to {
-        right: 33.333%;
-        opacity: 1;
-    }
-}
-
-/* 오른쪽 1/3지점에서 오른쪽 끝까지 슬라이딩하면서 사라짐. */
-@keyframes rightLeftReverse {
-    from {
-        right: 33.333%;
-        opacity: 1;
-    }
-    to {
-        right: 10%;
-        opacity: 0;
-    }
-}
-
-/* 메인화면 MBTI게시판 부분*/
-#mbtiPart {
-    height: 100vh;
-}
-
-/* 버튼 1, 2 */
-#MBTIboardBtn1 {
-    border: black solid 2px;
-    background: #3498db;
-    color: white;
-    width: 160px;
-}
-
-#MBTIboardBtn2 {
-    border: black solid 2px;
-    background: #23e00e;
-    color: #fde955;
-    width: 160px;
+/* 푸터 */
+p.text-center.text-body-secondary {
+    margin-bottom: 0; !important;
 }

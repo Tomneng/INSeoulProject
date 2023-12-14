@@ -1,0 +1,42 @@
+/* 캐러셀 전체 */
+
+#mainCarouselDiv {
+    width: 100%;
+    /*height: auto; !*이미지 높이 만큼 나타남*!*/
+    /*height: 450px; !* 브레이크포인트에 상관없이 높이 450px *!*/
+    height: 90vh;
+    /*opacity: 0; !* 0은 보이지 않는다. js에서 1로 바꾸면 보이게 된다. *!*/
+    /*transition: 1s ease-in; !* opacity가 변경이 될 때 화면에 보이는 속도 *!*/
+}
+
+/* 캐러셀 전체의 자식 태그, carousel-item을 담고 있는 div태그 */
+.carousel-inner {
+    height: 100%;
+}
+
+/* .carousel-inner의 자식 태그, img태그를 담고있는 div태그 */
+.carousel-item {
+    height: 100%; /* 높이 100%로 하니까 캡션(이미지 하단의 글자)이 나왔다! */
+}
+
+/* 캐러셀의 이미지 태그 */
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 캐러셀 이전, 다음 버튼 */
+.carousel-control-prev, .carousel-control-next {
+}
+
+/* 위에서 아래로 슬라이드 되는 애니메이션 */
+@keyframes slideTopDown {
+    from {
+        bottom: 100vh;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}

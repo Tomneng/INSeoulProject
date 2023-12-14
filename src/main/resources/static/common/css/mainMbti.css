@@ -1,0 +1,35 @@
+#mbtiPart {
+    opacity: 1; /* 0은 보이지 않는다. js에서 1로 바꾸면 보이게 된다. */
+    transition: 1s ease-in; /* opacity가 변경이 될 때 화면에 보이는 속도 */
+}
+
+/* 메인화면 MBTI게시판 부분*/
+#mbtiPart {
+    height: 80vh;
+    position: relative;
+}
+
+#mbtiPart .row {
+    position: absolute;
+    top: 10vh;
+    align-items: center;
+}
+
+#mainMbtiBoardImg {
+    background-position-x: center;
+}
+
+/* 버튼 1, 2 */
+#MBTIboardBtn1 {
+    border: black solid 2px;
+    background: #3498db;
+    color: white;
+    width: 160px;
+}
+
+#MBTIboardBtn2 {
+    border: black solid 2px;
+    background: #23e00e;
+    color: #fde955;
+    width: 160px;
+}

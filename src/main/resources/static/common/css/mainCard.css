@@ -1,0 +1,47 @@
+/* 관광/부동산 추천 카드 */
+#cardPart {
+    overflow: hidden;
+}
+
+.card {
+    text-align: end; /* 글자 좌우 정렬 위치 */
+    color: #fde955; /* 글자색 */
+    background-color: #ff8080; /* 배경색 */
+    /*border: solid #333333 3px; !* 테두리 *!*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+    opacity: 0;
+}
+
+/* 카드가 오른쪽에서 왼쪽으로 나타남. */
+@keyframes cardAnimation {
+    from {
+        left: 100%;
+        opacity: 0;
+    }
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+/* 카드가 사라짐. */
+@keyframes cardAnimationHidden {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* 카드의 링크 */
+.card .card-body .card-link {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+/* 카드의 버튼 */
+.card .card-body .btn {
+    background: #2e6e6e;
+    color: chartreuse;
+}
