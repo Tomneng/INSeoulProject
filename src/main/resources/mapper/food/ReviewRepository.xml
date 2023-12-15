@@ -2,21 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.inseoul.food.repository.ReviewRepository">
 
-    <resultMap id="mapUser" type="com.inseoul.food.domain.User">
-        <result column="user_id" property="userId"/>
-        <result column="nickName" property="nickName"/>
-        <result column="password" property="password"/>
-        <result column="email" property="email"/>
-        <result column="regDate" property="regDate"/>
-        <result column="mbti" property="mbti"/>
-    </resultMap>
+<!--    <resultMap id="mapUser" type="com.inseoul.food.domain.User">-->
+<!--        <result column="user_id" property="userId"/>-->
+<!--        <result column="nickName" property="nickName"/>-->
+<!--        <result column="password" property="password"/>-->
+<!--        <result column="email" property="email"/>-->
+<!--        <result column="regDate" property="regDate"/>-->
+<!--        <result column="mbti" property="mbti"/>-->
+<!--    </resultMap>-->
 
+<!--    <sql id="SELECT_BASE">-->
+<!--        SELECT r.review_id "reviewId", f.food_id "foodId", u.user_id "userId"-->
+<!--             , r.review_category "reviewCategory", r.review_star "reviewStar"-->
+<!--        FROM review r, user u, food f-->
+<!--        WHERE r.user_id = u.user_id-->
+<!--        AND f.food_id = r.food_id-->
+<!--    </sql>-->
     <sql id="SELECT_BASE">
-        SELECT r.review_id "reviewId", f.food_id "foodId", u.user_id "userId"
+        SELECT r.review_id "reviewId", f.food_id "foodId"
              , r.review_category "reviewCategory", r.review_star "reviewStar"
-        FROM review r, user u, food f
-        WHERE r.user_id = u.user_id
-        AND f.food_id = r.food_id
+        FROM food_reviews r, food f
+        WHERE f.food_id = r.food_id
     </sql>
 
 <!-- 전체를 보여줄 필요 ? -->
@@ -26,14 +32,19 @@
     </select>
 
     <!-- 작성한 리뷰 저장 -->
+<!--    <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">-->
+<!--        INSERT INTO review (food_id, user_id, review_category, review_content, review_star)-->
+<!--        VALUES (#{foodId}, #{user.userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})-->
+<!--    </insert>-->
+
     <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
-        INSERT INTO review (food_id, user_id, review_category, review_content, review_star)
-        VALUES (#{foodId}, #{user.userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
+        INSERT INTO food_reviews (food_id,id, review_category, review_content, review_star)
+        VALUES (#{foodId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
     </insert>
 
     <!-- 저장된 리뷰카테고리 보여주기-->
     <select id="findById" resultType="String">
-        SELECT review_category "reviewCategory" FROM review
+        SELECT review_category "reviewCategory" FROM food_reviews
         WHERE review_id = #{reviewId}
     </select>
 
@@ -56,8 +67,9 @@
 <!--    </select>-->
     <!-- 평점 구하기 -->
     <select id="getRatingAvg" resultType="Double">
-        SELECT AVG(review_star)  FROM review
-        WHERE review_id = #{reviewId} GROUP BY food_id
+        SELECT AVG(review_star) "ratingAvg" FROM review
+        WHERE food_id = #{foodId}
+        GROUP BY food_id
     </select>
     <!-- 평점 불러오기 -->
     <update id="updateRating">
