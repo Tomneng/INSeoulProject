@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inseoul.user.repository.UserRepository">
     <sql id="SELECT_BASE">
-        SELECT id         "id"
+        SELECT user_id    "userId"
              , username   "username"
              , password   "password"
-             , name       "name"
+             , nickname   "nickname"
              , regdate    "regDate"
              , provider   "provider"
              , providerId "providerId"
@@ -16,7 +16,7 @@
     <select id="findById" resultType="com.inseoul.user.domain.User">
         <include refid="SELECT_BASE"/>
         AND
-        id = #{id}
+        user_id = #{userId}
     </select>
     <select id="findByUsername" resultType="com.inseoul.user.domain.User">
         <include refid="SELECT_BASE"/>
@@ -25,15 +25,15 @@
     </select>
 
     <insert id="save" flushCache="true" parameterType="com.inseoul.user.domain.User"
-            keyProperty="id" useGeneratedKeys="true" keyColumn="id">
-        INSERT INTO user(username, password, name, provider, providerId)
-        VALUES (#{username}, #{password}, #{name}, #{provider}, #{providerId})
+            keyProperty="userId" useGeneratedKeys="true" keyColumn="user_id">
+        INSERT INTO user(username, password, nickname, provider, providerId)
+        VALUES (#{username}, #{password}, #{nickname}, #{provider}, #{providerId})
     </insert>
 
     <update id="update" flushCache="true" parameterType="com.inseoul.user.domain.User">
         UPDATE user
-        SET username = #{username}, password = #{password}, name = #{name}
-        WHERE id = #{id}
+        SET username = #{username}, password = #{password}, nickname = #{nickname}
+        WHERE user_id = #{userId}
     </update>
 
 </mapper>

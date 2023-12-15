@@ -22,7 +22,11 @@ $(document).ready(function () {
         cache: false,
         success: function(data, status) {
             if(status == "success"){
-                for (i = 225; i<225+12; i++){
+                const init = document.querySelector("#container1").firstElementChild
+                const val = parseInt(init.firstElementChild.value);
+                console.log(init)
+                console.log(val)
+                for (i = val; i<val+12; i++){
                     if (data.includes(i)){
                         document.getElementById(`${i}`).checked=true;
                     }
@@ -30,8 +34,6 @@ $(document).ready(function () {
             }
         },
     })
-
-
 
 
     $(".divider input").change(function(){

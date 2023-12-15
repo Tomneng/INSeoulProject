@@ -117,7 +117,7 @@ public class OAuth2Controller {
         if (user == null){ // 비등록자일경우
             User newUser = User.builder()
                     .username(username)
-                    .name(name)
+                    .nickname(name)
                     .password(password)
                     .provider(provider)
                     .providerId(providerId)

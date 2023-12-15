@@ -13,15 +13,15 @@
              bubn, floor, contract_date,
              rent_kind, rent_area, rent_deposit,
              rent_fee, building_name, build_year,
-             house_kind_name, contract_period, new_ron_secd, distinguish, address)
+             house_kind_name, contract_period, new_ron_secd, address)
         VALUES
             (#{accYear}, #{ssgCode},
              #{ssgName}, #{dongCode}, #{dongName},
              #{landKind}, #{landKindName}, #{bobn},
              #{bubn}, #{floor}, #{contractDate},
              #{rentKind}, #{rentArea}, #{rentDeposit},
-             #{                                                                                                                                                                          rentFee}, #{buildingName}, #{buildYear},
-             #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{distinguish}, #{address})
+             #{rentFee}, #{buildingName}, #{buildYear},
+             #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{address})
     </insert>
 
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">

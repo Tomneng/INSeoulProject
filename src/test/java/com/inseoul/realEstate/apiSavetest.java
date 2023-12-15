@@ -1,6 +1,6 @@
 package com.inseoul.realEstate;
 
-import com.inseoul.real_estate.domain.Housedata;
+
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
 import com.inseoul.user.domain.UserScraptedHouse;
