@@ -431,3 +431,4 @@ ALTER TABLE user_authority
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
 ;
+
