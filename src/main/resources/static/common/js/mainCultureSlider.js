@@ -66,10 +66,10 @@ const makeTrandingSlider = () => {
         loop: true,
         slidesPerView: 'auto',
         coverflowEffect: {
-            rotate: 0,
+            rotate: 90,
             stretch: 0,
-            depth: 100,
-            modifier: 2.5,
+            depth: 200,
+            modifier: 1.5,
         },
         pagination: {
             el: '.swiper-pagination',

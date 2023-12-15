@@ -10,10 +10,19 @@ body {
     height: 10vh;
 }
 
-/* 헤더 안 로고 옆 글자 "in 서울" */
+/* 헤더 안 로고 & 글자 "in 서울" */
 .navbar-brand {
-    font-size: x-large;
+    font-size: x-large !important;
     font-weight: bold;
+    border: white solid;
+}
+
+/* 헤더 안에 로고 */
+#headerLogo {
+    /*width: 10% !important;*/
+    /*width: 3rem !important;*/
+    width: 4vw !important;
+    /*border: black solid;*/
 }
 
 /* 헤더의 탭들 */
@@ -42,4 +51,8 @@ body {
 /* 푸터 */
 p.text-center.text-body-secondary {
     margin-bottom: 0; !important;
+}
+
+.container-fluid {
+    border: #23e00e solid;
 }
