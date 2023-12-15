@@ -25,7 +25,7 @@ public class TourController {
     @Autowired
     public TourService tourService;
 
-    @RequestMapping("/tourList")
+//    @RequestMapping("/tourList")
 //    public void list(@RequestParam(value = "tourSigungucode", required = false) String tourSigungucode,
 //                       @RequestParam(value = "tourName", required = false) String tourName,
 //                       Integer page, Model model) throws IOException {
@@ -36,12 +36,17 @@ public class TourController {
 //        // 모델에 검색 결과 추가
 //        model.addAttribute("tourList", searchResults);
 //    }
-    public void list(@Valid Item item2, Model model, Integer page) {
-        System.out.println("사용자가 입력한 검색어 조회 = " + tourService.search(item2));
-        if (tourService.search(item2) <= 0) {    // 검색 조건을 사용해서 검색했을 때 같은 조건으로 한번이라도 검색된적이 있는지 확인
-            tourService.getTourApi(item2, model, page);     // 검색된적이 없으면 API 호출 후 DB에 저장
-        }
-        tourService.list(item2, model, page);    // 검색된적이 있으면 getTourApi 하지 않고 바로 list 동작
+//    public void list(@Valid Item item2, Model model, Integer page) {
+//        System.out.println("사용자가 입력한 검색어 조회 = " + tourService.search(item2));
+//        if (tourService.search(item2) <= 0) {    // 검색 조건을 사용해서 검색했을 때 같은 조건으로 한번이라도 검색된적이 있는지 확인
+//            tourService.getTourApi(item2, model, page);     // 검색된적이 없으면 API 호출 후 DB에 저장
+//        }
+//        tourService.list(item2, model, page);    // 검색된적이 있으면 getTourApi 하지 않고 바로 list 동작
+//    }
+
+    @RequestMapping("/tourList")
+    public void list(Item item, Integer page, Model model) {
+        tourService.list(item, page, model);
     }
 
     @GetMapping("/tourDetail/{tourId}")

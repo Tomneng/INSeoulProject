@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="commonMap">
+    <div class="map_wrap">
+        <div id="map">
+            <ul id="category">
+                <li id="FD6" data-order="1">
+                    <span class="category_bg food"></span>
+                    음식
+                </li>
+                <li id="CE7" data-order="2">
+                    <span class="category_bg cafe"></span>
+                    카페
+                </li>
+                <li id="AT4" data-order="3">
+                    <span class="category_bg attractions"></span>
+                    명소
+                </li>
+            </ul>
+            <ul id="centerCoordinates" onclick="panTo()">
+                <li id="cc" data-order="4">
+                    <span class="category_bg cc"></span>
+                    원위치
+                </li>
+            </ul>
+            <!--            <button id="centerCoordinates" onclick="panTo()">원위치</button>-->
+        </div>
+    </div>
+</th:block>
+</html>

@@ -90,7 +90,7 @@
         <option value="24">중구</option>
         <option value="25">중랑구</option>
     </select>
-    <input type="text" name="tourName" placeholder="관광지명을 검색하세요.">
+    <input type="text" name="tourName" id="tourName" placeholder="관광지명을 검색하세요.">
     <button type="submit" id="btn_tour">검색</button>
     <br><br>
     <hr>
@@ -127,9 +127,6 @@
 <!-- pagination -->
 <th:block th:insert="~{tour/pagination::pagination}"></th:block>
 <!-- pagination -->
-
-<!--<table id="demoJSON_tour"></table><br><br><br>-->
-
 
 </body>
 

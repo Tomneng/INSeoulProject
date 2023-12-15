@@ -25,6 +25,13 @@ public class TourRepositoryTest {
     void test2() {
         TourRepository tourRepository = sqlSession.getMapper(TourRepository.class);
 
-//        System.out.println(tourRepository.selectFromRow("강남", ""));
+//        System.out.println(tourRepository.selectFromRow("강남", "", 10, 12));
+    }
+
+    @Test
+    void test3() {
+        TourRepository tourRepository = sqlSession.getMapper(TourRepository.class);
+
+        System.out.println(tourRepository.selectFromRow("23", "광화문", 10, 12));
     }
 }

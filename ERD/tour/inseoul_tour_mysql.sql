@@ -4,16 +4,12 @@ CREATE TABLE tour(
     tour_name varchar(100) NOT NULL,
     tour_addr1 varchar(150),
     tour_addr2 varchar(150),
-#     tourInfo varchar(100),
-#     tourTel varchar(15),
     tour_image1 varchar(200),
     tour_image2 varchar(200),
-#     tourUrl varchar(30),
     tour_contentid int,
     tour_sigungucode varchar(10),
     tour_mapx double,
-    tour_mapy double,
-    tourItem varchar(500)
+    tour_mapy double
 );
 
 DROP TABLE IF EXISTS contact_us;
@@ -34,3 +30,5 @@ CREATE TABLE user (
     nickname varchar(20) UNIQUE NOT NULL,
     mbti varchar(4)
 );
+
+SELECT * FROM tour;
