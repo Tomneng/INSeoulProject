@@ -14,15 +14,24 @@ CREATE TABLE food(
 
 DROP TABLE IF EXISTS review;
 
+-- CREATE TABLE review(
+--     review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+--     food_id INT NOT NULL,
+--     user_id INT NOT NULL,
+--     review_category VARCHAR(100),
+--     review_star DECIMAL(2,1) NOT NULL,
+--     review_content VARCHAR(100),
+--     FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
+--     FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+-- );
+
 CREATE TABLE review(
     review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     food_id INT NOT NULL,
-    user_id INT NOT NULL,
     review_category VARCHAR(100),
     review_star DECIMAL(2,1) NOT NULL,
     review_content VARCHAR(100),
-    FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+    FOREIGN KEY (`food_id`) REFERENCES `food` (`food_id`)
 );
 
 INSERT INTO review (review_id, food_id,user_id, review_category, review_star, review_content)

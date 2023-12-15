@@ -16,7 +16,13 @@ FROM food
 WHERE langcodeId = 'ko'
 ORDER BY food_id ASC;
 
+SELECT * FROM food_reviews;
+
+INSERT into food_reviews
+value (3, 122, 14, 'ㅇㅇ', 3.0,'ㅇㅇ');
+
 SELECT * FROM review;
+
 
 SELECT * FROM user;
 

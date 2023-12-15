@@ -10,10 +10,12 @@ public interface ReviewService {
     List<Review> list(Model model);
 
     //리뷰 작성
-    int write(Review review);
+    int write(Long foodId, Double reviewStar, String reviewCategory, String reviewContent);
+
     //리뷰 카테고리
     String selectById(Long reviewId);
-//    평점 계산
+
+    // 평점 계산
     double getRatingAverage(Long foodId);
 
     // 평점 반영

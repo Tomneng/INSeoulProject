@@ -105,9 +105,9 @@ input[type="button"]{
     background-color: rgb(19, 192, 85);
     color: #444;
 }
-#fooodImage img{
-    width: 400px;
-    height: 200px;
+#foodImage img{
+    /*width: 400px;*/
+    /*height: 200px;*/
 }
 .image-preview{
     width: 100px;
@@ -151,7 +151,7 @@ span{
 
 /* 평점 별*/
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-.rate { 
+.rate {
     display: inline-block; 
     border: 0; 
     margin-right: 15px;
@@ -189,7 +189,7 @@ span{
 } 
 
 /* 리뷰 카테코리 */
-#reviewCategory{
+#reviewCat{
     display: block;
     /* float: left; */
     min-height: 21px;
@@ -235,7 +235,7 @@ span{
 .category-comment{
     
 }
-#reviewCategory .checkComment{
+#reviewCat .checkComment{
     overflow: hidden;
     position: absolute;
     width: 1px;
@@ -267,19 +267,32 @@ input{
     border-radius: 5px;
     margin-right: 5px;
 }
-input[type="checkbox"]{
-    box-sizing: border-box;
-    display: none;
-}
-input[type="checkbox"] + label{
-    cursor: pointer;
-    display: inline-block;
-    background: rgb(0, 192, 112);
-}
+/*input[type="checkbox"]{*/
+/*    box-sizing: border-box;*/
+/*    display: none;*/
+/*}*/
+/*input[type="checkbox"] + label{*/
+/*    cursor: pointer;*/
+/*    display: inline-block;*/
+/*    background: rgb(0, 192, 112);*/
+/*}*/
+
+/*input[type="radio"]{*/
+/*    box-sizing: border-box;*/
+/*    display: none;*/
+/*}*/
+/*input[type="radio"] + label{*/
+/*    cursor: pointer;*/
+/*    display: inline-block;*/
+/*    background: rgb(0, 192, 112);*/
+/*}*/
 /* 선택시 색상 변경 */
 input[type="checkbox"]:checked + label{
     background: rgb(141, 190, 223);
 }
+/*input[type="radio"]:checked + label{*/
+/*    background: rgb(141, 190, 223);*/
+/*}*/
 
 input[type="submit"]{
     background-color: rgb(141, 190, 223);
@@ -291,16 +304,13 @@ input[type="submit"]{
     /* margin-left: 90px; */
 }
 
-.foodMap span{
-    /* margin-top: 50px; */
-    float: left;
-}
-#map{
-    margin-top:100px;
+
+#foodmap{
+    /*margin-top:100px;*/
     border-radius: 5px;
     border: 1px solid black;
     height: 200px;
 
      width: 200px;
 }
-  
+

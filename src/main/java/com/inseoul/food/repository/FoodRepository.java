@@ -13,12 +13,4 @@ public interface FoodRepository {
     FoodRow findById(Long foodId);
     //insert
     int write(FoodRow row);
-
-    //중복값 비교
-//    int compare(String string);
-
-//    void write(FoodRow row);
-    //특정 아이디 읽기
-//    int findById(Long foodId);
-
 }

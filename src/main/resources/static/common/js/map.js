@@ -52,7 +52,7 @@ var placeOverlay = new kakao.maps.CustomOverlay({zIndex: 1}),
 var ps = new kakao.maps.services.Places(map);
 
 // 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
+// kakao.maps.event.addListener(map, 'idle', searchPlaces);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다
 contentNode.className = 'placeinfo_wrap';
@@ -66,7 +66,7 @@ addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
 placeOverlay.setContent(contentNode);
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
-addCategoryClickEvent();
+// addCategoryClickEvent();
 
 // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 function addEventHandle(target, type, callback) {
@@ -78,19 +78,19 @@ function addEventHandle(target, type, callback) {
 }
 
 // 카테고리 검색을 요청하는 함수입니다
-function searchPlaces() {
-    if (!currCategory) {
-        return;
-    }
-
-    // 커스텀 오버레이를 숨깁니다
-    placeOverlay.setMap(null);
-
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
-
-    ps.categorySearch(currCategory, placesSearchCB, {useMapBounds: true});
-}
+// function searchPlaces() {
+//     if (!currCategory) {
+//         return;
+//     }
+//
+//     // 커스텀 오버레이를 숨깁니다
+//     placeOverlay.setMap(null);
+//
+//     // 지도에 표시되고 있는 마커를 제거합니다
+//     removeMarker();
+//
+//     ps.categorySearch(currCategory, placesSearchCB, {useMapBounds: true});
+// }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -179,41 +179,43 @@ function removeMarker() {
 }
 
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
-function displayPlaceInfo(place) {
-    var content =
-        '<div class="placeinfo">' +
-        '   <div class="placeinfoTitle">' +
-        '       <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>' +
-        '   </div>';
+// function displayPlaceInfo(place) {
+//     var content =
+//         '<div class="placeinfo">' +
+//         '   <div class="placeinfoTitle">' +
+//         '       <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>' +
+//         '   </div>';
+//
+//     if (place.road_address_name) {
+//         content +=
+//             '<span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
+//             '<span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
+//     } else {
+//         content +=
+//             '<span title="' + place.address_name + '">' + place.address_name + '</span>';
+//     }
+//
+//     content +=
+//         '<span class="tel">' + place.phone + '</span>' +
+//         '</div>' +
+//         '<div class="after"></div>';
+//
+//     contentNode.innerHTML = content;
+//     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+//     placeOverlay.setMap(map);
+// }
 
-    if (place.road_address_name) {
-        content +=
-            '<span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
-            '<span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
-    } else {
-        content +=
-            '<span title="' + place.address_name + '">' + place.address_name + '</span>';
-    }
 
-    content +=
-        '<span class="tel">' + place.phone + '</span>' +
-        '</div>' +
-        '<div class="after"></div>';
-
-    contentNode.innerHTML = content;
-    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);
-}
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
-function addCategoryClickEvent() {
-    var category = document.getElementById('category'),
-        children = category.children;
-
-    for (var i = 0; i < children.length; i++) {
-        children[i].onclick = onClickCategory;
-    }
-}
+// function addCategoryClickEvent() {
+//     var category = document.getElementById('category'),
+//         children = category.children;
+//
+//     for (var i = 0; i < children.length; i++) {
+//         children[i].onclick = onClickCategory;
+//     }
+// }
 
 // 카테고리를 클릭했을 때 호출되는 함수입니다
 function onClickCategory() {
@@ -276,37 +278,37 @@ console.log("(좌표만 있을때)지도에 센터 좌표로 마커 표시 = " +
 // 커스텀 오버레이에 표시할 컨텐츠 입니다
 // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
 // 별도의 이벤트 메소드를 제공하지 않습니다
-var content =
-    '<div class="wrap">' +
-    '    <div class="info">' +
-    '        <div class="title">' + centerMarkerName +
-    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-    '        </div>' +
-    '        <div class="body">' +
-    '           <div class="img">' +
-    '                <img id src="' + centerMarkerImg + '" width="73" height="70">' +
-    '           </div>' +
-    '           <div class="desc">' +
-    '                <div class="ellipsis">' + centerMarkerJuso + '</div>' +
-    '                <div class="jibun ellipsis">' + centerMarkerJibun + '</div>' +
-    '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
-    '           </div>' +
-    '        </div>' +
-    '    </div>' +
-    '</div>';
+// var content =
+//     '<div class="wrap">' +
+//     '    <div class="info">' +
+//     '        <div class="title">' + centerMarkerName +
+//     '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+//     '        </div>' +
+//     '        <div class="body">' +
+//     '           <div class="img">' +
+//     '                <img id src="' + centerMarkerImg + '" width="73" height="70">' +
+//     '           </div>' +
+//     '           <div class="desc">' +
+//     '                <div class="ellipsis">' + centerMarkerJuso + '</div>' +
+//     '                <div class="jibun ellipsis">' + centerMarkerJibun + '</div>' +
+//     '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
+//     '           </div>' +
+//     '        </div>' +
+//     '    </div>' +
+//     '</div>';
 
 
 // 마커 위에 커스텀오버레이를 표시합니다
 // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-var overlay = new kakao.maps.CustomOverlay({
-    content: content,
-    position: marker.getPosition(),
-    zIndex: 3
-});
+// var overlay = new kakao.maps.CustomOverlay({
+//     content: content,
+//     position: marker.getPosition(),
+//     zIndex: 3
+// });
 
-marker.setMap(map); // 상세페이지 장소에 마커 표시
+// marker.setMap(map); // 상세페이지 장소에 마커 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 마커 표시")
-overlay.setMap(map); // 상세페이지 장소에 커스텀 오버레이 표시
+// overlay.setMap(map); // 상세페이지 장소에 커스텀 오버레이 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 커스텀 오버레이 표시")
 
 // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다

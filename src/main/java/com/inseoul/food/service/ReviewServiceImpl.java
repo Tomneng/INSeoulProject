@@ -25,8 +25,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
     //리뷰 작성
     @Override
-    public int write(Review review) {
-        return reviewRepository.reviewSave(review);
+    public int write(Long foodId, Double reviewStar, String reviewCategory, String reviewContent) {
+        Review review1 = new Review();
+        review1.setFoodId(foodId);
+        review1.setReviewStar(reviewStar);
+        review1.setReviewCategory(reviewCategory);
+        review1.setReviewContent(reviewContent);
+
+        return reviewRepository.reviewSave(review1);
     }
     //리뷰 카테고리 보여주기
     @Override
@@ -43,14 +49,4 @@ public class ReviewServiceImpl implements ReviewService {
     public double updateRating(Long foodId) {
         return reviewRepository.updateRating(foodId);
     }
-
-    //평점 반영
-//    @Override
-//    public int setRating(Long reviewId) {
-//        Double ratingAvg =
-//
-//        return 0;
-//    }
-//
-
 }
