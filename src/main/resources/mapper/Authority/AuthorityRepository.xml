@@ -8,20 +8,20 @@
     </insert>
     <select id="findByNames" resultType="com.inseoul.authority.domain.Authority">
         SELECT
-            id "id",
-            name "name"
+            authority_id "id",
+            authority_name "name"
         FROM
             authority
         WHERE
-            name = #{name}
+            authority_name = #{name}
     </select>
     <select id="findByUser" resultType="com.inseoul.authority.domain.Authority">
         SELECT
-            a.id "id",
-            a.name "name"
+            a.authority_id "id",
+            a.authority_name "name"
         FROM
-            authority a, user_authorities u
+            authority a, user_authority u
         WHERE
-            a.id = u.authority_id AND u.user_id = #{id}
+            a.authority_id = u.authority_id AND u.user_id = #{userId}
     </select>
 </mapper>

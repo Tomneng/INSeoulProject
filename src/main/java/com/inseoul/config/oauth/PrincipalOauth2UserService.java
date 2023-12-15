@@ -63,14 +63,14 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         // username은 중복되지 않도록 만들어야 한다
         String username = oAuth2UserInfo.getEmail(); // "ex) google_xxxxxxxx"
         String password = passwordEncoder.encode(oauth2Password);
-        String name = oAuth2UserInfo.getName();
+        String nickname = oAuth2UserInfo.getName();
 
 
         // 회원 가입 진행하기 전에
         // 이미 가입한 회원인지, 혹은 비가입자인지 체크하여야 한다
         User newUser = User.builder()
                 .username(username)
-                .name(name)
+                .nickname(nickname)
                 .password(password)
                 .provider(provider)
                 .providerId(providerId)
