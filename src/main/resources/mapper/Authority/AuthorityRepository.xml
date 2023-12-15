@@ -11,7 +11,7 @@
             authority_id "id",
             authority_name "name"
         FROM
-            authority
+            user_authorities
         WHERE
             authority_name = #{name}
     </select>
