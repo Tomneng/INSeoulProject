@@ -6,6 +6,7 @@ import com.inseoul.tour.repository.TourRepository;
 import com.inseoul.tour.util.U;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +32,7 @@ public class TourServiceImpl implements TourService {
 
     private TourRepository tourRepository;
 
+    @Autowired
     public TourServiceImpl(SqlSession sqlSession){
         tourRepository = sqlSession.getMapper(TourRepository.class);
         System.out.println("Service 생성 완료");
@@ -38,11 +40,6 @@ public class TourServiceImpl implements TourService {
     @Override
     public int save(Item item) {
         return tourRepository.save(item);
-    }
-
-    @Override
-    public int isDuplicated(String string) {
-        return tourRepository.compare(string);
     }
 
     @Override
@@ -54,21 +51,22 @@ public class TourServiceImpl implements TourService {
     // item2에 NULL 값이 들어가기 때문에 countAll에 0이 출력되게 됨
     // 그러면 Controller 에서 이미 DB 에 저장되어 있어도 다시 API 를 호출하는 불필요한 작업을 하게 되기 때문에
     // Session 에 값을 저장하여 사용함 → list 에 사용한 것도 같은 이유
-    @Override
-    public int search(Item item) {
-        HttpSession session = U.getSession();
-        if (item.getTourName() == null) {
-            item.setTourName((String) session.getAttribute("tourName"));
-            item.setTourSigungucode((String) session.getAttribute("tourSigungucode"));
-        } else {
-            session.setAttribute("tourName", item.getTourName());
-            session.setAttribute("tourSigungucode", item.getTourSigungucode());
-        }
-        return tourRepository.countAll(item);
-    }
+//    @Override
+//    public int search(Item item) {
+//        HttpSession session = U.getSession();
+//        if (item.getTourName() == null) {
+//            item.setTourName((String) session.getAttribute("tourName"));
+//            item.setTourSigungucode((String) session.getAttribute("tourSigungucode"));
+//        } else {
+//            session.setAttribute("tourName", item.getTourName());
+//            session.setAttribute("tourSigungucode", item.getTourSigungucode());
+//        }
+//        return tourRepository.countAll(item);
+////        return tourRepository.countAll();
+//    }
 
     @Override
-    public void getTourApi(Item item2, Model model, Integer page) {
+    public void getTourApi(Item item2) {
         String apiUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1";
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl)
@@ -104,7 +102,7 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public List<Item> list(Item item, Model model, Integer page) {
+    public List<Item> list(Item item, Integer page, Model model) {
         if (page == null) page = 1; // 디폴트 1page
         if (page < 1) page = 1;
         // 페이징
@@ -128,6 +126,7 @@ public class TourServiceImpl implements TourService {
         session.setAttribute("page", page);
 
         long cnt = tourRepository.countAll(item);   // 글 목록 전체의 개수
+//        long cnt = tourRepository.countAll();   // 글 목록 전체의 개수
         int totalPage = (int)Math.ceil(cnt / (double)pageRows);   // 총 몇 '페이지'
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'
@@ -150,7 +149,8 @@ public class TourServiceImpl implements TourService {
             if (endPage >= totalPage) endPage = totalPage;
 
             // 해당페이지의 글 목록 읽어오기 + 필터링 인자들
-            list = tourRepository.selectFromRow(item.getTourName(), item.getTourSigungucode(), fromRow, pageRows);
+            list = tourRepository.selectFromRow(item.getTourSigungucode(), item.getTourName(), fromRow, pageRows);
+//            list = tourRepository.selectFromRow(fromRow, pageRows);
             model.addAttribute("list", list);
         } else {
             page = 0;

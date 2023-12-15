@@ -13,24 +13,22 @@ import lombok.NoArgsConstructor;
 public class Item {
 
     private Long tourId;
+    @JsonProperty("title")
+    private String tourName;
     @JsonProperty("addr1")
     private String tourAddr1;
     @JsonProperty("addr2")
     private String tourAddr2;
-    @JsonProperty("contentid")
-    private int tourContentid;
     @JsonProperty("firstimage")
     private String tourImage1;
     @JsonProperty("firstimage2")
     private String tourImage2;
+    @JsonProperty("contentid")
+    private int tourContentid;
+    @JsonProperty("sigungucode")
+    private String tourSigungucode;
     @JsonProperty("mapx")
     private double tourMapx;
     @JsonProperty("mapy")
     private double tourMapy;
-    @JsonProperty("sigungucode")
-    private String tourSigungucode;
-    @JsonProperty("title")
-    private String tourName;
-
-    private String tourItem;
 }

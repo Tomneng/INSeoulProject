@@ -8,9 +8,9 @@
     <insert id="save" parameterType="com.inseoul.tour.domain.Item"
             useGeneratedKeys="true" keyColumn="tour_id" keyProperty="tourId">
         INSERT INTO tour
-            (tour_name, tour_addr1, tour_addr2, tour_image1, tour_image2, tour_contentid, tour_sigungucode, tour_mapx, tour_mapy, tourItem)
+        (tour_name, tour_addr1, tour_addr2, tour_image1, tour_image2, tour_contentid, tour_sigungucode, tour_mapx, tour_mapy)
         VALUES
-            (#{tourName}, #{tourAddr1}, #{tourAddr2}, #{tourImage1}, #{tourImage2}, #{tourContentid}, #{tourSigungucode}, #{tourMapx}, #{tourMapy}, #{tourItem})
+            (#{tourName}, #{tourAddr1}, #{tourAddr2}, #{tourImage1}, #{tourImage2}, #{tourContentid}, #{tourSigungucode}, #{tourMapx}, #{tourMapy})
     </insert>
 
     <sql id="SELECT_BASE">
@@ -23,17 +23,10 @@
                tour_contentid "tourContentid",
                tour_sigungucode "tourSigungucode",
                tour_mapx "tourMapx",
-               tour_mapy "tourMapy",
-               tourItem
+               tour_mapy "tourMapy"
         FROM tour
-        WHERE 1=1
+        WHERE 1 = 1
     </sql>
-
-    <select id="compare" resultType="java.lang.Integer">
-        SELECT count(tourItem)
-        FROM tour
-        WHERE tourItem = #{tourItem}
-    </select>
 
     <select id="selectById" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
