@@ -6,7 +6,6 @@
     history.back();
 </script>
 
-<th:block>
 
     <head>
         <meta charset="utf-8">
@@ -27,15 +26,14 @@
         <h2>조회</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">Email :[[${post.user.email}]]</span>
-            <span class="float-start me-2">Id : [[${post.user.mbti}]]</span>
+            <span class="float-start me-2">id : [[${post.postId}]]</span>
             <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
             <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
 
         <section>
-            <form name="frmDelete" method="post">
-                <input type="hidden" name="postId">
+            <form name="frmDelete" th:action="@{/board/delete}" method="post">  <!-- 안녕 -->
+                <input type="hidden" name="postId" th:value="${post.postId}">
             </form>
 
             <div class="mb-3 mt-3">
@@ -60,5 +58,4 @@
 
     </body>
 
-</th:block>
 </html>

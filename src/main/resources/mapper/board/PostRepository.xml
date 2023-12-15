@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.board.repository.PostRepository">
+
+    <insert id="save" flushCache="true" parameterType="com.inseoul.board.domain.post.Post"
+        useGeneratedKeys="true" keyColumn="post_id" keyProperty="postId">
+        INSERT INTO post
+#             (title, content, post_regdate)    <!--컬럼안에 아래 value가 들어감 // erd테이블 컬럼-->
+            (title, content)    <!--컬럼안에 아래 value가 들어감 // erd테이블 컬럼-->
+        VALUES
+<!--            (#{title}, #{content}, #{postRegdate})   &lt;!&ndash;domain에 들어온 애들 // #에 데이터가 들어감 &ndash;&gt;-->
+            (#{title}, #{content})   <!--domain에 들어온 애들 // #에 데이터가 들어감 -->
+    </insert>   <!--insert 쿼리를 실행 시키기 위해 insert태그 안에 쿼리를 넣는다.-->
+
+    <!-- 반복해서 사용될 쿼리문은 sql 태그로 정의 하고, include 태그로 가져다 쓸수 있다 -->
+<!--    <sql id="SELECT_BASE">-->
+<!--        SELECT-->
+<!--            p.post_id "postId",  &lt;!&ndash;왼쪽은 실제 컬럼 이름, 오른쪽은 별칭(데이타 베이스 맨 위에 뜨는거)&ndash;&gt;-->
+<!--            p.title "title",            &lt;!&ndash;post에 있는 필드 이름과 오른쪽이 같아야함&ndash;&gt;-->
+<!--            p.content "content",-->
+<!--            p.viewcnt "viewcnt",-->
+<!--            p.post_regdate "postRegdate",-->
+<!--            u.user_id "userId",-->
+<!--            u.email "email",-->
+<!--            u.nickname "nickname",-->
+<!--            u.mbti "mbti",-->
+<!--            u.user_regdate "userRegdate"-->
+<!--        FROM-->
+<!--            post p, user u-->
+<!--        WHERE-->
+<!--            p.user_id = u.user_id-->
+<!--    </sql>-->
+
+    <sql id="SELECT_BASE">
+        SELECT
+        p.post_id "postId",  <!--왼쪽은 실제 컬럼 이름, 오른쪽은 별칭(데이타 베이스 맨 위에 뜨는거)-->
+        p.title "title",            <!--post에 있는 필드 이름과 오른쪽이 같아야함-->
+        p.content "content",
+        p.viewcnt "viewcnt",
+        p.post_regdate "postRegdate"
+        FROM
+        post p
+        WHERE
+        1 = 1
+    </sql>
+
+<!--    &lt;!&ndash; JOIN 문에서 여러 테이블의 데이터 매핑 받기 &ndash;&gt;-->
+<!--    <resultMap id="mapUser" type="com.inseoul.board.domain.user.User">-->
+<!--        <result column="userId" property="userId"/>   &lt;!&ndash;/ column은 erd 컬럼명 / property는 User 도메인 컬럼명&ndash;&gt;-->
+<!--        <result column="email" property="email"/>-->
+<!--        <result column="password" property="password"/>-->
+<!--        <result column="userRegdate" property="userRegdate"/>-->
+<!--        <result column="nickname" property="nickname"/>-->
+<!--        <result column="mbti" property="mbti"/>-->
+<!--    </resultMap>-->
+
+    <resultMap id="mapPost" type="com.inseoul.board.domain.post.Post">
+        <result column="postId" property="postId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="viewcnt" property="viewcnt"/>
+        <result column="postRegdate" property="postRegdate"/>
+<!--        <collection property="user" resultMap="mapUser"/>     &lt;!&ndash; Post에서 userId는 FK이므로 resultMap="mapUser"→User 도메인의 userId를 사용&ndash;&gt;-->
+    </resultMap>
+
+    <update id="incViewCnt" flushCache="true">
+        UPDATE post
+        SET viewcnt = viewcnt + 1
+        WHERE post_id = #{param1}
+    </update>
+
+<!--    <select id="findAll" resultMap="mapPost">-->
+<!--        <include refid="SELECT_BASE"/>-->
+<!--        ORDER BY post_id DESC-->
+<!--    </select>-->
+    <select id="findAll" resultType="com.inseoul.board.domain.post.Post">
+        <include refid="SELECT_BASE"/>
+        ORDER BY post_id DESC
+    </select>
+
+    <update id="update" flushCache="true"
+            parameterType="com.inseoul.board.domain.post.Post">
+        UPDATE post
+        SET title = #{title}, content = #{content}
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="deleteById" flushCache="true"
+            parameterType="com.inseoul.board.domain.post.Post">
+        DELETE FROM post WHERE post_id = #{postId}
+    </delete>
+
+    <select id="countAll" resultType="int">
+        SELECT count(*) FROM post
+    </select>
+<!--resultType="com.inseoul.board.domain.post.Post"-->
+<!--    <select id="findById" resultMap="mapPost">-->
+    <select id="findById" resultType="com.inseoul.board.domain.post.Post">
+        <include refid="SELECT_BASE"/>    <!--<sql id="SELECT_BASE">안의 쿼리를 가져온다-->
+            AND post_id = #{postId}
+    </select>   <!--애는 조회임 조회는 결과가 있어야함 그 결과를 resultType타입으로 알려준다(mybatise한테 알려 준다는 뜻) -->
+
+<!--    <select id="selectFromRow" resultMap="mapPost">-->
+<!--        <include refid="SELECT_BASE"/>-->
+<!--        ORDER BY p.id DESC-->
+<!--        LIMIT #{param1}, #{param2}-->
+<!--    </select>-->
+</mapper>

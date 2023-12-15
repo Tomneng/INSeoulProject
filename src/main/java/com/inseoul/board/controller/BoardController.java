@@ -1,13 +1,14 @@
 package com.inseoul.board.controller;
 
 import com.inseoul.board.domain.post.Post;
-import com.inseoul.board.domain.post.Post;
+import com.inseoul.board.domain.post.PostValidator;
 import com.inseoul.board.service.BoardService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +36,7 @@ public class BoardController {
             , Model model   // 매개변수 선언시 BindingResult 보다 Model 을 뒤에 두어야 한다.
             , RedirectAttributes redirectAttrs
     ) {
+        System.out.println("보드컨트롤러의 롸이트Ok함수 실행!!!");
         // validation 에러가 있었다면 redirect 할거다!
         if (result.hasErrors()) {
 
@@ -64,11 +66,9 @@ public class BoardController {
 
     @GetMapping("/detail/{postId}")
     public String detail(@PathVariable("postId") Long postId, Model model){ // key와 value로 이루어져있는 HashMapModel의 || addAttribute()를 통해 view에 전달할 데이터를 저장
-        System.out.println("포스트아이디 = " + postId);
-        System.out.println("모델 = " + model); // 모델이 없다 비어있는 오브젝트임
         Post post = boardService.selectById(postId);    // 보드서비스에 있는 셀렉트바이아이디라는 함스에다가 매개변수로 포스트아이디를 전달함
         System.out.println("post = " + post);
-        System.out.println(post.getUser());
+//        System.out.println(post.getUser());
         model.addAttribute("post", post);   // key, value
         return "board/detail";
     }
@@ -109,16 +109,19 @@ public class BoardController {
         return "board/updateOk";
     }
 
-    @GetMapping ("/delete")
-    public String deleteOk(Long postId, Model model){
-        int result = boardService.deleteById(postId);
+
+    @PostMapping("/delete")     // 이 주소로 접속하면 이 메소드를 호출한다.(매핑한다.)
+    public String deleteOk(Long postId, Model model){   // 이 함수 안에서 변수로 쓰고 있기 때문에 이름이바뀌어도 상관 없다.
+        System.out.println("왼쪽은 deleteById를 찍음" + postId);
+        int result = boardService.deleteById(postId);   //boardService에 있는 deleteById 함수를 호출하는데 그 호출하는데 매개변수를 id값을 준것
+        System.out.println("야호" + result);  // 0이 나왔어
         model.addAttribute("result", result);
         return "board/deleteOk";
     }
 
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        System.out.println("initBinder() 호출");
-//        binder.setValidator(new PostValidator());
-//    }
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        System.out.println("initBinder() 호출");
+        binder.setValidator(new PostValidator());
+    }
 }

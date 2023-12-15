@@ -1,9 +1,9 @@
-$(function(){
+$(function () {
     // 글 [삭제] 버튼
-    $("#btnDel").click(function(){
+    $("#btnDel").click(function () {
         let answer = confirm("삭제하시겠습니까?");
-        if(answer){
-            $("form[name='frmDelete']").submit();
+        if (answer) {
+            $("form[name='frmDelete']").submit();   // 삭제 역할
         }
     });
 });
