@@ -24,8 +24,6 @@ $(document).ready(function () {
             if(status == "success"){
                 const init = document.querySelector("#container1").firstElementChild
                 const val = parseInt(init.firstElementChild.value);
-                console.log(init)
-                console.log(val)
                 for (i = val; i>val-12; i--){
                     if (data.includes(i)){
                         document.getElementById(`${i}`).checked=true;
