@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface UserScraptedService {
-    List<Row> listById(Long id, Model model);
+    List<Row> listById(Model model);
 
     List<Long> scraptedList(Long id);
 

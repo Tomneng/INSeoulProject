@@ -10,6 +10,7 @@ public interface UserScraptedRepository {
 
     int addHouseScrapt(UserScraptedHouse userScraptedHouse);
 
+    //이 유저저가 스크랩한거 불러오기
     List<Long> getids(Long userId);
 
     Row selectScrapted(Long id);
