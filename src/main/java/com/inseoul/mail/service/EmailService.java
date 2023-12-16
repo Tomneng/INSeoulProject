@@ -1,5 +1,6 @@
 package com.inseoul.mail.service;
 
+import com.inseoul.mail.domain.AuthCodeQryResult;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -90,14 +91,17 @@ public class EmailService {
      * @throws MessagingException
      * @throws UnsupportedEncodingException
      */
-    public String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
+    public AuthCodeQryResult sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException {
 
         //메일전송에 필요한 정보 설정
         MimeMessage emailForm = createEmailForm(toEmail);
         //실제 메일 전송 참고로 send()메소드에 담긴 매개변수는 createMimeMessage()로 만들어진 MimeMessage타입이여만 함 (당연히 둘은 같은 클래스에있기 때문일듯?)
         emailSender.send(emailForm);
-
-        return authNum; //인증 코드 반환
+        AuthCodeQryResult authCodeQryResult = AuthCodeQryResult.builder()
+                .authCode(authNum)
+                .status("OK")
+                .build();
+        return authCodeQryResult; //인증 코드 및 status 반환
     }
 
     /** setContext로 내가 보내고 싶은 내용을 html 파일에 담아서 실행을 시키고 실행결과를 리턴받음

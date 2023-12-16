@@ -79,29 +79,11 @@ public class UserController {
         int cnt = userService.register((User) model.getAttribute("user"));
         model.addAttribute("result", cnt);
         return "user/registerOk";
-
-//        model.addAttribute("user", user);
-//        String page = "/user/mailConfirm";
-//        model.addAttribute("email", user.getUsername());
-//        return page;
     }
 
-//    @PostMapping("/codeConfirm")
-//    public String codeOk(@Valid String code, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
-//        if (result.hasErrors()) {
-//            redirectAttrs.addFlashAttribute("wrongCode", 1);
-//            return "redirect:/user/codeConfirm";
-//        } else {
-//            int cnt = userService.register((User) model.getAttribute("user"));
-//            model.addAttribute("result", cnt);
-//            return "user/registerOk";
-//        }
-//    }
 
-//    @PostMapping("/authok")
-//    public void authOk() {
-//    // 미완(아직 이메일 인증절차 중간에 끼워넣기 안됬음)
-//    }
+
+
 
     @Autowired
     UserValidator userValidator;
