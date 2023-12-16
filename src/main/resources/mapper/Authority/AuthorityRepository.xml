@@ -3,7 +3,7 @@
 <mapper namespace="com.inseoul.authority.repository.AuthorityRepository">
 
     <insert id="addAuthority">
-        INSERT INTO user_authorities(user_id, authority_id)
+        INSERT INTO user_authority(user_id, authority_id)
         VALUES (#{param1}, #{param2})
     </insert>
     <select id="findByNames" resultType="com.inseoul.authority.domain.Authority">
