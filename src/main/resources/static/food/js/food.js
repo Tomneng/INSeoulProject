@@ -17,6 +17,7 @@ $(document).ready(function(){
         $("div#foodImage").append('<img referrerpolicy="no-referrer" src="' + res.documents[1].image_url+'" style="width:380px; height:250px;" />');
         // $("div#foodImage").append('<img src="' + res.documents[0].thumbnail_url + '"/>');
     })
+
 })
 
 // 모달
@@ -40,8 +41,18 @@ closeBtn.addEventListener("click", e => {
     modalOff();
 })
 
-
-
+// 체크박스 하나만 선택
+// function ckone(el){
+//     const reviewCategory = []
+//     // $('input[type="checkbox"]:checked').each(function (){
+//     //     reviewCategory.push($(this).val());
+//     // });
+//     const ckboxes = document.querySelectorAll('checkComment:checked');
+//     ckboxes.forEach((e) => {
+//         e.checked = false;
+//     })
+//     el.checked = true;
+// }
 
 // 리뷰 남기기 클릭시
 function getShow(){
@@ -53,23 +64,28 @@ function getShow(){
 // 작성완료 클릭시
 function getHide(){
     const foodId = $('input[type="hidden"]').val(); //음식점 아이디 값을 가져옴
+       //회원 아이디 값
     const reviewCategory = []
     $('input[type="checkbox"]:checked').each(function (){
         reviewCategory.push($(this).val());
     });
-    const reviewContent = $('.reviewComment').val();
-    const reviewStar = $('input[type="radio"]:checked').val();
-    console.log("리뷰내용 = " + reviewContent)
+    const reviewContent = $('.reviewComment').val();    //글 내용
+    const reviewStar = $('input[type="radio"]:checked').val();  //선택한 별점의 값
+    console.log("리뷰내용 = " + reviewContent);
+    console.log("키워드 = " + reviewCategory);
+    console.log("별점 값 = " + reviewStar);
 
+    // 별점은 NN로 필수 선택, 선택되지 않은 경우
     if(!reviewStar){
         alert('별점을 선택해주세요');
         return;
     }
-
+    // 넘길 변수
     const data = {
         "food_id" : foodId,
+        "user" : Logged_id,
         "review_star" : reviewStar,
-        "review_category" : reviewCategory,
+        "review_category" : [reviewCategory],
         "review_content" : reviewContent,
     };
 
@@ -79,27 +95,30 @@ function getHide(){
         data : data,
         cache : false,
         success : function (data, status){
+            // 서버와 성공적으로 통신한 경우
             if (status == "success"){
                 if (data.status !== "OK"){
                     alert(data.status);
                     return;
                 }
                 $('#reviewStar').val();
-                // $('#reviewCategory').val();
-                $('.checkComment').val();
+                $('#reviewCategory').val();
+                // 선택된 체크박스 를 해제
+                // $('.checkComment').prop('checked', false);
                 $('.reviewComment').val();
             }
                 console.log(response);
                 alert("성공");
+                alert("리뷰를 남겼어요 😊");
+                document.getElementById('content').style.display="none";
+                document.getElementById('showContent').style.display="";
         },
+        // 서버와 통신중 에러가 발생한 경우
         error :function (error){
             console.log(error);
             alert("error");
         }
     });
-                alert("리뷰를 남겼어요 😊");
-                document.getElementById('content').style.display="none";
-                document.getElementById('showContent').style.display="";
 }
 // 취소 클릭시
 function getCancel(){
@@ -144,12 +163,6 @@ upload.addEventListener('click', e => realUpload.click());
 realUpload.addEventListener('change', getImageFiles);
 
 
-
-//평점
-function clickStar(){
-
-}
-
 //리뷰 남기기
 // const review = document.getElementById("reviewCategory")
 
@@ -157,5 +170,3 @@ function clickStar(){
 // cancelBtn.addEventListener("click", e=> {
 //     alert("리뷰작성을 취소하시겠습니까?");
 // });
-
-// 지도

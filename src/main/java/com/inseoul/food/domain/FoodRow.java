@@ -21,11 +21,9 @@ public class FoodRow {
     public String storeTel;
     @JsonProperty("LANG_CODE_ID")
     public String langcodeId;
+
     //리뷰 별점 평균
     private double reviewAvg;
-
-//    중복
-//    private String distinguish;
 
     //첨부 파일(이미지)
     @ToString.Exclude

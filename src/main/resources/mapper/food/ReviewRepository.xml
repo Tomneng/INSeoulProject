@@ -30,16 +30,9 @@
         <include refid="SELECT_BASE"/>
         ORDER BY review_id ASC
     </select>
-
-    <!-- 작성한 리뷰 저장 -->
-<!--    <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">-->
-<!--        INSERT INTO review (food_id, user_id, review_category, review_content, review_star)-->
-<!--        VALUES (#{foodId}, #{user.userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})-->
-<!--    </insert>-->
-
     <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
-        INSERT INTO food_reviews (food_id,id, review_category, review_content, review_star)
-        VALUES (#{foodId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
+        INSERT INTO food_reviews (food_id, id, review_category, review_content, review_star)
+        VALUES (#{foodId}, #{user.userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
     </insert>
 
     <!-- 저장된 리뷰카테고리 보여주기-->
@@ -47,15 +40,6 @@
         SELECT review_category "reviewCategory" FROM food_reviews
         WHERE review_id = #{reviewId}
     </select>
-
-
-<!--    <resultMap id="mapFood" type="com.inseoul.food.domain.FoodRow">-->
-<!--        <result column="food_id" property="foodId"/>-->
-<!--        <result column="store_name" property="storeName"/>-->
-<!--        <result column="store_address" property="storeAddress"/>-->
-<!--        <result column="langcodeId" property="langcodeId"/>-->
-<!--        <result column="review_avg" property="reviewAvg"/>-->
-<!--    </resultMap>-->
     <!-- 이미지 저장하기 -->
 <!--    <insert id="saveImage" parameterType="com.inseoul.food.domain.Review">-->
 <!--        INSERT INTO food_review(reviewId, reviewImage, reviewStoredImage)-->
@@ -67,14 +51,14 @@
 <!--    </select>-->
     <!-- 평점 구하기 -->
     <select id="getRatingAvg" resultType="Double">
-        SELECT AVG(review_star) "ratingAvg" FROM review
+        SELECT AVG(review_star) "reviewAvg" FROM food_reviews
         WHERE food_id = #{foodId}
         GROUP BY food_id
     </select>
     <!-- 평점 불러오기 -->
     <update id="updateRating">
         UPDATE food
-        SET rating_avg = #{ratingAvg}
+        SET review_avg = #{reviewAvg}
         WHERE food_id = #{foodId}
     </update>
 </mapper>
@@ -84,7 +68,6 @@
     <!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
     <!--        WHERE reviewId = #{reviewId}-->
     <!--    </select>-->
-
 
     <!--    &lt;!&ndash; 평점 구하기&ndash;&gt;-->
     <!--    <select id="getRatingAvg" resultType="Double">-->

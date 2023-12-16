@@ -12,6 +12,7 @@ $(document).ready(function () {
         frm.attr("action", "pageRows")
         frm.submit();
     })
+
     const userId = {
         "user_id": logged_id,
     };

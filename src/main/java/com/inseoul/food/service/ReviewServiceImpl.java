@@ -2,6 +2,9 @@ package com.inseoul.food.service;
 
 import com.inseoul.food.domain.Review;
 import com.inseoul.food.repository.ReviewRepository;
+import com.inseoul.food.util.U;
+import com.inseoul.user.domain.User;
+import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +27,13 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findAll();
     }
     //리뷰 작성
+    //review1 객체 생성
     @Override
-    public int write(Long foodId, Double reviewStar, String reviewCategory, String reviewContent) {
+    public int write(Long foodId, User user, Double reviewStar, String reviewCategory, String reviewContent) {
+//        HttpSession session = U.getSession();
         Review review1 = new Review();
         review1.setFoodId(foodId);
+        review1.setUser(user);
         review1.setReviewStar(reviewStar);
         review1.setReviewCategory(reviewCategory);
         review1.setReviewContent(reviewContent);
@@ -44,7 +50,7 @@ public class ReviewServiceImpl implements ReviewService {
     public double getRatingAverage(Long foodId) {
         return reviewRepository.getRatingAvg(foodId);
     }
-
+    //평균 업데이트
     @Override
     public double updateRating(Long foodId) {
         return reviewRepository.updateRating(foodId);

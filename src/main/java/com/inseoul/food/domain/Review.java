@@ -1,5 +1,6 @@
 package com.inseoul.food.domain;
 
+import com.inseoul.user.domain.User;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class Review {
     private Long reviewId;
     //회원 아이디(리뷰 작성자)
 //    @ToString.Exclude
-//    private User user;
+    private User user;
 
     private Long foodId;
     //리뷰 카테고리

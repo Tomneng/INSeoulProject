@@ -1,10 +1,8 @@
 package com.inseoul.food.repository;
 
 import com.inseoul.food.domain.Review;
-import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ReviewRepository {
     // 특정음식점 리뷰의 목록
@@ -18,5 +16,4 @@ public interface ReviewRepository {
     double getRatingAvg(Long foodId);
     //평점 평균 반영하기
     double updateRating(Long foodId);
-
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:with="logged_user=${#authentication.principal.user}">
 <head>
     <meta charset="UTF-8">
     <title>Food Detail/Review</title>
@@ -12,7 +13,12 @@
     <script src="https://kit.fontawesome.com/821e8d3801.js" crossorigin="anonymous"></script>
    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 </head>
+    <script th:inline="javascript">
+        // 나중에 댓글 작성시 필요.
+        const logged_id = [[${logged_user.userId}]];
+    </script>
 <body>
+
     <div id="container">
         <h2>관광상세페이지</h2>
         <div id="">관광상세페이지</div>
@@ -52,7 +58,7 @@
                     <!-- 다중 파일 업로드 -->
                     <span></span>
                     <div class="upload">
-<!--                        <ul class="image-preview">이미지 db에서 띄워줘</ul>-->
+                        <ul class="image-preview">띄워조.</ul>
                     </div>
                     <!-- 이미지 보여주기 -->
 <!--                    <div th:each="attachment : ${foodrow?.fileList}">-->
@@ -63,7 +69,8 @@
                 <div class="mid">
                     <div id="userId">
                         <span>회원ID</span>
-<!--                        <span class="userId" th:text="${user?.userId}">asdfdsfaasdfasfd</span>-->
+<!--                        <input type="hidden" name="userId" th:value="${user.userId}">-->
+                        <span class="userId" th:text="${user?.userId}"></span>
                     </div>
                     <div id="reviewStar">
                         <fieldset class="rate">
@@ -91,7 +98,7 @@
                         </fieldset>
                     </div>
                 </div>
-                <div id="reviewcategorydiv">
+                <div id="reviewCat">
                     <span>리뷰</span>
                     <div class="keyword">
                         <ul class="category">
@@ -108,7 +115,7 @@
                                 </label>
                             </li>
                             <li class="category-comment">
-                                <input type="checkbox" class="checkComment" id="reviewCategory3" value="🌉 뷰가 좋아요">
+                                <input type="checkbox" class="checkComment" id="reviewCategory3" name ="reviewCategory" value="🌉 뷰가 좋아요">
                                 <label for="reviewCategory3" class="label-comment">
                                     🌉 뷰가 좋아요
                                 </label>
@@ -120,7 +127,7 @@
                                 </label>
                             </li>
                             <li class="category-comment">
-                                <input type="checkbox" class="checkComment" id="reviewCategory5" name="reviewCategory" value="👀 매장이 넓어요">
+                                <input type="checkbox" class="checkComment" id="reviewCategory5" name="reviewCategory" value="👀 매장이 넓어요" >
                                 <label for="reviewCategory5" class="label-comment">
                                     👀 매장이 넓어요
                                 </label>
@@ -140,6 +147,7 @@
         </div>
     </div>
 </body>
+</th:block>
 <script th:src="@{/food/js/food.js}"></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>
