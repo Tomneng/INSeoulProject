@@ -109,7 +109,7 @@ CREATE TABLE foodInfoSaved
 
 
 -- 음식점리뷰테이블
--- 첨부이미지 제거, 음식점, 회원 아이디 unique 제거
+-- 첨부이미지 제거
 CREATE TABLE food_reviews
 (
     review_id int NOT NULL AUTO_INCREMENT COMMENT '리뷰아이디',
