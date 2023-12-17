@@ -45,3 +45,8 @@
     background: #2e6e6e;
     color: chartreuse;
 }
+
+.col .card img{
+    height: 60vh;
+    object-fit: cover;
+}

@@ -7,11 +7,11 @@
     <nav class="navbar navbar-expand-lg sticky-top" aria-label="Offcanvas navbar large"
          data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="main">
+            <a class="navbar-brand" th:href="@{/home/main}">
                 <img th:src="@{/common/image/seoul/Seoul_illust.jpg}" alt="Logo" style="width:80px;"
                      class="rounded-pill"
-                id="headerLogo">
-<!--                in 서울-->
+                     id="headerLogo">
+                <!-- in 서울 -->
             </a>
             <h1>in 서울</h1>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
@@ -22,7 +22,7 @@
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar2"
                  aria-labelledby="offcanvasNavbar2Label">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label"></i> 로그인 정보</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbar2Label">로그인 정보</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                 </div>
@@ -32,10 +32,10 @@
                             <a class="nav-link" href="#">서비스 소개</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">관광</a>
+                            <a class="nav-link" th:href="@{/tour/tourList}">관광</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">부동산</a>
+                            <a class="nav-link" th:href="@{/realEstate/infoList}">부동산</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">MBTI게시판</a>
@@ -44,12 +44,18 @@
                     <a class="btn btn-primary" sec:authorize="isAnonymous()" type="submit" th:href="@{/user/login2}">Login</a>
 
                     <!-- 로그인 했을때는 username 과 로그아웃 form 보여주기 -->
-                    <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()" th:with="user=${#authentication.getPrincipal().getUser()}">
+                    <form th:action="@{/user/logout}" method="POST" sec:authorize="isAuthenticated()"
+                          th:with="user=${#authentication.getPrincipal().getUser()}">
                         <!--TODO : 로그아웃후 다시 돌아오기 -->
                         <span class="d-flex">
-                        <span class="text-light p-2"><span TODO="">[[${user.username}]]([[${user.nickname}]])</span> 님 환영합니다</span>
-            <span><button class="btn btn-danger" type="submit">Logout</button></span>
-          </span>
+                            <span class="text-light p-2"><span TODO="">[[${user.username}]]([[${user.nickname}]])</span> 님 환영합니다</span>
+                            <span>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                                    회원
+                                </button>
+                            </span>
+                            <span><button class="btn btn-danger" type="submit">Logout</button></span>
+                        </span>
                     </form>
                 </div>
             </div>
