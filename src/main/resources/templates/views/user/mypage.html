@@ -3,6 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:with="logged_user=${#authentication.principal.user}">
+
+  <style>
+    .divider-container{
+      width:150px;
+      height: 50px;
+      border: black 2px solid;
+      display: flex;
+      align-content: center;
+    }
+
+  </style>
 <head>
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +30,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
 
-    <title>Scraps</title>
+    <title>Mypage</title>
 </head>
 
 <script th:inline="javascript">
