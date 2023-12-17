@@ -11,8 +11,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script th:src="@{/board/js/list.js}"></script>
 
-    <title>목록</title>
     <link rel="stylesheet" type="text/css" th:href="@{/board/css/list.css}">
+
+    <title>목록</title>
 </head>
 <body>
 
@@ -21,9 +22,7 @@
         <div>
             <h2 class="title">PlayGround</h2>
         </div>
-
         <div>
-
         </div>
     <div>
             <div class="search-bar">
@@ -49,25 +48,24 @@
         </div>
     </div>
 
-
     <!-- 목록 -->
     <table class="table table-hover">
         <thead class="table">
         <tr>
             <th>No</th>
-            <th>MBTI type</th>
+<!--            <th>MBTI type</th>-->
             <th>Post title</th>
-            <th>Writer</th>
+<!--            <th>Writer</th>-->
             <th>Date</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="post : ${list}">   <!--하나의 행 - 행이 시작되는 부분 (한 줄) ${list}의 안에 있는 원소를 post라는 이름을 반복-->
-            <td><span th:text="${post.id}"></span></td>     <!--list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭-->
-            <td><span><a th:href="@{'/board/detail/' + ${post.id}}" th:text="${post.subject}"></a></span> </td>
-            <td><span th:text="${post.user}"></span></td>
-            <td><span th:text="${post.viewCnt}"></span></td>
-            <td><span th:text="${#temporals.format(post.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+            <td><span th:text="${post.postId}"></span></td>
+<!--            <td><span th:text="${post.user.mbti}"></span></td>&lt;!&ndash;list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭&ndash;&gt;-->
+            <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span> </td>
+<!--            <td><span th:text="${post.user.email}"></span></td>-->
+            <td><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
         </tr>
 
         </tbody>

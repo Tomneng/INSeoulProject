@@ -14,13 +14,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" th:href="@{/board/css/common.css}">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-        <script th:src="@{/js/update.js}"></script>
+        <script th:src="@{/board/js/update.js}"></script>
 
 
-        <title>수정</title>
+        <title>수정 - [[${post.postId}]]</title>
     </head>
 
     <body>
@@ -28,22 +29,21 @@
         <h2>수정</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">id: [[${post.id}]]</span>
-            <span class="float-end ms-4">작성일: [[${#temporals.format(post.regDate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
-            <span class="float-end">조회수: [[${post.viewCnt}]]</span>
+            <span class="float-start me-2">id: [[${post.postId}]]</span>
+            <span class="float-end">조회수: [[${post.viewcnt}]]</span>
         </div>
 
         <form name="frm" th:action="@{/board/update}" method="post">
-            <input type="hidden" name="id" th:value="${post.id}"/>
+            <input type="hidden" name="postId" th:value="${post.postId}"/>
             <div class="mb-3">
                 <label>작성자:</label>
-                <span class="form-control" readonly th:text="${post.user}"></span>
-                <input type="hidden" name="user" th:value="${post.user}"> <!-- validation 땜에 필요 -->
+                <span class="form-control" readonly th:text="${post.postId}"></span>
+                <input type="hidden" name="postId" th:value="${post.postId}"> <!-- validation 땜에 필요 -->
             </div>
             <div class="mb-3 mt-3">
-                <label for="subject">제목:</label>
-                <input type="text" class="form-control" id="subject" placeholder="제목을 입력하세요" name="subject" th:value="${subject} ? ${subject} : ${post.subject}">
-                <span class="text-danger" th:if="${error_subject}" th:utext="${error_subject}"></span>
+                <label for="title">제목:</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" th:value="${title} ? ${title} : ${post.title}">
+                <span class="text-danger" th:if="${error_title}" th:utext="${error_title}"></span>
             </div>
             <div class="mb-3 mt-3">
                 <label for="content">내용:</label>

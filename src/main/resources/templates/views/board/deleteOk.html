@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:unless="${result > 0}">  // 안에 조건이 거짓일 때 실행   만약 삭제 실패이면 result가 0이 아니라서 초과라 실패가 뜬것
+    alert("삭제 실패");
+    history.back();
+</script>
+
+<script th:if="${result > 0}" th:inline="javascript">   //if는 result가 참일 때 (0초과일 때 실행)
+    alert("삭제 성공");
+    location.href = `list`;
+</script>
+
+</html>
