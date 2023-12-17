@@ -146,6 +146,8 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     building_name varchar(20),
     build_year int,
     house_kind_name varchar(20),
+    contract_score int DEFAULT 0, # 점수 칼럼 추가 이건 실제 평균값임
+    place_score int DEFAULT 0,
     contract_period varchar(20), #이거 null 허용으로 바꿈
     new_ron_secd varchar(2),
     address varchar(100) # column명이 다름 이걸로 갈듯
@@ -157,7 +159,7 @@ CREATE TABLE houseContractScore
 (
     user_id int REFERENCES user(user_id), #column명 다름 이걸로 갈듯
     house_id int REFERENCES house_contract(house_id), #외래키설정 비버에 안되있음
-    contract_score int, #디폴트 value는 없애는 방향
+    contract_score int DEFAULT 0,
     place_score int,
     PRIMARY KEY (user_id, house_id) #비버에 pk설정 안되있음
 ) COMMENT = '부동산 점수테이블';
@@ -437,5 +439,6 @@ SELECT * FROM authority;
 INSERT INTO authority (authority_name) VALUES
 ('ROLE_MEMBER'), ('ROLE_ADMIN');
 
+SELECT * FROM houseContractScore;
 
 

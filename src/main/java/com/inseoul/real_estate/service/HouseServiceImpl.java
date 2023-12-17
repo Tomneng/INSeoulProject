@@ -64,8 +64,9 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public int putScore(Row row) {
-        return houseRepository.updateScore(row);
+    public int putScore(Row row, Double contractScore, Double placeScore) {// 여기서 logged_user받아야함
+
+        return 0;
     }
 
 

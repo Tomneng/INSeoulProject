@@ -24,6 +24,11 @@
              #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{address})
     </insert>
 
+    <insert id="initScore">
+        INSERT INTO houseContractScore(user_id, house_id, contract_score, place_score)
+        VALUES (#{userId}, #{houseId}, #{contractScore}, #{placeScore})
+    </insert>
+
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
         SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address",
                rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
@@ -33,7 +38,7 @@
     </select>
 
     <update id="updateScore">
-        UPDATE house_contract_score
+        UPDATE houseContractScore
         SET place_score = #{placeScore}, contract_score = #{contractScore}
         WHERE house_id = #{houseId}
     </update>
@@ -51,6 +56,12 @@
         SELECT count(house_id)
         FROM house_contract
         WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
+    </select>
+
+    <select id="checkScore" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM houseContractscore
+        WHERE house_id =#{houseId}
     </select>
 
 

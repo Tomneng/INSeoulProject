@@ -44,8 +44,6 @@ public class HouseInfoCardController {
         houseService.list(row2, page, model);
     }
 
-
-
     @GetMapping("/redetail/{houseId}")
     public String detail(@PathVariable Long houseId, Model model){
         model.addAttribute("row", houseService.findById(houseId));
@@ -53,15 +51,9 @@ public class HouseInfoCardController {
     }
 
     @PostMapping("/putScore")
-    public String setScore(@Valid Row row, Model model){
-        model.addAttribute("result", houseService.putScore(row));
+    public String setScore(Row row, Model model, Double contractScore, Double placeScore){
+        model.addAttribute("result", houseService.putScore(row, contractScore, placeScore));
         return "redirect:/realEstate/redetail/" + row.getHouseId();
     }
-
-
-
-
-
-
 
 }

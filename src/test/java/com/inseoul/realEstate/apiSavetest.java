@@ -28,11 +28,10 @@ public class apiSavetest {
     void test3(){
         HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
         Row row = new Row();
-        row.setHouseId(1L);
-        row.setContractScore(80);
-        row.setPlaceScore(90);
-
-        System.out.println(houseRepository.updateScore(row));
+        row.setHouseId(107L);
+        System.out.println(houseRepository.checkScore(row.getHouseId(), 1L));
+        System.out.println(houseRepository.initScore(row.getHouseId(), 1L, 50, 50));
+        System.out.println(houseRepository.updateScore(row.getHouseId(), 1L, 40, 40));
     }
 
     @Test
