@@ -15,4 +15,6 @@ public interface UserScraptedService {
 
     ScrapQryResult scrapted(Long userId, Long houseId);
 
+    ScrapQryResult scraptedFood(Long userId, Long foodId);
+
 }

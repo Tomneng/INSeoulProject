@@ -45,7 +45,7 @@ public class apiFoodTest {
         Review review = Review.builder()
                 .reviewId(4L)
                 .foodId(24L)
-                .user(user)
+                .userId(18L)
                 .reviewCategory("음식이 맛있어요")
                 .reviewStar(4.5)
                 .reviewContent("산골막국수")

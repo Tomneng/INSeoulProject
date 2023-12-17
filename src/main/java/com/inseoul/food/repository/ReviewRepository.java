@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReviewRepository {
     // 특정음식점 리뷰의 목록
-    List<Review> findAll();
+//    List<Review> findAll();
 
     //작성한 리뷰 저장
     int reviewSave(Review review);

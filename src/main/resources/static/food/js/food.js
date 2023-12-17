@@ -63,7 +63,8 @@ function getShow(){
 
 // 작성완료 클릭시
 function getHide(){
-    const foodId = $('input[type="hidden"]').val(); //음식점 아이디 값을 가져옴
+    const foodId = $('#foodId').val(); //음식점 아이디 값을 가져옴
+    // const reviewId = $('#reviewId').val();  //리뷰 아이디 값을 가져옴
        //회원 아이디 값
     const reviewCategory = []
     $('input[type="checkbox"]:checked').each(function (){
@@ -83,14 +84,14 @@ function getHide(){
     // 넘길 변수
     const data = {
         "food_id" : foodId,
-        "user" : Logged_id,
+        "user_id" : logged_id,
         "review_star" : reviewStar,
-        "review_category" : [reviewCategory],
-        "review_content" : reviewContent,
+        "review_category" : reviewCategory,
+        "review_content" : reviewContent
     };
 
     $.ajax({
-        url: "/food/food_review/",
+        url: "/food/food_review",
         type: "POST",
         data : data,
         cache : false,
@@ -102,9 +103,9 @@ function getHide(){
                     return;
                 }
                 $('#reviewStar').val();
-                $('#reviewCategory').val();
+                $('.reviewCategory').val(reviewCategory);
                 // 선택된 체크박스 를 해제
-                // $('.checkComment').prop('checked', false);
+                $('.checkComment').prop('checked', false);
                 $('.reviewComment').val();
             }
                 console.log(response);
@@ -161,6 +162,25 @@ const upload = document.querySelector('.upload');
 
 upload.addEventListener('click', e => realUpload.click());
 realUpload.addEventListener('change', getImageFiles);
+
+//스크랩
+// function scraptFood(){
+//     $.ajax({
+//         url: "/food/scrapted",
+//         type: "GET",
+//         data: userId,
+//         cache:false,
+//         success: function (data, status){
+//             if(status == "success"){
+//
+//             }
+//         }
+//
+//     })
+//     $(".scraptFood").
+// }
+
+
 
 
 //리뷰 남기기

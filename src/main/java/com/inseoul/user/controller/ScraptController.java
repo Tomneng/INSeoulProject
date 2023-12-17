@@ -30,4 +30,6 @@ public class ScraptController {
     ){
         return userScraptedService.scrapted(userId, houseId);
     }
+
+
 }

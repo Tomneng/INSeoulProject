@@ -26,29 +26,22 @@
     </sql>
 
 <!-- 전체를 보여줄 필요 ? -->
-    <select id="findAll" resultType="com.inseoul.food.domain.Review">
-        <include refid="SELECT_BASE"/>
-        ORDER BY review_id ASC
-    </select>
+<!--    <select id="findAll" resultType="com.inseoul.food.domain.Review">-->
+<!--        <include refid="SELECT_BASE"/>-->
+<!--        ORDER BY review_id ASC-->
+<!--    </select>-->
+
     <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
         INSERT INTO food_reviews (food_id, id, review_category, review_content, review_star)
-        VALUES (#{foodId}, #{user.userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
+        VALUES (#{foodId}, #{userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
     </insert>
 
-    <!-- 저장된 리뷰카테고리 보여주기-->
+    <!-- 저장된 리뷰카테고리 하나 보여주기-->
     <select id="findById" resultType="String">
         SELECT review_category "reviewCategory" FROM food_reviews
         WHERE review_id = #{reviewId}
     </select>
-    <!-- 이미지 저장하기 -->
-<!--    <insert id="saveImage" parameterType="com.inseoul.food.domain.Review">-->
-<!--        INSERT INTO food_review(reviewId, reviewImage, reviewStoredImage)-->
-<!--        VALUES (#{reviewId}, #{reviewImage}, #{reviewStoredImage})-->
-<!--    </insert>-->
-    <!-- 저장한 이미지 보여주기 -->
-<!--    <select id="showImage" parameterType="com.inseoul.food.domain.Review">-->
-<!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
-<!--    </select>-->
+
     <!-- 평점 구하기 -->
     <select id="getRatingAvg" resultType="Double">
         SELECT AVG(review_star) "reviewAvg" FROM food_reviews
@@ -62,21 +55,21 @@
         WHERE food_id = #{foodId}
     </update>
 </mapper>
+
+        <!-- 이미지 저장하기 -->
+        <!--    <insert id="saveImage" parameterType="com.inseoul.food.domain.Review">-->
+        <!--        INSERT INTO food_review(reviewId, reviewImage, reviewStoredImage)-->
+        <!--        VALUES (#{reviewId}, #{reviewImage}, #{reviewStoredImage})-->
+        <!--    </insert>-->
+        <!-- 저장한 이미지 보여주기 -->
+        <!--    <select id="showImage" parameterType="com.inseoul.food.domain.Review">-->
+        <!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
+        <!--    </select>-->
+
+
     <!--    &lt;!&ndash; 특정 아이디&ndash;&gt;-->
     <!--    &lt;!&ndash; 이미지 &ndash;&gt;-->
     <!--    <select id="findByImage">-->
     <!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
     <!--        WHERE reviewId = #{reviewId}-->
     <!--    </select>-->
-
-    <!--    &lt;!&ndash; 평점 구하기&ndash;&gt;-->
-    <!--    <select id="getRatingAvg" resultType="Double">-->
-    <!--        SELECT AVG(reviewStar) FROM food_review-->
-    <!--        WHERE reviewId = #{reviewId}-->
-    <!--    </select>-->
-    <!--    &lt;!&ndash; 평점 불러오기&ndash;&gt;-->
-    <!--    <update id="updateRating">-->
-    <!--        UPDATE food_review-->
-    <!--        SET reviewStar = #{reviewStar}-->
-    <!--        WHERE reviewId = #{reviewId}-->
-    <!--    </update>-->

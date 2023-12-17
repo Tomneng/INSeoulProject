@@ -5,6 +5,7 @@ import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
 import com.inseoul.user.domain.ScrapQryResult;
 import com.inseoul.user.domain.User;
+import com.inseoul.user.domain.UserScraptedFood;
 import com.inseoul.user.domain.UserScraptedHouse;
 import com.inseoul.user.repository.UserRepository;
 import com.inseoul.user.repository.UserScraptedRepository;
@@ -32,7 +33,7 @@ public class UserScraptedServiceImpl implements UserScraptedService {
         userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
         userRepository = sqlSession.getMapper(UserRepository.class);
 //        tourRepository = sqlSession.getMapper(TourRepository.class);
-        System.out.println("Service 생성 완료");
+        System.out.println("ScraptedService 생성 완료");
     }
 
     @Override
@@ -53,7 +54,7 @@ public class UserScraptedServiceImpl implements UserScraptedService {
         List<Long> list = userScraptedRepository.getids(id);
         return list;
     }
-
+    //부동산
     @Override
     public ScrapQryResult scrapted(Long userId, Long houseId) {
         if (userScraptedRepository.scrapCheck(userId, houseId) > 0){
@@ -63,18 +64,40 @@ public class UserScraptedServiceImpl implements UserScraptedService {
                     .status("DELETED")
                     .build();
             return result;
-        }else {
-
-        UserScraptedHouse userScraptedHouse = UserScraptedHouse.builder()
-                .userId(userId)
-                .houseId(houseId)
-                .build();
-        userScraptedRepository.addHouseScrapt(userScraptedHouse);
-        ScrapQryResult result = ScrapQryResult.builder()
-                .count(1)
-                .status("OK")
-                .build();
-        return result;
+        } else {
+            UserScraptedHouse userScraptedHouse = UserScraptedHouse.builder()
+                    .userId(userId)
+                    .houseId(houseId)
+                    .build();
+            userScraptedRepository.addHouseScrapt(userScraptedHouse);
+            ScrapQryResult result = ScrapQryResult.builder()
+                    .count(1)
+                    .status("OK")
+                    .build();
+            return result;
+        }
+    }
+    //음식점
+    @Override
+    public ScrapQryResult scraptedFood(Long userId, Long foodId) {
+        if (userScraptedRepository.scrapFoodCheck(userId, foodId) > 0 ){
+            userScraptedRepository.deleteFoodScrap(userId, foodId);
+            ScrapQryResult result = ScrapQryResult.builder()
+                    .count(1)
+                    .status("DELETED")
+                    .build();
+            return result;
+        } else {
+            UserScraptedFood userScraptedFood = UserScraptedFood.builder()
+                    .userId(userId)
+                    .foodId(foodId)
+                    .build();
+            userScraptedRepository.addFoodScrapt(userScraptedFood);
+            ScrapQryResult result = ScrapQryResult.builder()
+                    .count(1)
+                    .status("OK")
+                    .build();
+            return result;
         }
     }
 }

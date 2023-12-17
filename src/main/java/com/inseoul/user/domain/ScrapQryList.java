@@ -19,9 +19,9 @@ public class ScrapQryList extends ScrapQryResult {
     @JsonProperty("data") // json변환시 data라는 이름의 property로 변경!
     List<UserScraptedHouse> list;
 
-//    @ToString.Exclude
-//    @JsonProperty("data")
-//    List<Tour> list;
+    @ToString.Exclude
+    @JsonProperty("data")
+    List<UserScraptedFood> listFood;
 
 //    @ToString.Exclude
 //    @JsonProperty("data")

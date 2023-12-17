@@ -19,21 +19,21 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     public ReviewServiceImpl(SqlSession sqlSession){
         reviewRepository = sqlSession.getMapper(ReviewRepository.class);
-        System.out.println("ReviewService() 생성");
+        System.out.println("ReviewService 생성");
     }
 
-    @Override
-    public List<Review> list(Model model) {
-        return reviewRepository.findAll();
-    }
+//    @Override
+//    public List<Review> list(Model model) {
+//        return reviewRepository.findAll();
+//    }
     //리뷰 작성
     //review1 객체 생성
     @Override
-    public int write(Long foodId, User user, Double reviewStar, String reviewCategory, String reviewContent) {
+    public int write(Long foodId, Long userId, Double reviewStar, String reviewCategory, String reviewContent) {
 //        HttpSession session = U.getSession();
         Review review1 = new Review();
         review1.setFoodId(foodId);
-        review1.setUser(user);
+        review1.setUserId(userId);
         review1.setReviewStar(reviewStar);
         review1.setReviewCategory(reviewCategory);
         review1.setReviewContent(reviewContent);

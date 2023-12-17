@@ -21,7 +21,4 @@ public class UserMypageController {
         // 위 정보는 session 의 정보이므로 현재 로그인한 유저의 아이디를 기준으로 검색
         userScraptedService.listById(user.getUserId(), model);
     }
-
-
-
 }

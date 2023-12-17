@@ -14,7 +14,6 @@
    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 </head>
     <script th:inline="javascript">
-        // 나중에 댓글 작성시 필요.
         const logged_id = [[${logged_user.userId}]];
     </script>
 <body>
@@ -28,7 +27,9 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class="close-area">X</div>
+<!--            <i class="fa-regular fa-bookmark" class="scraptFood" onclick="scraptFood()"></i>-->
             <input type="hidden" name="foodId" th:value="${foodrow.foodId}">
+<!--            <input type="hidden" name="reviewId" th:value="${review.reviewId}">-->
             <div class="title">
                 <div class="store_name"><span th:text="${foodrow?.storeName}"></span></div>
                 <div class="store_address"><span th:text="${foodrow?.storeAddress}"></span></div>
@@ -70,7 +71,7 @@
                     <div id="userId">
                         <span>회원ID</span>
 <!--                        <input type="hidden" name="userId" th:value="${user.userId}">-->
-                        <span class="userId" th:text="${user?.userId}"></span>
+                        <span class="userId" th:text="${logged_user.nickname}"></span>
                     </div>
                     <div id="reviewStar">
                         <fieldset class="rate">
@@ -137,10 +138,11 @@
                     <div class="category-content">
                         <textarea class="reviewComment" cols="15" rows="10" placeholder="직접 후기를 작성해주세요" th:value="${reviewContent}"></textarea>
                     </div>
-                    <input type="submit" class="cancel" value="취소" onclick="getCancel()">
-                    <input type="submit" class="ok" value="작성완료" onclick="getHide()">
+                    <input type="button" class="cancel" value="취소" onclick="getCancel()">
+                    <input type="button" class="ok" value="작성완료" onclick="getHide()">
                 </div>
             </div>
+<!-- 리뷰의 지도 위치 -->
 <!--            <div class="foodMap">-->
 <!--                <th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
 <!--            </div>-->
