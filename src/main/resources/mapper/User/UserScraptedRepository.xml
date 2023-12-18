@@ -26,7 +26,38 @@
         FROM houseinfosaved
         WHERE user_id = #{userId} AND house_id = #{houseId}
     </select>
+
     <delete id="deleteScrap" flushCache="true">
         DELETE FROM houseinfosaved WHERE user_id = #{userId} AND house_id = ${houseId}
+    </delete>
+
+    <insert id="addTourScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedTour"
+    useGeneratedKeys="true" keyColumn="tour_scrapted_id" keyProperty="tourScraptedId">
+        INSERT INTO tourinfosaved
+            (user_id, tour_id)
+        VALUES
+            (#{userId}, #{tourId})
+    </insert>
+
+    <select id="getIdsTour" resultType="java.lang.Long">
+        SELECT tour_id "tourId"
+        FROM tourinfosaved
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="scrapCheckTour" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM tourinfosaved
+        WHERE user_id = #{userId} AND tour_id = #{tourId}
+    </select>
+
+    <select id="selectScraptedTour" resultType="com.inseoul.tour.domain.Item">
+        SELECT tour_id "tourId", tour_image1 "tourImage1", tour_name "tourName"
+        FROM tour
+        WHERE tour_id = #{tourId}
+    </select>
+
+    <delete id="deleteScrapTour" flushCache="true">
+        DELETE FROM tourinfosaved WHERE user_id = #{userId} AND tour_id = ${tourId}
     </delete>
 </mapper>

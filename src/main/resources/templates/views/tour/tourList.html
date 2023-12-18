@@ -60,6 +60,7 @@
 </head>
 
 <body>
+<th:block th:insert="~{common/header::header}"></th:block>
 <form th:action="@{/tour/tourList}" method="post">
 <div id="container_tourlist">
     <select name="tourSigungucode" id="tourSigungucode">
@@ -105,19 +106,36 @@
 <!-- 페이징 헤더 -->
 
 <!-- 목록 -->
+<!--<table class="table table-hover">-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <div class="row row-cols-4">-->
+<!--                <div th:each="item : ${list}" class="col mb-3">-->
+<!--                    <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">-->
+<!--                        <div th:attr="data-content-id=${item.tourContentid}" class="tour-item">-->
+<!--                            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"-->
+<!--                                 class="img-fluid" id="tourImage1">-->
+<!--                            <p class="text-center mt-2" th:text="${item.tourName}"></p>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
 <table class="table table-hover">
     <tr>
         <td>
             <div class="row row-cols-4">
-                <div th:each="item : ${list}" class="col mb-3">
+            <div th:each="item : ${list}" class="col mb-3" id="container1">
+                <div class="divider">
+                    <input type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}">
                     <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">
-                        <div th:attr="data-content-id=${item.tourContentid}" class="tour-item">
-                            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
-                                 class="img-fluid" id="tourImage1">
-                            <p class="text-center mt-2" th:text="${item.tourName}"></p>
-                        </div>
+                        <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid" id="tourImage1">
+                        <span th:text="${item.tourName}"></span>
                     </a>
                 </div>
+            </div>
             </div>
         </td>
     </tr>
@@ -127,7 +145,7 @@
 <!-- pagination -->
 <th:block th:insert="~{tour/pagination::pagination}"></th:block>
 <!-- pagination -->
-
+<th:block th:insert="~{common/footer::footer}"></th:block>
 </body>
 
 </html>

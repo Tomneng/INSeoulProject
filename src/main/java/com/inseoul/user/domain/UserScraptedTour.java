@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserScraptedTour {
     private Long userId;
-    private Long houseId;
+    private Long tourId;
     private Long tourScraptedId;
 }

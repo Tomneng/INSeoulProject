@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.aboutus.repository.AboutUsRepository">
+    <insert id="save" flushCache="true" parameterType="com.inseoul.aboutus.domain.ContactUs"
+            useGeneratedKeys="true" keyColumn="complain_id" keyProperty="complainId">
+        INSERT INTO contact_us
+            (user_id, content)
+        VALUES
+            (#{user.userId}, #{content})
+    </insert>
+</mapper>

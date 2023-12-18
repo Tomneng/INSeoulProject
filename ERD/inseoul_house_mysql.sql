@@ -119,8 +119,7 @@ CREATE TABLE food_reviews
     review_star double NOT NULL COMMENT '평점',
     review_content varchar(100) COMMENT '리뷰글',
     PRIMARY KEY (review_id),
-    UNIQUE (review_id),
-    UNIQUE (id)
+    UNIQUE (review_id)
 ) COMMENT = '음식점리뷰테이블';
 
 
@@ -430,12 +429,4 @@ ALTER TABLE user_authority
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
 ;
-
-SELECT * FROM authority;
-
-#권한 종류 설정
-INSERT INTO authority (authority_name) VALUES
-('ROLE_MEMBER'), ('ROLE_ADMIN');
-
-
 
