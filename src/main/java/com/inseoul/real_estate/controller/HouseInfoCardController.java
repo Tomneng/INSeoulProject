@@ -5,6 +5,7 @@ import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.service.HouseService;
 import com.inseoul.real_estate.util.U;
 import com.inseoul.user.domain.ScrapQryResult;
+import com.inseoul.user.domain.User;
 import com.inseoul.user.service.UserScraptedService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,10 @@ public class HouseInfoCardController {
     }
 
     @PostMapping("/putScore")
-    public String setScore(Row row, Model model, Double contractScore, Double placeScore){
-        model.addAttribute("result", houseService.putScore(row, contractScore, placeScore));
-        return "redirect:/realEstate/redetail/" + row.getHouseId();
+    public String setScore(Long houseId, int contractScore, int placeScore){
+        User user = U.getLoggedUser();
+        houseService.putScore(houseId, user.getUserId(), contractScore, placeScore);
+        return "redirect:/realEstate/redetail/" + houseId;
     }
 
 }

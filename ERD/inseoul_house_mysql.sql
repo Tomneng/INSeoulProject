@@ -440,5 +440,6 @@ INSERT INTO authority (authority_name) VALUES
 ('ROLE_MEMBER'), ('ROLE_ADMIN');
 
 SELECT * FROM houseContractScore;
-
+SELECT * FROM user;
+SELECT * FROM house_Contract;
 

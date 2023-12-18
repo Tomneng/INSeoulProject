@@ -32,7 +32,7 @@
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
         SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address",
                rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
-               contract_period "contractPeriod", new_ron_secd "newRonSecd"
+               contract_period "contractPeriod", new_ron_secd "newRonSecd", contract_score "contractScore", place_score "placeScore"
         FROM house_Contract
         WHERE house_id = #{houseId}
     </select>
@@ -40,7 +40,7 @@
     <update id="updateScore">
         UPDATE houseContractScore
         SET place_score = #{placeScore}, contract_score = #{contractScore}
-        WHERE house_id = #{houseId}
+        WHERE house_id = #{houseId} AND user_id = #{userId}
     </update>
 
 
@@ -61,8 +61,13 @@
     <select id="checkScore" resultType="java.lang.Integer">
         SELECT count(*)
         FROM houseContractscore
-        WHERE house_id =#{houseId}
+        WHERE house_id =#{houseId} AND user_id = #{userId}
     </select>
 
+    <update id="updateRealScore">
+        UPDATE house_Contract
+        SET place_score = ROUND((SELECT avg(place_score) FROM housecontractscore WHERE housecontractscore.house_id = #{houseId}), 0), contract_score = ROUND((SELECT avg(contract_score) FROM housecontractscore WHERE housecontractscore.house_id = #{houseId}), 0)
+        WHERE house_id = #{houseId}
+    </update>
 
 </mapper>
