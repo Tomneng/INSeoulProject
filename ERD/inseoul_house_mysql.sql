@@ -250,7 +250,8 @@ CREATE TABLE user
     nickname varchar(80) NOT NULL, #column명 다름, nickname으로 갈듯(수정함)
     regdate datetime DEFAULT now(), #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200), #비버에 이거랑 provider 둘다 추가되야됨
-    provider varchar(40)
+    provider varchar(40),
+    mbti varchar(4)
 ) COMMENT = '회원테이블';
 
 

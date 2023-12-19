@@ -81,10 +81,6 @@ public class UserController {
         return "user/registerOk";
     }
 
-
-
-
-
     @Autowired
     UserValidator userValidator;
 
