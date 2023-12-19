@@ -34,7 +34,7 @@
     <insert id="addTourScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedTour"
     useGeneratedKeys="true" keyColumn="tour_scrapted_id" keyProperty="tourScraptedId">
         INSERT INTO tourinfosaved
-            (user_id, tour_id)
+            (id, tour_id)
         VALUES
             (#{userId}, #{tourId})
     </insert>
@@ -42,13 +42,13 @@
     <select id="getIdsTour" resultType="java.lang.Long">
         SELECT tour_id "tourId"
         FROM tourinfosaved
-        WHERE user_id = #{userId}
+        WHERE id = #{userId}
     </select>
 
     <select id="scrapCheckTour" resultType="java.lang.Integer">
         SELECT count(*)
         FROM tourinfosaved
-        WHERE user_id = #{userId} AND tour_id = #{tourId}
+        WHERE id = #{userId} AND tour_id = #{tourId}
     </select>
 
     <select id="selectScraptedTour" resultType="com.inseoul.tour.domain.Item">
@@ -58,6 +58,6 @@
     </select>
 
     <delete id="deleteScrapTour" flushCache="true">
-        DELETE FROM tourinfosaved WHERE user_id = #{userId} AND tour_id = ${tourId}
+        DELETE FROM tourinfosaved WHERE id = #{userId} AND tour_id = ${tourId}
     </delete>
 </mapper>

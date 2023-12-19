@@ -73,7 +73,8 @@ CREATE TABLE com_like
 CREATE TABLE contact_us
 (
     complain_id int PRIMARY KEY AUTO_INCREMENT,
-    user_id int REFERENCES User(user_id), #비버에 외래키 참조 설정안되있음(되어 있어야 함, unique는 필요없을듯)
+    name varchar(10) NOT NULL,
+    email varchar(20) NOT NULL,
     content longtext NOT NULL,
     answer longtext,
     is_answered boolean NOT NULL DEFAULT false # 비버에 디폴트 설정 잘못됨 (고쳐야함)
@@ -231,10 +232,7 @@ CREATE TABLE tourInfoSaved
     tour_scrapted_id int NOT NULL AUTO_INCREMENT COMMENT '관광정보스크랩아이디',
     tour_id int NOT NULL COMMENT '관광지아이디',
     id int NOT NULL COMMENT '회원아이디',
-    PRIMARY KEY (tour_scrapted_id),
-    UNIQUE (tour_scrapted_id),
-    UNIQUE (tour_id),
-    UNIQUE (id)
+    PRIMARY KEY (tour_scrapted_id)
 ) COMMENT = '관광정보스크랩테이블';
 
 
@@ -430,3 +428,7 @@ ALTER TABLE user_authority
         ON DELETE RESTRICT
 ;
 
+SELECT * FROM tourinfosaved;
+SELECT * FROM user;
+SELECT * FROM tour;
+SELECT * FROM contact_us;

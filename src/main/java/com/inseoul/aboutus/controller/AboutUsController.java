@@ -36,6 +36,8 @@ public class AboutUsController {
     ) {
 
         if(result.hasErrors()){
+            redirectAttrs.addFlashAttribute("name", contactUs.getName());
+            redirectAttrs.addFlashAttribute("email", contactUs.getEmail());
             redirectAttrs.addFlashAttribute("content", contactUs.getContent());
 
             for(var err : result.getFieldErrors()){

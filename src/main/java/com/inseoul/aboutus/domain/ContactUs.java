@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ContactUs {
     private int complainId;
-    private User user;
+    private String name;
+    private String email;
     private String content;
     private String answer;
     private boolean isAnswered;

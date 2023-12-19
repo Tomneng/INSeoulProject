@@ -29,5 +29,5 @@ public interface UserScraptedRepository {
 
     List<Long> getIdsTour(Long userId);
 
-    Item selectScraptedTour(Long userId);
+    Item selectScraptedTour(Long tourId);
 }

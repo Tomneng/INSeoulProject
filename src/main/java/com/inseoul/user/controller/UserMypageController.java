@@ -17,7 +17,8 @@ public class UserMypageController {
 
     @RequestMapping("/mypage")
     public void mypage(Model model){
-        userScraptedService.listById(model);
+//        userScraptedService.listById(model);
+        userScraptedService.listByIdTour(model);
     }
 
 

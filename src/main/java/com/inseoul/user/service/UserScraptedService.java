@@ -17,9 +17,11 @@ public interface UserScraptedService {
     ScrapQryResult scrapted(Long userId, Long houseId);
 
 
-    List<Long> scraptedListTour(Long userId);
+    List<Long> scraptedTourList(Long userId);
 
     ScrapQryResult scraptedTour(Long userId, Long tourId);
 
-    List<Item> listByIdTour(Long userId, Model model);
+    List<Item> listByIdTour(Model model);
+
+
 }

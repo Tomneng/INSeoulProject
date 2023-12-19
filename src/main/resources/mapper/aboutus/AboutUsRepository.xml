@@ -4,8 +4,8 @@
     <insert id="save" flushCache="true" parameterType="com.inseoul.aboutus.domain.ContactUs"
             useGeneratedKeys="true" keyColumn="complain_id" keyProperty="complainId">
         INSERT INTO contact_us
-            (user_id, content)
+            (name, email, content)
         VALUES
-            (#{user.userId}, #{content})
+            (#{name}, #{email}, #{content})
     </insert>
 </mapper>
