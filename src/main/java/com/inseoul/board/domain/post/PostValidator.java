@@ -13,7 +13,7 @@ public class PostValidator implements Validator {
         System.out.println(result);
         return result;
     }
-//    Class<?> clazz 클레스의 리터럴 값 클래스를 받아온다
+//    Class<?> clazz 클래스의 리터럴 값 클래스를 받아온다
 
     @Override
     public void validate(Object target, Errors errors) {

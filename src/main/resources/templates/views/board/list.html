@@ -24,7 +24,7 @@
         </div>
         <div>
         </div>
-    <div>
+        <div>
             <div class="search-bar">
                 <div class="">
                     <form name="search-form" autocapitalize="off">
@@ -47,24 +47,42 @@
             </div>
         </div>
     </div>
-
+    <div>
+        <!-- 페이징 헤더 -->
+        <div class="mb-3 mt-3 clearfix">
+            <span class="float-start me-2">총 [[${cnt}]]개</span>
+            <span class="float-start">page [[${page}]]/[[${totalPage}]]</span>
+            <span class="float-end">
+                <form name="frmPageRows">
+                    <input type="hidden" name="page" th:value="${page}">
+                    <select class="form-select" name="pageRows">
+                        <option value="10" th:selected="${pageRows==10}">10</option>
+                        <option value="15" th:selected="${pageRows==15}">15</option>
+                        <option value="20" th:selected="${pageRows==20}">20</option>
+                        <option value="50" th:selected="${pageRows==50}">50</option>
+                    </select>
+                </form>
+            </span>
+        </div>
+        <!-- 페이징 헤더 -->
+    </div>
     <!-- 목록 -->
     <table class="table table-hover">
         <thead class="table">
         <tr>
             <th>No</th>
-<!--            <th>MBTI type</th>-->
+            <!--            <th>MBTI type</th>-->
             <th>Post title</th>
-<!--            <th>Writer</th>-->
+            <!--            <th>Writer</th>-->
             <th>Date</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="post : ${list}">   <!--하나의 행 - 행이 시작되는 부분 (한 줄) ${list}의 안에 있는 원소를 post라는 이름을 반복-->
             <td><span th:text="${post.postId}"></span></td>
-<!--            <td><span th:text="${post.user.mbti}"></span></td>&lt;!&ndash;list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭&ndash;&gt;-->
+            <!--            <td><span th:text="${post.user.mbti}"></span></td>&lt;!&ndash;list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭&ndash;&gt;-->
             <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span> </td>
-<!--            <td><span th:text="${post.user.email}"></span></td>-->
+            <!--            <td><span th:text="${post.user.email}"></span></td>-->
             <td><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
         </tr>
 
@@ -78,6 +96,8 @@
         </div>
     </div>
 </div>
-
+<!-- pagination -->
+<th:block th:insert="~{board/pagination::pagination}"></th:block>
+<!-- pagination -->
 </body>
 </html>

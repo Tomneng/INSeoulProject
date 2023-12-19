@@ -3,6 +3,7 @@ package com.inseoul.board.controller;
 import com.inseoul.board.domain.post.Post;
 import com.inseoul.board.domain.post.PostValidator;
 import com.inseoul.board.service.BoardService;
+import com.inseoul.real_estate.util.U;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class BoardController {
 
     @GetMapping("/write")   //GetMapping 요청 들어온걸 받기
     public void write() {
+        System.out.println("보드컨트롤러 write함수 실햄됨");
     }
 
     @PostMapping("/write")  // PostMapping
@@ -73,11 +75,13 @@ public class BoardController {
         return "board/detail";
     }
 
+
+    // 페이징있는 리스트화면
     @GetMapping("/list")
-    public void list(Model model){
-        List<Post> list = boardService.list();
-        model.addAttribute("list", list);
-        System.out.println(list);
+    public void list(Integer page, Model model){
+        System.out.println("보드컨트롤러의 리스트함수의 page 값 = " + page);
+        System.out.println("보드컨트롤러의 리스트함수의 model 값 = " + model);
+        boardService.list(page, model);
     }
 
     @GetMapping("/update/{postId}")
@@ -112,9 +116,9 @@ public class BoardController {
 
     @PostMapping("/delete")     // 이 주소로 접속하면 이 메소드를 호출한다.(매핑한다.)
     public String deleteOk(Long postId, Model model){   // 이 함수 안에서 변수로 쓰고 있기 때문에 이름이바뀌어도 상관 없다.
-        System.out.println("왼쪽은 deleteById를 찍음" + postId);
+//        System.out.println("왼쪽은 deleteById를 찍음" + postId);
         int result = boardService.deleteById(postId);   //boardService에 있는 deleteById 함수를 호출하는데 그 호출하는데 매개변수를 id값을 준것
-        System.out.println("야호" + result);  // 0이 나왔어
+//        System.out.println("야호" + result);  // 0이 나왔어
         model.addAttribute("result", result);
         return "board/deleteOk";
     }
@@ -123,5 +127,14 @@ public class BoardController {
     public void initBinder(WebDataBinder binder){
         System.out.println("initBinder() 호출");
         binder.setValidator(new PostValidator());
+    }
+
+    // 페이징
+    // pageRows 변경시 동작
+    @PostMapping("/pageRows")
+    public String pageRows(Integer page, Integer pageRows){
+        System.out.println("역 있당" + page + pageRows);
+        U.getSession().setAttribute("pageRows", pageRows);
+        return "redirect:/board/list?page=" + page;
     }
 }

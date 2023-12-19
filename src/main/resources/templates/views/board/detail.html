@@ -6,7 +6,7 @@
     history.back();
 </script>
 
-
+<th:block th:if="${post}" th:with="logged_user=${#authentication.principal.user}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,12 +16,16 @@
 <!--        <link rel="stylesheet" th:href="@{/css/common.css}">-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
         <script th:src="@{/board/js/detail.js}"></script>
 
         <title>조회</title>
     </head>
 
     <body>
+    <!--/* 인증 헤더 */-->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
     <div class="container mt-3">
         <h2>조회</h2>
         <hr>
@@ -36,6 +40,10 @@
                 <input type="hidden" name="postId" th:value="${post.postId}">
             </form>
 
+            <div class="mb-3">
+                <label>작성자:</label>
+<!--                <span class="form-control" th:text="${post.user.email}"></span>-->
+            </div>
             <div class="mb-3 mt-3">
                 <label>제목:</label>
                 <span class="form-control" th:text="${post.title}"></span>
@@ -45,6 +53,24 @@
                 <div class="border bg-light rounded p-2" th:text="${post.content}"></div>
             </div>
 
+<!--            &lt;!&ndash; 첨부파일목록 &ndash;&gt;-->
+<!--            <div class="container mt-3 mb-3 border rounded">-->
+<!--                <div class="mb-3 mt-3">-->
+<!--                    <label>첨부파일:</label>-->
+<!--                    <ul class="list-group mb-1">-->
+<!--                        <li class="list-group-item" th:each="attachment : ${post.fileList}">-->
+<!--                            <a th:href="@{/board/download(id=${attachment.id})}" th:text="${attachment.sourcename}"></a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                    &lt;!&ndash;/* 이미지인 경우 보여주기 */&ndash;&gt;-->
+<!--                    <div th:each="attachment : ${post.fileList}" th:if="${attachment.image}">-->
+<!--                        <img th:src="@{'/upload/' + ${attachment.filename}}" class="img-thumbnail" alt="Cinque Terre">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; 첨부파일목록 &ndash;&gt;-->
+
             <!-- 하단 링크 -->
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                 <a class="btn btn-outline-dark" th:href="@{'/board/update/' + ${post.postId}}">수정</a>
@@ -53,9 +79,13 @@
                 <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>
             </div>
 
+            <!-- 댓글 -->
+            <th:block th:insert="~{board/comment::comment}"></th:block>
+            <!-- 댓글 -->
+
         </section>
     </div>
 
     </body>
-
+</th:block>
 </html>

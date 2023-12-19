@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 
 public class User {
-    private Long userId;
+    private Long user;
     private String username; // 이게 입력 받는 아이디
 
     @JsonIgnore

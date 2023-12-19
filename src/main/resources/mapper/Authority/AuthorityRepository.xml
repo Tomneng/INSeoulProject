@@ -24,4 +24,6 @@
         WHERE
             a.authority_id = u.authority_id AND u.user_id = #{userId}
     </select>
+
+
 </mapper>

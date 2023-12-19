@@ -93,9 +93,6 @@
         DELETE FROM post WHERE post_id = #{postId}
     </delete>
 
-    <select id="countAll" resultType="int">
-        SELECT count(*) FROM post
-    </select>
 <!--resultType="com.inseoul.board.domain.post.Post"-->
 <!--    <select id="findById" resultMap="mapPost">-->
     <select id="findById" resultType="com.inseoul.board.domain.post.Post">
@@ -103,9 +100,13 @@
             AND post_id = #{postId}
     </select>   <!--애는 조회임 조회는 결과가 있어야함 그 결과를 resultType타입으로 알려준다(mybatise한테 알려 준다는 뜻) -->
 
-<!--    <select id="selectFromRow" resultMap="mapPost">-->
-<!--        <include refid="SELECT_BASE"/>-->
-<!--        ORDER BY p.id DESC-->
-<!--        LIMIT #{param1}, #{param2}-->
-<!--    </select>-->
+    <select id="selectFromRow" resultMap="mapPost">
+        <include refid="SELECT_BASE"/>
+        ORDER BY post_id DESC
+        LIMIT #{param1}, #{param2}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT count(*) FROM post
+    </select>
 </mapper>

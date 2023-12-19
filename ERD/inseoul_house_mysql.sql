@@ -16,12 +16,14 @@ DROP TABLE IF EXISTS houseContractScore;
 DROP TABLE IF EXISTS houseInfoSaved;
 DROP TABLE IF EXISTS house_Contract;
 DROP TABLE IF EXISTS post_like;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS post;  /*1번*/
 DROP TABLE IF EXISTS tourInfoSaved;
 DROP TABLE IF EXISTS tour;
 DROP TABLE IF EXISTS user;
 
 /* Create Tables */
+
+
 
 -- 첨부파일테이블
 CREATE TABLE attachment
@@ -47,26 +49,25 @@ CREATE TABLE authority
 -- 댓글테이블
 CREATE TABLE comment
 (
-    com_id int NOT NULL AUTO_INCREMENT COMMENT '댓글아이디',
-    post_id int NOT NULL COMMENT '게시글아이디',
-    id int NOT NULL COMMENT '회원아이디',
-    com_content text NOT NULL COMMENT '댓글내용',
-    com_regdate datetime NOT NULL COMMENT '댓글작성일자',
+    com_id int NOT NULL AUTO_INCREMENT,
+    post_id int NOT NULL,
+    id int NOT NULL,
+    com_content text NOT NULL,
+    com_regdate datetime NOT NULL,
     PRIMARY KEY (com_id),
     UNIQUE (com_id),
-    UNIQUE (post_id),
-    UNIQUE (id)
-) COMMENT = '댓글테이블';
+    UNIQUE (post_id)
+);
 
 
 -- 댓글좋아요테이블
 CREATE TABLE com_like
 (
-    id int NOT NULL COMMENT '회원아이디',
-    com_id int NOT NULL COMMENT '댓글아이디',
+    id int NOT NULL,
+    com_id int NOT NULL,
     UNIQUE (id),
     UNIQUE (com_id)
-) COMMENT = '댓글좋아요테이블';
+);
 
 
 -- 문의사항테이블
@@ -173,19 +174,40 @@ CREATE TABLE houseInfoSaved
 ) COMMENT = '부동산정보스크랩테이블';
 
 
--- 게시글테이블
+
+
+-- 게시글테이블           /*2번*/
 CREATE TABLE post
 (
-    post_id int NOT NULL AUTO_INCREMENT COMMENT '게시글아이디',
-    id int NOT NULL COMMENT '회원아이디',
-    title varchar(50) NOT NULL COMMENT '게시글제목',
-    content longtext COMMENT '게시글내용',
-    viewcnt int COMMENT '조회수',
+    post_id int NOT NULL AUTO_INCREMENT,
+    id int NOT NULL,
+    title varchar(50) NOT NULL,
+    content longtext,
+    viewcnt int,
     post_regdate datetime default now(),   #NOT NULL에서 default now()로 변경
     PRIMARY KEY (post_id),
-    UNIQUE (post_id),
-    UNIQUE (id)
-) COMMENT = '게시글테이블';
+    UNIQUE (post_id)
+);
+
+/*3번*/
+INSERT INTO post (id, title, content, viewcnt) VALUES
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
+    (1, 'Sample Post 4', 'This is the content of the first post.', 100);
+
+select * from post;
 
 
 -- 게시글좋아요테이블
@@ -250,7 +272,13 @@ CREATE TABLE user
     regdate datetime DEFAULT now(), #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200), #비버에 이거랑 provider 둘다 추가되야됨
     provider varchar(40)
-) COMMENT = '회원테이블';
+);
+INSERT INTO user (username, password, nickname, providerId, provider)
+VALUES
+    ('john_doe@example.com', 'hashed_password_1', 'JohnDoe', NULL, NULL),
+    ('jane_smith@example.com', 'hashed_password_2', 'JaneSmith', 'some_provider_id', 'some_provider'),
+    ('bob_jones@example.com', 'hashed_password_3', 'BobJones', 'another_provider_id', 'another_provider');
+
 
 
 -- 회원권한테이블
@@ -262,8 +290,13 @@ CREATE TABLE user_authority
 ) COMMENT = '회원권한테이블';
 
 
+ALTER TABLE post
+    drop index id;
+
 
 /* Create Foreign Keys */
+
+
 
 ALTER TABLE user_authority
     ADD FOREIGN KEY (authority_id)

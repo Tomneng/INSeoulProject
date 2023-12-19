@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         // 신규회원은 ROLE_MEMBER 권한을 부여하기
         Authority auth = authorityRepository.findByNames("ROLE_MEMBER");
 
-        Long user_id = user.getUserId();
+        Long user_id = user.getUser();
         Long auth_id = auth.getId();
         authorityRepository.addAuthority(user_id, auth_id);
 
