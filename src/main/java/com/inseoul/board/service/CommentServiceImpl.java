@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public QryResult write(Long post_id, Long userId, String content) {
+    public QryResult write(Long post_id, int userId, String content) {
 
         User user = userRepository.findById(post_id);
 

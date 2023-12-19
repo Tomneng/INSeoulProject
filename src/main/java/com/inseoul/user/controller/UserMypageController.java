@@ -18,15 +18,15 @@ public class UserMypageController {
 
     @Autowired
     private UserScraptedService userScraptedService;
-    @GetMapping("/scraps")
-    public void showScrapted(Model model) {
-        User user = U.getLoggedUser();
+
+//    @GetMapping("/scraps")
+//    public void showScrapted(Model model) {
+//        User user = U.getLoggedUser();
+//    }
 
     @RequestMapping("/mypage")
-    public void mypage(Model model){
+    public void mypage (Model model) {
         userScraptedService.listById(model);
     }
-
-
 
 }

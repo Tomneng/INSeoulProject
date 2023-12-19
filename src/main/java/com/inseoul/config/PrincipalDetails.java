@@ -49,7 +49,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         Collection<GrantedAuthority> collect = new ArrayList<>();
 
         // DB 에서 user 의 권한(들) 읽어오기
-        List<Authority> list = userService.selectAuthoritiesById(user.getUser());
+        List<Authority> list = userService.selectAuthoritiesById(user.getUserId());
 
         for(Authority auth : list){
             collect.add(new GrantedAuthority() {
