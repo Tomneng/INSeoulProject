@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.board.repository.CommentRepository">
+
+    <resultMap id="mapUser" type="com.inseoul.user.domain.User">
+        <result column="u_user_id" property="id"/>
+        <result column="u_username" property="username"/>
+        <result column="u_password" property="password"/>
+        <result column="u_nickname" property="nickname"/>
+        <result column="u_regdate" property="regDate"/>
+    </resultMap>
+
+    <resultMap id="mapComment" type="com.inseoul.board.domain.post.Comment">
+        <result column="c_com_id" property="id"/>
+        <result column="c_com_content" property="content"/>
+        <result column="c_com_regdate" property="regDate"/>
+        <result column="c_post_id" property="post_id"/>
+        <collection property="user" resultMap="mapUser"/>
+    </resultMap>
+
+
+
+    <select id="findByPost" resultMap="mapComment">
+        SELECT
+            c.id "c_id",
+            c.com_content "c_com_content",
+            c.com_regdate "c_com_regdate",
+            c.post_id "c_post_id",
+            u.user_id "u_user",
+            u.username "u_username",
+            u.password "u_password",
+            u.nickname "u_nickname",
+            u.regDate "u_regDate"
+        FROM comment c, user u
+        WHERE
+            c.id = u.user_id
+          AND c.post_id = #{post_id}
+        ORDER BY c.id DESC
+    </select>
+
+    <insert id="save" flushCache="true"
+            parameterType="com.inseoul.board.domain.post.Comment"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO comment(id, post_id, com_content)
+        VALUES(#{user.id}, #{post_id}, #{content})
+    </insert>
+
+    <delete id="deleteById" flushCache="true">
+        DELETE FROM comment WHERE com_id = #{id}
+    </delete>
+
+</mapper>
