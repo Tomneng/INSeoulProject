@@ -9,25 +9,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/house")
+@RequestMapping("/tour")
 public class ScraptController {
 
     @Autowired
     private UserScraptedService userScraptedService;
 
+//    @GetMapping("/scrapted")
+//    public List scraptedHouse(
+//            @RequestParam("user_id") Long userId
+//    ){
+//        List<Long> list = userScraptedService.scraptedList(userId);
+//        return list;
+//    }
+//
+//    @PostMapping("/scrapt")
+//    public ScrapQryResult scrapHouse(
+//            @RequestParam("house_id") Long houseId,
+//            @RequestParam("user_id") Long userId
+//    ){
+//        return userScraptedService.scrapted(userId, houseId);
+//    }
+
     @GetMapping("/scrapted")
-    public List scraptedHouse(
+    public List scraptedTour(
             @RequestParam("user_id") Long userId
     ){
-        List<Long> list = userScraptedService.scraptedList(userId);
-        return list;
+        List<Long> tourList = userScraptedService.scraptedTourList(userId);
+        return tourList;
     }
 
     @PostMapping("/scrapt")
-    public ScrapQryResult scrapHouse(
-            @RequestParam("house_id") Long houseId,
+    public ScrapQryResult scrapTour(
+            @RequestParam("tour_id") Long tourId,
             @RequestParam("user_id") Long userId
     ){
-        return userScraptedService.scrapted(userId, houseId);
+        return userScraptedService.scraptedTour(userId, tourId);
     }
 }

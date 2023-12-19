@@ -2,7 +2,7 @@
 // 지도의 중심이 될 주소, 주소를 좌표로 변경할때 사용됨.
 // 현재 임의의 값으로 코리아it아카데미 2관의 주소가 들어있음(서울 강남구 테헤란로26길 12)
 let centralAddress = '';
-centralAddress = $('.store_address').text()
+// centralAddress = $('.store_address').text()
 
 // 서울특별시 강남구 테헤란로26길 12
 console.log("주소:" + centralAddress);
@@ -409,11 +409,4 @@ function panTo() {
 
     // 지도 중심을 부드럽게 이동시킵니다
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-    map.panTo(moveLatLon);
-<<<<<<< HEAD
-}
-
-
-=======
-}
->>>>>>> tour2
+    map.panTo(moveLatLon);}

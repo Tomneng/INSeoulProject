@@ -4,9 +4,12 @@ import com.inseoul.food.repository.FoodRepository;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
 import com.inseoul.real_estate.util.U;
+import com.inseoul.tour.domain.Item;
+import com.inseoul.tour.repository.TourRepository;
 import com.inseoul.user.domain.ScrapQryResult;
 import com.inseoul.user.domain.User;
 import com.inseoul.user.domain.UserScraptedHouse;
+import com.inseoul.user.domain.UserScraptedTour;
 import com.inseoul.user.repository.UserRepository;
 import com.inseoul.user.repository.UserScraptedRepository;
 import org.apache.ibatis.session.SqlSession;
@@ -25,14 +28,14 @@ public class UserScraptedServiceImpl implements UserScraptedService {
     private UserScraptedRepository userScraptedRepository;
 
     private UserRepository userRepository;
-//    private TourRepository tourRepository;
+    private TourRepository tourRepository;
 
     public UserScraptedServiceImpl(SqlSession sqlSession) {
         houseRepository = sqlSession.getMapper(HouseRepository.class);
         foodRepository = sqlSession.getMapper(FoodRepository.class);
         userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
         userRepository = sqlSession.getMapper(UserRepository.class);
-//        tourRepository = sqlSession.getMapper(TourRepository.class);
+        tourRepository = sqlSession.getMapper(TourRepository.class);
         System.out.println("Service 생성 완료");
     }
 
@@ -52,6 +55,23 @@ public class UserScraptedServiceImpl implements UserScraptedService {
 
         model.addAttribute("myrowlist", myrowlist);
         return myrowlist;
+    }
+
+    @Override
+    public List<Item> listByIdTour(Model model) {
+        User user = U.getLoggedUser();
+
+        // 위 정보는 session 의 정보이고, 일단 DB 에서 다시 읽어온다
+        Long userId = user.getUserId();
+
+        List<Long> tourList = userScraptedRepository.getIdsTour(userId);
+        List<Item> itemList = new ArrayList<>();
+        for (int i = 0; i < tourList.size(); i++){
+            itemList.add(i,userScraptedRepository.selectScraptedTour(tourList.get(i)));
+        }
+
+        model.addAttribute("itemList", itemList);
+        return itemList;
     }
 
     @Override
@@ -81,6 +101,35 @@ public class UserScraptedServiceImpl implements UserScraptedService {
                 .status("OK")
                 .build();
         return result;
+        }
+    }
+
+    @Override
+    public List<Long> scraptedTourList(Long userId) {
+        List<Long> tourList = userScraptedRepository.getIdsTour(userId);
+        return tourList;
+    }
+
+    @Override
+    public ScrapQryResult scraptedTour(Long userId, Long tourId) {
+        if (userScraptedRepository.scrapCheckTour(userId, tourId) > 0){
+            userScraptedRepository.deleteScrapTour(userId, tourId);
+            ScrapQryResult result = ScrapQryResult.builder()
+                    .count(1)
+                    .status("DELETED")
+                    .build();
+            return result;
+        } else {
+            UserScraptedTour userScraptedTour = UserScraptedTour.builder()
+                    .userId(userId)
+                    .tourId(tourId)
+                    .build();
+            userScraptedRepository.addTourScrapt(userScraptedTour);
+            ScrapQryResult result = ScrapQryResult.builder()
+                    .count(1)
+                    .status("OK")
+                    .build();
+            return result;
         }
     }
 }

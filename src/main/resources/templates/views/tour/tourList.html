@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<th:block th:with="logged_user=${#authentication.principal.user}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,8 +61,9 @@
 </head>
 
 <body>
-<form th:action="@{/tour/tourList}" method="post">
+<th:block th:insert="~{common/header::header}"></th:block>
 <div id="container_tourlist">
+<form th:action="@{/tour/tourList}" method="post">
     <select name="tourSigungucode" id="tourSigungucode">
         <option value="">전체</option>
         <option value="1">강남구</option>
@@ -94,8 +96,8 @@
     <button type="submit" id="btn_tour">검색</button>
     <br><br>
     <hr>
-</div>
 </form>
+</div>
 
 <!-- 페이징 헤더 -->
 <div class="mb-3 mt-3 clearfix">
@@ -109,15 +111,15 @@
     <tr>
         <td>
             <div class="row row-cols-4">
-                <div th:each="item : ${list}" class="col mb-3">
+            <div th:each="item : ${list}" class="col mb-3 tours" id="container1">
+                <div class="divider">
+                    <input type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}">
                     <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">
-                        <div th:attr="data-content-id=${item.tourContentid}" class="tour-item">
-                            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
-                                 class="img-fluid" id="tourImage1">
-                            <p class="text-center mt-2" th:text="${item.tourName}"></p>
-                        </div>
+                        <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid" id="tourImage1">
+                        <span th:text="${item.tourName}"></span>
                     </a>
                 </div>
+            </div>
             </div>
         </td>
     </tr>
@@ -127,7 +129,11 @@
 <!-- pagination -->
 <th:block th:insert="~{tour/pagination::pagination}"></th:block>
 <!-- pagination -->
-
+<th:block th:insert="~{common/footer::footer}"></th:block>
 </body>
-
+    <script th:inline="javascript">
+        // 나중에 댓글 작성시 필요.
+        const logged_id = [[${logged_user.userId}]];
+    </script>
+</th:block>
 </html>
