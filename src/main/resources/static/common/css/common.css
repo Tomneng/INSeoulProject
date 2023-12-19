@@ -1,13 +1,67 @@
-body {
-    font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+
+:root {
+    --primary: antiquewhite;
+    --white: #ffffff;
+    --bg: #f5f5f5;
+    --skycoral: #F8496C; /*2024년 서울의 색으로 선정됨.*/
 }
+
+::-webkit-scrollbar {
+    width: 1.3rem;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: #797979;
+    transition: all 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #222224;
+}
+
+::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
+body {
+    font-family: 'Dongle', sans-serif;
+}
+
+.container-fluid h1 {
+    color: white;
+    font-size: 4rem;
+}
+
+/* 헤더의 탭들 */
+.offcanvas-body ul li a.nav-link {
+    color: white;
+    font-size: 2rem;
+    margin-left: 5px;
+    border-radius: 20px;
+    border: black solid;
+}
+
+.offcanvas-body ul li a.nav-link.active {
+    color: var(--skycoral);
+    background: white;
+}
+
+.offcanvas-body ul li a.nav-link:hover {
+    color: var(--skycoral);
+    background: white;
+}
+
 
 /* 헤더 & 푸터 배경색 */
 .navbar, .offcanvas, footer {
-    background-color: #F8496C; /* 2024년 서울의 색 '스카이 코랄(#F8496C)' */
+    background-color: var(--skycoral); /* 2024년 서울의 색 '스카이 코랄(#F8496C)' */
 }
+
 .navbar {
     height: 10vh;
+    padding-top: 0;
 }
 
 /* 헤더 안 로고 & 글자 "in 서울" */
@@ -26,10 +80,36 @@ body {
 }
 
 /* 헤더의 탭들 */
+.offcanvas-body .navbar-nav {
+    align-items: center;
+}
+
 .offcanvas-body .navbar-nav .nav-item {
     font-size: large;
-    width: 140px;
+    width: 8rem;
     text-align: center;
+}
+
+/* 헤더의 아이콘들 */
+.userIcons {
+    border: black solid;
+    width: 4rem !important;
+}
+
+.userIcon {
+    font-size: 2rem;
+    color: white;
+    height: 2.5rem;
+    border: #23e00e solid;
+}
+
+.userIcon:hover {
+    color: var(--skycoral);
+    background: white;
+}
+
+#adminIcon {
+    color: black;
 }
 
 /* 오프캔버스 안에 로그인 버튼 */
@@ -50,9 +130,28 @@ body {
 
 /* 푸터 */
 p.text-center.text-body-secondary {
-    margin-bottom: 0; !important;
+    margin-bottom: 0;
+!important;
 }
 
 .container-fluid {
     border: #23e00e solid;
+}
+
+@media (max-width: 991px) {
+    #headerLogo {
+        width: 7vw !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #headerLogo {
+        width: 9vw !important;
+    }
+}
+
+@media (max-width: 600px) {
+    #headerLogo {
+        width: 11vw !important;
+    }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:fragment="myscrapH" th:with="logged_user=${#authentication.principal.user}">
+    <div th:each="row : ${myrowlist}" class="divider-container" id="container1">
+        <div class="divider">
+            <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                <span th:text="${row.ssgName}"></span>
+                <span th:text="${row.dongName}"></span>
+                <span th:text="${row.rentKind}"></span>
+                <span th:text="${row.rentDeposit}"></span>
+                <span th:text="${row.rentFee}"></span>
+                <!--            <span th:text="${row.contractScore}"></span>-->
+            </a>
+        </div>
+    </div>
+</th:block>
+</html>

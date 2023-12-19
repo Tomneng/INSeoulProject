@@ -1,12 +1,17 @@
+// 여기 철희가 추가 12/19
+// 헤더에 active class 추가
+$("#tabRealEstate").addClass("active");
+
+
 $(document).ready(function () {
     selyear()
     selssg()
-    $("#selectSSG").change(function (){
+    $("#selectSSG").change(function () {
         let value = $(this).val().trim();
         selbjdong(value)
     })
     selHKind()
-    $("[name='pageRows']").change(function (){
+    $("[name='pageRows']").change(function () {
         let frm = $("[name='frmPageRows']");
         frm.attr("method", "Post")
         frm.attr("action", "pageRows")
@@ -20,15 +25,13 @@ $(document).ready(function () {
         type: "GET",
         data: userId,
         cache: false,
-        success: function(data, status) {
-            if(status == "success"){
+        success: function (data, status) {
+            if (status == "success") {
                 const init = document.querySelector("#container1").firstElementChild
                 const val = parseInt(init.firstElementChild.value);
-                console.log(init)
-                console.log(val)
-                for (i = val; i>val-12; i--){
-                    if (data.includes(i)){
-                        document.getElementById(`${i}`).checked=true;
+                for (i = val; i > val - 12; i--) {
+                    if (data.includes(i)) {
+                        document.getElementById(`${i}`).checked = true;
                     }
                 }
             }
@@ -36,37 +39,36 @@ $(document).ready(function () {
     })
 
 
-    $(".divider input").change(function(){
+    $(".divider input").change(function () {
         const houseId = $(this).val();
         const data = {
             "house_id": houseId,
             "user_id": logged_id,
         };
-        if ($(".divider input").is(":checked")){
-        $.ajax({
-            url: "/house/scrapt",
-            type: "POST",
-            data: data,
-            cache: false,
-            success: function(data, status) {
-                if(status == "success"){
-                    if(data.status !== "OK"){
-                        alert(data.status);
-                        return;
-                    }
-                }
-            },
-        });
-        }
-        else {
+        if ($(".divider input").is(":checked")) {
             $.ajax({
                 url: "/house/scrapt",
                 type: "POST",
                 data: data,
                 cache: false,
-                success: function(data, status) {
-                    if(status == "success"){
-                        if(data.status !== "DELETED"){
+                success: function (data, status) {
+                    if (status == "success") {
+                        if (data.status !== "OK") {
+                            alert(data.status);
+                            return;
+                        }
+                    }
+                },
+            });
+        } else {
+            $.ajax({
+                url: "/house/scrapt",
+                type: "POST",
+                data: data,
+                cache: false,
+                success: function (data, status) {
+                    if (status == "success") {
+                        if (data.status !== "DELETED") {
                             alert(data.status);
                             return;
                         }
@@ -78,21 +80,20 @@ $(document).ready(function () {
     });
 
 
-
 });
 
-function repaging(){
+function repaging() {
 }
 
 
 function selyear() {
     for (k = 2023; k > 2017; k--) {
-        if (k == 2023){
+        if (k == 2023) {
             $(`#selectYear`).append(`
                         <option th:value="${k}" selected>${k}</option>
             `)
-        }else {
-        $(`#selectYear`).append(`
+        } else {
+            $(`#selectYear`).append(`
                         <option th:value="${k}">${k}</option>
             `)
         }
@@ -333,30 +334,29 @@ let mergedjungGu = Object.fromEntries(jungGu.map((key, index) => [key, jungGuCod
 let mergedjungnangGu = Object.fromEntries(jungnangGu.map((key, index) => [key, jungnangGuCodes[index]])); // 중랑구
 
 
-
 const ssg = [
     ["영등포구", mergedyeongdeungpoGu], ["광진구", mergedgwangjinGu], ["관악구", mergedgwanakGu], ["중구", mergedjungGu], ["용산구", mergedyongsanGu], ["송파구", mergedsongpaGu],
     ["강북구", mergedgangbukGu], ["동대문구", mergeddongdaemunGu], ["성북구", mergedseongbukGu], ["금천구", mergedgeumcheonGu], ["중랑구", mergedjungnangGu],
     ["강서구", mergedgangseoGu], ["구로구", mergedguroGu], ["성동구", mergedseongdongGu], ["동작구", mergeddongjakGu], ["서대문구", mergedseodaemunGu], ["강남구", mergedgangnamGu],
-    ["노원구", mergednowonGu], ["종로구",  mergedjongroGu], ["마포구", mergedmapoGu], ["강동구", mergedgangdongGu], ["서초구", mergedseochoGu], ["은평구", mergedeunpyeongGu],
+    ["노원구", mergednowonGu], ["종로구", mergedjongroGu], ["마포구", mergedmapoGu], ["강동구", mergedgangdongGu], ["서초구", mergedseochoGu], ["은평구", mergedeunpyeongGu],
     ["양천구", mergedyangcheonGu], ["도봉구", mergeddobongGu]]
 
 const housekind = ["아파트", "단독다가구", "연립다세대", "오피스텔"]
 
 function selssg() {
     for (i = 0; i < 25; i++) {
-            $(`#selectSSG`).append(`
+        $(`#selectSSG`).append(`
                <option th:value=${ssg[i][0]}>${ssg[i][0]}</option>
            `)
     }
 }
 
-function selbjdong(value){
+function selbjdong(value) {
     $(`#selectBJDONG option`).remove()
-    for (i = 0; i< ssg.length; i++){
-        if (value == ssg[i][0]){
-            for (j = 0; j<Object.keys(ssg[i][1]).length; j++)
-            $(`#selectBJDONG`).append(`
+    for (i = 0; i < ssg.length; i++) {
+        if (value == ssg[i][0]) {
+            for (j = 0; j < Object.keys(ssg[i][1]).length; j++)
+                $(`#selectBJDONG`).append(`
                         <option value="${Object.values(ssg[i][1])[j]}">${Object.keys(ssg[i][1])[j]}</option>
             `)
         }
@@ -365,7 +365,7 @@ function selbjdong(value){
 
 function selHKind() {
     for (i = 0; i < 4; i++) {
-            $(`#selectHouseKind`).append(`
+        $(`#selectHouseKind`).append(`
                         <option th:value="${housekind[i]}">${housekind[i]}</option>
             `)
     }

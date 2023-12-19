@@ -1,18 +1,34 @@
 /* 관광/부동산 카드 탭 */
 #cardTab .nav-link {
-    color: #333333;
+    color: black;
 }
 
 #cardTab .active, #cardTab .nav-link:hover {
-    color: antiquewhite;
+    color: white;
     background-color: #F8496C; /* 2024년 서울의 색 '스카이 코랄(#F8496C)' */
 }
 
 #cardTab {
     opacity: 0; /* 0은 보이지 않는다. js에서 1로 바꾸면 보이게 된다. */
     transition: 1s ease-in; /* opacity가 변경이 될 때 화면에 보이는 속도 */
-    margin-top: 8vh;
+    /*margin-top: 8vh;*/
+    font-size: 2rem;
+    padding: 2rem 2rem 1rem 2rem;
+    border: black solid;
 }
 
-#cardTab {
+#cardTab .nav-tabs .nav-link {
+    padding: 0 20px 0 20px;
 }
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 600px) {
+}
+

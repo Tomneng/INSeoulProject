@@ -3,6 +3,7 @@ package com.inseoul.user.service;
 import com.inseoul.food.repository.FoodRepository;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
+import com.inseoul.real_estate.util.U;
 import com.inseoul.user.domain.ScrapQryResult;
 import com.inseoul.user.domain.User;
 import com.inseoul.user.domain.UserScraptedHouse;
@@ -36,16 +37,21 @@ public class UserScraptedServiceImpl implements UserScraptedService {
     }
 
     @Override
-    public List<Row> listById(Long userId, Model model) {
+    public List<Row> listById(Model model) {
+
+        User user = U.getLoggedUser();
+
+        // 위 정보는 session 의 정보이고, 일단 DB 에서 다시 읽어온다
+        Long userId = user.getUserId();
 
         List<Long> list = userScraptedRepository.getids(userId);
-        List<Row> rowlist = new ArrayList<>();
+        List<Row> myrowlist = new ArrayList<>();
         for (int i = 0; i < list.size(); i++){
-            rowlist.add(i,userScraptedRepository.selectScrapted(list.get(i)));
+            myrowlist.add(i,userScraptedRepository.selectScrapted(list.get(i)));
         }
 
-        model.addAttribute("rowlist", rowlist);
-        return rowlist;
+        model.addAttribute("myrowlist", myrowlist);
+        return myrowlist;
     }
 
     @Override

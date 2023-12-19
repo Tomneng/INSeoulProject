@@ -15,7 +15,7 @@ public class ScraptController {
     @Autowired
     private UserScraptedService userScraptedService;
 
-    @GetMapping("scrapted")
+    @GetMapping("/scrapted")
     public List scraptedHouse(
             @RequestParam("user_id") Long userId
     ){

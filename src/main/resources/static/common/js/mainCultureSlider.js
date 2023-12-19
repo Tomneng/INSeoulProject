@@ -12,7 +12,7 @@ const apiUrl = `${baseUrl}/${apiKey}/${fileType}/${serviceName}/${startIndex}/${
 console.log('apiUrl은(는) ' + apiUrl)
 
 const posterContainer = document.getElementById('posterContainer'); // 포스터 이미지들을 넣을 부모 요소 선택
-console.log('posterContainer는 ' + posterContainer)
+// console.log('posterContainer는 ' + posterContainer)
 fetch(apiUrl)
     .then(response => response.json())
     .then(jsonData => {

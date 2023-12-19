@@ -34,7 +34,7 @@ function isModalOn() {
 function modalOff() {
     modal.style.display = "none"
 }
-    
+
 const closeBtn = modal.querySelector(".close-area")
 closeBtn.addEventListener("click", e => {
     modalOff();
@@ -134,7 +134,7 @@ function getImageFiles(e){
 //     return li;
 // }
 
-// 
+//
 
 // 이미지 파일 선택창
 const realUpload = document.querySelector('.real-upload');

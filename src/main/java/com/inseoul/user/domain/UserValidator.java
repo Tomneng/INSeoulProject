@@ -32,9 +32,9 @@ public class UserValidator implements Validator {
             errors.rejectValue("username", "username 은 필수입니다"); // rejectValue(field, errorcode)
         } else if (userService.isExist(username)) {
             // 이미 등록된 중복된 아이디(username) 이 들어오면
-            errors.rejectValue("username", "이미 존재하는 아이디(username) 입니다");
+            errors.rejectValue("username", "이미 존재하는 이메일(username) 입니다");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name 은 필수입니다");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "nickname 은 필수입니다");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password 는 필수입니다");
 
         // email

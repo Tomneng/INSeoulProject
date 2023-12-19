@@ -10,13 +10,6 @@
 /*    text-decoration: none;*/
 /*}*/
 
-:root {
-    --primary: antiquewhite;
-    --white: #ffffff;
-    --bg: #f5f5f5;
-    --skycoral: #F8496C; /*2024년 서울의 색으로 선정됨.*/
-}
-
 /*html {*/
 /*    font-size: 62.5%;*/
 /*    font-family: "Montserrat", sans-serif;*/
@@ -40,24 +33,6 @@
 /*        zoom: 2.5;*/
 /*    }*/
 /*}*/
-
-::-webkit-scrollbar {
-    width: 1.3rem;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 1rem;
-    background: #797979;
-    transition: all 0.5s ease-in-out;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #222224;
-}
-
-::-webkit-scrollbar-track {
-    background: #f9f9f9;
-}
 
 /*body {*/
 /*    font-size: 1.6rem;*/
