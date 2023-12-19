@@ -1,12 +1,11 @@
 // 주소를 좌표로 바꾸기
-// 지도의 중심이 될 주소, 주소를 좌표로 변경할때 사용됨.
+// 지도의 중심이 될 주소, 주소를 좌표로 변경할때 사용됨.f
 // 현재 임의의 값으로 코리아it아카데미 2관의 주소가 들어있음(서울 강남구 테헤란로26길 12)
-let centralAddress = '';
-centralAddress = $('.store_address').text()
+// let centralAddress = '';
+// centralAddress = $('.store_address').text()
 
 // 서울특별시 강남구 테헤란로26길 12
-console.log("주소:" + centralAddress);
-
+// console.log("주소:" + centralAddress);
 
 
 // 지도의 중심이 될 위도, 경도를 입력
@@ -36,7 +35,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 
 // 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
+var tourMap = new kakao.maps.Map(mapContainer, mapOption);
 console.log("(좌표만 있을때)지도 표시하기 = " + centralLatitude, centralLongitude);
 // 지도 표시하기 끝
 
@@ -49,10 +48,10 @@ var placeOverlay = new kakao.maps.CustomOverlay({zIndex: 1}),
     currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
 
 // 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places(map);
+var ps = new kakao.maps.services.Places(tourMap);
 
 // 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
+kakao.maps.event.addListener(tourMap, 'idle', searchPlaces);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다
 contentNode.className = 'placeinfo_wrap';
@@ -164,7 +163,7 @@ function addMarker(position, order) {
         });
 
 
-    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    marker.setMap(tourMap); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
     return marker;
@@ -202,7 +201,7 @@ function displayPlaceInfo(place) {
 
     contentNode.innerHTML = content;
     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);
+    placeOverlay.setMap(tourMap);
 }
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
@@ -304,9 +303,9 @@ var overlay = new kakao.maps.CustomOverlay({
     zIndex: 3
 });
 
-marker.setMap(map); // 상세페이지 장소에 마커 표시
+marker.setMap(tourMap); // 상세페이지 장소에 마커 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 마커 표시")
-overlay.setMap(map); // 상세페이지 장소에 커스텀 오버레이 표시
+overlay.setMap(tourMap); // 상세페이지 장소에 커스텀 오버레이 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 커스텀 오버레이 표시")
 
 // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
@@ -321,7 +320,7 @@ function closeOverlay() {
 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function () {
     console.log("(???)지도 중심 마커 클릭 이벤트 리스너 실행됨")
-    overlay.setMap(map); // 중심마커 위에 커스텀오버레이 표시하기
+    overlay.setMap(tourMap); // 중심마커 위에 커스텀오버레이 표시하기
 });
 
 const onClickCentralMarker = (result) => {
@@ -337,7 +336,7 @@ const setCentralMarker = result => {
     console.log("(주소->좌표)중심마커를 표시하는 함수의 좌표값 = " + coords)
 
     marker = new kakao.maps.Marker({
-        map: map,
+        map: tourMap,
         position: coords,
         image: markerImage, // 마커의 이미지정보를 가지고 있는 변수로 이미지 설정
         zIndex: 3
@@ -357,7 +356,7 @@ const setCustomOverlay = result => {
     // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
     overlay = new kakao.maps.CustomOverlay({
         content: content,
-        map: map,
+        map: tourMap,
         position: coords,
         zIndex: 3
     });
@@ -389,7 +388,7 @@ if (centralAddress) {
             centralLongitude = result[0].x; // 지도의 중심이 될 경도 127.035856382455
             console.log("async try centralLatitude, centralLongitude = " + centralLatitude, centralLongitude);
 
-            map.setCenter(new kakao.maps.LatLng(centralLatitude, centralLongitude)); // 지도의 중심 표시하기
+            tourMap.setCenter(new kakao.maps.LatLng(centralLatitude, centralLongitude)); // 지도의 중심 표시하기
 
             setCentralMarker(result); // 중심마커 표시하기
 
@@ -409,11 +408,5 @@ function panTo() {
 
     // 지도 중심을 부드럽게 이동시킵니다
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-    map.panTo(moveLatLon);
-<<<<<<< HEAD
+    tourMap.panTo(moveLatLon);
 }
-
-
-=======
-}
->>>>>>> tour2

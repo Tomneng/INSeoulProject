@@ -1,12 +1,16 @@
 /* 지도가 들어가는 div */
+:root {
+
+}
+
 #map {
     /*width: 70vw; !* 지도의 폭 *!*/
     /*height: 70vh; !* 지도의 높이 *!*/
     border: 1px solid black;
     border-radius: 5px;
-    width: 100%;
-    height: 200px;
-    margin-top: 30px;
+    /*width: 80vw;*/
+    max-width: 1200px;
+    height: 60vh;
     margin: auto !important; /* !important로 이전에 css 설정을 무시함 */
 }
 
@@ -20,11 +24,12 @@
     padding: 0;
     font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
     font-size: 12px;
-    /*margin-top: 50px;*/
 }
 
 .map_wrap {
     position: relative;
+    /*margin: 50px;*/
+    margin-bottom: 50px;
 }
 
 #category {
