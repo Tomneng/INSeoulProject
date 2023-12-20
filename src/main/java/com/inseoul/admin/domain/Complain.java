@@ -10,8 +10,9 @@ import lombok.*;
 @Builder
 public class Complain {
     private Long complainId; // 글 id (PK)
-    private User user; // 글작성자 (FK) 나중에 필요
+    private String nickname;
+    private String username; // email
     private String content;
-    private String answer;
+    private String answer; // 추후에 답변도 이메일처리 해줘야함
     private boolean isAnswered;
 }

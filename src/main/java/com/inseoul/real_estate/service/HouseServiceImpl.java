@@ -162,7 +162,7 @@ public class HouseServiceImpl implements HouseService {
      */
     @Override
     public void getapi(Row row2, Model model, Integer page) {
-        String url = String.format("http://openapi.seoul.go.kr:8088/%s/json/tbLnOpendataRentV/1/120/%s/%%20/%s/%d/%%20/%%20/%%20/%%20/%s"
+        String url = String.format("http://openapi.seoul.go.kr:8088/%s/json/tbLnOpendataRentV/1/120/%s/%%20/%s/%d/%%20/%%20/%%20/%%20/%%20/%s"
                 , "5146444173746f6d32346f53767a56", row2.getAccYear(), row2.getSsgName(), row2.getDongCode(), row2.getHouseKindName());
 
         RestTemplate restTemplate = new RestTemplate();

@@ -143,7 +143,7 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     rent_area DOUBLE NOT NULL, #area가 맞음 are는 오타
     rent_deposit int NOT NULL,
     rent_fee int NOT NULL,
-    building_name varchar(20),
+    building_name varchar(50),
     build_year int,
     house_kind_name varchar(20),
     contract_period varchar(20), #이거 null 허용으로 바꿈
