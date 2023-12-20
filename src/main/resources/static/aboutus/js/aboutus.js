@@ -44,3 +44,8 @@ $(document).ready(function () {
     });
 });
 
+
+// 여기부터 철희가 추가 12/18
+// 헤더에 active class 추가
+$("#tabService").addClass("active");
+

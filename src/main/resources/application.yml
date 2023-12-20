@@ -28,8 +28,8 @@ spring:
 # datasource 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seoul_tour?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
-    username: jiwoo
+    url: jdbc:mysql://localhost:3306/inseoul?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: chulhee
     password: 1234
 
   # security
@@ -92,3 +92,7 @@ app:
       redirect-uri: http://localhost:8080/oauth2/kakao/callback  # Redirect URI
       token-uri: https://kauth.kakao.com/oauth/token   # access token 요청 URI
       user-info-uri: https://kapi.kakao.com/v2/user/me   # 사용자 profile 요청 URI
+
+
+
+

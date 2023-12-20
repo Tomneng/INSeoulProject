@@ -429,7 +429,11 @@ ALTER TABLE user_authority
         ON DELETE RESTRICT
 ;
 
-SELECT * FROM tourinfosaved;
-SELECT * FROM user;
-SELECT * FROM tour;
-SELECT * FROM contact_us;
+SELECT * FROM authority;
+
+#권한 종류 설정
+INSERT INTO authority (authority_name) VALUES
+('ROLE_MEMBER'), ('ROLE_ADMIN');
+
+
+
