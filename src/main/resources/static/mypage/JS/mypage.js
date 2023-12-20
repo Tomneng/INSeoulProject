@@ -56,25 +56,3 @@ $(document).ready(function () {
         });
     });
 });
-
-// const frm1 = document.forms['frm1'];
-// const frm2 = document.forms['frm2'];
-//
-// let btns = document.querySelectorAll('button[type=button][name="button"]');
-// console.log("btns = " + btns)
-//
-//
-// btns.forEach(btn => btn.addEventListener('click', () => {
-//         console.log("btn = " + btn)
-//         if (btn.value == "마이페이지") {
-//             frm1.style.display = 'block';
-//             frm2.style.display = 'none';
-//         }
-//         if (btn.value == "회원정보") {
-//             frm1.style.display = 'none';
-//             frm2.style.display = 'block';
-//         }
-//
-//     }
-// ));
-

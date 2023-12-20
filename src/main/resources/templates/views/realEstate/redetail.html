@@ -8,6 +8,13 @@
     history.back();
 </script>
 <th:block th:if="${row}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>조회 - [[${row.houseId}]]</title>
+    </head>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +36,118 @@
         }
     </style>
     <body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search" placeholder="Search">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <style>
+        td {
+            border: black 2px solid;
+        }
+    </style>
+    <body>
     <!--  헤더 추가 철희 12/20 -->
     <th:block th:insert="~{common/header::header}"></th:block>
 
+    <div class="container">
+        <table class="table table-hover" style="border: black 2px solid; text-align: center">
+            <thead>
+            fdsafa
+            </thead>
+            <tbody>
+            <tr class="table-active">
+                <td>건물명</td>
+                <td id="building_name">[[${row.buildingName}]]</td>
+                <td>계약일</td>
+                <td id="contract_date">[[${row.contractDate}]]</td>
+            </tr>
+            <tr>
+                <td>주소</td>
+                <td colspan="3" id="address">[[${row.address}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>전월세구분</td>
+                <td id="rent_kind">[[${row.rentKind}]]</td>
+                <td>임대면적</td>
+                <td id="rent_area">[[${row.rentArea}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>보증금</td>
+                <td id="rent_deposit">[[${row.rentDeposit}]]</td>
+                <td>월세</td>
+                <td id="rent_fee">[[${row.rentFee}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>건축년도</td>
+                <td id="built_year">[[${row.buildYear}]]</td>
+                <td>건물용도</td>
+                <td id="house_kindNm">[[${row.houseKindName}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>계약기간</td>
+                <td id="contract_period">[[${row.contractPeriod}]]</td>
+                <td>신규갱신여부</td>
+                <td id="new_Ron">[[${row.newRonSecd}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <section>
+        <div class="container" style="display: flex">
+            <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.contractScore}]] /
+                100
+            </div>
+            <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.placeScore}]] /
+                100
+            </div>
+            <form th:action="@{/realEstate/putScore}" method="post">
+                <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
+                <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
+                <input id="houseId" name="houseId" th:value="${row.houseId}">
+                <button type="submit" id="putScore" class="btn btn-outline-dark">작성완료</button>
+            </form>
+        </div>
+    </section>
     <div class="container">
         <table class="table table-hover" style="border: black 2px solid; text-align: center">
             <thead> 상세정보 - [[${row.houseId}]]</thead>

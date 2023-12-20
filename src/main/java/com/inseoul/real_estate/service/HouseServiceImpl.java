@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
@@ -64,8 +65,15 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public int putScore(Row row) {
-        return houseRepository.updateScore(row);
+    public int putScore(Long houseId,Long userId, int contractScore, int placeScore) {
+        if (houseRepository.checkScore(houseId, userId) == 0){
+            houseRepository.initScore(houseId, userId, contractScore, placeScore);
+            houseRepository.updateRealScore(houseId);
+        }else {
+            houseRepository.updateScore(houseId, userId, contractScore, placeScore);
+            houseRepository.updateRealScore(houseId);
+        }
+        return 0;
     }
 
 

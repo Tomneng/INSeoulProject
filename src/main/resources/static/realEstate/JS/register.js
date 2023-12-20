@@ -25,12 +25,34 @@ $(document).ready(function (){
             $("#authCodeSend").text("인증코드 재전송");
         }else {
             alert("인증 성공");
-            $("#submitThis").removeAttr("type").attr("type", "submit");
+            // $("#submitThis").removeAttr("type").attr("type", "submit");
         }
     })
+    // document.getElementById("submitThis").getAttribute("type").toString()==="button"
     $("#submitThis").click(function (){
-        if (document.getElementById("submitThis").getAttribute("type").toString()==="button"){
+        if ($("#authcode").val() !== value){
             alert("이메일 인증을 완료해주세요")
+        }else {
+        openModal()
         }
+    })
+    $("#skip").click(function (){
+        let form = document.forms['submitForm'];
+        for (i=0; i< document.getElementsByName("mbti").length; i++){
+            document.getElementsByName("mbti")[i].value=null;
+        }
+        form.submit();
+    })
+
+    $("#done").click(function (){
+        let form = document.forms['submitForm'];
+        form.submit();
     })
 })
+
+function openModal() {
+    document.getElementById('myModalWrapper').style.display = 'flex';
+}
+
+
+

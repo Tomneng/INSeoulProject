@@ -25,4 +25,12 @@ public class EmailController {
         return qryResult;
     }
 
+    @GetMapping("getPass")
+    public AuthCodeQryResult givePassword(
+            @RequestParam("email") String email
+    ) throws MessagingException, UnsupportedEncodingException{
+        AuthCodeQryResult qryResult = emailService.sendPass(email);
+        return qryResult;
+    }
+
 }

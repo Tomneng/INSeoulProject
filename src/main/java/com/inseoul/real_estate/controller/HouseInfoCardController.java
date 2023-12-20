@@ -5,6 +5,7 @@ import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.service.HouseService;
 import com.inseoul.real_estate.util.U;
 import com.inseoul.user.domain.ScrapQryResult;
+import com.inseoul.user.domain.User;
 import com.inseoul.user.service.UserScraptedService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,6 @@ public class HouseInfoCardController {
         houseService.list(row2, page, model);
     }
 
-
-
     @GetMapping("/redetail/{houseId}")
     public String detail(@PathVariable Long houseId, Model model){
         model.addAttribute("row", houseService.findById(houseId));
@@ -53,15 +52,10 @@ public class HouseInfoCardController {
     }
 
     @PostMapping("/putScore")
-    public String setScore(@Valid Row row, Model model){
-        model.addAttribute("result", houseService.putScore(row));
-        return "redirect:/realEstate/redetail/" + row.getHouseId();
+    public String setScore(Long houseId, int contractScore, int placeScore){
+        User user = U.getLoggedUser();
+        houseService.putScore(houseId, user.getUserId(), contractScore, placeScore);
+        return "redirect:/realEstate/redetail/" + houseId;
     }
-
-
-
-
-
-
 
 }

@@ -44,7 +44,6 @@ public class UserScraptedServiceImpl implements UserScraptedService {
 
         User user = U.getLoggedUser();
 
-        // 위 정보는 session 의 정보이고, 일단 DB 에서 다시 읽어온다
         Long userId = user.getUserId();
 
         List<Long> list = userScraptedRepository.getids(userId);

@@ -21,6 +21,7 @@ public class User {
     private String re_password; // 비밀번호 확인 입력용 DB에 저장 x
 
     private String nickname;
+    private String mbti; //이건 왜 못받아오는거임?
 
     @JsonIgnore
     private LocalDateTime regDate;

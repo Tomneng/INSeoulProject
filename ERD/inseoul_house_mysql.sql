@@ -157,7 +157,7 @@ CREATE TABLE houseContractScore
 (
     user_id int REFERENCES user(user_id), #column명 다름 이걸로 갈듯
     house_id int REFERENCES house_contract(house_id), #외래키설정 비버에 안되있음
-    contract_score int, #디폴트 value는 없애는 방향
+    contract_score int DEFAULT 0,
     place_score int,
     PRIMARY KEY (user_id, house_id) #비버에 pk설정 안되있음
 ) COMMENT = '부동산 점수테이블';
@@ -232,8 +232,7 @@ CREATE TABLE tourInfoSaved
     tour_scrapted_id int NOT NULL AUTO_INCREMENT COMMENT '관광정보스크랩아이디',
     tour_id int NOT NULL COMMENT '관광지아이디',
     id int NOT NULL COMMENT '회원아이디',
-    PRIMARY KEY (tour_scrapted_id),
-    UNIQUE (tour_id)
+    PRIMARY KEY (tour_scrapted_id)
 ) COMMENT = '관광정보스크랩테이블';
 
 
@@ -246,7 +245,8 @@ CREATE TABLE user
     nickname varchar(80) NOT NULL, #column명 다름, nickname으로 갈듯(수정함)
     regdate datetime DEFAULT now(), #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200), #비버에 이거랑 provider 둘다 추가되야됨
-    provider varchar(40)
+    provider varchar(40),
+    mbti varchar(4)
 ) COMMENT = '회원테이블';
 
 
@@ -435,7 +435,7 @@ SELECT * FROM authority;
 INSERT INTO authority (authority_name) VALUES
 ('ROLE_MEMBER'), ('ROLE_ADMIN');
 
-SELECT * FROM tourinfosaved;
-
-
-
+SELECT * FROM houseContractScore;
+SELECT * FROM user;
+SELECT * FROM house_Contract;
+SELECT * FROM contact_us
