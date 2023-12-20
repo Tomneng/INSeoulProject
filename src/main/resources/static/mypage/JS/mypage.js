@@ -30,7 +30,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "/tour/scrapt",
+            url: "/house/scraptTour",
             type: "POST",
             data: data,
             cache: false,

@@ -232,7 +232,8 @@ CREATE TABLE tourInfoSaved
     tour_scrapted_id int NOT NULL AUTO_INCREMENT COMMENT '관광정보스크랩아이디',
     tour_id int NOT NULL COMMENT '관광지아이디',
     id int NOT NULL COMMENT '회원아이디',
-    PRIMARY KEY (tour_scrapted_id)
+    PRIMARY KEY (tour_scrapted_id),
+    UNIQUE (tour_id)
 ) COMMENT = '관광정보스크랩테이블';
 
 
