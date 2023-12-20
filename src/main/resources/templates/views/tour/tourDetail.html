@@ -51,10 +51,14 @@
             <input type="hidden" id="tourContentid" name="tourContentid" th:value="${item.tourContentid}"/>
 
             <!--  추천음식점  -->
+            <!-- 여기 아래 아직 손대지 않음. -->
             <p>여기는 추첨 음식점 이미지</p>
-            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid recommendedFood">
-            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid recommendedFood">
-            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid recommendedFood">
+            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
+                 class="img-fluid recommendedFood">
+            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
+                 class="img-fluid recommendedFood">
+            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
+                 class="img-fluid recommendedFood">
         </div>
     </div>
 
