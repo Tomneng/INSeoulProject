@@ -3,50 +3,45 @@ body {
     color: #495057;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* 뷰포트 높이에 맞게 설정 */
-}
 
-#container_tourdetail {
+#container_tourlist {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    max-width: 1200px;
-    text-align: center; /* 텍스트 가운데 정렬 */
+    max-width: 600px;
+    border: red solid;
 }
 
-#tourImage1 {
-    border-radius: 8px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    width: 100%;
-    max-width: 800px;
-    max-height: 600px;
-    /*border: black solid;*/
-}
-
+#tourSigungucode,
 #tourName {
-    font-size: 7rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border-radius: 8px;
 }
 
-#tourAddress {
-    font-size: 3rem;
+#btn_tour {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-#demoJSON_tour {
-    font-size: 2rem;
-    margin-top: 20px;
-    width: 100%;
+#btn_tour:hover {
+    background-color: #0056b3;
 }
 
-.recommendedFood {
-    max-width: 300px;
+.tour-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background: white;
+}
+
+.tour-item:hover {
+    transform: scale(1.05);
 }

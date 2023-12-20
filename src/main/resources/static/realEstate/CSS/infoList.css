@@ -128,16 +128,19 @@ p {
     max-width: var(--realEstateMaxWidth);
 }
 
+/* select, 검색버튼이 들어있음 */
 #realEstateSearchContainer form {
     border: orange solid;
 }
 
+/* select들 */
 #realEstateSearchContainer form select {
     border: black solid;
     border-radius: 10px;
     width: 300px;
 }
 
+/* 검색버튼 */
 #realEstateSearchContainer form button {
     background-color: var(--white);
     color: var(--skycoral);
