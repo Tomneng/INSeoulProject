@@ -74,7 +74,7 @@ CREATE TABLE contact_us
 (
     complain_id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(10) NOT NULL,
-    email varchar(20) NOT NULL,
+    email varchar(100) NOT NULL,
     content longtext NOT NULL,
     answer longtext,
     is_answered boolean NOT NULL DEFAULT false # 비버에 디폴트 설정 잘못됨 (고쳐야함)

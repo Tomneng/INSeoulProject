@@ -84,9 +84,9 @@
 
         .introduce img {
             display: block;
-            margin: 0 auto;  /* 이미지를 가로로 가운데 정렬 */
+            margin: 0 auto; /* 이미지를 가로로 가운데 정렬 */
             width: 100%;
-            max-width: 600px;  /* 이미지의 최대 너비를 설정할 수 있습니다. */
+            max-width: 600px; /* 이미지의 최대 너비를 설정할 수 있습니다. */
             height: auto;
             margin-top: 20px;
         }
@@ -188,19 +188,21 @@
         </div>
         <div class="mb-3 mt-3">
             <label>Email:</label>
-            <input type="text" class="form-control" id="email" placeholder="이메일을 입력하세요" name="email" th:value="${email}">
+            <input type="text" class="form-control" id="email" placeholder="이메일을 입력하세요" name="email"
+                   th:value="${email}">
             <span class="text-danger" th:if="${error_email}" th:utext="${error_email}"></span>
         </div>
         <div class="my-3">
             <label for="content">Message:</label>
-            <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content" th:utext="${content}"></textarea>
+            <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content"
+                      th:utext="${content}"></textarea>
         </div>
         <button type="submit" class="btn btn-outline-dark">작성완료</button>
     </form>
 </div>
 <th:block th:insert="~{common/footer::footer}"></th:block>
 </body>
-    <script th:src="@{/aboutus/js/aboutus.js}"></script>
+<script th:src="@{/aboutus/js/aboutus.js}"></script>
 <script th:src="@{/aboutus/js/aboutus.js}"></script>
 
 <!-- 여기부터 철희가 추가 12/18 -->
