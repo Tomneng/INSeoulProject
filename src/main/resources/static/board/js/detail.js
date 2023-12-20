@@ -8,15 +8,16 @@ $(function(){
     });
 
     // 현재 글의 id 값
-    const id = $("input[name='id']").val().trim();
+    const postId = $("input[name='postId']").val().trim();
 
     // 현재 글의 댓글을 불러온다
-    loadComment(id);
+    loadComment(postId);
 
     // 댓글 작성 버튼 누르면 댓글 등록 하기.
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
     // 2. 어느 사용자가 작성한 댓글인지? --> logged_id 값
     // 3. 댓글 내용은 무엇인지?  --> 아래 content
+
 
     $("#btn_comment").click(function(){
         // 입력한 댓글
@@ -31,7 +32,7 @@ $(function(){
 
         // submit 할 parameter 들 준비
         const data = {
-            "post_id": id,
+            "post_id": postId,
             "user_id": logged_id,
             "content": content,
         };
@@ -58,9 +59,9 @@ $(function(){
 });
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
-function loadComment(post_id){
+function loadComment(postId){
     $.ajax({
-        url: "/comment/list?id=" + post_id,
+        url: "/comment/list?postId=" + postId,
         type: "GET",
         cache: false,
         success: function(data, status){
@@ -90,7 +91,7 @@ function buildComment(result) {
 
     result.data.forEach(comment => {
         let id = comment.id;
-        let content = comment.content.trim();
+        let content = comment.content;
         let regdate = comment.regdate;
 
         let user_id = comment.user.id;
@@ -103,7 +104,8 @@ function buildComment(result) {
                             data-cmtdel-id="${id}" title="삭제"></i>
         `;
 
-        const row = `
+        const row =
+            `
             <tr>
             <td><span><strong>${username}</strong><br><small class="text-secondary">(${name})</small></span></td>
             <td>

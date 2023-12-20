@@ -3,11 +3,14 @@ package com.inseoul.board.service;
 import com.inseoul.board.domain.post.Post;
 import com.inseoul.board.repository.PostRepository;
 import com.inseoul.real_estate.util.U;
+import com.inseoul.user.domain.User;
+import com.inseoul.user.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import java.util.List;
 
@@ -25,15 +28,30 @@ public class BoardServiceImpl implements BoardService {
 
     private PostRepository postRepository;
 
+    private UserRepository userRepository;  // 생성자 만들어서
+
+
     @Autowired
     public BoardServiceImpl(SqlSession sqlSession) {    // MyBatis 가 생성한 SqlSession 빈(bean) 객체 주입
         postRepository = sqlSession.getMapper(PostRepository.class);
+        userRepository = sqlSession.getMapper(UserRepository.class);    // 생성자에 대입했는데 세션에 있는 getMapper가 UserRepository에 있는 클래스를 가져외서 userRepository
         System.out.println("BoardService() 생성");
     }
 
     @Override
     public int write(Post post) {
         System.out.println("라이트 함수 " + post);
+
+        User user = U.getLoggedUser();
+
+        System.out.println("User user = U.getLoggedUser(); = " + user);
+
+        user = userRepository.findById(user.getUserId());   // findByid에 user.getUserI를 넣어주기
+
+        System.out.println("user = userRepository.findById(user.getUserId()) = " + user);
+
+        post.setUser(user);
+        System.out.println(post);
         return postRepository.save(post);
     }   // 게시물(Post)을 저장하는 메서드를 나타냅니다.
 
@@ -130,4 +148,15 @@ public class BoardServiceImpl implements BoardService {
 
         return list;
     }
+
+    @Override
+    @Transactional
+    public Post detail(long postId) {
+        System.out.println("보드서비스임플 detail함수 실행");
+
+        Post post = postRepository.findById(postId);
+
+        return post;
+    }
+
 }

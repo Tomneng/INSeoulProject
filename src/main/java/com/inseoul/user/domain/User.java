@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class User {
     private Long userId;
-    private String username; // 이게 입력 받는 아이디
+    private String username; // 이게 입력 받는 아이디, 이 프로젝트에서는 이메일정보가 담겨있음.
 
     @JsonIgnore
     private String password;

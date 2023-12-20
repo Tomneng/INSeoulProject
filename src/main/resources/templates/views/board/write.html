@@ -23,20 +23,15 @@
 </head>
 <body>
 
-<!--<div class="container mt-3" th:with="user=${#authentication.getPrincipal().getUser()}">-->
+<div class="container mt-3" th:with="user=${#authentication.getPrincipal().getUser()}">     <!-- post.user.nickname을 했었는데 유저를 받아왔기 때문에 post를 가져올 필요없다 -->
 <div class="container mt-3">
     <h2>작성</h2>
     <hr>
     <form th:action="@{/board/write}" method="post" enctype="multipart/form-data">
         <div class="my-3">
             <label>작성자 : </label>
-            <span class="form-control"></span>
+            <span class="form-control">[[${user.username}]] ([[${user.nickname}]])</span>
         </div>
-<!--        <div class="my-3">-->
-<!--            <label for="user">작성자:</label>-->
-<!--            <input type="text" class="form-control" id="user" placeholder="작성자를 입력하세요" name="user" th:value="${user}">-->
-<!--            <span class="text-danger" th:if="${error_user}" th:utext="${error_user}"></span>-->
-<!--        </div>-->
 
         <div class="my-3">
             <label for="title">제목 : </label>
@@ -65,6 +60,7 @@
         <a class="btn btn-outline-dark" th:href="@{/board/list(page=${session.page})}">목록</a>
     </form>
 
+</div>
 </div>
 
 </body>

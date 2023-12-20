@@ -18,11 +18,11 @@ import java.time.LocalDateTime;
 @Builder
 public class Comment {
     private Long id;  // PK
+    @JsonIgnore   // JSON 변환시 제외하는 필드
+    private Long postId; // 어느글의 댓글 (FK)
     @ToString.Exclude
     private User user; // 댓글 작성자 (FK)
 
-    @JsonIgnore   // JSON 변환시 제외하는 필드
-    private Long post_id; // 어느글의 댓글 (FK)
     private String content;   // 댓글 내용
 
     // java.time.* 객체 변환을 위한 annotation 들

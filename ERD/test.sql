@@ -15,6 +15,10 @@ WHERE
 
 SELECT count(*) FROM post;
 
+select * from post;
+
+select * from user;
+
 select * from comment;
 
 -- 샘플 데이터 삽입
@@ -29,4 +33,18 @@ INSERT INTO comment(post_id, id, com_content, com_regdate) VALUES
                                                       (8, 4, '8. user1이 4번글에 댓글 작성.', NOW()),
                                                       (9, 1, '9. admin1이 1번글에 댓글 작성.', NOW()),
                                                       (10, 1, '10. admin1이 1번글에 댓글 작성.', NOW());
-;
+
+INSERT INTO comment(post_id, id, com_content, com_regdate) VALUES
+(30, 1, '댓글', NOW());
+
+
+
+
+
+
+
+
+
+
+
+

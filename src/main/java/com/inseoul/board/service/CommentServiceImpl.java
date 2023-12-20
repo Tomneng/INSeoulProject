@@ -29,27 +29,30 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public QryCommentList list(Long post_id) {
+    public QryCommentList list(Long postId) {
         QryCommentList list = new QryCommentList();
 
-        List<Comment> comments = commentRepository.findByPost(post_id);
+        List<Comment> comments = commentRepository.findByPost(postId);
+
+        System.out.println("댓글---------------------------------------------" + comments);
 
         list.setCount(comments.size());   // 댓글의 개수
         list.setList(comments);
         list.setStatus("OK");
 
+        System.out.println(list);
         return list;
     }
 
     @Override
-    public QryResult write(Long post_id, int userId, String content) {
+    public QryResult write(Long postId, Long userId, String content) {
 
-        User user = userRepository.findById(post_id);
+        User user = userRepository.findById(userId);
 
         Comment comment = Comment.builder()
                 .user(user)
                 .content(content)
-                .post_id(post_id)
+                .postId(postId)
                 .build();
 
         commentRepository.save(comment);

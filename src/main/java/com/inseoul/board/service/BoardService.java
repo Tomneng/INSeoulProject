@@ -21,4 +21,8 @@ public interface BoardService {
 
     // 페이징 리스트
     List<Post> list(Integer page, Model model);
+
+    @Transactional
+    Post detail(long postId);
+
 }

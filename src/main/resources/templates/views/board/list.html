@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -38,18 +39,7 @@
 
         </div>
     <div>
-            <div class="search-bar">
-                <div class="">
-                    <form name="search-form" autocapitalize="off">
-                        <select name="type" class="form-select">
-                            <option selected>Number</option>
-                            <option value="">MBTI</option>
-                            <option value="">Post title</option>
-                            <option value="">Writer</option>
-                            <option value="">Date</option>
-                        </select>
-                    </form>
-                </div>
+
                 <div class="search-bar-searchIcon" style="position: relative;">
                     <input class="form-control me-2" type="search" placeholder="검색......" aria-label="Search">
                     <svg class="bi bi-search-heart" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); margin-right: 10px">

@@ -1,7 +1,5 @@
 package com.inseoul.board.controller;
 
-
-
 import com.inseoul.board.domain.post.QryCommentList;
 import com.inseoul.board.domain.post.QryResult;
 import com.inseoul.board.service.CommentService;
@@ -17,16 +15,15 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/list")
-    public QryCommentList list(Long com_id) {
-        System.out.println("comment/list" + com_id);
-        System.out.println(commentService.list(com_id));
-        return commentService.list(com_id);
+    public QryCommentList list(Long postId) {
+        System.out.println(commentService.list(postId));
+        return commentService.list(postId);
     }
 
     @PostMapping("/write")
     public QryResult write(
             @RequestParam("post_id") Long postId,
-            @RequestParam("user_id") int userId,
+            @RequestParam("user_id") Long userId,
             String content
     ){
         return commentService.write(postId, userId, content);

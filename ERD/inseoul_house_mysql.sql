@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS tour;
 DROP TABLE IF EXISTS user;
 
 /* Create Tables */
-
+select * from comment;
 
 
 -- 첨부파일테이블
@@ -55,9 +55,11 @@ CREATE TABLE comment
     com_content text NOT NULL,
     com_regdate datetime NOT NULL,
     PRIMARY KEY (com_id),
-    UNIQUE (com_id),
-    UNIQUE (post_id)
+    UNIQUE (com_id)
+#     UNIQUE (post_id)
 );
+
+select * from comment;
 
 
 -- 댓글좋아요테이블
@@ -190,19 +192,6 @@ CREATE TABLE post
 
 /*3번*/
 INSERT INTO post (id, title, content, viewcnt) VALUES
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
-    (1, 'Sample Post 4', 'This is the content of the first post.', 100),
     (1, 'Sample Post 4', 'This is the content of the first post.', 100),
     (1, 'Sample Post 4', 'This is the content of the first post.', 100);
 

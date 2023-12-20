@@ -6,10 +6,10 @@ import com.inseoul.board.domain.post.QryResult;
 public interface CommentService {
 
     // 특정 글(id) 의 댓글 목록
-    QryCommentList list(Long id);
+    QryCommentList list(Long post_id);
 
     // 특정 글(postId) 에 특정 사용자(userId) 가 댓글 작성
-    QryResult write(Long post_id, int id, String content);
+    QryResult write(Long post_id, Long userId, String content);
 
     // 특정 댓글(id) 삭제
     QryResult delete(Long id);

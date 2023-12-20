@@ -3,18 +3,18 @@
 <mapper namespace="com.inseoul.board.repository.CommentRepository">
 
     <resultMap id="mapUser" type="com.inseoul.user.domain.User">
-        <result column="u_user_id" property="id"/>
-        <result column="u_username" property="username"/>
-        <result column="u_password" property="password"/>
-        <result column="u_nickname" property="nickname"/>
-        <result column="u_regdate" property="regDate"/>
+        <result column="userId" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="userRegdate" property="regDate"/>
     </resultMap>
 
     <resultMap id="mapComment" type="com.inseoul.board.domain.post.Comment">
-        <result column="c_com_id" property="id"/>
-        <result column="c_com_content" property="content"/>
-        <result column="c_com_regdate" property="regDate"/>
-        <result column="c_post_id" property="post_id"/>
+        <result column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="regdate" property="regDate"/>
+        <result column="postId" property="postId"/>
         <collection property="user" resultMap="mapUser"/>
     </resultMap>
 
@@ -22,27 +22,26 @@
 
     <select id="findByPost" resultMap="mapComment">
         SELECT
-            c.id "c_id",
-            c.com_content "c_com_content",
-            c.com_regdate "c_com_regdate",
-            c.post_id "c_post_id",
-            u.user_id "u_user",
-            u.username "u_username",
-            u.password "u_password",
-            u.nickname "u_nickname",
-            u.regDate "u_regDate"
+            c.com_id "id",
+            c.com_content "content",
+            c.com_regdate "regDate",
+            c.post_id "postId",
+            u.user_id "userId",
+            u.username "username",
+            u.nickname "nickname",
+            u.regDate "userRegDate"
         FROM comment c, user u
         WHERE
             c.id = u.user_id
-          AND c.post_id = #{post_id}
+          AND c.post_id = #{postId}
         ORDER BY c.id DESC
     </select>
 
     <insert id="save" flushCache="true"
             parameterType="com.inseoul.board.domain.post.Comment"
-            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+            useGeneratedKeys="true" keyColumn="com_id" keyProperty="id">
         INSERT INTO comment(id, post_id, com_content)
-        VALUES(#{user.id}, #{post_id}, #{content})
+        VALUES(#{user.id}, #{postId}, #{content})
     </insert>
 
     <delete id="deleteById" flushCache="true">
