@@ -1,9 +1,9 @@
-// 여기 철희가 추가 12/19
-// 헤더에 active class 추가
-$("#tabRealEstate").addClass("active");
-
-
 $(document).ready(function () {
+
+    // 여기 철희가 추가 12/19
+    // 헤더에 active class 추가
+    $("#tabRealEstate").addClass("active");
+
     selyear()
     selssg()
     $("#selectSSG").change(function () {
@@ -39,13 +39,13 @@ $(document).ready(function () {
     })
 
 
-    $(".divider input").change(function () {
+    $(".divider .scraptRealEstate").change(function () {
         const houseId = $(this).val();
         const data = {
             "house_id": houseId,
             "user_id": logged_id,
         };
-        if ($(".divider input").is(":checked")) {
+        if ($(".divider .scraptRealEstate").is(":checked")) {
             $.ajax({
                 url: "/house/scrapt",
                 type: "POST",
@@ -54,6 +54,7 @@ $(document).ready(function () {
                 success: function (data, status) {
                     if (status == "success") {
                         if (data.status !== "OK") {
+                            console.log("스크랩 체크: " + data.status)
                             alert(data.status);
                             return;
                         }
@@ -69,6 +70,7 @@ $(document).ready(function () {
                 success: function (data, status) {
                     if (status == "success") {
                         if (data.status !== "DELETED") {
+                            console.log("스크랩 해제: " + data.status)
                             alert(data.status);
                             return;
                         }

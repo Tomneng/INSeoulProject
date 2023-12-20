@@ -46,8 +46,7 @@
                         </li>
                         <!-- 권한이 관리자인 경우에 보여주는 관리자페이지 탭 -->
                         <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <!--                        <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">-->
-                            <a class="nav-link" th:href="@{/realEstate/infoList}">관리자답변</a>
+                            <a id="tabAdminAnswer" class="nav-link" th:href="@{/admin/adminanswer}">관리자답변</a>
                         </li>
                     </ul>
 
@@ -75,10 +74,9 @@
                         <!--로그아웃 아이콘-->
                         <li class="nav-item userIcons">
                             <a id="logoutIcon" class="userIcon" type="submit"
-                               th:href="@{/user/login2}"><i class="fa-solid fa-right-from-bracket"></i></a>
+                               th:href="@{/user/logout}"><i class="fa-solid fa-right-from-bracket"></i></a>
                         </li>
                     </ul>
-
 
 
                 </div>

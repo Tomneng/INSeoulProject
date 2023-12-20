@@ -11,9 +11,11 @@
               integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
               crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script th:src="@{/realEstate/JS/infoList.js}"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/infoList.css}">
+
+        <!--철희 추가 12/19-->
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
 
         <title>간단한 웹페이지</title>
@@ -22,10 +24,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <body>
-    <!--  헤더 철희 추가  -->
+    <!--  헤더 추가 철희 -->
     <th:block th:insert="~{common/header::header}"></th:block>
 
-    <div class="container">
+    <div id="realEstateSearchContainer" class="container">
         <form th:action="@{/realEstate/infoList}" method="post">
             <select id="selectYear" name="accYear">
             </select>
@@ -42,22 +44,25 @@
     </div>
 
     <hr>
-    <div class="mb-3 mt-3 clearfix">
+    <div id="cntRealEstate" class="mb-3 mt-3 clearfix">
         <span class="float-start me-2">총 [[${cnt}]]개</span>
-        <span class="float-start">page [[${page}]]/[[${totalPage}]]</span>
+        <span class="float-start">[[${page}]]/[[${totalPage}]] page</span>
     </div>
 
-    <div th:each="row : ${list}" class="divider-container" id="container1">
-        <div class="divider">
-            <input type="checkbox" th:id="${row.houseId}" th:value="${row.houseId}">
-            <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
-                <span th:text="${row.ssgName}"></span>
-                <span th:text="${row.dongName}"></span>
-                <span th:text="${row.rentKind}"></span>
-                <span th:text="${row.rentDeposit}"></span>
-                <span th:text="${row.rentFee}"></span>
-                <!--            <span th:text="${row.contractScore}"></span>-->
-            </a>
+    <div class="divider-containerParents justify-content-center row">
+        <div th:each="row : ${list}" class="divider-container" id="container1">
+            <div class="divider">
+                <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
+                       th:value="${row.houseId}"><br>
+                <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                    <span th:text="${row.ssgName}"></span><br>
+                    <span th:text="${row.dongName}"></span><br>
+                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
+                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
+                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
+                    <!--            <span th:text="${row.contractScore}"></span>-->
+                </a>
+            </div>
         </div>
     </div>
 
