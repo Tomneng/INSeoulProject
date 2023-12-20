@@ -435,5 +435,7 @@ SELECT * FROM authority;
 INSERT INTO authority (authority_name) VALUES
 ('ROLE_MEMBER'), ('ROLE_ADMIN');
 
+SELECT * FROM tourinfosaved;
+
 
 

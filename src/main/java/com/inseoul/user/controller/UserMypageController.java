@@ -21,6 +21,4 @@ public class UserMypageController {
         userScraptedService.listById(model);
         userScraptedService.listByIdTour(model);
     }
-
-
 }
