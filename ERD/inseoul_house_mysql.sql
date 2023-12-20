@@ -147,6 +147,8 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     build_year int,
     house_kind_name varchar(20),
     contract_period varchar(20), #이거 null 허용으로 바꿈
+    place_score int,
+    contract_score int,
     new_ron_secd varchar(2),
     address varchar(100) # column명이 다름 이걸로 갈듯
 ) COMMENT = '부동산계약데이터테이블';
@@ -438,4 +440,4 @@ INSERT INTO authority (authority_name) VALUES
 SELECT * FROM houseContractScore;
 SELECT * FROM user;
 SELECT * FROM house_Contract;
-
+SELECT * FROM contact_us

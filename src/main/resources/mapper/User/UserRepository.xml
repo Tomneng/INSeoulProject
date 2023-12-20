@@ -37,4 +37,10 @@
         WHERE user_id = #{userId}
     </update>
 
+    <update id="tempPass" flushCache="true" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET password = #{password}
+        WHERE user_id = #{userId}
+    </update>
+
 </mapper>

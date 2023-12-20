@@ -14,4 +14,6 @@ public interface UserRepository {
 
     // User 정보 수정
     int update(User user);
+
+    int tempPass(User user);
 }

@@ -1,68 +1,205 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+
+<!--    <title>로그인</title>-->
+<!--</head>-->
+
+
+<!--<body style="margin-bottom: 200px">-->
+
+
+<!--<div class="container mt-3 text-center">-->
+<!--    <div class="row mt-5">-->
+<!--        &lt;!&ndash; 에러 메세지 &ndash;&gt;-->
+<!--    </div>-->
+<!--    <form th:action="@{/user/login2}" method="POST">-->
+<!--        <h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>-->
+<!--        <div class="col-12 text-danger" th:text="${errorMessage}">-->
+<!--        </div>-->
+
+
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control" name="username" id="username" th:value="${username}"-->
+<!--                   placeholder="name@example.com" required>-->
+<!--            <label for="username">Email</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating mt-1">-->
+<!--            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password"-->
+<!--                   required>-->
+<!--            <label for="password">Password</label>-->
+<!--        </div>-->
+
+<!--        <button class="w-100 btn btn-lg btn-primary my-1" type="submit">로그인</button>-->
+<!--        <a class="w-100 btn btn-lg btn-primary my-1" th:href="@{/user/register}">회원가입</a>-->
+<!--        &lt;!&ndash;        OAuth 로그인 버튼&ndash;&gt;-->
+<!--        <a class="btn btn-lg my-1"-->
+<!--           th:href="@{https://kauth.kakao.com/oauth/authorize(response_type=${'code'}, client_id=${@environment.getProperty('app.oauth2.kakao.client-id')}, redirect_uri=${@environment.getProperty('app.oauth2.kakao.redirect-uri')})}">-->
+<!--            <img th:src="@{/image/kakao_login_medium_wide.png}" width="260" height="45">-->
+<!--        </a>-->
+<!--        <a class="btn btn-lg my-1" th:href="@{/oauth2/authorization/google}">-->
+<!--            <img th:src="@{/image/google_login_button.png}" width="260" height="45">-->
+<!--        </a>-->
+<!--        <a class="btn btn-lg my-1" th:href="@{/oauth2/authorization/naver}">-->
+<!--            <img th:src="@{/image/naver_login_button.png}" width="260" height="45">-->
+<!--        </a>-->
+<!--        &lt;!&ndash;        OAuth 로그인 버튼&ndash;&gt;-->
+<!--    </form>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <title>로그인</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* 그림자 효과 강화 */
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        .login-form h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .form-floating {
+            margin-bottom: 15px;
+        }
+
+        .btn-login {
+            margin-bottom: 10px;
+        }
+
+        .btn-oauth {
+            height: 80px; /* 높이를 원하는 크기로 조절하세요 */
+            width: 80px; /* width를 height과 동일한 정사각형으로 설정 */
+            margin-right: 10px; /* 각 버튼 사이 간격 조절 */
+            background-color: transparent; /* 파란색 버튼 스타일 제거 */
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border-radius: 50%;
+        }
+
+        .btn-oauth img {
+            width: 70%; /* 이미지 크기를 조절하세요 */
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/realEstate/JS/login2.js}"></script>
 </head>
-
-
-<body style="margin-bottom: 200px">
-
-
-<div class="container mt-3 text-center">
-    <div class="row mt-5">
-        <!-- 에러 메세지 -->
-    </div>
-    <form th:action="@{/user/login2}" method="POST">
+<body>
+<div class="login-container">
+    <form class="login-form" th:action="@{/user/login2}" method="POST">
         <h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
-        <div class="col-12 text-danger" th:text="${errorMessage}">
-        </div>
-
+        <div class="col-12 text-danger" th:text="${errorMessage}"></div>
 
         <div class="form-floating">
-            <input type="text" class="form-control" name="username" id="username" th:value="${username}"
-                   placeholder="name@example.com" required>
+            <input type="text" class="form-control" name="username" id="username" th:value="${username}" placeholder="name@example.com" required>
             <label for="username">Email</label>
         </div>
-        <div class="form-floating mt-1">
-            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password"
-                   required>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
             <label for="password">Password</label>
         </div>
 
+        <button type="button" class="btn btn-lg btn-secondary" onclick="openModal()">
+            비밀번호 찾기
+        </button>
 
-        <div class="mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary my-1" type="submit">로그인</button>
-        <!--        OAuth 로그인 버튼-->
-        <a class="btn btn-lg my-1"
-           th:href="@{https://kauth.kakao.com/oauth/authorize(response_type=${'code'}, client_id=${@environment.getProperty('app.oauth2.kakao.client-id')}, redirect_uri=${@environment.getProperty('app.oauth2.kakao.redirect-uri')})}">
-            <img th:src="@{/image/kakao_login_medium_wide.png}" width="260" height="45">
-        </a>
-        <a class="btn btn-lg my-1" th:href="@{/oauth2/authorization/google}">
-            <img th:src="@{/image/google_login_button.png}" width="260" height="45">
-        </a>
-        <a class="btn btn-lg my-1" th:href="@{/oauth2/authorization/naver}">
-            <img th:src="@{/image/naver_login_button.png}" width="260" height="45">
-        </a>
-        <!--        OAuth 로그인 버튼-->
+        <button class="w-100 btn btn-lg btn-primary btn-login" type="submit">로그인</button>
         <a class="w-100 btn btn-lg btn-primary my-1" th:href="@{/user/register}">회원가입</a>
-        <p class="mt-2 mb-3 text-muted">&copy; 2017–2022</p>
+
+        <!-- OAuth 로그인 버튼 -->
+        <div class="d-flex justify-content-start">
+            <a class="btn btn-oauth" th:href="@{https://kauth.kakao.com/oauth/authorize(response_type=${'code'}, client_id=${@environment.getProperty('app.oauth2.kakao.client-id')}, redirect_uri=${@environment.getProperty('app.oauth2.kakao.redirect-uri')})}">
+                <img th:src="@{/image/ico_s_kakao_talk.png}" alt="Kakao" />
+            </a>
+            <a class="btn btn-oauth" th:href="@{/oauth2/authorization/google}">
+                <img th:src="@{/image/Googleimage.png}" alt="Google" />
+            </a>
+            <a class="btn btn-oauth" th:href="@{/oauth2/authorization/naver}">
+                <img th:src="@{/image/btnG_naver.png}" alt="Naver" />
+            </a>
+        </div>
+        <!-- OAuth 로그인 버튼 -->
     </form>
 </div>
 
+<!-- 비밀번호 찾기 모달 -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">비밀번호 찾기</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <input  id="email" value="">
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" id="getpassword" class="btn btn-secondary" data-bs-dismiss="modal">비밀번호 받기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        var modal = new bootstrap.Modal(document.getElementById('forgotPasswordModal'));
+        modal.show();
+    }
+</script>
+<!-- 비밀번호 찾기 모달 -->
 </body>
 </html>
-
 
 
