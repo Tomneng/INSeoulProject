@@ -177,7 +177,7 @@ CREATE TABLE post
     title        varchar(50) NOT NULL COMMENT '게시글제목',
     content      longtext COMMENT '게시글내용',
     viewcnt      int COMMENT '조회수',
-    post_regdate datetime default now(), #NOT NULL에서 default now()로 변경
+    post_regdate datetime default now(), #NOT NULL에서 default now()로 변경 - 신철희 12/21 16:00
     PRIMARY KEY (post_id),
     UNIQUE (post_id)
 ) COMMENT = '게시글테이블';
@@ -242,7 +242,8 @@ CREATE TABLE user
     nickname   varchar(80)  NOT NULL,          #column명 다름, nickname으로 갈듯(수정함)
     regdate    datetime DEFAULT now(),         #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200),                   #비버에 이거랑 provider 둘다 추가되야됨
-    provider   varchar(40)
+    provider   varchar(40),
+    mbti       varchar(4)                      #추가 - 신철희 12/21 16:00
 ) COMMENT = '회원테이블';
 
 
@@ -325,7 +326,7 @@ ALTER TABLE comment
     ADD FOREIGN KEY (post_id)
         REFERENCES post (post_id)
         ON UPDATE RESTRICT
-        ON DELETE RESTRICT
+        ON DELETE CASCADE # RESTRICT에서 CASCADE로 변경 - 신철희 12/21 16:00
 ;
 
 
@@ -333,7 +334,7 @@ ALTER TABLE post_like
     ADD FOREIGN KEY (post_id)
         REFERENCES post (post_id)
         ON UPDATE RESTRICT
-        ON DELETE RESTRICT
+        ON DELETE CASCADE # RESTRICT에서 CASCADE로 변경 - 신철희 12/21 16:00
 ;
 
 
