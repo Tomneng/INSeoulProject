@@ -17,9 +17,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Comment {
-    private Long id;  // PK
+
+    private Long comId;  // PK
+
     @JsonIgnore   // JSON 변환시 제외하는 필드
     private Long postId; // 어느글의 댓글 (FK)
+
     @ToString.Exclude
     private User user; // 댓글 작성자 (FK)
 

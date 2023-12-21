@@ -30,11 +30,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public QryCommentList list(Long postId) {
+        System.out.println("댓글서비스임플 list함수 postId값은 " + postId);
         QryCommentList list = new QryCommentList();
 
         List<Comment> comments = commentRepository.findByPost(postId);
 
-        System.out.println("댓글---------------------------------------------" + comments);
+        System.out.println("댓글--------------" + comments);
 
         list.setCount(comments.size());   // 댓글의 개수
         list.setList(comments);

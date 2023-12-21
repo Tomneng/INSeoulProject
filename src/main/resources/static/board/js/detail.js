@@ -1,14 +1,16 @@
-$(function(){
+$(function () {
     // 글 [삭제] 버튼
-    $("#btnDel").click(function(){
+    $("#btnDel").click(function () {
         let answer = confirm("삭제하시겠습니까?");
-        if(answer){
+        if (answer) {
             $("form[name='frmDelete']").submit();
         }
     });
 
     // 현재 글의 id 값
     const postId = $("input[name='postId']").val().trim();
+    console.log("input[name='postId'] = " + postId)
+
 
     // 현재 글의 댓글을 불러온다
     loadComment(postId);
@@ -18,13 +20,12 @@ $(function(){
     // 2. 어느 사용자가 작성한 댓글인지? --> logged_id 값
     // 3. 댓글 내용은 무엇인지?  --> 아래 content
 
-
-    $("#btn_comment").click(function(){
+    $("#btn_comment").click(function () {
         // 입력한 댓글
         const content = $("#input_comment").val().trim();
 
         // 검증
-        if(!content){
+        if (!content) {
             alert("댓글 입력을 하세요");
             $("#input_comment").focus();
             return;
@@ -42,13 +43,13 @@ $(function(){
             type: "POST",
             data: data,
             cache: false,
-            success: function(data, status) {
-                if(status == "success"){
-                    if(data.status !== "OK"){
+            success: function (data, status) {
+                if (status == "success") {
+                    if (data.status !== "OK") {
                         alert(data.status);
                         return;
                     }
-                    loadComment(id);  // 댓글 목록 다시 업데이트
+                    loadComment(postId);  // 댓글 목록 다시 업데이트
                     $("#input_comment").val('');   // 입력칸 리셋
                 }
             },
@@ -59,16 +60,18 @@ $(function(){
 });
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
-function loadComment(postId){
+function loadComment(postId) {
     $.ajax({
-        url: "/comment/list?postId=" + postId,
+        url: "/comment/list?id=" + postId,
         type: "GET",
         cache: false,
-        success: function(data, status){
-            if(status == "success"){
+        success: function (data, status) {
+            if (status == "success") {
+                console.log("loadComment() GET status = " + status)
+                console.log("loadComment() GET data = " + data)
 
                 // 서버쪽에서 에러가 있는 경우.
-                if(data.status !== "OK"){
+                if (data.status !== "OK") {
                     alert(data.status);
                     return;
                 }
@@ -91,7 +94,7 @@ function buildComment(result) {
 
     result.data.forEach(comment => {
         let id = comment.id;
-        let content = comment.content;
+        let content = comment.content.trim();
         let regdate = comment.regdate;
 
         let user_id = comment.user.id;
@@ -104,8 +107,7 @@ function buildComment(result) {
                             data-cmtdel-id="${id}" title="삭제"></i>
         `;
 
-        const row =
-            `
+        const row = `
             <tr>
             <td><span><strong>${username}</strong><br><small class="text-secondary">(${name})</small></span></td>
             <td>
@@ -121,12 +123,12 @@ function buildComment(result) {
 }
 
 // 댓글 삭제 버튼이 눌렸을때.  해당 댓글 삭제하는 동작을 이벤트 핸들러로 등록
-function addDelete(){
+function addDelete() {
     // 현재 글의 id
     const id = $("input[name='id']").val().trim();
 
-    $("[data-cmtdel-id]").click(function(){
-        if(!confirm("댓글을 삭제하시겠습니까?")) return;
+    $("[data-cmtdel-id]").click(function () {
+        if (!confirm("댓글을 삭제하시겠습니까?")) return;
 
         // 삭제할 댓글의 comment_id
         const comment_id = $(this).attr("data-cmtdel-id");
@@ -136,9 +138,9 @@ function addDelete(){
             type: "POST",
             cache: false,
             data: {"id": comment_id},
-            success: function(data, status){
-                if(status == "success"){
-                    if(data.status !== "OK"){
+            success: function (data, status) {
+                if (status == "success") {
+                    if (data.status !== "OK") {
                         alert(data.status);
                         return;
                     }
