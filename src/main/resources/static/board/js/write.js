@@ -13,8 +13,8 @@ $(function(){
         `);
         i++;
     });
-    $("#content").summernote({
-        width: 800,
+    $(".summernote").summernote({
+        width: 1000,
         height: 300,
         minHeight: null,
         focus: true,
@@ -29,12 +29,13 @@ $(function(){
             ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
             // // 표만들기
             // ['table', ['table']],
+            ['insert', ['picture', 'link']],
             // 글머리 기호, 번호매기기, 문단정렬
             ['para', ['ul', 'ol', 'paragraph']],
             // 줄간격
             ['height', ['height']],
             // 코드보기, 확대해서보기, 도움말
-            ['view', ['codeview', 'fullscreen', 'help']]
+            ['view', ['help']]
         ],
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
         // 추가한 폰트사이즈

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -37,61 +38,70 @@
         <div>
 
         </div>
-    <div>
-            <div class="search-bar">
-                <div class="">
-                    <form name="search-form" autocapitalize="off">
-                        <select name="type" class="form-select">
-                            <option selected>Number</option>
-                            <option value="">MBTI</option>
-                            <option value="">Post title</option>
-                            <option value="">Writer</option>
-                            <option value="">Date</option>
-                        </select>
-                    </form>
-                </div>
-                <div class="search-bar-searchIcon" style="position: relative;">
-                    <input class="form-control me-2" type="search" placeholder="검색......" aria-label="Search">
-                    <svg class="bi bi-search-heart" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); margin-right: 10px">
-                        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
-                        <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
-                    </svg>
-                </div>
+        <div>
+
+            <div class="search-bar-searchIcon" style="position: relative;">
+                <input class="form-control me-2" type="search" placeholder="검색......" aria-label="Search">
+                <svg class="bi bi-search-heart" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); margin-right: 10px">
+                    <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+                    <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+                </svg>
             </div>
         </div>
     </div>
+</div>
+<div>
+    <!-- 페이징 헤더 -->
+    <div class="mb-3 mt-3 clearfix">
+        <span class="float-start me-2">총 [[${cnt}]]개</span>
+        <span class="float-start">page [[${page}]]/[[${totalPage}]]</span>
+        <span class="float-end">
+                <form name="frmPageRows">
+                    <input type="hidden" name="page" th:value="${page}">
+                    <select class="form-select" name="pageRows">
+                        <option value="10" th:selected="${pageRows==10}">10</option>
+                        <option value="15" th:selected="${pageRows==15}">15</option>
+                        <option value="20" th:selected="${pageRows==20}">20</option>
+                        <option value="50" th:selected="${pageRows==50}">50</option>
+                    </select>
+                </form>
+            </span>
+    </div>
+    <!-- 페이징 헤더 -->
+</div>
+<!-- 목록 -->
+<table class="table table-hover">
+    <thead class="table">
+    <tr>
+        <th>No</th>
+        <!--            <th>MBTI type</th>-->
+        <th>Post title</th>
+        <!--            <th>Writer</th>-->
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${list}">   <!--하나의 행 - 행이 시작되는 부분 (한 줄) ${list}의 안에 있는 원소를 post라는 이름을 반복-->
+        <td><span th:text="${post.postId}"></span></td>
+        <!--            <td><span th:text="${post.user.mbti}"></span></td>&lt;!&ndash;list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭&ndash;&gt;-->
+        <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span> </td>
+        <!--            <td><span th:text="${post.user.email}"></span></td>-->
+        <td><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+    </tr>
 
+    </tbody>
+</table>
+<!-- 목록 -->
 
-    <!-- 목록 -->
-    <table class="table table-hover">
-        <thead class="table">
-        <tr>
-            <th>No</th>
-            <th>MBTI type</th>
-            <th>Post title</th>
-            <th>Writer</th>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="post : ${list}">   <!--하나의 행 - 행이 시작되는 부분 (한 줄) ${list}의 안에 있는 원소를 post라는 이름을 반복-->
-            <td><span th:text="${post.id}"></span></td>     <!--list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭-->
-            <td><span><a th:href="@{'/board/detail/' + ${post.id}}" th:text="${post.subject}"></a></span> </td>
-            <td><span th:text="${post.user}"></span></td>
-            <td><span th:text="${post.viewCnt}"></span></td>
-            <td><span th:text="${#temporals.format(post.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
-        </tr>
-
-        </tbody>
-    </table>
-    <!-- 목록 -->
-
-    <div class="row">
-        <div class="col-12">
-            <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>    <!--write 요청-->
-        </div>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>    <!--write 요청-->
     </div>
 </div>
+</div>
+<!-- pagination -->
+<th:block th:insert="~{board/pagination::pagination}"></th:block>
+<!-- pagination -->
 
 <!--  푸터 블럭 by 철희 12/19  -->
 <th:block th:insert="~{common/footer::footer}"></th:block>
