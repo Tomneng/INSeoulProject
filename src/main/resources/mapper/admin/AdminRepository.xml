@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.admin.repository.AdminRepository">
+    <update id="resolved">
+        UPDATE contact_us
+        SET answer = #{answer}, is_answered = TRUE
+        WHERE complain_id = #{complainId}
+    </update>
+
+
+    <select id="allComplains" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM contact_us
+    </select>
+
+    <select id="complains" resultType="com.inseoul.admin.domain.Complain">
+        SELECT complain_id  "complainId", name "nickname", content "content", is_answered "isAnswered"
+        FROM contact_us
+        ORDER BY complain_id DESC
+        LIMIT #{param1}, #{param2}
+    </select>
+    <select id="findByIdCom" resultType="com.inseoul.admin.domain.Complain">
+        SELECT complain_id  "complainId", name "nickname", email "username", content "content", answer "answer", is_answered "isAnswered"
+        FROM contact_us
+        WHERE complain_id = #{complainId};
+    </select>
+</mapper>

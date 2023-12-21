@@ -74,7 +74,7 @@ CREATE TABLE contact_us
 (
     complain_id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(10) NOT NULL,
-    email varchar(20) NOT NULL,
+    email varchar(100) NOT NULL,
     content longtext NOT NULL,
     answer longtext,
     is_answered boolean NOT NULL DEFAULT false # 비버에 디폴트 설정 잘못됨 (고쳐야함)
@@ -248,7 +248,8 @@ CREATE TABLE user
     regdate datetime DEFAULT now(), #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200), #비버에 이거랑 provider 둘다 추가되야됨
     provider varchar(40),
-    mbti varchar(4)
+    mbti varchar(4),
+    tempPass int DEFAULT 0
 ) COMMENT = '회원테이블';
 
 
@@ -441,3 +442,4 @@ SELECT * FROM houseContractScore;
 SELECT * FROM user;
 SELECT * FROM house_Contract;
 SELECT * FROM contact_us
+

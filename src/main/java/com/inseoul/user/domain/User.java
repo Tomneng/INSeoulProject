@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class User {
     private Long userId;
     private String username; // 이게 입력 받는 아이디
@@ -22,6 +21,8 @@ public class User {
 
     private String nickname;
     private String mbti; //이건 왜 못받아오는거임?
+
+    private Long tempPass;
 
     @JsonIgnore
     private LocalDateTime regDate;

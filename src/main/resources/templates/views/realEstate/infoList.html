@@ -9,8 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script th:src="@{/realEstate/JS/infoList.js}"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
@@ -19,6 +17,8 @@
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script th:src="@{/realEstate/JS/infoList.js}"></script>
 
         <title>간단한 웹페이지</title>
 
@@ -76,7 +76,6 @@
 <!-- pagination -->
 </body>
     <script th:inline="javascript">
-        // 나중에 댓글 작성시 필요.
         const logged_id = [[${logged_user.userId}]];
     </script>
 </th:block>

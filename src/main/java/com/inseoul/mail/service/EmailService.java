@@ -1,5 +1,6 @@
 package com.inseoul.mail.service;
 
+import com.inseoul.admin.repository.AdminRepository;
 import com.inseoul.authority.repository.AuthorityRepository;
 import com.inseoul.mail.domain.AuthCodeQryResult;
 import com.inseoul.user.domain.User;
@@ -158,6 +159,22 @@ public class EmailService {
         return message;
     }
 
+    public MimeMessage giveAnswer(String email, String answer) throws MessagingException, UnsupportedEncodingException {
+
+        String setFrom = "kchanghee59@gmail.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
+        String toEmail = email; //받는 사람
+        String title = "INSeoul 회원님의 비밀번호입니다."; //제목
+
+        MimeMessage message = emailSender.createMimeMessage();
+        message.addRecipients(MimeMessage.RecipientType.TO, email); // 받는 사람 주소 지정
+        message.setSubject(title); //제목 설정
+        message.setFrom(setFrom); // 보내는 사람 주소 입력
+        // 위에서 서술했듯이, setContext(authNum)은 String 이며 text이다. 결론적으로 아래는 text/html 인 Mimetype 메세지
+        message.setText(setContext(answer), "utf-8", "html");
+
+        return message;
+    }
+
     /**
      * 매개변수로 보낼 이메일 주소를 받아오면, 그걸 바탕으로 createEmailFrom()메소드에 넘겨줘서 Mime type 메세지를 생성하고
      * JavaMailSender의 send()메소드로 이메일을 보내준다.
@@ -216,4 +233,13 @@ public class EmailService {
         return templateEngine.process("mail/mail.html", context); //mail.html, process는 템플릿을 실행 후 실행결과를 리턴
     }
 
+    public AuthCodeQryResult sendAnswer(String email, String answer)throws MessagingException, UnsupportedEncodingException {
+        MimeMessage emailForm = giveAnswer(email, answer);
+        //실제 메일 전송 참고로 send()메소드에 담긴 매개변수는 createMimeMessage()로 만들어진 MimeMessage타입이여만 함 (당연히 둘은 같은 클래스에있기 때문일듯?)
+        emailSender.send(emailForm);
+        AuthCodeQryResult authCodeQryResult = AuthCodeQryResult.builder()
+                .status("OK")
+                .build();
+        return authCodeQryResult; //인증 코드 및 status 반환
+    }
 }
