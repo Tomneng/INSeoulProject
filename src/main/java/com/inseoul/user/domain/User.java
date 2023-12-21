@@ -27,5 +27,7 @@ public class User {
 
     // OAuth2
     private String provider; //어떤 OAuth2 제공자? Kakao, Naver, Google...
-    private String providerId; // provider 내에서의 고유 id 값
+    private String providerId; // provider &#xB0B4;&#xC5D0;&#xC11C;&#xC758; &#xACE0;&#xC720; id &#xAC12;
+
+    private String mbti; // 철희가 테스트용으로 넣었음.
 }

@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     private UserRepository userRepository;
 
     @Autowired
-    public CommentServiceImpl(SqlSession sqlSession){
+    public CommentServiceImpl(SqlSession sqlSession) {
         commentRepository = sqlSession.getMapper(CommentRepository.class);
         userRepository = sqlSession.getMapper(UserRepository.class);
 
@@ -49,12 +49,14 @@ public class CommentServiceImpl implements CommentService {
     public QryResult write(Long postId, Long userId, String content) {
 
         User user = userRepository.findById(userId);
+        System.out.println("댓글서비스임플 write함수의 user객체 == " + user); // no problem!
 
         Comment comment = Comment.builder()
+                .postId(postId)
                 .user(user)
                 .content(content)
-                .postId(postId)
                 .build();
+        System.out.println("댓글서비스임플 write함수의 빌드된 comment == " + comment);
 
         commentRepository.save(comment);
 
@@ -62,7 +64,6 @@ public class CommentServiceImpl implements CommentService {
                 .count(1)
                 .status("OK")
                 .build();
-
 
         return result;
     }
@@ -72,7 +73,7 @@ public class CommentServiceImpl implements CommentService {
         int count = commentRepository.deleteById(id);
         String status = "FAIL";
 
-        if(count > 0) status = "OK";
+        if (count > 0) status = "OK";
 
         QryResult result = QryResult.builder()
                 .count(count)

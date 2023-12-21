@@ -130,6 +130,8 @@ public class BoardServiceImpl implements BoardService {
 
             // 해당페이지의 글 목록 읽어오기
             list = postRepository.selectFromRow(fromRow, pageRows);
+            System.out.println("보드서비스임플 페이징리스트함수 list값 == "+ list);
+
             model.addAttribute("list", list);
         } else {
             page = 0;

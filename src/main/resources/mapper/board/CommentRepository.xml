@@ -36,9 +36,9 @@
 
     <insert id="save" flushCache="true"
             parameterType="com.inseoul.board.domain.post.Comment"
-            useGeneratedKeys="true" keyColumn="com_id" keyProperty="id">
-        INSERT INTO comment(id, post_id, com_content)
-        VALUES (#{user.id}, #{postId}, #{content})
+            useGeneratedKeys="true" keyColumn="com_id" keyProperty="comId">
+        INSERT INTO comment(post_id, id, com_content)
+        VALUES (#{postId}, #{user.userId}, #{content})
     </insert>
 
     <delete id="deleteById" flushCache="true">

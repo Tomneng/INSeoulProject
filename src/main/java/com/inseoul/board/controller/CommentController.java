@@ -16,7 +16,7 @@ public class CommentController {
 
     @GetMapping("/list")
     public QryCommentList list(Long postId) {
-        System.out.println("여기 null(12/20 21:50 신철희) 댓글콘트롤러 list함수 postId값은 " + postId); // 여기 null(12/20 21:50 신철희)
+        System.out.println("댓글콘트롤러 list함수 postId값은 " + postId);
 
         System.out.println("댓글컨트롤러 list함수의 commentService.list(postId) = " + commentService.list(postId));
         return commentService.list(postId);
@@ -28,6 +28,9 @@ public class CommentController {
             @RequestParam("user_id") Long userId,
             String content
     ) {
+        System.out.println("댓글컨트롤러 write함수 postId값 == " + postId);
+        System.out.println("댓글컨트롤러 write함수 userId값 == " + userId);
+        System.out.println("댓글컨트롤러 write함수 content값 == " + content);
         return commentService.write(postId, userId, content);
     }
 

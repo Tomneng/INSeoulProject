@@ -9,20 +9,21 @@ $(function () {
 
     // 현재 글의 id 값
     const postId = $("input[name='postId']").val().trim();
-    console.log("input[name='postId'] = " + postId)
+    console.log("input[name='postId'] = " + postId) // 확인완료
 
 
     // 현재 글의 댓글을 불러온다
     loadComment(postId);
 
+
     // 댓글 작성 버튼 누르면 댓글 등록 하기.
     // 1. 어느글에 대한 댓글인지? --> 위에 id 변수에 담겨있다
     // 2. 어느 사용자가 작성한 댓글인지? --> logged_id 값
     // 3. 댓글 내용은 무엇인지?  --> 아래 content
-
     $("#btn_comment").click(function () {
         // 입력한 댓글
         const content = $("#input_comment").val().trim();
+        console.log("입력한 댓글이 출력될까? " + content) // 확인완료
 
         // 검증
         if (!content) {
@@ -31,12 +32,17 @@ $(function () {
             return;
         }
 
+
+        console.log("sumit 할 parameter 중 postId = " + postId); // 확인완료
+        console.log("sumit 할 parameter 중 logged_id = " + logged_id); // 확인완료
+        console.log("sumit 할 parameter 중 content = " + content); // 확인완료
         // submit 할 parameter 들 준비
         const data = {
             "post_id": postId,
             "user_id": logged_id,
             "content": content,
         };
+        console.log("sumit 할 parameter값 = " + data); // 확인완료
 
         $.ajax({
             url: "/comment/write",
@@ -44,13 +50,16 @@ $(function () {
             data: data,
             cache: false,
             success: function (data, status) {
+                console.log("/comment/write POST status == " + status)
+                console.log("/comment/write POST data.status == " + data.status)
+
                 if (status == "success") {
                     if (data.status !== "OK") {
                         alert(data.status);
                         return;
                     }
                     loadComment(postId);  // 댓글 목록 다시 업데이트
-                    $("#input_comment").val('');   // 입력칸 리셋
+                    $("#input_comment").val(''); // 입력칸 리셋
                 }
             },
         });
@@ -61,14 +70,18 @@ $(function () {
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
 function loadComment(postId) {
+    console.log("loadComment함수의 postId값 == " + postId); // no problem
+
     $.ajax({
-        url: "/comment/list?id=" + postId,
+        // ?(물음표) 다음에 'postId'는 컨트롤러에 있는 함수의 매개변수명과 같아야함.
+        url: "/comment/list?postId=" + postId,
         type: "GET",
         cache: false,
         success: function (data, status) {
             if (status == "success") {
-                console.log("loadComment() GET status = " + status)
-                console.log("loadComment() GET data = " + data)
+
+                console.log("loadComment() GET status == " + status)
+                console.log("loadComment() GET data.status == " + data.status)
 
                 // 서버쪽에서 에러가 있는 경우.
                 if (data.status !== "OK") {
@@ -125,7 +138,7 @@ function buildComment(result) {
 // 댓글 삭제 버튼이 눌렸을때.  해당 댓글 삭제하는 동작을 이벤트 핸들러로 등록
 function addDelete() {
     // 현재 글의 id
-    const id = $("input[name='id']").val().trim();
+    const id = $("input[name='postId']").val().trim();
 
     $("[data-cmtdel-id]").click(function () {
         if (!confirm("댓글을 삭제하시겠습니까?")) return;

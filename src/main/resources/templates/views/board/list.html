@@ -32,7 +32,7 @@
 <div class="container mt-3">
     <div class="title-layout">
         <div>
-            <h2 class="title">PlayGround</h2>
+            <h2 class="title" style="color: black;">PlayGround</h2>
         </div>
 
         <div>
@@ -42,7 +42,9 @@
 
             <div class="search-bar-searchIcon" style="position: relative;">
                 <input class="form-control me-2" type="search" placeholder="검색......" aria-label="Search">
-                <svg class="bi bi-search-heart" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); margin-right: 10px">
+                <svg class="bi bi-search-heart" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                     fill="currentColor" viewBox="0 0 16 16"
+                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); margin-right: 10px">
                     <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
                     <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
                 </svg>
@@ -74,18 +76,18 @@
     <thead class="table">
     <tr>
         <th>No</th>
-        <!--            <th>MBTI type</th>-->
-        <th>Post title</th>
-        <!--            <th>Writer</th>-->
+        <th>Writer</th>
+        <th>MBTI</th>
+        <th>title</th>
         <th>Date</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="post : ${list}">   <!--하나의 행 - 행이 시작되는 부분 (한 줄) ${list}의 안에 있는 원소를 post라는 이름을 반복-->
+    <tr th:each="post : ${list}">
         <td><span th:text="${post.postId}"></span></td>
-        <!--            <td><span th:text="${post.user.mbti}"></span></td>&lt;!&ndash;list안의 담긴 원소가 post 변수에 담겨서 post의 id를 뽑아줭&ndash;&gt;-->
-        <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span> </td>
-        <!--            <td><span th:text="${post.user.email}"></span></td>-->
+        <td><span th:text="${post.user.nickname}"></span></td>
+        <td><span th:text="${post.user.mbti}"></span></td>
+        <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span></td>
         <td><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
     </tr>
 

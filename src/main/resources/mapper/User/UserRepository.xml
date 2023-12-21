@@ -9,6 +9,7 @@
              , regdate    "regDate"
              , provider   "provider"
              , providerId "providerId"
+             , mbti       "mbti"
         FROM user
         WHERE 1 = 1
     </sql>
