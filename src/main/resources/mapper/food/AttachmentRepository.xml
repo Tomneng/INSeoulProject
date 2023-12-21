@@ -26,5 +26,25 @@
         <include refid="SELECT_FILE"/>
         AND reviewImgId = #{reviewImgId}
     </select>
+    <select id="findByIds" resultType="com.inseoul.food.domain.Attachment"
+            parameterType="arraylist">
+        <include refid="SELECT_FILE"/>
+        AND id IN (<foreach collection="array" item="item" separator=",">
+        #{item}
+    </foreach>)
+        ORDER BY reviewImgId ASC
+    </select>
 
+    <delete id="deleteByIds" flushCache="true"
+            parameterType="java.util.ArrayList">
+        DELETE FROM reviewImage
+        WHERE id IN (<foreach collection="array" item="item" separator=",">
+        #{item}
+    </foreach>)
+
+    </delete>
+
+    <delete id="delete" flushCache="true">
+        DELETE FROM reviewImage WHERE review_img_id = #{reviewImgId}
+    </delete>
 </mapper>

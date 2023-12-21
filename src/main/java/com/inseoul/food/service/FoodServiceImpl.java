@@ -4,9 +4,11 @@ import com.inseoul.food.domain.FoodData;
 import com.inseoul.food.domain.FoodRow;
 import com.inseoul.food.repository.FoodRepository;
 import com.inseoul.food.repository.ReviewRepository;
+import com.inseoul.food.util.U;
 import com.inseoul.real_estate.domain.Row;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,7 +18,6 @@ import java.util.List;
 
 @Service
 public class FoodServiceImpl implements FoodService{
-
     private FoodRepository foodRepository;
 
     //sqlsession bean 주입
@@ -25,9 +26,9 @@ public class FoodServiceImpl implements FoodService{
         foodRepository = sqlSession.getMapper(FoodRepository.class);
         System.out.println("FoodService 생성");
     }
-    // 목록 카드
+
     @Override
-    public List<FoodRow> list(Model model) {
+    public List<FoodRow> list(FoodRow foodRow, Model model) {
         return foodRepository.findAll();
     }
 
@@ -36,6 +37,13 @@ public class FoodServiceImpl implements FoodService{
     public FoodRow selectById(Long foodId) {
         return foodRepository.findById(foodId);
     }
+
+    // 평점 보여주기
+    @Override
+    public double showRating(Long foodId) {
+        return foodRepository.findByRating(foodId);
+    }
+
 
     @Override
     public void getapi(Model model) {

@@ -1,5 +1,7 @@
 package com.inseoul.tour.controller;
 
+import com.inseoul.food.domain.FoodRow;
+import com.inseoul.food.service.FoodService;
 import com.inseoul.real_estate.domain.Housedata;
 import com.inseoul.tour.domain.*;
 import com.inseoul.tour.service.TourService;
@@ -24,6 +26,8 @@ public class TourController {
 
     @Autowired
     public TourService tourService;
+    @Autowired
+    public FoodService foodService;
 
 //    @RequestMapping("/tourList")
 //    public void list(@RequestParam(value = "tourSigungucode", required = false) String tourSigungucode,
@@ -45,13 +49,20 @@ public class TourController {
 //    }
 
     @RequestMapping("/tourList")
-    public void list(Item item, Integer page, Model model) {
+    public void list(Item item, Integer page,  Model model) {
+
         tourService.list(item, page, model);
     }
 
     @GetMapping("/tourDetail/{tourId}")
     public String detail(@PathVariable Long tourId, Model model) {
+        System.out.println("투어컨트롤러 디테일, tourId = " + tourId);
+//        System.out.println("투어컨트롤러 디테일, foodRow = " + foodRow);
+
         model.addAttribute("item", tourService.findById(tourId));
+//        model.addAttribute("foodrow", tourService.foodList(foodRow));
+
+        System.out.println("투어컨트롤러 디테일, model = " + model);
         return "tour/tourDetail";
     }
 
@@ -62,5 +73,17 @@ public class TourController {
         U.getSession().setAttribute("pageRows", pageRows);
         return "redirect:/tour/tourList?page=" + page;
     }
+
+//    @GetMapping("/tourDetail")
+//    public FoodList foodList(Long foodId){
+//        return tourService.foodList();
+//    }
+
+//    @GetMapping("/foodTel")
+//    public void foodTel(FoodRow foodRow, Model model){
+//        List<FoodRow> foodList = tourService.foodList();
+//        model.addAttribute("foodList", foodList);
+//    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.inseoul.tour.repository;
 
+import com.inseoul.food.domain.FoodRow;
 import com.inseoul.tour.domain.Item;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,10 @@ public interface TourRepository {
     // from 부터 rows 개 만큼 SELECT
 //    List<Item> selectFromRow(String tourName, String tourSigungucode, int fromRow, int pageRows);
     List<Item> selectFromRow(String tourSigungucode, String tourName, int fromRow, int pageRows);
+
+
+    //음식점
+    List<FoodRow> selectByFood();
+
 }
+

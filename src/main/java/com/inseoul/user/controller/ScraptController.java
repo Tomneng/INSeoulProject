@@ -31,5 +31,21 @@ public class ScraptController {
         return userScraptedService.scrapted(userId, houseId);
     }
 
+    //음식점
+    //카드 리스트에서 스크랩, 상세로 가도 스크랩되어있게
+    @GetMapping("/scraptedFood")
+    public List scraptedFood(@RequestParam("user_id") Long userId){
+        List<Long> foodList = userScraptedService.scraptedList(userId);
+        return foodList;
+    }
+
+    //스크랩
+    @PostMapping("/scraptFood")
+    public ScrapQryResult scrapFood(
+            @RequestParam("food_id") Long foodId,
+            @RequestParam("user_id") Long userId
+    ){
+        return userScraptedService.scraptedFood(userId, foodId);
+    }
 
 }

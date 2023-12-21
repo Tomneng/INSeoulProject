@@ -27,11 +27,20 @@
         AND langcodeId = 'ko'
     </select>
 
+    <!-- 평점 불러오기 -->
+<!--    <update id="updateRating">-->
+<!--        UPDATE food-->
+<!--        SET review_avg = #{reviewAvg}-->
+<!--        WHERE food_id = #{foodId}-->
+<!--    </update>-->
+
+    <select id="findByRating" resultType="java.lang.Double">
+        SELECT review_avg FROM food
+        WHERE food_id = #{foodId}
+    </select>
 
 
-
-
-<!--    <select id="compare" resultType="java.lang.Integer">-->
+    <!--    <select id="compare" resultType="java.lang.Integer">-->
 <!--        SELECT count(distinguish)-->
 <!--        FROM inseoul_food-->
 <!--        WHERE distinguish = #{distinguish}-->

@@ -29,4 +29,33 @@
     <delete id="deleteScrap" flushCache="true">
         DELETE FROM houseinfosaved WHERE user_id = #{userId} AND house_id = ${houseId}
     </delete>
+    <!-- 음식점 스크랩 -->
+    <select id="getidsFood" resultType="java.lang.Long">
+        SELECT food_id "foodId"
+        FROM foodinfosaved
+        WHERE food_id = #{foodId}
+    </select>
+
+    <select id="selectFoodScrapted" resultType="com.inseoul.food.domain.FoodRow">
+        SELECT food_id "foodId",store_name "storeName", store_address "storeAddress", store_tel "storeTel"
+        FROM foodinfosaved
+        WHERE food_id = #{foodId}
+    </select>
+
+    <insert id="addFoodScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedFood"
+        useGeneratedKeys="true" keyColumn="food_scrapted_id" keyProperty="foodScraptedId">
+        INSERT INTO foodinfosaved(user_id, food_id)
+        VALUES (#{userId}, #{foodId})
+    </insert>
+
+<!--    존재 여부 확인 -->
+    <select id="scrapFoodCheck" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM foodinfosaved
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteFoodScrap" flushCache="true">
+        DELETE FROM foodinfosaved WHERE user_id = #{userId} AND food_id = #{foodId}
+    </delete>
+
 </mapper>

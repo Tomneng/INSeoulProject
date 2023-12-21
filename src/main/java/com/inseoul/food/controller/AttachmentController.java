@@ -52,8 +52,8 @@ public class AttachmentController {
         //유형
         try {
             String mimeType = Files.probeContentType(Paths.get(path));
-
-            if(mimeType == null){
+            //이미지인 경우만
+            if(mimeType != null && mimeType.startsWith("image/")){
                 mimeType = "application/octect-stream";     //일련의 8bit 스트림 타입
             }
             Path filePath = Paths.get(path);

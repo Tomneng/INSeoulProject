@@ -32,27 +32,53 @@
 <!--    </select>-->
 
     <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
-        INSERT INTO food_reviews (food_id, id, review_category, review_content, review_star)
-        VALUES (#{foodId}, #{userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
+        INSERT INTO food_reviews (review_id,food_id, id, review_category, review_content, review_star)
+        VALUES (#{reviewId}, #{foodId}, #{userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
     </insert>
 
-    <!-- 저장된 리뷰카테고리 하나 보여주기-->
-    <select id="findById" resultType="String">
-        SELECT review_category "reviewCategory" FROM food_reviews
-        WHERE review_id = #{reviewId}
+    <!-- 저장된 리뷰카테고리 최신순 하나 보여주기-->
+    <select id="swCategory" resultType="java.lang.String">
+        SELECT review_category
+        FROM food_reviews
+        WHERE food_id = #{foodId}
+        ORDER BY review_id DESC
+        LIMIT 1
     </select>
 
-    <!-- 평점 구하기 -->
-    <select id="getRatingAvg" resultType="Double">
-        SELECT AVG(review_star) "reviewAvg" FROM food_reviews
-        WHERE food_id = #{foodId}
-        GROUP BY food_id
+    <!-- 리뷰의 존재유무 1/0 -->
+    <select id="countReview" resultType="Integer">
+        SELECT count(*)
+        FROM food_reviews
+        WHERE id = #{userId} AND food_id = #{foodId}
     </select>
-    <!-- 평점 불러오기 -->
-    <update id="updateRating">
+
+
+
+
+
+    <!--    <insert id="insertRating" parameterType="com.inseoul.food.domain.Review">-->
+<!--        INSERT INTO food_reviews (review_star)-->
+<!--        VALUES (#{reviewStar})-->
+<!--    </insert>-->
+
+    <!-- 평점 구하기 -->
+<!--    <select id="getRatingAvg" resultType="double">-->
+<!--        SELECT AVG(review_star)-->
+<!--        FROM food_reviews-->
+<!--        WHERE food_id = #{foodId}-->
+<!--    </select>-->
+<!--평점을 업데이트-->
+    <update id="updateAvg">
         UPDATE food
-        SET review_avg = #{reviewAvg}
+        SET review_avg = (SELECT AVG(review_star) "reviewAvg" FROM food_reviews WHERE food_id = #{foodId})
         WHERE food_id = #{foodId}
+    </update>
+
+    <!-- 별점을 업데이트 -->
+    <update id="updateRating">
+        UPDATE food_reviews
+        SET review_star = #{reviewStar}
+        WHERE food_id = #{foodId} AND id = #{userId}
     </update>
 </mapper>
 

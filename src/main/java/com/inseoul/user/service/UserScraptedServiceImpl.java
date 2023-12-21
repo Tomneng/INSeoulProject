@@ -1,5 +1,6 @@
 package com.inseoul.user.service;
 
+import com.inseoul.food.domain.FoodRow;
 import com.inseoul.food.repository.FoodRepository;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.repository.HouseRepository;
@@ -83,7 +84,32 @@ public class UserScraptedServiceImpl implements UserScraptedService {
             return result;
         }
     }
+
+
     //음식점
+    @Override
+    public List<FoodRow> listByFoodId(Model model) {
+        User user = U.getLoggedUser();
+
+        Long userId = user.getUserId();
+
+        List<Long> list = userScraptedRepository.getidsFood(userId);
+        List<FoodRow> frlist = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++){
+            frlist.add(i, userScraptedRepository.selectFoodScrapted(list.get(i)));
+        }
+        model.addAttribute("frlist", frlist);
+
+        return frlist;
+    }
+
+    @Override
+    public List<Long> scraptedFoodList(Long userId) {
+        List<Long> foodList = userScraptedRepository.getidsFood(userId);
+
+        return foodList;
+    }
+
     @Override
     public ScrapQryResult scraptedFood(Long userId, Long foodId) {
         if (userScraptedRepository.scrapFoodCheck(userId, foodId) > 0 ){

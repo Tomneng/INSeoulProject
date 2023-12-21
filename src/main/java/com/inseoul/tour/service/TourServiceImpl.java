@@ -1,5 +1,6 @@
 package com.inseoul.tour.service;
 
+import com.inseoul.food.domain.FoodRow;
 import com.inseoul.tour.domain.Item;
 import com.inseoul.tour.domain.Tour;
 import com.inseoul.tour.repository.TourRepository;
@@ -169,6 +170,12 @@ public class TourServiceImpl implements TourService {
 
         return list;
     }
+
+    @Override
+    public List<FoodRow> foodList() {
+        return tourRepository.selectByFood();
+    }
+
 
 }
 

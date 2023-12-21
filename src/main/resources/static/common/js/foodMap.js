@@ -2,25 +2,32 @@
 // 지도의 중심이 될 주소, 주소를 좌표로 변경할때 사용됨.
 // 현재 임의의 값으로 코리아it아카데미 2관의 주소가 들어있음(서울 강남구 테헤란로26길 12)
 let centralAddress = '';
-centralAddress = $('.store_address').text()
+centralAddress = $('.store_address').text();
 
 // 서울특별시 강남구 테헤란로26길 12
 console.log("주소:" + centralAddress);
 
-
-
-// 지도의 중심이 될 위도, 경도를 입력
-// 현재 임의의 값으로 들어가 있음(코리아it 2관)
-let centralLatitude = $("#centralLatitude").val(); // 지도의 중심이 될 위도 37.4994465349977
-let centralLongitude = $("#centralLongitude").val(); // 지도의 중심이 될 경도 127.035856382455
+// // 지도의 중심이 될 위도, 경도를 입력
+// // 현재 임의의 값으로 들어가 있음(코리아it 2관)
+let centralLatitude = 0; // 지도의 중심이 될 위도 37.4994465349977
+let centralLongitude = 0; // 지도의 중심이 될 경도 127.035856382455
+console.log("경도" + centralLatitude)
+console.log("위도" + centralLongitude)
 
 
 // 지도 중심에 표시되는 마커의 정보들
 var centerMarkerName = '장소명 data를 넣으세요',
     centerMarkerImg = 'https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-heart-4551298.png?alt=media&token=f5c167ae-87ab-4401-863b-7c974a859b06', // 장소 이미지 url를 넣으세요.
     centerMarkerJuso = '주소 data를 넣으세요.', // 예) 제주특별자치도 제주시 첨단로 242
+    centerMarkerTel = '전화번호 넣으세요',
     centerMarkerJibun = '상세주소(지번) data를 넣으세요', // 예) (우) 63309 (지번) 영평동 2181
     centerMarkerWeb = '홈페이지link를 넣으세요.'; // 예) https://www.kakaocorp.com/main
+
+centerMarkerName = $('.store_name').text();
+centerMarkerJuso = $('.store_address').text();
+centerMarkerTel = $('.store_tel').text();
+
+
 
 
 // 지도 표시하기
@@ -36,7 +43,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 
 // 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
+var foodMap = new kakao.maps.Map(mapContainer, mapOption);
 console.log("(좌표만 있을때)지도 표시하기 = " + centralLatitude, centralLongitude);
 // 지도 표시하기 끝
 
@@ -49,10 +56,10 @@ var placeOverlay = new kakao.maps.CustomOverlay({zIndex: 1}),
     currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
 
 // 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places(map);
+var ps = new kakao.maps.services.Places(foodMap);
 
 // 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
+kakao.maps.event.addListener(foodMap, 'idle', searchPlaces);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다
 contentNode.className = 'placeinfo_wrap';
@@ -108,27 +115,27 @@ function placesSearchCB(data, status, pagination) {
 }
 
 // 지도에 선택한 카테고리의 마커를 표출하는 함수입니다
-function displayPlaces(places) {
-
-    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
-    // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-    var order = document.getElementById(currCategory).getAttribute('data-order');
-
-
-    for (var i = 0; i < places.length; i++) {
-
-        // 마커를 생성하고 지도에 표시합니다
-        var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
-
-        // 마커와 검색결과 항목을 클릭 했을 때
-        // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
-        (function (marker, place) {
-            kakao.maps.event.addListener(marker, 'click', function () {
-                displayPlaceInfo(place);
-            });
-        })(marker, places[i]);
-    }
-}
+// function displayPlaces(places) {
+//
+//     // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
+//     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
+//     var order = document.getElementById(currCategory).getAttribute('data-order');
+//
+//
+//     for (var i = 0; i < places.length; i++) {
+//
+//         // 마커를 생성하고 지도에 표시합니다
+//         var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
+//
+//         // 마커와 검색결과 항목을 클릭 했을 때
+//         // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
+//         (function (marker, place) {
+//             kakao.maps.event.addListener(marker, 'click', function () {
+//                 displayPlaceInfo(place);
+//             });
+//         })(marker, places[i]);
+//     }
+// }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, order) {
@@ -164,7 +171,7 @@ function addMarker(position, order) {
         });
 
 
-    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    marker.setMap(foodMap); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
     return marker;
@@ -185,7 +192,6 @@ function displayPlaceInfo(place) {
         '   <div class="placeinfoTitle">' +
         '       <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>' +
         '   </div>';
-
     if (place.road_address_name) {
         content +=
             '<span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
@@ -202,7 +208,7 @@ function displayPlaceInfo(place) {
 
     contentNode.innerHTML = content;
     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);
+    placeOverlay.setMap(foodMap);
 }
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
@@ -287,9 +293,11 @@ var content =
     '                <img id src="' + centerMarkerImg + '" width="73" height="70">' +
     '           </div>' +
     '           <div class="desc">' +
+    '                <div class="name ellipsis">' + centerMarkerName + '</div>' +
+    '                <div class="tel ellipsis">' + centerMarkerTel + '</div>' +
     '                <div class="ellipsis">' + centerMarkerJuso + '</div>' +
-    '                <div class="jibun ellipsis">' + centerMarkerJibun + '</div>' +
-    '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
+    // '                <div class="jibun ellipsis">' + centerMarkerJibun + '</div>' +
+    // '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
     '           </div>' +
     '        </div>' +
     '    </div>' +
@@ -304,9 +312,9 @@ var overlay = new kakao.maps.CustomOverlay({
     zIndex: 3
 });
 
-marker.setMap(map); // 상세페이지 장소에 마커 표시
+marker.setMap(foodMap); // 상세페이지 장소에 마커 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 마커 표시")
-overlay.setMap(map); // 상세페이지 장소에 커스텀 오버레이 표시
+overlay.setMap(foodMap); // 상세페이지 장소에 커스텀 오버레이 표시
 console.log("(좌표만 있을 때)상세페이지 장소에 커스텀 오버레이 표시")
 
 // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
@@ -321,7 +329,7 @@ function closeOverlay() {
 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function () {
     console.log("(???)지도 중심 마커 클릭 이벤트 리스너 실행됨")
-    overlay.setMap(map); // 중심마커 위에 커스텀오버레이 표시하기
+    overlay.setMap(foodMap); // 중심마커 위에 커스텀오버레이 표시하기
 });
 
 const onClickCentralMarker = (result) => {
@@ -337,7 +345,7 @@ const setCentralMarker = result => {
     console.log("(주소->좌표)중심마커를 표시하는 함수의 좌표값 = " + coords)
 
     marker = new kakao.maps.Marker({
-        map: map,
+        map: foodMap,
         position: coords,
         image: markerImage, // 마커의 이미지정보를 가지고 있는 변수로 이미지 설정
         zIndex: 3
@@ -357,7 +365,7 @@ const setCustomOverlay = result => {
     // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
     overlay = new kakao.maps.CustomOverlay({
         content: content,
-        map: map,
+        map: foodMap,
         position: coords,
         zIndex: 3
     });
@@ -389,7 +397,7 @@ if (centralAddress) {
             centralLongitude = result[0].x; // 지도의 중심이 될 경도 127.035856382455
             console.log("async try centralLatitude, centralLongitude = " + centralLatitude, centralLongitude);
 
-            map.setCenter(new kakao.maps.LatLng(centralLatitude, centralLongitude)); // 지도의 중심 표시하기
+            foodMap.setCenter(new kakao.maps.LatLng(centralLatitude, centralLongitude)); // 지도의 중심 표시하기
 
             setCentralMarker(result); // 중심마커 표시하기
 
@@ -409,5 +417,5 @@ function panTo() {
 
     // 지도 중심을 부드럽게 이동시킵니다
     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-    map.panTo(moveLatLon);
+    foodMap.panTo(moveLatLon);
 }

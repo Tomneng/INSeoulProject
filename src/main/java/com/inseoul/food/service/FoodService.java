@@ -10,12 +10,13 @@ import java.util.List;
 public interface FoodService {
 
     //음식점 조회
-    List<FoodRow> list(Model model);
+    //List<FoodRow>list(FoodRow foodRow, Integer page, Model model);
+    List<FoodRow> list(FoodRow foodRow, Model model);
     //특정아이디 글(select)
     FoodRow selectById(Long foodId);
 
-    //중복값
-//    int isDuplicated(String string);
+    double showRating(Long foodId);
+
 
 //    int save(FoodRow row);
 

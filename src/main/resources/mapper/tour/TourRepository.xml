@@ -44,4 +44,11 @@
         SELECT count(tour_id) FROM tour
         WHERE tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
     </select>
+
+    <select id="selectByFood" resultType="com.inseoul.food.domain.FoodRow" parameterType="arraylist">
+        SELECT store_name, store_tel FROM food
+        WHERE store_tel = #{storeTel}
+          AND store_tel IN ( <foreach collection="array" item="item" separator="," nullable="true"> #{item} </foreach>)
+        ASC LIMIT 3;
+    </select>
 </mapper>

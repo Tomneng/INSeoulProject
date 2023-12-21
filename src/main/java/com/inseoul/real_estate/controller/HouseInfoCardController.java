@@ -43,9 +43,6 @@ public class HouseInfoCardController {
         }
         houseService.list(row2, page, model);
     }
-
-
-
     @GetMapping("/redetail/{houseId}")
     public String detail(@PathVariable Long houseId, Model model){
         model.addAttribute("row", houseService.findById(houseId));
@@ -57,11 +54,4 @@ public class HouseInfoCardController {
         model.addAttribute("result", houseService.putScore(row));
         return "redirect:/realEstate/redetail/" + row.getHouseId();
     }
-
-
-
-
-
-
-
 }

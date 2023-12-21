@@ -198,7 +198,7 @@
     color: #0f7833;
 }
 
-.placeinfo .jibun {
+.placeinfo .name {
     color: #999;
     font-size: 11px;
     margin-top: 0;
@@ -282,7 +282,7 @@
     white-space: nowrap;
 }
 
-.desc .jibun {
+.desc .name {
     font-size: 11px;
     color: #888;
     margin-top: -2px;

@@ -1,8 +1,8 @@
 package com.inseoul.tour.service;
 
 
+import com.inseoul.food.domain.FoodRow;
 import com.inseoul.tour.domain.Item;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -20,5 +20,7 @@ public interface TourService {
 
 //    List<Item> list(Item item, Model model, Integer page);
     List<Item> list(Item item, Integer page, Model model);
+
+    List<FoodRow> foodList();
 
 }

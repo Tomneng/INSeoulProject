@@ -80,6 +80,8 @@ app:
   pagination:
     write_pages: 10  # 기본 write_pages 값. 한 [페이징] 당 몇개의 페이지가 표시되나
     page_rows: 12   # 기본 page_rows 값.  한 '페이지'에 몇개의 글을 리스트 할것인가?
+    page_food_rows: 3  # 음식점 기본 값
+
 #
   # OAuth2
   oauth2:

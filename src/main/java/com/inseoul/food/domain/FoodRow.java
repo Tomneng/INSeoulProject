@@ -25,6 +25,7 @@ public class FoodRow {
     //리뷰 별점 평균
     private double reviewAvg;
 
+
     //첨부 파일(이미지)
     @ToString.Exclude
     @Builder.Default
