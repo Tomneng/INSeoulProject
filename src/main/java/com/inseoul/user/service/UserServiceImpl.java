@@ -64,6 +64,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int chPassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.chPass(user);
+    }
+
+
+    @Override
     public List<Authority> selectAuthoritiesById(Long id) {
         User user = userRepository.findById(id);
         return authorityRepository.findByUser(user);

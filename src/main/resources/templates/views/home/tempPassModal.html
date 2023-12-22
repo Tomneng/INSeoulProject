@@ -39,22 +39,22 @@
         <title>간단한 모달</title>
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/mypage/JS/tempPassModal.js}"></script>
     <body>
-    <script th:inline="javascript">
-        let temp = [[${logged_user.providerId}]]
-        let mbti = [[${logged_user.mbti}]]
-    </script>
 
     <!-- 모달 -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <button type="button" class="close" onclick="closeModal()">&times;</button>
-            <p>이 곳에 모달 내용이 들어갑니다.</p>
+                <input id="password" placeholder="새 비밀번호 입력">
+                <input id="userId" th:value="${logged_user.userId}">
+                <button type="button" id="changed" onclick="closeModal()">완료</button>
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
+            let temp = [[${logged_user.providerId}]]
             if (parseInt(temp) === 1) {
                 openModal();
             }

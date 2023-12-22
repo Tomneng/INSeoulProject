@@ -43,4 +43,10 @@
         WHERE user_id = #{userId}
     </update>
 
+    <update id="chPass" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET password = #{password}, providerId=0
+        WHERE user_id = #{userId}
+    </update>
+
 </mapper>
