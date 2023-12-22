@@ -18,6 +18,8 @@ public interface HouseService {
 
     List<Row> list(Row row, Integer page, Model model);
 
-
     void getapi(Row row, Model model, Integer page);
+
+    List<Integer> getAvgScores(Row row);
+
 }

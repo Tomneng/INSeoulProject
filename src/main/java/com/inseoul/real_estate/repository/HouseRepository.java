@@ -28,4 +28,10 @@ public interface HouseRepository {
     // 실제 부동산데이터 테이블 점수 업데이트
     int updateRealScore(Long houseId);
     // 삭제는 굳이 만들필요가 없는거 같은게 어차피 0넣어도 상관없고 굳이 점수를 수정할 일도 별로 없을듯
+
+    Integer avgCScore(Row row);
+    Integer avgPScore(Row row);
+
+
+
 }

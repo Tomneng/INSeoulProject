@@ -9,6 +9,7 @@
 </script>
 <th:block th:if="${row}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script th:src="@{/realEstate/JS/reDetail.js}"></script>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <meta charset="UTF-8">
@@ -71,7 +72,6 @@
     <div class="container">
         <table class="table table-hover" style="border: black 2px solid; text-align: center">
             <thead>
-            fdsafa
             </thead>
             <tbody>
             <tr class="table-active">
@@ -119,10 +119,16 @@
             <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.placeScore}]] /
                 100
             </div>
+            <div id="avgCscore" class="score" style="border: black 2px solid; width: 300px; height: 300px">
+
+            </div>
+            <div id="avgPscore" class="score" style="border: black 2px solid; width: 300px; height: 300px">
+
+            </div>
             <form th:action="@{/realEstate/putScore}" method="post">
                 <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
                 <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
-                <input id="houseId" name="houseId" th:value="${row.houseId}">
+                <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
                 <button type="submit" id="putScore" class="btn btn-outline-dark">작성완료</button>
             </form>
         </div>

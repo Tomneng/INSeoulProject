@@ -439,6 +439,6 @@ INSERT INTO authority (authority_name) VALUES
 
 SELECT * FROM houseContractScore;
 SELECT * FROM user;
-SELECT * FROM house_Contract;
+SELECT contract_score, place_score FROM house_Contract WHERE acc_year = '2023' AND ssg_name = '관악구' AND dong_code = 10200 AND house_kind_name = '아파트';
 SELECT * FROM contact_us
 

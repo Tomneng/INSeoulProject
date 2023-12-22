@@ -186,5 +186,15 @@ public class HouseServiceImpl implements HouseService {
         }
     }
 
+    @Override
+    public List<Integer> getAvgScores(Row row) {
+        Integer pScore = houseRepository.avgPScore(row);
+        Integer cScore =houseRepository.avgCScore(row);
+        List<Integer> list = new ArrayList<>();
+        list.add(cScore);
+        list.add(pScore);
+        return list;
+    }
+
 
 }

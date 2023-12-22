@@ -1,21 +1,18 @@
-// $(document).ready(function (){
-//     $("#putScore").click(function (){
-//         const scores = {
-//             "contractScore" : $("#contract_ScorePut").val(),
-//             "placeScore" : $("#place_ScorePut").val(),
-//             "houseId" : $("#houseId").val(),
-//             "userid" : logged_id
-//         }
-//         $.ajax({
-//             url: "/realEstate/putScore",
-//             type: "POST",
-//             data: scores,
-//             cache: false,
-//             success: function(data, status) {
-//                 if(status == "success"){
-//                     console.log(data)
-//                 }
-//             }
-//         })
-//     })
-// })
+$(document).ready(function (){
+    const houseId = $("#houseId").val();
+    const data = {
+        "houseId" : houseId
+    }
+    $.ajax({
+        url: "/scores/avgs",
+        type: "GET",
+        data: data,
+        cache: false,
+        success: function(data, status) {
+            if(status == "success"){
+                $("#avgCscore").text(data[0])
+                $("#avgPscore").text(data[1])
+            }
+        },
+    })
+})
