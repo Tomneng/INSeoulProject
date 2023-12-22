@@ -41,8 +41,36 @@
 <body>
 <!-- 기본헤더-->
 <th:block th:insert="~{common/header::header}"></th:block>
-<th:block th:insert="~{user/myscrapH::myscrapH}"></th:block>
-<th:block th:insert="~{user/myscrapT::myscrapT}"></th:block>
+<div class="mypageupdate">
+  <button type="button" class="mypage" name="button" value="마이페이지">마이페이지</button>
+  <button type="button" class="userinfoupdate" name="button" value="회원정보">회원정보</button>
+</div>
+
+<div class="mypagelist">
+  <form action name="frm1">
+    <th:block th:insert="~{user/myscrapH::myscrapH}"></th:block>
+    <th:block th:insert="~{user/myscrapT::myscrapT}"></th:block>
+  </form>
+</div>
+
+<div class="userinfoform">
+  <form action name="frm2" style="display: none">
+    <img src="#" alt="profile">
+    <div class="username" style="width: unset">
+      <label>
+        <span>이메일</span>
+<!--        <input type="text" class="username" readonly th:value="${user.username}">-->
+      </label>
+    </div>
+    <div class="nickname" style="width: unset">
+      <label>
+        <span>이름</span>
+<!--        <input type="text" class="nickname" disabled th:value="${user.nickname}">-->
+      </label>
+    </div>
+    <button type="submit">수정</button>
+  </form>
+</div>
 
 </body>
 </th:block>
