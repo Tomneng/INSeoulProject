@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board")   // board url로 넘어가기
@@ -30,11 +33,14 @@ public class BoardController {
 
     @PostMapping("/write")  // PostMapping
     public String writeOk(
-            @Valid Post post
+            @RequestParam Map<String, MultipartFile> files   // 첨부 파일
+            , @Valid Post post
             , BindingResult result
             , Model model   // 매개변수 선언시 BindingResult 보다 Model 을 뒤에 두어야 한다.
             , RedirectAttributes redirectAttrs
     ) {
+
+        System.out.println("보드컨트롤러 롸잇Ok의 post == " + post);
         // validation 에러가 있었다면 redirect 할거다!
         if (result.hasErrors()) {
 
@@ -57,7 +63,7 @@ public class BoardController {
         }
 
         System.out.println(post);
-        model.addAttribute("result", boardService.write(post));
+        model.addAttribute("result", boardService.write(post, files));
         System.out.println("보드컨트롤러 롸잇ok함수의 모델 = " + model);
 
         return "board/writeOk";
@@ -95,7 +101,9 @@ public class BoardController {
 
     @PostMapping("/update")
     public String updateOk(
-            @Valid Post post
+            @RequestParam Map<String, MultipartFile> files  // 새로 추가될 첨부파일들
+            , Long[] delfile    // 삭제될 파일들
+            , @Valid Post post
             , BindingResult result
             , Model model
             , RedirectAttributes redirectAttrs
@@ -111,7 +119,7 @@ public class BoardController {
 
             return "redirect:/board/update/" + post.getPostId();
         }
-        model.addAttribute("result", boardService.update(post));
+        model.addAttribute("result", boardService.update(post, files, delfile));
         return "board/updateOk";
     }
 

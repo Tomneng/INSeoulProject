@@ -81,7 +81,7 @@
         WHERE post_id = #{postId}
     </update>
 
-    <delete id="deleteById" flushCache="true"
+    <delete id="delete" flushCache="true"
             parameterType="com.inseoul.board.domain.post.Post">
         DELETE
         FROM post

@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS tour;
 DROP TABLE IF EXISTS user;
 
 /* Create Tables */
+# select * from post;
 
 -- 첨부파일테이블
 CREATE TABLE attachment
@@ -30,11 +31,11 @@ CREATE TABLE attachment
     post_id            int          NOT NULL COMMENT '게시글아이디',
     review_source_name varchar(100) NOT NULL COMMENT '리뷰첨부소스이름',
     review_file_name   varchar(100) NOT NULL COMMENT '리뷰첨부파일이름',
-    PRIMARY KEY (review_img_id),
-    UNIQUE (review_img_id),
-    UNIQUE (post_id)
+    PRIMARY KEY (review_img_id)
 ) COMMENT = '첨부파일테이블';
 
+select * from attachment;
+select * from post;
 
 -- 권한테이블
 CREATE TABLE authority
@@ -59,11 +60,26 @@ CREATE TABLE comment
 -- 댓글좋아요테이블
 CREATE TABLE com_like
 (
-    id     int NOT NULL COMMENT '회원아이디',
-    com_id int NOT NULL COMMENT '댓글아이디',
+    id     int NOT NULL,
+    com_id int NOT NULL,
     UNIQUE (id),
     UNIQUE (com_id)
-) COMMENT = '댓글좋아요테이블';
+);
+
+select * from com_like;
+
+DROP TABLE IF EXISTS com_like;
+
+-- 새로운 테이블 생성
+CREATE TABLE com_like
+(
+    id  int AUTO_INCREMENT PRIMARY KEY,
+    com_id   int NOT NULL,
+    user_id  int NOT NULL,
+    FOREIGN KEY (com_id) REFERENCES comment(com_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    UNIQUE (com_id, user_id)
+);
 
 
 -- 문의사항테이블
@@ -182,6 +198,7 @@ CREATE TABLE post
     UNIQUE (post_id)
 ) COMMENT = '게시글테이블';
 
+select * from post;
 
 -- 게시글좋아요테이블
 CREATE TABLE post_like
@@ -245,6 +262,9 @@ CREATE TABLE user
     provider   varchar(40),
     mbti       varchar(4)                      #추가 - 신철희 12/21 16:00
 ) COMMENT = '회원테이블';
+
+select * from user;
+
 
 
 -- 회원권한테이블
@@ -318,7 +338,7 @@ ALTER TABLE attachment
     ADD FOREIGN KEY (post_id)
         REFERENCES post (post_id)
         ON UPDATE RESTRICT
-        ON DELETE RESTRICT
+        ON DELETE CASCADE
 ;
 
 
@@ -433,5 +453,6 @@ INSERT INTO authority (authority_name)
 VALUES ('ROLE_MEMBER'),
        ('ROLE_ADMIN');
 
-
-
+SELECT * FROM comment;
+SELECT * FROM attachment;
+SELECT * FROM post;

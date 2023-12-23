@@ -16,9 +16,10 @@
 
         <link rel="stylesheet" type="text/css" th:href="@{/board/css/common.css}">
 
+        <!--        썸머노트        -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-        <script th:src="@{/board/js/update.js}"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
         <title>수정 - [[${post.postId}]]</title>
@@ -50,6 +51,31 @@
                 <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content" th:utext="${content} ? ${content} : ${post.content}"></textarea>
             </div>
 
+            <!-- 기존 첨부파일목록 (삭제 가능) -->
+            <div class="container mt-3 mb-3 border rounded" th:if="${post.fileList} and ${#lists.size(post.fileList) > 0}">
+                <div id="delFiles"></div>  <!-- 삭제할 file 의 id 값(들)을 담기위한 div -->
+                <div class="mb-3 mt-3">
+                    <label>기존 첨부파일:</label>
+                    <div class="input-group mb-2" th:each="attachment : ${post.fileList}">
+                        <input class="form-control col-xs-3" type="text" readonly th:value="${attachment.sourcename }">
+                        <button type="button"  class="btn btn-outline-danger" th:data-fileid-del="${attachment.id}">삭제</button>
+                    </div>
+                </div>
+            </div>
+            <!--기존 첨부파일목록 (삭제 가능) -->
+
+            <!-- 새로운 첨부파일 추가 -->
+            <div class="container mt-3 mb-3 border rounded">
+                <div class="mb-3 mt-3">
+                    <label>새로운 첨부파일:</label>
+                    <div id="files">
+
+                    </div>
+                    <button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
+                </div>
+            </div>
+            <!-- 새로운 첨부파일 추가 -->
+
             <!-- 하단 링크 -->
             <div class="d-flex">
                 <button type="submit" class="btn btn-outline-dark">수정완료</button>
@@ -62,6 +88,7 @@
     </div>
 
     </body>
+    <script th:src="@{/board/js/update.js}"></script>
 </th:block>
 
 </html>

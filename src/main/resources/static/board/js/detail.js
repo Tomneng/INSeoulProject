@@ -106,19 +106,20 @@ function buildComment(result) {
     const out = [];
 
     result.data.forEach(comment => {
-        let id = comment.id;
+        let id = comment.comId;    // 댓글 아이디
         let content = comment.content.trim();
         let regdate = comment.regdate;
 
-        let user_id = comment.user.id;
+        let userId = comment.user.userId;   // 댓글 테이블에 있는 유저의 유저아이디
         let username = comment.user.username;
         let name = comment.user.name;
 
         // 삭제버튼 여부: 작성자 본인인 경우만 삭제 버튼 보이게 하기
-        const delBtn = (logged_id !== user_id) ? '' : `
+        const delBtn = (logged_id !== userId) ? '' : `
             <i class="btn fa-solid fa-delete-left text-danger" data-bs-toggle="tooltip"
                             data-cmtdel-id="${id}" title="삭제"></i>
         `;
+
 
         const row = `
             <tr>
@@ -133,6 +134,7 @@ function buildComment(result) {
     });
 
     $("#cmt_list").html(out.join("\n"));
+    console.log()
 }
 
 // 댓글 삭제 버튼이 눌렸을때.  해당 댓글 삭제하는 동작을 이벤트 핸들러로 등록
@@ -145,6 +147,7 @@ function addDelete() {
 
         // 삭제할 댓글의 comment_id
         const comment_id = $(this).attr("data-cmtdel-id");
+        console.log(comment_id);
 
         $.ajax({
             url: "/comment/delete",
@@ -157,7 +160,6 @@ function addDelete() {
                         alert(data.status);
                         return;
                     }
-
                     // 삭제후에도 다시 목록을 불러와야 한다 (갱신)
                     loadComment(id);
                 }

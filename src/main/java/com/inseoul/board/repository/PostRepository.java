@@ -26,7 +26,7 @@ public interface PostRepository {
     int update(Post post);     //
 
     // 특정 id 글 삭제하기 (DELETE)
-    int deleteById(Post post);
+    int delete(Post post);
 
     //    페이지네이션
     List<Post> selectFromRow(int from, int rows);
