@@ -92,3 +92,7 @@ app:
       redirect-uri: http://localhost:8080/oauth2/kakao/callback  # Redirect URI
       token-uri: https://kauth.kakao.com/oauth/token   # access token 요청 URI
       user-info-uri: https://kapi.kakao.com/v2/user/me   # 사용자 profile 요청 URI
+
+
+
+

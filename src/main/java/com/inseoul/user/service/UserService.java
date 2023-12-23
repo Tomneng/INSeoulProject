@@ -23,4 +23,8 @@ public interface UserService {
     // 특정 사용자(id)의 authority(들)
     List<Authority> selectAuthoritiesById(Long id);
 
+
+    int update(User user);
+
+    User selectById(Long userId);
 }

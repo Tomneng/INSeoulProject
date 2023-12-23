@@ -3,10 +3,10 @@ $(document).ready(function () {
         const value = $(this).val();
         if (value === "마이페이지") {
             $(".mypagelist form").show();
-            $(".userinfoform form").hide();
+            $(".userinfo form").hide();
         } else if (value === "회원정보") {
             $(".mypagelist form").hide();
-            $(".userinfoform form").show();
+            $(".userinfo form").show();
         }
     });
 

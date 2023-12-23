@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:with="logged_user=${#authentication.principal.user}">
 
   <style>
-    .divider-container{
-      width:150px;
-      height: 50px;
-      border: black 2px solid;
-      display: flex;
-      align-content: center;
-    }
 
+    .userinfo{
+      margin-top: 50px;
+      width: 80%;
+      height: auto;
+      border: black 1px solid;
+      border-radius: 20px;
+    }
   </style>
 <head>
     <meta charset="UTF-8">
@@ -32,7 +33,6 @@
   <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
-
     <title>Mypage</title>
 </head>
 
@@ -42,7 +42,7 @@
 </script>
 
 <body>
-<!-- 기본헤더-->
+<!-- 기본해더-->
 <th:block th:insert="~{common/header::header}"></th:block>
 
 <div class="mypageupdate">
@@ -57,22 +57,34 @@
   </form>
 </div>
 
-<div class="userinfoform">
-  <form action name="frm2" style="display: none">
-    <img src="#" alt="profile">
+<div class="userinfo" style="display: flex">
+  <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px;">
+  <form name="frm2" style="display: none; margin-left: 20px;">
     <div class="username" style="width: unset">
       <label>
         <span>이메일</span>
-<!--        <input type="text" class="username" readonly th:value="${user.username}">-->
+        <input type="text" class="username" readonly th:value="${user.username}">
       </label>
     </div>
     <div class="nickname" style="width: unset">
       <label>
         <span>이름</span>
-<!--        <input type="text" class="nickname" disabled th:value="${user.nickname}">-->
+        <input type="text" class="nickname" readonly th:value="${user.nickname}">
       </label>
     </div>
-    <button type="submit">수정</button>
+<!--    <div class="password" style="width: unset">-->
+<!--      <label>-->
+<!--        <span>비밀번호</span>-->
+<!--                <input type="password" class="password" readonly th:value="${user.password}">-->
+<!--      </label>-->
+<!--    </div>-->
+    <div class="mbti" style="width: unset">
+      <label>
+        <span>MBTI</span>
+                <input type="text" class="mbti" readonly th:value="${user.mbti}">
+      </label>
+    </div>
+    <a class="btn btn-outline-dark ms-2" th:href="@{'/user/userinfo/' + ${user.userId}}">수정</a>
   </form>
 </div>
 

@@ -4,6 +4,7 @@ import com.inseoul.tour.domain.Item;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TourRepository {
 
@@ -20,4 +21,8 @@ public interface TourRepository {
     // from 부터 rows 개 만큼 SELECT
 //    List<Item> selectFromRow(String tourName, String tourSigungucode, int fromRow, int pageRows);
     List<Item> selectFromRow(String tourSigungucode, String tourName, int fromRow, int pageRows);
+
+    List<Item> getRandomTourCard();
+
+    Item findById(Long tourId);
 }

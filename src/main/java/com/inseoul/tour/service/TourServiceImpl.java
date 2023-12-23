@@ -4,6 +4,8 @@ import com.inseoul.tour.domain.Item;
 import com.inseoul.tour.domain.Tour;
 import com.inseoul.tour.repository.TourRepository;
 import com.inseoul.tour.util.U;
+import com.inseoul.user.domain.UserScraptedTour;
+import com.inseoul.user.repository.UserScraptedRepository;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,9 +35,12 @@ public class TourServiceImpl implements TourService {
 
     private TourRepository tourRepository;
 
+    private UserScraptedRepository userScraptedRepository;
+
     @Autowired
     public TourServiceImpl(SqlSession sqlSession){
         tourRepository = sqlSession.getMapper(TourRepository.class);
+        userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
         System.out.println("Service 생성 완료");
     }
     @Override
@@ -169,6 +175,12 @@ public class TourServiceImpl implements TourService {
 
         return list;
     }
+
+    @Override
+    public List<Item> getRandomTourCard() {
+        return tourRepository.getRandomTourCard();
+    }
+
 
 }
 
