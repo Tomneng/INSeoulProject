@@ -10,19 +10,19 @@
 </script>
 <th:block th:if="${row}" th:with="logged_user=${#authentication.getPrincipal().getUser()}">
     <script th:src="@{/realEstate/JS/reDetail.js}"></script>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조회 - [[${row.houseId}]]</title>
-    <!--  철희 추가 12/20  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/reDetail.css}">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>조회 - [[${row.houseId}]]</title>
+        <!--  철희 추가 12/20  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/reDetail.css}">
 
-</head>
+    </head>
 
     <script th:inline="javascript">
         const logged_id = [[${logged_user.userId}]];
@@ -33,50 +33,8 @@
         }
     </style>
     <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!--/* 공통 헤더 */-->
+    <th:block th:insert="~{common/header::header}"></th:block>
 
     <div class="container">
         <table class="table table-hover" style="border: black 2px solid; text-align: center">
@@ -125,10 +83,10 @@
             <div>
                 <canvas id="myChart"></canvas>
             </div>
-                <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
-                <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
-                <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
-                <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
+            <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
+            <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
+            <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
+            <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
         </div>
     </section>
 
