@@ -16,12 +16,11 @@ public interface UserScraptedService {
 
     ScrapQryResult scrapted(Long userId, Long houseId);
 
-
     List<Long> scraptedTourList(Long userId);
 
     ScrapQryResult scraptedTour(Long userId, Long tourId);
 
     List<Item> listByIdTour(Model model);
 
-
+//    List<Item> noMbtiTourCard();
 }

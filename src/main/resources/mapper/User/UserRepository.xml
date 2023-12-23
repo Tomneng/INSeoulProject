@@ -33,7 +33,7 @@
 
     <update id="update" flushCache="true" parameterType="com.inseoul.user.domain.User">
         UPDATE user
-        SET username = #{username}, password = #{password}, nickname = #{nickname}, mbti = #{mbti}
+        SET username = #{username}, nickname = #{nickname}, mbti = #{mbti}
         WHERE user_id = #{userId}
     </update>
 

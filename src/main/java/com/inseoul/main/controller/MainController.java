@@ -1,12 +1,24 @@
 package com.inseoul.main.controller;
 
+import com.inseoul.tour.domain.Item;
+import com.inseoul.tour.service.TourService;
+import com.inseoul.user.service.UserScraptedService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class MainController {
+
+    @Autowired
+    private TourService tourService;
+
+    @Autowired
+    private UserScraptedService userScraptedService;
 
     @RequestMapping("/inseoul")
     public String home() {
@@ -14,7 +26,13 @@ public class MainController {
     }
 
     @RequestMapping("/home/main")
-    public void common(Model model) {
+    public String common(Model model) {
+        model.addAttribute("randomTourCard", tourService.getRandomTourCard());
+
+//        List<Item> noMbtiTourCard = userScraptedService.noMbtiTourCard();
+//        model.addAttribute("noMbtiTourCard", noMbtiTourCard);
+
+        return "home/main";
     }
 
     @RequestMapping("/map")

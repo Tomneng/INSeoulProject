@@ -21,4 +21,6 @@ public interface TourService {
 //    List<Item> list(Item item, Model model, Integer page);
     List<Item> list(Item item, Integer page, Model model);
 
+    List<Item> getRandomTourCard();
+
 }

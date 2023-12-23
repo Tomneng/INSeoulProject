@@ -18,7 +18,7 @@ public class User {
 
     @ToString.Exclude // toString() 결과에서 제외
     @JsonIgnore // json욿 response할 때 제외
-    private String re_password; // 비밀번호 확인 입력용 DB에 저장 x
+    private String re_password; // 비밀번호 확인 []입력용 DB에 저장 x
 
     private String nickname;
     private String mbti; //이건 왜 못받아오는거임?

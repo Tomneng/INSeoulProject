@@ -28,6 +28,25 @@
         WHERE 1 = 1
     </sql>
 
+    <resultMap id="mapTourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
+        <result column="tour_scrapted_id" property="tourScraptedId"/>
+        <result column="tour_id" property="tourId"/>
+        <result column="id" property="userId"/>
+    </resultMap>
+
+    <resultMap id="mapTour" type="com.inseoul.tour.domain.Item">
+        <result column="tour_id" property="tourId"/>
+        <result column="tour_name" property="tourName"/>
+        <result column="tour_addr1" property="tourAddr1"/>
+        <result column="tour_addr2" property="tourAddr2"/>
+        <result column="tour_image1" property="tourImage1"/>
+        <result column="tour_image2" property="tourImage2"/>
+        <result column="tour_contentid" property="tourContentid"/>
+        <result column="tour_sigungucode" property="tourSigungucode"/>
+        <result column="tour_mapx" property="tourMapx"/>
+        <result column="tour_mapy" property="tourMapy"/>
+    </resultMap>
+
     <select id="selectById" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
         AND tour_id = #{tourId}
@@ -38,10 +57,18 @@
         AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
         ORDER BY tour_id DESC
         LIMIT #{param3}, #{param4}
-        </select>
+    </select>
 
     <select id="countAll" resultType="java.lang.Integer">
         SELECT count(tour_id) FROM tour
         WHERE tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
     </select>
+
+    <select id="getRandomTourCard" resultType="com.inseoul.tour.domain.Item">
+        <include refid="SELECT_BASE"/>
+        ORDER BY RAND()
+        LIMIT 4
+    </select>
+    <select id="findById" resultType="com.inseoul.tour.domain.Item"></select>
+
 </mapper>

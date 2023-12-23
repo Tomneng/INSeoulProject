@@ -438,4 +438,6 @@ INSERT INTO authority (authority_name) VALUES
 SELECT * FROM houseContractScore;
 SELECT * FROM user;
 SELECT * FROM house_Contract;
-SELECT * FROM contact_us
+SELECT * FROM contact_us;
+SELECT * FROM tourinfosaved;
+SELECT * FROM tour;
