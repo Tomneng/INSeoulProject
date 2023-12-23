@@ -1,0 +1,24 @@
+td {
+    border: black 2px solid;
+}
+
+#roadviewSection {
+    justify-content: center;
+    text-justify: auto;
+}
+
+#roadviewName {
+    border: orange solid;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#roadview {
+    /*width:100%;*/
+    max-width: 1024px;
+    height: 80vh;
+    border: red solid;
+    border-radius: 10px;
+    margin: auto;
+
+}
