@@ -2,11 +2,10 @@ package com.inseoul.real_estate.controller;
 
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.service.HouseService;
+import com.inseoul.real_estate.util.U;
+import com.inseoul.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +24,15 @@ public class ScoreController {
         Row row = houseService.findById(houseId);
         List<Integer> list = houseService.getAvgScores(row);
         return list;
+    }
+
+    @PostMapping("/putScore")
+    public void setScore(
+            @RequestParam("houseId") Long houseId,
+            @RequestParam("cScore") int contractScore,
+            @RequestParam("pScore") int placeScore,
+            @RequestParam("userId") Long userId){
+
+        houseService.putScore(houseId, userId, contractScore, placeScore);
     }
 }

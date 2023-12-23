@@ -191,7 +191,9 @@ public class HouseServiceImpl implements HouseService {
         Integer pScore = houseRepository.avgPScore(row);
         Integer cScore =houseRepository.avgCScore(row);
         List<Integer> list = new ArrayList<>();
+        list.add(row.getContractScore());
         list.add(cScore);
+        list.add(row.getPlaceScore());
         list.add(pScore);
         return list;
     }

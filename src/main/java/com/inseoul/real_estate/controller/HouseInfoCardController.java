@@ -51,11 +51,5 @@ public class HouseInfoCardController {
         return "realEstate/redetail";
     }
 
-    @PostMapping("/putScore")
-    public String setScore(Long houseId, int contractScore, int placeScore){
-        User user = U.getLoggedUser();
-        houseService.putScore(houseId, user.getUserId(), contractScore, placeScore);
-        return "redirect:/realEstate/redetail/" + houseId;
-    }
 
 }
