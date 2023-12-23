@@ -16,6 +16,13 @@
 
         <!--철희 추가 12/19-->
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCarousel.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCardTab.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script th:src="@{/realEstate/JS/infoList.js}"></script>
 
         <title>간단한 웹페이지</title>
 
@@ -63,6 +70,10 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <div th:unless="${list}">
+        정보가 없어용
     </div>
 
 

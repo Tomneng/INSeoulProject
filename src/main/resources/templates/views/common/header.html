@@ -10,6 +10,8 @@
         <!-- navbar 안에 container -->
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/home/main}">
+                <img th:src="@{/common/image/seoul/Seoul_illust.jpg}" alt="Logo" style="width:80px;"
+            <a class="navbar-brand" th:href="@{/home/main}">
                 <img th:src="@{/common/image/seoul/Seoul_illust.jpg}" alt="Logo"
                      class="rounded-pill"
                      id="headerLogo">
@@ -80,26 +82,8 @@
 
 
                 </div>
-
-                <!--                &lt;!&ndash; 로그인 하지 않았을때 보여주는 화면 &ndash;&gt;-->
-                <!--                <div sec:authorize="isAnonymous()" class="alert alert-warning alert-dismissible">-->
-                <!--                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
-                <!--                    로그인하지 않은 상태입니다 <br>-->
-                <!--                </div>-->
-
-                <!--                &lt;!&ndash; 로그인 했을때 보여주는 화면 &ndash;&gt;-->
-                <!--                <div sec:authorize="isAuthenticated()" class="alert alert-info alert-dismissible">-->
-                <!--                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
-                <!--                    <div th:text="${#authentication.getPrincipal().getUser()}"></div>-->
-                <!--                    <div sec:authentication="principal.authorities"></div>&lt;!&ndash;/* 멤버의 권한 */&ndash;&gt;-->
-                <!--                    로그인 하셨습니다 <br>-->
-                <!--                </div>-->
-
             </div>
-            <!-- 태블릿 이하의 offcanvas의 끝 -->
         </div>
-        <!-- navbar 안에 container의 끝 -->
     </nav>
-
 </th:block>
 </html>

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class User {
     private Long userId;
     private String username; // 이게 입력 받는 아이디
@@ -21,6 +20,7 @@ public class User {
     private String re_password; // 비밀번호 확인 입력용 DB에 저장 x
 
     private String nickname;
+    private String mbti;
 
     @JsonIgnore
     private LocalDateTime regDate;

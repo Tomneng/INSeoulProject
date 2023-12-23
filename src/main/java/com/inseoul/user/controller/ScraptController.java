@@ -1,7 +1,12 @@
 package com.inseoul.user.controller;
 
+import com.inseoul.real_estate.util.U;
 import com.inseoul.user.domain.ScrapQryResult;
+import com.inseoul.user.domain.User;
+import com.inseoul.user.domain.User;
 import com.inseoul.user.service.UserScraptedService;
+import com.inseoul.user.service.UserService;
+import com.inseoul.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +19,9 @@ public class ScraptController {
 
     @Autowired
     private UserScraptedService userScraptedService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/scrapted")
     public List scraptedHouse(
@@ -29,6 +37,17 @@ public class ScraptController {
             @RequestParam("user_id") Long userId
     ){
         return userScraptedService.scrapted(userId, houseId);
+    }
+
+    @PostMapping("/chpass")
+    public void changePassword(
+            @RequestParam("password") String password,
+            @RequestParam("userId") Long userId
+    ){
+        User user = new User();
+        user.setPassword(password);
+        user.setUserId(userId);
+        userService.chPassword(user);
     }
 
     @GetMapping("/scraptedTour")

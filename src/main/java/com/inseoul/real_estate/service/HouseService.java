@@ -14,10 +14,12 @@ public interface HouseService {
 
     Row findById(Long id);
 
-    int putScore(Row row);
+    int putScore(Long houseId, Long userId, int contractScore, int placeScore);
 
     List<Row> list(Row row, Integer page, Model model);
 
-
     void getapi(Row row, Model model, Integer page);
+
+    List<Integer> getAvgScores(Row row);
+
 }
