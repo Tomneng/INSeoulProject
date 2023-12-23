@@ -6,7 +6,7 @@
     history.back();
 </script>
 
-<th:block th:if="${post}">
+<th:block th:if="${post}" th:with="logged_user=${#authentication.principal.user}">
 
     <head>
         <meta charset="utf-8">
@@ -27,38 +27,43 @@
 
     <body>
     <div class="container mt-3">
-        <h2>수정</h2>
+        <h2>수정 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
             <span class="float-start me-2">id: [[${post.postId}]]</span>
+            <span class="float-end ms-4">작성일: [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
             <span class="float-end">조회수: [[${post.viewcnt}]]</span>
         </div>
 
-        <form name="frm" th:action="@{/board/update}" method="post">
+        <form name="frm" th:action="@{/board/update}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="postId" th:value="${post.postId}"/>
             <div class="mb-3">
                 <label>작성자:</label>
-                <span class="form-control bg-light" th:text="${post.user.username}"></span>
+                <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
                 <input type="hidden" name="postId" th:value="${post.postId}"> <!-- validation 땜에 필요 -->
             </div>
             <div class="mb-3 mt-3">
                 <label for="title">제목:</label>
-                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" th:value="${title} ? ${title} : ${post.title}">
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title"
+                       th:value="${title} ? ${title} : ${post.title}">
                 <span class="text-danger" th:if="${error_title}" th:utext="${error_title}"></span>
             </div>
             <div class="mb-3 mt-3">
                 <label for="content">내용:</label>
-                <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content" th:utext="${content} ? ${content} : ${post.content}"></textarea>
+                <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content"
+                          th:utext="${content} ? ${content} : ${post.content}"></textarea>
             </div>
 
             <!-- 기존 첨부파일목록 (삭제 가능) -->
-            <div class="container mt-3 mb-3 border rounded" th:if="${post.fileList} and ${#lists.size(post.fileList) > 0}">
+            <div class="container mt-3 mb-3 border rounded"
+                 th:if="${post.fileList} and ${#lists.size(post.fileList) > 0}">
                 <div id="delFiles"></div>  <!-- 삭제할 file 의 id 값(들)을 담기위한 div -->
                 <div class="mb-3 mt-3">
                     <label>기존 첨부파일:</label>
                     <div class="input-group mb-2" th:each="attachment : ${post.fileList}">
                         <input class="form-control col-xs-3" type="text" readonly th:value="${attachment.sourcename }">
-                        <button type="button"  class="btn btn-outline-danger" th:data-fileid-del="${attachment.id}">삭제</button>
+                        <button type="button" class="btn btn-outline-danger" th:data-fileid-del="${attachment.id}">삭제
+                        </button>
                     </div>
                 </div>
             </div>
@@ -78,9 +83,10 @@
 
             <!-- 하단 링크 -->
             <div class="d-flex">
-                <button type="submit" class="btn btn-outline-dark">수정완료</button>
+                <button type="submit" class="btn btn-outline-dark" th:if="${logged_user.userId == post.user.userId}">수정완료
+                </button>
                 <button type="button" class="btn btn-outline-dark ms-1" onclick="history.back()">이전으로</button>
-                <a class="btn btn-outline-dark ms-1" th:href="@{/board/list}">목록</a>
+                <a class="btn btn-outline-dark ms-1" th:href="@{/board/list(page=${session.page})}">목록</a>
             </div>
             <!-- 하단 링크 -->
 

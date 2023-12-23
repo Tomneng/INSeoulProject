@@ -159,6 +159,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional  // 이 메소드는 '트랜잭션' 처리
     public Post detail(Long id) {
+        System.out.println("보드서비스임플 디테일 id값 == " + id); // 게시글번호 출력ok
         postRepository.incViewCnt(id);
         Post post = postRepository.findById(id);
 

@@ -63,18 +63,19 @@ CREATE TABLE com_like
     UNIQUE (com_id)
 );
 
-select * from com_like;
+select *
+from com_like;
 
 DROP TABLE IF EXISTS com_like;
 
 -- 새로운 테이블 생성
 CREATE TABLE com_like
 (
-    id  int AUTO_INCREMENT PRIMARY KEY,
-    com_id   int NOT NULL,
-    user_id  int NOT NULL,
-    FOREIGN KEY (com_id) REFERENCES comment(com_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    id      int AUTO_INCREMENT PRIMARY KEY,
+    com_id  int NOT NULL,
+    user_id int NOT NULL,
+    FOREIGN KEY (com_id) REFERENCES comment (com_id),
+    FOREIGN KEY (user_id) REFERENCES user (user_id),
     UNIQUE (com_id, user_id)
 );
 
@@ -153,10 +154,12 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     rent_area       DOUBLE      NOT NULL, #area가 맞음 are는 오타
     rent_deposit    int         NOT NULL,
     rent_fee        int         NOT NULL,
-    building_name   varchar(20),
+    building_name   varchar(50),
     build_year      int,
     house_kind_name varchar(20),
     contract_period varchar(20),          #이거 null 허용으로 바꿈
+    place_score     int,
+    contract_score  int,
     new_ron_secd    varchar(2),
     address         varchar(100)          # column명이 다름 이걸로 갈듯
 ) COMMENT = '부동산계약데이터테이블';
@@ -167,7 +170,7 @@ CREATE TABLE houseContractScore
 (
     user_id        int REFERENCES user (user_id),            #column명 다름 이걸로 갈듯
     house_id       int REFERENCES house_contract (house_id), #외래키설정 비버에 안되있음
-    contract_score int,                                      #디폴트 value는 없애는 방향
+    contract_score int DEFAULT 0,
     place_score    int,
     PRIMARY KEY (user_id, house_id)                          #비버에 pk설정 안되있음
 ) COMMENT = '부동산 점수테이블';
@@ -189,7 +192,7 @@ CREATE TABLE post
     id           int         NOT NULL COMMENT '회원아이디',
     title        varchar(50) NOT NULL COMMENT '게시글제목',
     content      longtext COMMENT '게시글내용',
-    viewcnt      int COMMENT '조회수',
+    viewcnt      int      default 0 COMMENT '조회수',
     post_regdate datetime default now(), #NOT NULL에서 default now()로 변경 - 신철희 12/21 16:00
     PRIMARY KEY (post_id),
     UNIQUE (post_id)
@@ -256,7 +259,7 @@ CREATE TABLE user
     regdate    datetime DEFAULT now(),         #column명 다름, 비버에 디폴트값없음(수정함)
     providerId varchar(200),                   #비버에 이거랑 provider 둘다 추가되야됨
     provider   varchar(40),
-    mbti       varchar(4)                      #추가 - 신철희 12/21 16:00
+    mbti       varchar(4)
 ) COMMENT = '회원테이블';
 
 
@@ -446,12 +449,23 @@ INSERT INTO authority (authority_name)
 VALUES ('ROLE_MEMBER'),
        ('ROLE_ADMIN');
 
-SELECT * FROM houseContractScore;
-SELECT * FROM user;
-SELECT contract_score, place_score FROM house_Contract WHERE acc_year = '2023' AND ssg_name = '관악구' AND dong_code = 10200 AND house_kind_name = '아파트';
-SELECT * FROM contact_us;
+SELECT *
+FROM houseContractScore;
+SELECT *
+FROM user;
+SELECT contract_score, place_score
+FROM house_Contract
+WHERE acc_year = '2023'
+  AND ssg_name = '관악구'
+  AND dong_code = 10200
+  AND house_kind_name = '아파트';
+SELECT *
+FROM contact_us;
 
 
-SELECT * FROM comment;
-SELECT * FROM attachment;
-SELECT * FROM post;
+SELECT *
+FROM comment;
+SELECT *
+FROM attachment;
+SELECT *
+FROM post;

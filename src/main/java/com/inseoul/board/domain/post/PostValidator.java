@@ -22,7 +22,6 @@ public class PostValidator implements Validator {
         Post post = (Post) target;
         System.out.println(post);
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "글 제목은 필수입니다.");
     }
-
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "subject", "글 제목은 필수입니다.");
 }

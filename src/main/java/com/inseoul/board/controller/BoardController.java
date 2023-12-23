@@ -41,6 +41,7 @@ public class BoardController {
     ) {
 
         System.out.println("보드컨트롤러 롸잇Ok의 post == " + post);
+
         // validation 에러가 있었다면 redirect 할거다!
         if (result.hasErrors()) {
 
@@ -72,6 +73,7 @@ public class BoardController {
 
     @GetMapping("/detail/{postId}")
     public String detail(@PathVariable(name = "postId") Long postId, Model model) { // key와 value로 이루어져있는 HashMapModel의 || addAttribute()를 통해 view에 전달할 데이터를 저장
+
 //        Post post = boardService.selectById(postId);    // 보드서비스에 있는 셀렉트바이아이디라는 함스에다가 매개변수로 포스트아이디를 전달함
 //        System.out.println("post = " + post);
 //        System.out.println(post.getUser());

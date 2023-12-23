@@ -26,12 +26,12 @@
         </script>
 
 
-        <title>조회</title>
+        <title>조회 - [[${post.postId}]]</title>
     </head>
 
     <body>
     <div class="container mt-3">
-        <h2>조회</h2>
+        <h2>조회 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
 <!--            <span class="float-start me-2">id : [[${post.postId}]]</span>-->
@@ -46,7 +46,7 @@
 
             <div class="mb-3">
                 <label>작성자:</label>
-                <span class="form-control bg-light" th:text="${post.user.username}"></span>
+                <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
             </div>
             <div class="mb-3 mt-3">
                 <label>제목:</label>
