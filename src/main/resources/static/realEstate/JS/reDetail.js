@@ -2,6 +2,7 @@
 var address = $('#address').text().trim();
 console.log("여기에 부동산 주소가 찍힐까? " + address) // 주소 출력되는 것 확인함.
 
+
 // 로드뷰 지도 표시 - 신철희 12/22 저녁
 var centerRealEstate = address;
 
