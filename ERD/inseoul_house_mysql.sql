@@ -42,7 +42,7 @@ CREATE TABLE authority
 (
     authority_id   int PRIMARY KEY AUTO_INCREMENT, #column명 다름 비버에 있는걸로 할듯
     authority_name varchar(80) NOT NULL UNIQUE     #column명 다름 비버에 있는걸로 할듯 + 길이제한 다름
-) COMMENT = '권한테이블';
+);
 
 
 -- 댓글테이블
@@ -54,7 +54,7 @@ CREATE TABLE comment
     com_content text NOT NULL COMMENT '댓글내용',
     com_regdate datetime DEFAULT now() COMMENT '댓글작성일자',
     PRIMARY KEY (com_id)
-) COMMENT = '댓글테이블';
+);
 
 
 -- 댓글좋아요테이블
@@ -91,7 +91,7 @@ CREATE TABLE contact_us
     content     longtext     NOT NULL,
     answer      longtext,
     is_answered boolean      NOT NULL DEFAULT false # 비버에 디폴트 설정 잘못됨 (고쳐야함)
-) COMMENT = '문의사항테이블';
+);
 
 
 -- 음식점테이블
@@ -106,7 +106,7 @@ CREATE TABLE food
     review_avg    double DEFAULT 0.0,
     PRIMARY KEY (food_id),
     UNIQUE (food_id)
-) COMMENT = '음식점테이블';
+);
 
 
 -- 음식점정보스크랩테이블
@@ -134,7 +134,7 @@ CREATE TABLE food_reviews
     review_content  varchar(100) COMMENT '리뷰글',
     PRIMARY KEY (review_id),
     UNIQUE (review_id)
-) COMMENT = '음식점리뷰테이블';
+);
 
 
 -- 부동산계약데이터테이블

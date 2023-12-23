@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
 
     <title>목록</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <link rel="stylesheet" type="text/css" th:href="@{/board/css/list.css}">
 </head>
 <body>
@@ -81,7 +83,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="post : ${list}">
+    <tr class="post-row" th:each="post : ${list}">
         <td><span th:text="${post.postId}"></span></td>
         <td><span th:text="${post.user.nickname}"></span></td>
         <td><span th:text="${post.user.mbti}"></span></td>

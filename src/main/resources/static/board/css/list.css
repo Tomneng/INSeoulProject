@@ -27,3 +27,9 @@
     margin-left: 20px;
     margin-right: 60px;
 }
+
+/* 선택 사항: 커서를 호버시 변경하기 위한 CSS 스타일 추가 */
+tr:hover {
+    cursor: pointer;
+    background-color: #f5f5f5; /* 필요시 호버시 배경색 변경 */
+}
