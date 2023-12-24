@@ -24,10 +24,17 @@ $(document).ready(function () {
                 data: {
                     labels: ['현재부동산계약점수', '평균부동산계약점수', '현재부동산점수', '평균부동산점수'],
                     datasets: [{
-                        label: '# of Votes',
+                        label: '실시간 평가 점수',
                         data: chart,
-                        borderWidth: 1
-                    }]
+                        borderWidth: 1,
+                        backgroundColor: [
+                            data[0] > 80 && 'rgb(255, 99, 132)',
+                            'rgb(255, 159, 64)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                        ]
+                    }],
+
                 },
                 options: {
                     scales: {
@@ -59,10 +66,16 @@ $(document).ready(function () {
                 data: {
                     labels: [data[0], data[2], data[4]],
                     datasets: [{
-                        label: '# of Votes',
+                        label: 'MBTI유형별 스크랩 순위 TOP3',
                         data: chart2,
                         borderWidth: 1
-                    }]
+                    }],
+                    backgroundColor: [
+                        data[0] > 80 && 'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                    ]
                 },
                 options: {
                     scales: {
@@ -70,9 +83,13 @@ $(document).ready(function () {
                             beginAtZero: true
                         }
                     }
+
                 }
             });
         },
+        error :function (error){
+            console.log(error);
+        }
     })
 
     $("#putScore").click(function () {

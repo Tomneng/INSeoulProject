@@ -213,7 +213,6 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<Row> houseOnmain() {
-
         return houseRepository.houseOnmain();
     }
 
