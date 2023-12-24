@@ -1,7 +1,9 @@
 package com.inseoul.main.controller;
 
+import com.inseoul.real_estate.util.U;
 import com.inseoul.tour.domain.Item;
 import com.inseoul.tour.service.TourService;
+import com.inseoul.user.domain.User;
 import com.inseoul.user.service.UserScraptedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +31,6 @@ public class MainController {
     public String common(Model model) {
         model.addAttribute("randomTourCard", tourService.getRandomTourCard());
         model.addAttribute("noMbtiCard", userScraptedService.noMbtiTourCard());
-
-//        List<Item> noMbtiTourCard = userScraptedService.noMbtiTourCard();
-//        model.addAttribute("noMbtiTourCard", noMbtiTourCard);
 
         return "home/main";
     }

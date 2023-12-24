@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+
 public class U {
     // 현재 request를 구하려는 메소드
 
@@ -33,7 +35,7 @@ public class U {
         return getRequest().getSession();
     }
 
-    public static User getLoggedUser(){
+    public static User getLoggedUser() {
         // 현재 로그인 한 사용자
         PrincipalDetails userDetails = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDetails.getUser();
