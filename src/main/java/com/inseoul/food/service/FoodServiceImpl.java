@@ -47,7 +47,7 @@ public class FoodServiceImpl implements FoodService{
 
     @Override
     public void getapi(Model model) {
-        String url = String.format("http://openapi.seoul.go.kr:8088/%s/json/TbVwRestaurants/1/1000/", "4b574b46536b6873383346726a7a45");
+        String url = String.format("http://openapi.seoul.go.kr:8088/%s/json/TbVwRestaurants/7001/8000/", "4b574b46536b6873383346726a7a45");
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<FoodData> response = restTemplate.getForEntity(url, FoodData.class);

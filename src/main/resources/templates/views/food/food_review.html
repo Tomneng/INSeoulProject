@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:with="logged_user=${#authentication.principal.user}">
+<th:block th:with="logged_user=${#authentication.principal.user}" th:fragment="food_review">
     <head>
         <meta charset="UTF-8">
         <title>Food Detail/Review</title>

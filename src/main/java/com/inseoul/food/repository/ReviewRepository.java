@@ -23,6 +23,8 @@ public interface ReviewRepository {
 
     int updateRating(Long foodId, Long userId, Double reviewStar);
 
+    Double getScore(Long foodId);
+
 
 
     //평점 평균 구하기

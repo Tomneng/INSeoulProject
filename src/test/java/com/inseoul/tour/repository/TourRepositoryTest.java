@@ -34,4 +34,5 @@ public class TourRepositoryTest {
 
         System.out.println(tourRepository.selectFromRow("23", "광화문", 10, 12));
     }
+
 }

@@ -19,8 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TourServiceImpl implements TourService {
@@ -172,10 +171,23 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public List<FoodRow> foodList() {
-        return tourRepository.selectByFood();
+    public List<String> foodList(String[] list) {
+        List<String> b = new ArrayList<>();
+        List<String> a = tourRepository.selectByFood();
+        for (int i = 0; i < list.length; i++){
+            if (a.contains(list[i])) {
+                b.add(list[i]);
+            }
+        }
+//
+//        model.addAttribute("foodrow", tourRepository.selectFood(storeTel));
+        return b;
     }
 
-
+    @Override
+    public Long findByFoodId(String storeTel) {
+        Long storeT = tourRepository.selectByFoodId(storeTel);
+        System.out.println("투어서비스임플 파인드바이아이디 = " + storeT);
+        return tourRepository.selectByFoodId(storeTel);
+    }
 }
-

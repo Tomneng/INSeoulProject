@@ -60,6 +60,10 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.countReview(userId, foodId);
     }
 
+    @Override
+    public Double getScore(Long foodId) {
+        return reviewRepository.getScore(foodId);
+    }
 
 
     // 평점 보여주기

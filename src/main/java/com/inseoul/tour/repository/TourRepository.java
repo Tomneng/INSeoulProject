@@ -4,6 +4,7 @@ import com.inseoul.food.domain.FoodRow;
 import com.inseoul.tour.domain.Item;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 public interface TourRepository {
@@ -22,9 +23,9 @@ public interface TourRepository {
 //    List<Item> selectFromRow(String tourName, String tourSigungucode, int fromRow, int pageRows);
     List<Item> selectFromRow(String tourSigungucode, String tourName, int fromRow, int pageRows);
 
-
     //음식점
-    List<FoodRow> selectByFood();
+    List<String> selectByFood();
 
+    Long selectByFoodId(String storeTel);
 }
 

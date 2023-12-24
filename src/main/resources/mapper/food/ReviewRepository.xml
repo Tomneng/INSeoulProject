@@ -51,9 +51,11 @@
         FROM food_reviews
         WHERE id = #{userId} AND food_id = #{foodId}
     </select>
-
-
-
+    <select id="getScore" resultType="java.lang.Double">
+        SELECT review_avg
+        FROM food
+        WHERE food_id =#{foodId}
+    </select>
 
 
     <!--    <insert id="insertRating" parameterType="com.inseoul.food.domain.Review">-->

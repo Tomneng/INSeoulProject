@@ -43,6 +43,8 @@ public class apiFoodTest {
                 .build();
         System.out.println(reviewRepository.updateRating(review.getFoodId(), review.getUserId(), review.getReviewStar()));
     }
+
+
 }
 
 //

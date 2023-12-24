@@ -189,6 +189,8 @@ span {
     color: #fbff00 !important;
 }
 
+
+
 /* 리뷰 카테코리 */
 #reviewCat {
     display: block;
@@ -318,7 +320,6 @@ input[type="submit"] {
     /* margin-left: 90px; */
 }
 
-
 #foodmap {
     margin-top:100px;
     border-radius: 5px;
@@ -326,4 +327,3 @@ input[type="submit"] {
     height: 400px;
     width: 200px;
 }
-

@@ -32,26 +32,29 @@ public class HouseInfoCardController {
      * 실제로 db에 없는 값들은 그때그때마다 getapi를 써서 api 호출 및 DB에 저장
      * moreThanOnce()메소드로 일단 이 검색조건으로 검색됬는지를 확인하기 위해 DB를 조회함
      * 그 후, 검색여부에 따라서 .getapi를 호출함(이 과정이 없으면 페이지 넘길때마다 무조건적으로 api호출을 하게됨)
-     * @param row2 : 넘겨줄 검색값
+     *
+     * @param row2  : 넘겨줄 검색값
      * @param model : 여러 attributes값 담을 model
-     * @param page : 페이지값 넘겨주기
+     * @param page  : 페이지값 넘겨주기
      */
     @RequestMapping("/infoList")
     public void getApi(@Valid Row row2, Model model, Integer page) {
-        if (houseService.moreThanOnce(row2) <= 0){
+        if (houseService.moreThanOnce(row2) <= 0) {
             houseService.getapi(row2, model, page);
         }
         houseService.list(row2, page, model);
     }
+
     @GetMapping("/redetail/{houseId}")
-    public String detail(@PathVariable Long houseId, Model model){
+    public String detail(@PathVariable Long houseId, Model model) {
         model.addAttribute("row", houseService.findById(houseId));
         return "realEstate/redetail";
     }
 
     @PostMapping("/putScore")
-    public String setScore(@Valid Row row, Model model){
+    public String setScore(@Valid Row row, Model model) {
         model.addAttribute("result", houseService.putScore(row));
         return "redirect:/realEstate/redetail/" + row.getHouseId();
     }
+
 }

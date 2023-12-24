@@ -57,10 +57,8 @@ public class TourController {
     @GetMapping("/tourDetail/{tourId}")
     public String detail(@PathVariable Long tourId, Model model) {
         System.out.println("투어컨트롤러 디테일, tourId = " + tourId);
-//        System.out.println("투어컨트롤러 디테일, foodRow = " + foodRow);
 
         model.addAttribute("item", tourService.findById(tourId));
-//        model.addAttribute("foodrow", tourService.foodList(foodRow));
 
         System.out.println("투어컨트롤러 디테일, model = " + model);
         return "tour/tourDetail";

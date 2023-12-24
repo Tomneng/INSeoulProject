@@ -19,6 +19,3 @@ let caroucelElments = document.querySelectorAll("#cardTab")
 for (let i = 0; i < caroucelElments.length; i++) {
     carouselElement.observe(caroucelElments[i])
 }
-
-
-

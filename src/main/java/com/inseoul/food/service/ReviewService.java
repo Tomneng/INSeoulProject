@@ -33,5 +33,8 @@ public interface ReviewService {
 //    void setRating(Long foodId);
 //    int showRating(Long foodId);
 
+    //
     int reviewdb(Long userId, Long foodId);
+
+    Double getScore(Long foodId);
 }

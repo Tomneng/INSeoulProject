@@ -1,128 +1,231 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
 <script th:unless="${item}">
     alert("해당 정보가 삭제되거나 없습니다")
     history.back();
 </script>
 
-<th:block th:if="${item}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/common/css/map.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/food/css/food.css}">
+<th:block th:if="${item}" th:with="logged_user=${#authentication.principal.user}">
 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <style>
-        body {
-            background-color: #f8f9fa;
-            color: #495057;
-        }
+        <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/821e8d3801.js" crossorigin="anonymous"></script>
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh; /* 뷰포트 높이에 맞게 설정 */
-        }
+        <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/map.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/food/css/food.css}">
 
-        #container_tourdetail {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            max-width: 600px;
-            text-align: center; /* 텍스트 가운데 정렬 */
-        }
+        <style>
+            body {
+                background-color: #f8f9fa;
+                color: #495057;
+            }
 
-        #tourImage1 {
-            border-radius: 8px;
-            margin-bottom: 10px;
-            width: 100%;
-            max-height: 400px;
-        }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh; /* 뷰포트 높이에 맞게 설정 */
+            }
 
-        #tourName {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+            #container_tourdetail {
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin: 20px auto;
+                max-width: 600px;
+                text-align: center; /* 텍스트 가운데 정렬 */
+            }
 
-        #tourAddress {
-            font-size: 16px;
-        }
+            #tourImage1 {
+                border-radius: 8px;
+                margin-bottom: 10px;
+                width: 100%;
+                max-height: 400px;
+            }
 
-        #demoJSON_tour {
-            margin-top: 20px;
-            width: 100%;
-        }
-    </style>
+            #tourName {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
 
-    <title>관광 상세정보</title>
-</head>
+            #tourAddress {
+                font-size: 16px;
+            }
 
-<body>
-<div>
-    <div id="container_tourdetail">
-        <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid" id="tourImage1" style="width: 300px; height: 400px;">
-        <p th:text="${item.tourName}" id="tourName"></p><br>
-        <p th:text="${item.tourAddr1 + ' ' + item.tourAddr2}" id="tourAddress"></p><br>
-        <table id="demoJSON_tour"></table>
-        <input type="hidden" id="centralLongitude" name="centralLongitude" th:value="${item.tourMapx}"/>
-        <input type="hidden" id="centralLatitude" name="centralLatitude" th:value="${item.tourMapy}"/>
-        <input type="hidden" id="tourContentid" name="tourContentid" th:value="${item.tourContentid}"/>
-    </div>
+            #demoJSON_tour {
+                margin-top: 20px;
+                width: 100%;
+            }
+        </style>
 
-
-    <div th:each="foodrow : ${foodList}" class="divider-container" id="container1">
-<!--        <input type="hidden" id="foodId" name="foodId" th:value="${foodrow.foodId}">-->
-        <input type="hidden" class="storeTel" id="storeTel" name="storeTel" th:value="${foodrow.storeTel}">
-
-        <div class="card" id="foodImage" style="width: 50rem;">이미지
-<!--            <img src="..." class="card-img-top" alt="...">-->
-            <div class="card-body">
-<!--                <h5 class="card-title">Card title</h5>-->
-                <h5 class="card-title" th:text="${foodrow?.storeName}"></h5>
-
-
-
-                <!-- 모달창 열기 -->
-                <a th:href="@{'/food/food_review/' + ${foodrow?.foodId}}" th:text="${foodrow?.storeName}" class="foodreview">상세보기</a>
-<!--                <input type="button" id="btn" onclick="openBtn()" value="상세보기">-->
-
-            </div>
+        <title>관광 상세정보</title>
+    </head>
+    <script th:inline="javascript">
+        // 나중에 댓글 작성시 필요.
+        const logged_id = [[${logged_user.userId}]];
+    </script>
+    <body>
+    <div>
+        <div id="container_tourdetail">
+            <input type="hidden" id="tourId" th:value="${item.tourId}">
+            <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
+                 class="img-fluid" id="tourImage1" style="width: 300px; height: 400px;">
+            <p th:text="${item.tourName}" id="tourName"></p><br>
+            <p th:text="${item.tourAddr1 + ' ' + item.tourAddr2}" id="tourAddress"></p><br>
+            <table id="demoJSON_tour"></table>
+            <input type="hidden" id="centralLongitude" name="centralLongitude" th:value="${item.tourMapx}"/>
+            <input type="hidden" id="centralLatitude" name="centralLatitude" th:value="${item.tourMapy}"/>
+            <input type="hidden" id="tourContentid" name="tourContentid" th:value="${item.tourContentid}"/>
         </div>
-<!--    </div>-->
+        <div class="card getreview gfi" id="foodImage1" style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+            <input style="display: none">
+        </div>
+        <div class="card getreview gfi" id="foodImage2" style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+            <input style="display: none">
+        </div>
+        <div class="card getreview gfi" id="foodImage3" style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+            <input style="display: none">
+        </div>
+        <div id="modal" class="modal-overlay" style="display: none;">
+            <div class="modal-window">
+                <div class="close-area">X</div>
+                <!--            <input type="button" name="scrapFood"><i class="fa-regular fa-bookmark" class="scraptFood"></i>-->
+                <input type="checkbox" name="scraptFood">
+                <div class="title">
+                    <div id="store_name" ></div>
+                    <div id="store_address" ></div>
+                    <div id="store_tel" value=""></div>
+                </div>
+                <hr>
+                <div id="showContent">
+                    <div id="foodImage">음식점 이미지</div>
+                    <div id="reviewShowStar">
+                        <span>평점</span>
+                        <div id="reviewStarOne"></div>
+                    </div>
+                    <!-- 하나 -->
+                    <div id="reviewShowCategory">
+                        <span>리뷰</span>
+                        <div id="reviewCategory"></div>
+                    </div>
+                    <input type="button" value="리뷰남기기" id="getShow">
+                </div>
+                    <input type="hidden" name="reviewId" th:value="${reviewId}">
+                    <input id="foodid" type="hidden" name="foodId" th:value="${foodId}">
+                    <div id="content" style="display: none;">
+<!--                        <div class="container mt-3 mb-3 border rounded">-->
+<!--                            <label>첨부파일</label>-->
+<!--                        </div>-->
+                        <div class="mid">
+                            <div id="userId">
+                                <span>회원ID</span>
+                                <input type="hidden" name="userId" th:value="${logged_user.userId}">
+                            </div>
+                            <div id="reviewStar">
+                                <fieldset class="rate">
+                                    <span>평점</span>
+                                    <input type="radio" id="rating10" name="reviewStar" value="5.0">
+                                    <label for="rating10" title="5점"></label>
+                                    <input type="radio" id="rating9" name="reviewStar" value="4.5">
+                                    <label class="half" for="rating9" title="4.5점"></label>
+                                    <input type="radio" id="rating8" name="reviewStar" value="4.0">
+                                    <label for="rating8" title="4점"></label>
+                                    <input type="radio" id="rating7" name="reviewStar" value="3.5">
+                                    <label class="half" for="rating7" title="3.5점"></label>
+                                    <input type="radio" id="rating6" name="reviewStar" value="3.0">
+                                    <label for="rating6" title="3점"></label>
+                                    <input type="radio" id="rating5" name="reviewStar" value="2.5">
+                                    <label class="half" for="rating5" title="2.5점"></label>
+                                    <input type="radio" id="rating4" name="reviewStar" value="2.0">
+                                    <label for="rating4" title="2점"></label>
+                                    <input type="radio" id="rating3" name="reviewStar" value="1.5">
+                                    <label class="half" for="rating3" title="1.5점"></label>
+                                    <input type="radio" id="rating2" name="reviewStar" value="1.0">
+                                    <label for="rating2" title="1점"></label>
+                                    <input type="radio" id="rating1" name="reviewStar" value="0.5">
+                                    <label class="half" for="rating1" title="0.5점"></label>
+                                    <input type="hidden" id="rating" name="rating" value="">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div id="reviewCat">
+                            <span>리뷰</span>
+                            <div class="keyword">
+                                <ul class="category">
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory1"
+                                               name="reviewCategory" value="음식이 맛있어요">
+                                        <label for="reviewCategory1" class="label-comment">
+                                            😊 음식이 맛있어요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory2"
+                                               name="reviewCategory" value="친절해요">
+                                        <label for="reviewCategory2" class="label-comment">
+                                            💓 친절해요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory3"
+                                               name="reviewCategory" value="뷰가 좋아요">
+                                        <label for="reviewCategory3" class="label-comment">
+                                            🌉 뷰가 좋아요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory4"
+                                               name="reviewCategory" value="혼밥하기 좋아요">
+                                        <label for="reviewCategory4" class="label-comment">
+                                            🍙 혼밥하기 좋아요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory5"
+                                               name="reviewCategory" value="매장이 넓어요">
+                                        <label for="reviewCategory5" class="label-comment">
+                                            👀 매장이 넓어요
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="category-content">
+                            <textarea class="reviewComment" name="reviewContent" cols="15" rows="10"
+                                      placeholder="직접 후기를 작성해주세요" th:value="${reviewContent}"></textarea>
+                            </div>
+                            <button type="button" id="cancel" class="btn btn-outline-dark" value="취소">취소</button>
+                            <button type="button" id="ok" class="btn btn-outline-dark" value="작성완료">작성완료</button>
+                        </div>
+                    </div>
+                <!-- 리뷰의 지도 위치 -->
+                <div class="foodMap">
+                    <th:block th:insert="~{common/foodMap::commonMap}"></th:block>
+                </div>
+            </div>
 
 
-</div>
-
-<!--음식점 카드 섹션-->
-<!--    <div class="card-grid" id="foodImage">-->
-<!--&lt;!&ndash;   food_review     &ndash;&gt;-->
-<!--&lt;!&ndash;        <a class="card" href="">&ndash;&gt;-->
-<!--            <div class="card_background">-->
-<!--&lt;!&ndash; 주변 음식점 카드 리스트 &ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="card_content" onclick="openBtn()">-->
-<!--            <span class="card-title" >타이틀</span>-->
-<!--            </div>-->
-<!--&lt;!&ndash;        </a>&ndash;&gt;-->
-<!--    </div>-->
-<!--</section>-->
-
-<!--<th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
-</div>
-</body>
+        </div>
+        <!--<th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
+    </div>
+    </body>
 </th:block>
+
 <script th:src="@{/tour/js/tourDetail.js}"></script>
-<script th:src="@{/food/js/food.js}"></script>
+<script th:src="@{/common/js/foodMap.js}"></script>
+
 
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>

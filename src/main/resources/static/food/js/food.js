@@ -44,7 +44,7 @@ function isModalOn() {
 function modalOff() {
     modal.style.display = "none"
 }
-    
+
 const closeBtn = modal.querySelector(".close-area")
 closeBtn.addEventListener("click", e => {
     modalOff();
@@ -82,9 +82,8 @@ function getShow(){
             if(confirm("기존 리뷰는 작성시 삭제됩니다") == true){    //확인
                 document.getElementById('content').style.display="";
                 document.getElementById('showContent').style.display="none";
-            } else{ //취소
-                return;
-            } } else
+            } else{ return; } //취소
+            } else
             {
                 alert("리뷰를 남겨요 😃");
                 document.getElementById('content').style.display="";
@@ -120,7 +119,7 @@ function getCancel(){
 //     const reviewStar = $('input[type="radio"]:checked').val();  //선택한 별점의 값
 //     console.log("리뷰내용 = " + reviewContent);
 //     console.log("키워드 = " + reviewCategory);
-//     console.log("별점 값 = " + reviewStar);
+//     console.log("별점 값 = " + 7);
 //     console.log("foodId = " + foodId);
 //
 //     // 별점은 NN로 필수 선택, 선택되지 않은 경우
@@ -287,19 +286,4 @@ function getCancel(){
 //             });
 //         }
 //     });
-// });
-
-
-
-
-//관광지 주변 음식점 카드리스트
-//주소를 좌표로 변환
-
-
-//리뷰 남기기
-// const review = document.getElementById("reviewCategory")
-
-// const cancelBtn = review.querySelector(".")
-// cancelBtn.addEventListener("click", e=> {
-//     alert("리뷰작성을 취소하시겠습니까?");
 // });

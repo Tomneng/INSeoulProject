@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/food")
 public class FoodDetailController {
 
@@ -23,24 +23,23 @@ public class FoodDetailController {
 //        foodService.getapi(model);
 //    }
 //    음식점
-    @GetMapping("/food_review/{foodId}")
-    public String foodDetail(@PathVariable Long foodId, Model model){
-        //음식점 정보
-        model.addAttribute("foodrow", foodService.selectById(foodId));
-        // 리뷰 카테고리
-        model.addAttribute("reviewCategory", reviewService.showCategory(foodId));
-        // 평점
-        model.addAttribute("reviewAvg", foodService.showRating(foodId));
-
-        return "food/food_review";
-    }
+    //리뷰 작성
     @PostMapping("/food_review")
-    public String reviewDetail(Review review)
-    {
+    public int reviewDetail(
+            @RequestParam("food_id") Long foodId,
+            @RequestParam("user_id") Long userId,
+            @RequestParam("review_star") Double reviewStar,
+            @RequestParam("review_category") String reviewCategory,
+            @RequestParam("review_content") String reviewContent
+    ) {
+        Review review = new Review();
+        review.setFoodId(foodId);
+        review.setReviewContent(reviewContent);
+        review.setReviewCategory(reviewCategory);
+        review.setUserId(userId);
+        review.setReviewStar(reviewStar);
         System.out.println(reviewService.countRw(review));
-
-        String urld = "redirect:/food/food_review/" + review.getFoodId();
-        return urld;
-        }
+        return 1;
     }
+}
 

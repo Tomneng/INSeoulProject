@@ -140,6 +140,8 @@ public class HouseServiceImpl implements HouseService {
         model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
         model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
 
+        System.out.println("하우스서비스임플 list함수 model값 == " + model);
+
         return list;
     }
 
@@ -177,6 +179,4 @@ public class HouseServiceImpl implements HouseService {
             }
         }
     }
-
-
 }
