@@ -60,4 +60,12 @@
     <delete id="deleteScrapTour" flushCache="true">
         DELETE FROM tourinfosaved WHERE id = #{userId} AND tour_id = ${tourId}
     </delete>
+
+    <select id="noMbtiTourCard" resultType="com.inseoul.tour.domain.Item">
+        SELECT tour_id, COUNT(tour_id) as scrap_count
+        FROM user_scrapted_tour
+        GROUP BY tour_id
+        ORDER BY scrap_count DESC
+        LIMIT 4;
+    </select>
 </mapper>

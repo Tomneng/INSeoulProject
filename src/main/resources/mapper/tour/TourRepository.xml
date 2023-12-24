@@ -69,6 +69,5 @@
         ORDER BY RAND()
         LIMIT 4
     </select>
-    <select id="findById" resultType="com.inseoul.tour.domain.Item"></select>
 
 </mapper>
