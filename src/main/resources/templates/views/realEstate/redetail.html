@@ -29,7 +29,6 @@
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/reDetail.css}">
 
-        >>>>>>>>> Temporary merge branch 2
     </head>
 
     <script th:inline="javascript">
@@ -99,15 +98,14 @@
     </section>
 
     <!-- 카카오로드뷰 section 추가 - 신철희 12/22 저녁 -->
-    <!-- 부동산 지도 section 입니다 -->
-    <section id="realMapSection">
-        <!-- 부동산 지도 hearder -->
-        <div id="realMapHeader">&lt;카카오 지도 로드뷰&gt;</div>
-        <!-- 부동산 지도 div -->
-        <div id="realMap"></div>
-        <!-- 부동산 로드뷰 div -->
-        <div id="realRoadview"></div>
-    </section>
+    <div class="map_wrap">
+        <div id="mapWrapper">
+            <div id="map"></div> <!-- 지도를 표시할 div 입니다 -->
+        </div>
+        <div id="rvWrapper">
+            <div id="roadview"></div> <!-- 로드뷰를 표시할 div 입니다 -->
+        </div>
+    </div>
 
     <!--  푸터 블럭 by 철희 12/20  -->
     <th:block th:insert="~{common/footer::footer}"></th:block>

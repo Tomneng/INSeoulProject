@@ -1,5 +1,5 @@
 /* 관광/부동산 추천 카드 */
-#cardPart {
+.cardPart {
     overflow: hidden;
 }
 

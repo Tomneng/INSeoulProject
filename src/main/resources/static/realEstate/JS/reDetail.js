@@ -1,108 +1,127 @@
 $(document).ready(function () {
+    var realAdress = $('#address').text().trim();
+    console.log("부동산 주소는 " + realAdress);
 
-    const houseId = $("#houseId").val();
-    const data = {
-        "houseId": houseId
-    }
-    const chart = []
-    $.ajax({
-        url: "/scores/avgs",
-        type: "GET",
-        data: data,
-        cache: false,
-        success: function (data, status) {
-            if (status == "success") {
-                chart.push(data[0])
-                chart.push(data[1])
-                chart.push(data[2])
-                chart.push(data[3])
-            }
-            const ctx = document.getElementById('myChart');
+    var mapWrapper = document.getElementById('mapWrapper'); //지도를 감싸고 있는 DIV태그
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['현재부동산계약점수', '평균부동산계약점수', '현재부동산점수', '평균부동산점수'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: chart,
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        },
-    })
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapCenter = new kakao.maps.LatLng(33.450422139819736, 126.5709139924533), // 지도의 가운데 좌표
+        mapOption = {
+            center: mapCenter, // 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
+        };
+    console.log("document.ready mapCenter = " + mapCenter);
 
-    $("#putScore").click(function () {
-        const putscore = {
-            "houseId": houseId,
-            "cScore": $("#contract_ScorePut").val(),
-            "pScore": $("#place_ScorePut").val(),
-            "userId": logged_id
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    map.addOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW); //지도 위에 로드뷰 도로 올리기
+
+    var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+    var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
+    var rvClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+    // 마커 이미지를 생성합니다.
+    var markImage = new kakao.maps.MarkerImage(
+        'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/roadview_minimap_wk_2018.png',
+        new kakao.maps.Size(26, 46),
+        {
+            // 스프라이트 이미지를 사용합니다.
+            // 스프라이트 이미지 전체의 크기를 지정하고
+            spriteSize: new kakao.maps.Size(1666, 168),
+            // 사용하고 싶은 영역의 좌상단 좌표를 입력합니다.
+            // background-position으로 지정하는 값이며 부호는 반대입니다.
+            spriteOrigin: new kakao.maps.Point(705, 114),
+            offset: new kakao.maps.Point(13, 46)
         }
-
-        $.ajax({
-            url: "/scores/putScore",
-            type: "POST",
-            data: putscore,
-            cache: false,
-            success: function (data, status) {
-                if (status == "success") {
-                    alert("점수 작성 완료")
-                    $("#contract_ScorePut").val(null)
-                    $("#place_ScorePut").val(null)
-                }
-            },
-        })
-    })
+    );
 
 
-    // 여기부터 지도에 관한 내용.
-    // 렌더링 되어있는 부동산 주소값을 변수에 할당.
-    var address = $('#address').text().trim();
-    console.log("여기에 부동산 주소가 찍힐까? " + address) // 주소 출력되는 것 확인함.
+    // 드래그 가능한 마커변수
+    var rvMarker;
 
+    // 드래그 가능한 마커 생성함수
+    function createDraggableMaker(coords) {
+        // 드래그가 가능한 마커를 생성합니다.
+        rvMarker = new kakao.maps.Marker({
+            image: markImage,
+            position: coords,
+            draggable: true,
+            map: map
+        });
+        console.log("주소를 좌표로 변환 후 createDraggableMaker(coords)의 coords는 " + coords);
+    }
 
-    // 로드뷰 지도 표시 - 신철희 12/22 저녁
-    var centerRealEstate = address;
+    createDraggableMaker()
 
-    var roadviewContainer = document.getElementById('realRoadview'); //로드뷰를 표시할 div
-    var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-    var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+    function AssignDragendEventToMarker() {
+        //마커에 dragend 이벤트를 할당합니다
+        kakao.maps.event.addListener(rvMarker, 'dragend', function (mouseEvent) {
+            console.log("마커를 움직이면 실행한다.")
+            var position = rvMarker.getPosition(); //현재 마커가 놓인 자리의 좌표
+            toggleRoadview(position); //로드뷰를 토글합니다
+        });
+    }
 
-    // 좌표로 지도의 위치 담기
-    var position = "";
+    AssignDragendEventToMarker()
+
+    //지도에 클릭 이벤트를 할당합니다
+    kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+        // 현재 클릭한 부분의 좌표를 리턴
+        var position = mouseEvent.latLng;
+
+        rvMarker.setPosition(position);
+        toggleRoadview(position); //로드뷰를 토글합니다
+    });
+
+    //로드뷰 toggle함수
+    function toggleRoadview(position) {
+        console.log("주소를 좌표로 변환 후 toggleRoadview(position)의 position는 " + position);
+
+        //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+        rvClient.getNearestPanoId(position, 50, function (panoId) {
+
+            if (panoId === null) {
+                rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
+                mapWrapper.style.width = '100%';
+                map.relayout();
+            } else {
+                mapWrapper.style.width = '50%';
+                map.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+                rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
+                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
+            }
+
+        });
+
+    } // end of toggleRoadview()
+
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
 
-    function showLoadView() {
-        // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-        roadviewClient.getNearestPanoId(position, 100, function (panoId) {
-            roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
-        });
-    }
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(centerRealEstate, function (result, status) {
+    geocoder.addressSearch(realAdress, function (result, status) {
 
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
 
-            position = new kakao.maps.LatLng(result[0].y, result[0].x);
+            mapCenter = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        } else {
-            alert("주소를 좌표로 검색하는데 실패했습니다.");
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(mapCenter);
+            console.log("주소를 좌표로 변환 후 mapCenter = " + mapCenter);
+
+            createDraggableMaker(mapCenter);
+
+            toggleRoadview(mapCenter);
+
+            AssignDragendEventToMarker()
+
+
         }
-        showLoadView();
     });
 
-
-})
+}); // end of document ready

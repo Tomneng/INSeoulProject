@@ -2,22 +2,31 @@ td {
     border: black 2px solid;
 }
 
-#realMapSection {
-    justify-content: center;
-    text-justify: auto;
-}
 
-#realMapHeader {
-    border: orange solid;
-    text-align: center;
-    margin-top: 50px;
-}
-
-#realRoadview {
-    /*width:100%;*/
-    max-width: 1024px;
-    height: 80vh;
+.map_wrap {
+    overflow: hidden;
+    height: 600px;
     border: red solid;
-    border-radius: 10px;
-    margin: auto;
+}
+
+#mapWrapper {
+    width: 50%;
+    height: 100%;
+    float: left
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+#rvWrapper {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#roadview {
+    width: 100%;
+    height: 100%;
 }
