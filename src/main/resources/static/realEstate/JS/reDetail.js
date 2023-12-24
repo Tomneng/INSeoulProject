@@ -73,7 +73,7 @@ $(document).ready(function () {
     // 로드뷰 지도 표시 - 신철희 12/22 저녁
     var centerRealEstate = address;
 
-    var roadviewContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+    var roadviewContainer = document.getElementById('realRoadview'); //로드뷰를 표시할 div
     var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
     var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
 

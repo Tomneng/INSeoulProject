@@ -2,23 +2,22 @@ td {
     border: black 2px solid;
 }
 
-#roadviewSection {
+#realMapSection {
     justify-content: center;
     text-justify: auto;
 }
 
-#roadviewName {
+#realMapHeader {
     border: orange solid;
     text-align: center;
     margin-top: 50px;
 }
 
-#roadview {
+#realRoadview {
     /*width:100%;*/
     max-width: 1024px;
     height: 80vh;
     border: red solid;
     border-radius: 10px;
     margin: auto;
-
 }
