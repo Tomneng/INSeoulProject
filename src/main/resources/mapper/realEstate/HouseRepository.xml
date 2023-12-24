@@ -82,5 +82,29 @@
         WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
     </select>
 
+    <select id="top3mbti" resultType="java.lang.String">
+        SELECT u.mbti
+        FROM houseinfosaved h, user u
+        WHERE h.house_id = #{houseId}
+        Group by u.mbti
+        ORDER BY count(u.mbti) DESC
+        LIMIT 3
+    </select>
 
+    <select id="top3Prop" resultType="java.lang.Integer">
+        SELECT round(100*count(u.mbti) / (SELECT count(*) FROM houseinfosaved WHERE house_id = #{houseId}))
+        FROM houseinfosaved h NATURAL JOIN user u
+        WHERE h.house_id = #{houseId}
+        Group by u.mbti
+        ORDER BY 1 DESC
+        LIMIT 3;
+    </select>
+    <select id="houseOnmain" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT h.house_id "houseId", h.ssg_name "ssgName", h.dong_name "dongName", h.rent_kind "rentKind", h.rent_deposit "rentDeposit", h.rent_fee "rentFee"
+        FROM house_contract h, houseinfosaved s
+        WHERE h.house_id = (SELECT s.house_id FROM houseinfosaved GROUP BY s.house_id ORDER BY count(s.user_id) DESC LIMIT 4)
+        GROUP BY h.house_id
+        ORDER BY count(s.user_id) DESC
+        LIMIT 4
+    </select>
 </mapper>

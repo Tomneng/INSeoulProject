@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="mainCardH">
+    <!--Extra small	        None	<576px      Mobile L 425px  -->
+    <!--Small	            sm	    ≥576px                      -->
+    <!--Medium	            md	    ≥768px      Tablet 768px    -->
+    <!--Large	            lg	    ≥992px      Laptop 1024px   -->
+    <!--Extra large	        xl	    ≥1200px                     -->
+    <!--Extra extra large	xxl	    ≥1400px                     -->
+    <div id="cardPart2" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 mx-4 mb-5">
+        <div th:each="row : ${houseCard}" class="divider-container" id="container1">
+            <div class="divider">
+                <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
+                       th:value="${row.houseId}"><br>
+                <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                    <span th:text="${row.ssgName}"></span><br>
+                    <span th:text="${row.dongName}"></span><br>
+                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
+                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
+                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
+                </a>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

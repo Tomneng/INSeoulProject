@@ -469,3 +469,31 @@ SELECT *
 FROM attachment;
 SELECT *
 FROM post;
+
+
+SELECT * FROM houseinfosaved;
+SELECT mbti from user;
+
+SELECT count(*) FROM houseinfosaved WHERE house_id = 119;
+
+SELECT round(100*count(u.mbti) / (SELECT count(*) FROM houseinfosaved WHERE house_id = 119))
+FROM houseinfosaved h NATURAL JOIN user u
+WHERE h.house_id = 119
+Group by u.mbti
+ORDER BY 1 DESC
+LIMIT 3;
+
+SELECT *
+FROM houseinfosaved h NATURAL JOIN user u;
+
+SELECT h.house_id, h.ssg_name, h.dong_name, h.rent_kind, h.rent_deposit, h.rent_fee
+FROM house_contract h, houseinfosaved s
+WHERE h.house_id = (SELECT s.house_id FROM houseinfosaved GROUP BY s.house_id ORDER BY count(s.user_id) DESC LIMIT 4)
+GROUP BY h.house_id
+ORDER BY count(s.user_id) DESC
+LIMIT 4;
+
+SELECT house_id FROM houseinfosaved GROUP BY house_id ORDER BY count(user_id) DESC LIMIT 4
+
+
+

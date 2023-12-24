@@ -6,6 +6,7 @@ import com.inseoul.real_estate.domain.TbLnOpendataRentV;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Map;
 
 public interface HouseService {
     int save(Row row);
@@ -21,5 +22,9 @@ public interface HouseService {
     void getapi(Row row, Model model, Integer page);
 
     List<Integer> getAvgScores(Row row);
+
+    Object[] getTop(Long houseId);
+
+    List<Row> houseOnmain();
 
 }

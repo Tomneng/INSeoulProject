@@ -1,5 +1,6 @@
 package com.inseoul.main.controller;
 
+import com.inseoul.real_estate.service.HouseService;
 import com.inseoul.tour.domain.Item;
 import com.inseoul.tour.service.TourService;
 import com.inseoul.user.service.UserScraptedService;
@@ -18,6 +19,9 @@ public class MainController {
     private TourService tourService;
 
     @Autowired
+    private HouseService houseService;
+
+    @Autowired
     private UserScraptedService userScraptedService;
 
     @RequestMapping("/inseoul")
@@ -28,6 +32,7 @@ public class MainController {
     @RequestMapping("/home/main")
     public String common(Model model) {
         model.addAttribute("randomTourCard", tourService.getRandomTourCard());
+        model.addAttribute("houseCard", houseService.houseOnmain());
 
 //        List<Item> noMbtiTourCard = userScraptedService.noMbtiTourCard();
 //        model.addAttribute("noMbtiTourCard", noMbtiTourCard);

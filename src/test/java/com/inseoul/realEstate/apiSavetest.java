@@ -109,4 +109,31 @@ public class apiSavetest {
         System.out.println(row.getContractScore());
     }
 
+    @Test
+    void test10(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        List<String> list = houseRepository.top3mbti(119L);
+        System.out.println(list.size());
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+
+        List<Integer> list2 = houseRepository.top3Prop(119L);
+        System.out.println(list2.size());
+        System.out.println(list2.get(0));
+        System.out.println(list2.get(1));
+        System.out.println(list2.get(2));
+
+
+    }
+
+    @Test
+    void test11(){
+        HouseRepository houseRepository = sqlSession.getMapper(HouseRepository.class);
+        System.out.println(houseRepository.houseOnmain().get(0).getHouseId());
+        System.out.println(houseRepository.houseOnmain().get(1));
+        System.out.println(houseRepository.houseOnmain().get(2));
+        System.out.println(houseRepository.houseOnmain().get(3));
+    }
+
 }

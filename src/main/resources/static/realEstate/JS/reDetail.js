@@ -40,6 +40,41 @@ $(document).ready(function () {
         },
     })
 
+    const chart2 = []
+    $.ajax({
+        url: "/scores/mbtiOrder",
+        type: "GET",
+        data: data,
+        cache: false,
+        success: function (data, status) {
+            if (status == "success") {
+                chart2.push(data[1])
+                chart2.push(data[3])
+                chart2.push(data[5])
+            }
+            const ctx = document.getElementById('myChart2');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [data[0], data[2], data[4]],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: chart2,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        },
+    })
+
     $("#putScore").click(function () {
         const putscore = {
             "houseId": houseId,
