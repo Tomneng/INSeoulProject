@@ -202,13 +202,29 @@ public class HouseServiceImpl implements HouseService {
         List<String> list1 = houseRepository.top3mbti(houseId);
         List<Integer> list2 = houseRepository.top3Prop(houseId);
         Object[] mixedArray = new Object[6];
+        if (list1.isEmpty()){
+            return mixedArray;
+        } else if (list1.size() == 1) {
+
+        mixedArray[0] = list1.get(0);
+        mixedArray[1] = list2.get(0);
+        return mixedArray;
+        }else if (list1.size() == 2) {
+
         mixedArray[0] = list1.get(0);
         mixedArray[1] = list2.get(0);
         mixedArray[2] = list1.get(1);
         mixedArray[3] = list2.get(1);
-        mixedArray[4] = list1.get(2);
-        mixedArray[5] = list2.get(2);
         return mixedArray;
+        }else {
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            mixedArray[2] = list1.get(1);
+            mixedArray[3] = list2.get(1);
+            mixedArray[4] = list1.get(2);
+            mixedArray[5] = list2.get(2);
+            return mixedArray;
+        }
     }
 
     @Override

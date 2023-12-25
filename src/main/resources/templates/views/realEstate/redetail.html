@@ -8,7 +8,7 @@
     alert("해당 정보가 삭제되거나 없습니다")
     history.back();
 </script>
-<th:block th:if="${row}" th:with="logged_user=${#authentication.getPrincipal().getUser()}">
+<th:block th:if="${row}" th:with="logged_user=${#authentication.getPrincipal()?.getUser()}">
     <script th:src="@{/realEstate/JS/reDetail.js}"></script>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,6 +39,40 @@
         td {
             border: black 2px solid;
         }
+
+        #myChart, #myChart2 {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrap-chart {
+            flex-wrap: wrap; /* flex 요소들을 여러 줄로 나누기 */
+        }
+
+        .chart-container {
+            width: 49%; /* 각 차트의 폭을 49%로 조절 */
+            box-sizing: border-box; /* 요소의 내용을 포함한 전체 너비와 높이 지정 */
+            position: relative;
+        }
+
+        .score-inputs {
+            width: 100%; /* input 요소들을 차트 아래에 위치하도록 전체 폭 지정 */
+            margin-top: 10px; /* 간격 추가 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .score-inputs input{
+            width: 10%;
+        }
+
+        .bordered-div {
+            width: 49%;
+            box-sizing: border-box;
+            border: 2px solid black;
+            height: 100%;
+        }
     </style>
     <body>
     <!--/* 공통 헤더 */-->
@@ -67,9 +101,9 @@
             </tr>
             <tr class="table-primary">
                 <td>보증금 (단위 : 만)</td>
-                <td id="rent_deposit">[[${row.rentDeposit}]] 원</td>
+                <td id="rent_deposit">[[${row.rentDeposit}]]</td>
                 <td>월세 (단위 : 만)</td>
-                <td id="rent_fee">[[${row.rentFee}]] 원</td>
+                <td id="rent_fee">[[${row.rentFee}]]</td>
             </tr>
             <tr class="table-primary">
                 <td>건축년도</td>
@@ -87,17 +121,22 @@
         </table>
     </div>
     <section>
-        <div class="container" style="display: flex">
-            <div>
+        <div class="container wrap-chart" style="display: flex; justify-content: space-between">
+            <div class="chart-container">
                 <canvas id="myChart"></canvas>
             </div>
-            <div>
+            <div class="chart-container">
                 <canvas id="myChart2"></canvas>
             </div>
-            <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
-            <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
-            <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
-            <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
+            <div class="score-inputs">
+                <label for="contract_ScorePut">계약 평가하기</label>
+                <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
+                <label for="place_ScorePut">주거지 평가하기</label>
+                <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
+                <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
+                <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
+                <div class="bordered-div">* 계약점수는 현재 조회한 주거지의 계약에 대한 점수입니다.<br>* 주거지점수는 현재 조회한 집에 대한 점수입니다.</div>
+            </div>
         </div>
     </section>
 

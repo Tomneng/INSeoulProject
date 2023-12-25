@@ -3,6 +3,8 @@ package com.inseoul.config;
 import com.inseoul.authority.domain.Authority;
 import com.inseoul.user.domain.User;
 import com.inseoul.user.service.UserService;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;

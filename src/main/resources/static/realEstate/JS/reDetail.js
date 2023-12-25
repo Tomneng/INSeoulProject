@@ -24,14 +24,14 @@ $(document).ready(function () {
                 data: {
                     labels: ['현재부동산계약점수', '평균부동산계약점수', '현재부동산점수', '평균부동산점수'],
                     datasets: [{
-                        label: '실시간 평가 점수',
+                        label: '실시간 평가 점수 (단위 : 점)',
                         data: chart,
                         borderWidth: 1,
                         backgroundColor: [
-                            data[0] > 80 && 'rgb(255, 99, 132)',
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
+                            (data[0] < data[1]) ? 'rgb(255, 0, 0)' : 'rgb(051, 000, 255)',
+                            'rgb(128, 128, 128)',
+                            (data[2] < data[3]) ? 'rgb(255, 0, 0)' : 'rgb(051, 000, 255)',
+                            'rgb(128, 128, 128)',
                         ]
                     }],
 
@@ -39,7 +39,9 @@ $(document).ready(function () {
                 options: {
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            max: 100,
+                            stepSize: 10,
                         }
                     }
                 }
@@ -66,21 +68,23 @@ $(document).ready(function () {
                 data: {
                     labels: [data[0], data[2], data[4]],
                     datasets: [{
-                        label: 'MBTI유형별 스크랩 순위 TOP3',
+                        label: 'MBTI유형별 스크랩 순위 TOP3 (단위 : %)',
                         data: chart2,
-                        borderWidth: 1
-                    }],
+                        borderWidth: 1,
                     backgroundColor: [
-                        data[0] > 80 && 'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
+                        'rgb(255, 215, 00)',
+                        'rgb(192, 192, 192)',
+                        'rgb(205, 127, 50)',
                     ]
+                    }],
                 },
                 options: {
+                    indexAxis: 'y',
                     scales: {
-                        y: {
-                            beginAtZero: true
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            stepSize: 10,
                         }
                     }
 
@@ -93,6 +97,11 @@ $(document).ready(function () {
     })
 
     $("#putScore").click(function () {
+        if (logged_id == null){
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();
+        }else {
+
         const putscore = {
             "houseId": houseId,
             "cScore": $("#contract_ScorePut").val(),
@@ -113,6 +122,7 @@ $(document).ready(function () {
                 }
             },
         })
+        }
     })
 
 
