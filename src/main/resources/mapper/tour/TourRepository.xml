@@ -65,9 +65,39 @@
     </select>
 
     <select id="getRandomTourCard" resultType="com.inseoul.tour.domain.Item">
-        <include refid="SELECT_BASE"/>
-        ORDER BY RAND()
+        SELECT
+        t.tour_id AS "tourId",
+        t.tour_name AS "tourName",
+        t.tour_image1 AS "tourImage1",
+        t.tour_addr1 AS "tourAddr1",
+        t.tour_addr2 AS "tourAddr2"
+        FROM
+        tour t
+        JOIN
+        tourinfosaved ts ON t.tour_id = ts.tour_id
+        GROUP BY
+        t.tour_id
+        ORDER BY
+        COUNT(ts.tour_id) DESC
         LIMIT 4
+    </select>
+
+    <select id="top3mbti" resultType="java.lang.String">
+        SELECT u.mbti
+        FROM tourinfosaved t, user u
+        WHERE t.tour_id = #{tourId}
+        Group by u.mbti
+        ORDER BY count(u.mbti) DESC
+            LIMIT 3
+    </select>
+
+    <select id="top3Prop" resultType="java.lang.Integer">
+        SELECT round(100*count(u.mbti) / (SELECT count(*) FROM tourinfosaved WHERE tour_id = #{tourId}))
+        FROM tourinfosaved t NATURAL JOIN user u
+        WHERE t.tour_id = #{tourId}
+        Group by u.mbti
+        ORDER BY 1 DESC
+            LIMIT 3
     </select>
 
 </mapper>

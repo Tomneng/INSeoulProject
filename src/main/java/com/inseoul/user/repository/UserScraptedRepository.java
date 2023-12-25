@@ -31,5 +31,5 @@ public interface UserScraptedRepository {
 
     Item selectScraptedTour(Long tourId);
 
-    List<Item> noMbtiTourCard();
+//    List<Item> noMbtiTourCard();
 }

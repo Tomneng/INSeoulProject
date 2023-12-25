@@ -30,7 +30,7 @@ public class MainController {
     @RequestMapping("/home/main")
     public String common(Model model) {
         model.addAttribute("randomTourCard", tourService.getRandomTourCard());
-        model.addAttribute("noMbtiCard", userScraptedService.noMbtiTourCard());
+//        model.addAttribute("noMbtiCard", userScraptedService.noMbtiTourCard());
 
         return "home/main";
     }

@@ -75,10 +75,10 @@ public class UserScraptedServiceImpl implements UserScraptedService {
         return itemList;
     }
 
-    @Override
-    public List<Item> noMbtiTourCard() {
-        return userScraptedRepository.noMbtiTourCard();
-    }
+//    @Override
+//    public List<Item> noMbtiTourCard() {
+//        return userScraptedRepository.noMbtiTourCard();
+//    }
 
 
     @Override

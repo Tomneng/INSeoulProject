@@ -34,3 +34,6 @@ ORDER BY
     scrapCount DESC
 LIMIT 4;
 
+SELECT * FROM tourinfosaved;
+
+

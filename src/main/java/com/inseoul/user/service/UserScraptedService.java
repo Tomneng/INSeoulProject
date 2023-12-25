@@ -23,5 +23,5 @@ public interface UserScraptedService {
     List<Item> listByIdTour(Model model);
 
 
-    List<Item> noMbtiTourCard();
+//    List<Item> noMbtiTourCard();
 }
