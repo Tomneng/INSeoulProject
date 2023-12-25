@@ -1,4 +1,19 @@
 $(document).ready(function (){
+
+    $('.login-form .form-control').on('input', function () {
+        // Check if the input has a value
+        if ($(this).val().length > 0) {
+            // If it has a value, add a class to the label for styling
+            $(this).prev('label').addClass('has-value');
+        } else {
+            // If it doesn't have a value, remove the class
+            $(this).prev('label').removeClass('has-value');
+        }
+    });
+
+    // Trigger the input event initially for any pre-filled values
+    $('.login-form .form-control').trigger('input');
+
     let value;
     $("#authCodeSend").click(function (event){
             const data = {
