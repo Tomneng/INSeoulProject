@@ -122,7 +122,7 @@ public class EmailService {
         createCode(); //인증 코드 생성
         String setFrom = "kchanghee59@gmail.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
         String toEmail = email; //받는 사람
-        String title = "CODEBOX 회원가입 인증 번호"; //제목
+        String title = "INSeoul 회원가입 인증 번호"; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); // 받는 사람 주소 지정
@@ -147,14 +147,14 @@ public class EmailService {
 
         String setFrom = "kchanghee59@gmail.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
         String toEmail = email; //받는 사람
-        String title = "INSeoul 회원님의 비밀번호입니다."; //제목
+        String title = "INSeoul 회원님의 임시비밀번호입니다."; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); // 받는 사람 주소 지정
         message.setSubject(title); //제목 설정
         message.setFrom(setFrom); // 보내는 사람 주소 입력
         // 위에서 서술했듯이, setContext(authNum)은 String 이며 text이다. 결론적으로 아래는 text/html 인 Mimetype 메세지
-        message.setText(setContext(tempPass), "utf-8", "html");
+        message.setText(setContextPass(tempPass), "utf-8", "html");
 
         return message;
     }
@@ -163,7 +163,7 @@ public class EmailService {
 
         String setFrom = "kchanghee59@gmail.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
         String toEmail = email; //받는 사람
-        String title = "INSeoul 회원님의 비밀번호입니다."; //제목
+        String title = "INSeoul 문의사항 답변입니다."; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); // 받는 사람 주소 지정
@@ -231,6 +231,12 @@ public class EmailService {
         Context context = new Context();
         context.setVariable("code", code);
         return templateEngine.process("mail/mail.html", context); //mail.html, process는 템플릿을 실행 후 실행결과를 리턴
+    }
+
+    public String setContextPass(String code) {
+        Context context = new Context();
+        context.setVariable("code", code);
+        return templateEngine.process("mail/tempPass.html", context); //mail.html, process는 템플릿을 실행 후 실행결과를 리턴
     }
 
     public AuthCodeQryResult sendAnswer(String email, String answer)throws MessagingException, UnsupportedEncodingException {
