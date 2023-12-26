@@ -2,6 +2,8 @@
     overflow: hidden;
     height: 600px;
     border: red solid;
+    max-width: 83vw;
+    margin: auto;
 }
 
 #mapWrapper {
