@@ -31,18 +31,6 @@ public class apiFoodTest {
     }
 
 
-    @Test
-    void test09(){
-        ReviewRepository reviewRepository = sqlSession.getMapper(ReviewRepository.class);
-        Review review = Review.builder()
-                .foodId(24L)
-                .userId(1L)
-                .reviewCategory("음식이 맛있어요")
-                .reviewStar(4.5)
-                .reviewContent("산골막국수")
-                .build();
-        System.out.println(reviewRepository.updateRating(review.getFoodId(), review.getUserId(), review.getReviewStar()));
-    }
 
 }
 
