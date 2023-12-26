@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
     });
 
-    $(".divider input").change(function () {
+    $(".house").change(function () {
         const houseId = $(this).val();
         const data = {
             "house_id": houseId,
@@ -33,7 +33,7 @@ $(document).ready(function () {
         });
     });
 
-    $(".divider input").change(function () {
+    $(".tour").change(function () {
         const tourId = $(this).val();
         const data = {
             "tour_id": tourId,

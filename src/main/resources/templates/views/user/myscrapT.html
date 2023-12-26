@@ -5,7 +5,7 @@
 <th:block th:fragment="myscrapT" th:with="logged_user=${#authentication.principal.user}">
     <div th:each="item : ${itemList}" class="divider-container" id="container1">
         <div class="divider">
-            <input type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}" checked>
+            <input class="tour" type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}" checked>
             <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">
                 <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}" class="img-fluid" id="tourImage1">
                 <span th:text="${item.tourName}"></span>
