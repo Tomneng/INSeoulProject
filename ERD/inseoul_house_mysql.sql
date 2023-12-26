@@ -469,3 +469,13 @@ SELECT *
 FROM attachment;
 SELECT *
 FROM post;
+
+
+SELECT * FROM houseinfosaved;
+INSERT INTO houseInfoSaved(user_id, house_id)
+values(6, 119);
+SELECT * from user;
+
+
+
+

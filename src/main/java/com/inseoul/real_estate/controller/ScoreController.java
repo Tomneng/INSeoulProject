@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/scores")
@@ -35,4 +37,13 @@ public class ScoreController {
 
         houseService.putScore(houseId, userId, contractScore, placeScore);
     }
+
+    @GetMapping("/mbtiOrder")
+    public Object[] giveTop3(
+            @RequestParam("houseId") Long houseId
+    ){
+        Object[] hmap = houseService.getTop(houseId);
+        return hmap;
+    }
+
 }

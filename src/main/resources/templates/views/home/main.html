@@ -24,9 +24,6 @@
 
 <body>
 
-<!--임시 비밀번호로 로그인 한 경우 띄워주는 모달!-->
-<th:block th:insert="~{home/tempPassModal::tempPassModal}"></th:block>
-
 <!--/* 공통 헤더 */-->
 <th:block th:insert="~{common/header::header}"></th:block>
 
@@ -42,6 +39,9 @@
 
 <!--/* 관광 추천 카드 */-->
 <th:block th:insert="~{common/mainCard::mainCard}"></th:block>
+
+<!--/* 부동산 추천 카드 */-->
+<th:block th:insert="~{common/mainCardH::mainCardH}"></th:block>
 
 <!--/* 경계에 있는 그림자 효과 */-->
 <div class="b-example-divider"></div>

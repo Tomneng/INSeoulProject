@@ -32,6 +32,10 @@ public interface HouseRepository {
     Integer avgCScore(Row row);
     Integer avgPScore(Row row);
 
+    List<String> top3mbti(Long houseId);
 
+    List<Integer> top3Prop(Long houseId);
+
+    List<Row> houseOnmain();
 
 }

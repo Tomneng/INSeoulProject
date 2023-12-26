@@ -38,6 +38,7 @@ public class SecurityConfig {
                         // ↓ /board/detail/** URL로 들어오는 요청은 '인증'만 필요.
                         // 추후에 필요한 url들은 추가
                         .requestMatchers("/realEstate/infoList").authenticated()
+                        .requestMatchers("/tour/tourList").authenticated()
                         // ↓ "/board/write/**", "/board/update/**", "/board/delete/**" URL로 들어오는 요청은 '인증' 뿐 아니라 ROLE_MEMBER 나 ROLE_ADMIN 권한을 갖고 있어야 한다. ('인가')
                         .requestMatchers("/board/write/**", "/board/update/**", "/board/delete/**").hasAnyRole("MEMBER", "ADMIN")
                         // ↓ 그 밖의 다른 요청은 모두 permit!

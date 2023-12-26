@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     // 여기 철희가 추가 12/19
     // 헤더에 active class 추가
     $("#tabRealEstate").addClass("active");
@@ -20,23 +19,25 @@ $(document).ready(function () {
     const userId = {
         "user_id": logged_id,
     };
-    $.ajax({
-        url: "/house/scrapted",
-        type: "GET",
-        data: userId,
-        cache: false,
-        success: function (data, status) {
-            if (status == "success") {
-                const init = document.querySelector("#container1").firstElementChild
-                const val = parseInt(init.firstElementChild.value);
-                for (i = val; i > val - 12; i--) {
-                    if (data.includes(i)) {
-                        document.getElementById(`${i}`).checked = true;
+    if (logged_id != null) {
+        $.ajax({
+            url: "/house/scrapted",
+            type: "GET",
+            data: userId,
+            cache: false,
+            success: function (data, status) {
+                if (status == "success") {
+                    const init = document.querySelector("#container1").firstElementChild
+                    const val = parseInt(init.firstElementChild.value);
+                    for (i = val; i > val - 12; i--) {
+                        if (data.includes(i)) {
+                            document.getElementById(`${i}`).checked = true;
+                        }
                     }
                 }
-            }
-        },
-    })
+            },
+        })
+    }
 
 
     $(".divider .scraptRealEstate").change(function () {
@@ -45,7 +46,7 @@ $(document).ready(function () {
             "house_id": houseId,
             "user_id": logged_id,
         };
-        if ($(".divider .scraptRealEstate").is(":checked")) {
+        if ($(".divider .scraptRealEstate").is(":checked") && logged_id != null) {
             $.ajax({
                 url: "/house/scrapt",
                 type: "POST",
@@ -62,31 +63,27 @@ $(document).ready(function () {
                 },
             });
         } else {
-            $.ajax({
-                url: "/house/scrapt",
-                type: "POST",
-                data: data,
-                cache: false,
-                success: function (data, status) {
-                    if (status == "success") {
-                        if (data.status !== "DELETED") {
-                            console.log("스크랩 해제: " + data.status)
-                            alert(data.status);
-                            return;
+            if (logged_id != null) {
+
+                $.ajax({
+                    url: "/house/scrapt",
+                    type: "POST",
+                    data: data,
+                    cache: false,
+                    success: function (data, status) {
+                        if (status == "success") {
+                            if (data.status !== "DELETED") {
+                                console.log("스크랩 해제: " + data.status)
+                                alert(data.status);
+                                return;
+                            }
                         }
-                    }
-                },
-            });
+                    },
+                });
+            }
         }
-
     });
-
-
 });
-
-function repaging() {
-}
-
 
 function selyear() {
     for (k = 2023; k > 2017; k--) {
