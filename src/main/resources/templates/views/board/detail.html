@@ -19,6 +19,16 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
+        <!-- 신철희 추가 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+
 
         <script th:inline="javascript">
             // 나중에 댓글 작성시 필요.
@@ -30,11 +40,14 @@
     </head>
 
     <body>
+    <!--  헤더 추가 - 신철희 -->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
     <div class="container mt-3">
         <h2>조회 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-<!--            <span class="float-start me-2">id : [[${post.postId}]]</span>-->
+            <!--            <span class="float-start me-2">id : [[${post.postId}]]</span>-->
             <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
             <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
@@ -94,8 +107,26 @@
 
         </section>
     </div>
+
+    <!--  푸터 추가 - 신철희  -->
+    <th:block th:insert="~{common/footer::footer}"></th:block>
+
     <script th:src="@{/board/js/detail.js}"></script>
     </body>
 
 </th:block>
+
+<!-- 신철희 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+        integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+        crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/common/js/common.js}"></script>
 </html>

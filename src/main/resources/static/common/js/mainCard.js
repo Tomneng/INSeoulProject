@@ -16,7 +16,7 @@ let cardElement = new IntersectionObserver((e) => {
     })
 })
 
-// 요소를 선택해서 변수에 할당
+// 추천 카드 요소
 let cardElments = document.querySelectorAll(".card")
 
 // 변수의 요소만큼 반복해서 observe() 호출

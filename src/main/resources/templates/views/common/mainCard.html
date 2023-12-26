@@ -4,68 +4,18 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="mainCard">
-    <!--Extra small	        None	<576px      Mobile L 425px  -->
-    <!--Small	            sm	    ≥576px                      -->
-    <!--Medium	            md	    ≥768px      Tablet 768px    -->
-    <!--Large	            lg	    ≥992px      Laptop 1024px   -->
-    <!--Extra large	        xl	    ≥1200px                     -->
-    <!--Extra extra large	xxl	    ≥1400px                     -->
-
-<!--    회원이 아니거나 로그인하지 않은 사용자에게 보여주는 메인추천카드-->
     <div id="cardPart1" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 mx-4 mb-5">
         <div th:each="item : ${randomTourCard}" class="col">
             <div class="card">
                 <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
                      class="img-fluid" id="tourImage1" alt="card1image">
                 <div class="card-body">
-                    <!-- <h5 class="card-title">카드 제목</h5> -->
-                    <h6 class="card-subtitle mb-2" th:text="${item.tourName}"></h6>
+                    <h3 class="card-subtitle mb-2" th:text="${item.tourName}"></h3>
                     <p class="card-text" th:text="${item.tourAddr1 + ' ' + item.tourAddr2}"></p>
-                    <!-- <a href="#" class="card-link">카드 링크</a> -->
-                    <!-- <a href="#" class="card-link">카드 링크2</a> -->
                     <a class="btn" th:href="@{'/tour/tourDetail/' + ${item.tourId}}">상세정보 보러가기</a>
                 </div>
             </div>
         </div>
-    </div>
-
-
-<!--    회원가입 시 회원가입정보에 MBTI 를 입력하지 않았거나 OAuth로 로그인한 사용자에게 보여주는 메인추천카드-->
-<!--    <div id="cardPart2" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 mx-4 mb-5">-->
-<!--        <div th:each="item : ${randomTourCard}" class="col">-->
-<!--            <div class="card">-->
-<!--                <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"-->
-<!--                     class="img-fluid" id="tourImage2" alt="card1image">-->
-<!--                <div class="card-body">-->
-<!--                    &lt;!&ndash; <h5 class="card-title">카드 제목</h5> &ndash;&gt;-->
-<!--                    <h6 class="card-subtitle mb-2" th:text="${item.tourName}"></h6>-->
-<!--                    <p class="card-text" th:text="${item.tourAddr1 + ' ' + item.tourAddr2}"></p>-->
-<!--                    &lt;!&ndash; <a href="#" class="card-link">카드 링크</a> &ndash;&gt;-->
-<!--                    &lt;!&ndash; <a href="#" class="card-link">카드 링크2</a> &ndash;&gt;-->
-<!--                    <a class="btn" th:href="@{'/tour/tourDetail/' + ${item.tourId}}">상세정보 보러가기</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    회원가입 시 회원정보에 MBTI를 입력한 사용자에게 보여주는 메인추천카드-->
-<!--    <div id="cardPart3" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 mx-4 mb-5" sec:authorize="isAuthenticated()" th:unless="${user.provider}" th:if="${user.mbti}">-->
-<!--        <div th:each="item : ${randomTourCard}" class="col">-->
-<!--            <div class="card">-->
-<!--                <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"-->
-<!--                     class="img-fluid" id="tourImage3" alt="card1image">-->
-<!--                <div class="card-body">-->
-<!--                    &lt;!&ndash; <h5 class="card-title">카드 제목</h5> &ndash;&gt;-->
-<!--                    <h6 class="card-subtitle mb-2" th:text="${item.tourName}"></h6>-->
-<!--                    <p class="card-text" th:text="${item.tourAddr1 + ' ' + item.tourAddr2}"></p>-->
-<!--                    &lt;!&ndash; <a href="#" class="card-link">카드 링크</a> &ndash;&gt;-->
-<!--                    &lt;!&ndash; <a href="#" class="card-link">카드 링크2</a> &ndash;&gt;-->
-<!--                    <a class="btn" th:href="@{'/tour/tourDetail/' + ${item.tourId}}">상세정보 보러가기</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
     </div>
 </th:block>
 </html>

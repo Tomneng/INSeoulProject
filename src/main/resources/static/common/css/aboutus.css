@@ -1,0 +1,12 @@
+#webinfo form {
+    max-width: 1024px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 20px;
+    min-height: 1024px;
+}
+
+#aboutusOption input {
+    width: 150px;
+    border-radius: 20px;
+}

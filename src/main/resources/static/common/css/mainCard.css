@@ -5,12 +5,17 @@
 
 .card {
     text-align: end; /* 글자 좌우 정렬 위치 */
-    color: #fde955; /* 글자색 */
-    background-color: #ff8080; /* 배경색 */
+    color: var(--white); /* 글자색 */
+    background-color: var(--skycoral); /* 배경색 */
     /*border: solid #333333 3px; !* 테두리 *!*/
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1); /* 그림자 효과 */
     opacity: 0;
 }
+
+.divider {
+    text-align: center !important;
+}
+
 
 /* 카드가 오른쪽에서 왼쪽으로 나타남. */
 @keyframes cardAnimation {
@@ -35,18 +40,23 @@
 }
 
 /* 카드의 링크 */
-.card .card-body .card-link {
+.card a {
     text-decoration: none;
     color: aliceblue;
 }
 
-/* 카드의 버튼 */
-.card .card-body .btn {
-    background: #2e6e6e;
-    color: chartreuse;
+#realCardAtag {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.col .card img{
+/* 카드의 버튼 */
+.card .card-body .btn {
+    background: var(--white);
+    color: var(--skycoral);
+}
+
+.col .card img {
     height: 60vh;
     object-fit: cover;
 }

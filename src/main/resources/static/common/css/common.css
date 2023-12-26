@@ -44,7 +44,7 @@ h5 {
     font-size: 2rem;
     margin-left: 5px;
     border-radius: 20px;
-    border: black solid;
+    border: var(--white) solid;
 }
 
 .offcanvas-body ul li a.nav-link.active {
@@ -72,7 +72,6 @@ h5 {
 .navbar-brand {
     font-size: x-large !important;
     font-weight: bold;
-    border: white solid;
 }
 
 /* 헤더 안에 로고 */
@@ -96,7 +95,6 @@ h5 {
 
 /* 헤더의 아이콘들 */
 .userIcons {
-    border: black solid;
     width: 4rem !important;
 }
 
@@ -104,11 +102,10 @@ h5 {
     font-size: 2rem;
     color: white;
     height: 2.5rem;
-    border: #23e00e solid;
+    border-radius: 10px;
 }
 
 #adminIcon {
-    color: black;
 }
 
 /* 오프캔버스 안에 로그인 버튼 */
@@ -129,12 +126,10 @@ h5 {
 
 /* 푸터 */
 p.text-center.text-body-secondary {
-    margin-bottom: 0;
-!important;
+    margin-bottom: 0 !important;
 }
 
 .container-fluid {
-    border: #23e00e solid;
 }
 
 @media (max-width: 991px) {
@@ -144,9 +139,7 @@ p.text-center.text-body-secondary {
 
     .container-fluid h1 {
         font-size: 4rem;
-
     }
-
 
 }
 
