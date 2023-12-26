@@ -56,11 +56,7 @@ public class TourController {
 
     @GetMapping("/tourDetail/{tourId}")
     public String detail(@PathVariable Long tourId, Model model) {
-        System.out.println("투어컨트롤러 디테일, tourId = " + tourId);
-
         model.addAttribute("item", tourService.findById(tourId));
-
-        System.out.println("투어컨트롤러 디테일, model = " + model);
         return "tour/tourDetail";
     }
 
@@ -71,17 +67,4 @@ public class TourController {
         U.getSession().setAttribute("pageRows", pageRows);
         return "redirect:/tour/tourList?page=" + page;
     }
-
-//    @GetMapping("/tourDetail")
-//    public FoodList foodList(Long foodId){
-//        return tourService.foodList();
-//    }
-
-//    @GetMapping("/foodTel")
-//    public void foodTel(FoodRow foodRow, Model model){
-//        List<FoodRow> foodList = tourService.foodList();
-//        model.addAttribute("foodList", foodList);
-//    }
-
-
 }

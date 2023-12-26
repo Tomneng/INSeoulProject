@@ -17,7 +17,6 @@ public interface ReviewService {
     String showCategory(Long foodId);
 
     // 리뷰 존재 유무
-//    int countRw(Review review);
     int countRw(Review review);
 
     //계산된 평점 반영

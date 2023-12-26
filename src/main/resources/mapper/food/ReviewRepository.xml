@@ -25,12 +25,6 @@
         WHERE f.food_id = r.food_id
     </sql>
 
-<!-- 전체를 보여줄 필요 ? -->
-<!--    <select id="findAll" resultType="com.inseoul.food.domain.Review">-->
-<!--        <include refid="SELECT_BASE"/>-->
-<!--        ORDER BY review_id ASC-->
-<!--    </select>-->
-
     <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
         INSERT INTO food_reviews (review_id,food_id, id, review_category, review_content, review_star)
         VALUES (#{reviewId}, #{foodId}, #{userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
@@ -51,10 +45,11 @@
         FROM food_reviews
         WHERE id = #{userId} AND food_id = #{foodId}
     </select>
+
     <select id="getScore" resultType="java.lang.Double">
         SELECT review_avg
         FROM food
-        WHERE food_id =#{foodId}
+        WHERE food_id = #{foodId}
     </select>
 
 
@@ -69,7 +64,7 @@
 <!--        FROM food_reviews-->
 <!--        WHERE food_id = #{foodId}-->
 <!--    </select>-->
-<!--평점을 업데이트-->
+    <!--평점을 업데이트-->
     <update id="updateAvg">
         UPDATE food
         SET review_avg = (SELECT AVG(review_star) "reviewAvg" FROM food_reviews WHERE food_id = #{foodId})
@@ -77,27 +72,17 @@
     </update>
 
     <!-- 별점을 업데이트 -->
-    <update id="updateRating">
+    <update id="updateRating" parameterType="com.inseoul.food.domain.Review">
         UPDATE food_reviews
-        SET review_star = #{reviewStar}
+        SET review_star = #{reviewStar}, review_category = #{reviewCategory}, review_content = #{reviewContent}
         WHERE food_id = #{foodId} AND id = #{userId}
     </update>
+    <!--  리뷰 업데이트  -->
+<!--    <update id="updateRating">-->
+<!--        UPDATE food_reviews-->
+<!--        SET review_star = #{reviewStar},-->
+<!--            review_category = #{reviewCategory},-->
+<!--            review_content = #{reviewContent}-->
+<!--        WHERE food_id = #{foodId} AND id = #{userId}-->
+<!--    </update>-->
 </mapper>
-
-        <!-- 이미지 저장하기 -->
-        <!--    <insert id="saveImage" parameterType="com.inseoul.food.domain.Review">-->
-        <!--        INSERT INTO food_review(reviewId, reviewImage, reviewStoredImage)-->
-        <!--        VALUES (#{reviewId}, #{reviewImage}, #{reviewStoredImage})-->
-        <!--    </insert>-->
-        <!-- 저장한 이미지 보여주기 -->
-        <!--    <select id="showImage" parameterType="com.inseoul.food.domain.Review">-->
-        <!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
-        <!--    </select>-->
-
-
-    <!--    &lt;!&ndash; 특정 아이디&ndash;&gt;-->
-    <!--    &lt;!&ndash; 이미지 &ndash;&gt;-->
-    <!--    <select id="findByImage">-->
-    <!--        SELECT reviewImage, reviewStoredImage FROM food_review-->
-    <!--        WHERE reviewId = #{reviewId}-->
-    <!--    </select>-->

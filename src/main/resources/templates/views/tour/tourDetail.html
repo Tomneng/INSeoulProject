@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-
 <script th:unless="${item}">
     alert("해당 정보가 삭제되거나 없습니다")
     history.back();
@@ -23,7 +21,6 @@
         <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/map.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/food/css/food.css}">
-
         <style>
             body {
                 background-color: #f8f9fa;
@@ -70,11 +67,9 @@
                 width: 100%;
             }
         </style>
-
         <title>관광 상세정보</title>
     </head>
     <script th:inline="javascript">
-        // 나중에 댓글 작성시 필요.
         const logged_id = [[${logged_user.userId}]];
     </script>
     <body>
@@ -102,8 +97,6 @@
         <div id="modal" class="modal-overlay" style="display: none;">
             <div class="modal-window">
                 <div class="close-area">X</div>
-                <!--            <input type="button" name="scrapFood"><i class="fa-regular fa-bookmark" class="scraptFood"></i>-->
-                <input type="checkbox" name="scraptFood">
                 <div class="title">
                     <div id="store_name" ></div>
                     <div id="store_address" ></div>
@@ -211,22 +204,17 @@
                         </div>
                     </div>
                 <!-- 리뷰의 지도 위치 -->
-                <div class="foodMap">
-                    <th:block th:insert="~{common/foodMap::commonMap}"></th:block>
-                </div>
+<!--                <div class="foodMap">-->
+<!--                    <th:block th:insert="~{common/foodMap::commonMap}"></th:block>-->
+<!--                </div>-->
             </div>
-
-
         </div>
         <!--<th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
     </div>
     </body>
 </th:block>
-
 <script th:src="@{/tour/js/tourDetail.js}"></script>
 <script th:src="@{/common/js/foodMap.js}"></script>
-
-
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>
 <!--<script th:src="@{/common/js/map.js}"></script>-->

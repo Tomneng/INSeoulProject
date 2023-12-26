@@ -170,6 +170,7 @@ public class TourServiceImpl implements TourService {
         return list;
     }
 
+
     @Override
     public List<String> foodList(String[] list) {
         List<String> b = new ArrayList<>();
@@ -179,15 +180,11 @@ public class TourServiceImpl implements TourService {
                 b.add(list[i]);
             }
         }
-//
-//        model.addAttribute("foodrow", tourRepository.selectFood(storeTel));
         return b;
     }
 
     @Override
     public Long findByFoodId(String storeTel) {
-        Long storeT = tourRepository.selectByFoodId(storeTel);
-        System.out.println("투어서비스임플 파인드바이아이디 = " + storeT);
         return tourRepository.selectByFoodId(storeTel);
     }
 }

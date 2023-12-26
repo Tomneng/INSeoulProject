@@ -21,7 +21,7 @@ public interface ReviewRepository {
     // 평균
     int updateAvg(Long foodId);
 
-    int updateRating(Long foodId, Long userId, Double reviewStar);
+    int updateRating(Review review);
 
     Double getScore(Long foodId);
 

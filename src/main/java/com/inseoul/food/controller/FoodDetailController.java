@@ -17,13 +17,15 @@ public class FoodDetailController {
     @Autowired
     public ReviewService reviewService;
 
-//    api 불러오기
-//    @GetMapping("/food")
-//    public void apiTest(@Valid Model model){
-//        foodService.getapi(model);
-//    }
-//    음식점
-    //리뷰 작성
+    // 리뷰 여부 확인
+    @PostMapping("/foodReview")
+    public int reviewTest(
+            @RequestParam("user_id") Long userId,
+            @RequestParam("food_id") Long foodId){
+        return reviewService.reviewdb(userId, foodId);
+    }
+
+    // 리뷰 작성
     @PostMapping("/food_review")
     public int reviewDetail(
             @RequestParam("food_id") Long foodId,
@@ -42,4 +44,3 @@ public class FoodDetailController {
         return 1;
     }
 }
-

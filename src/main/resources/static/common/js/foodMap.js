@@ -4,7 +4,7 @@
 
 
 let centralAddress = '';
-centralAddress = $('#store_tel').val();
+centralAddress = $(this).find('input').val();
 
 // 서울특별시 강남구 테헤란로26길 12
 console.log("주소:" + centralAddress);
@@ -28,8 +28,6 @@ var centerMarkerName = '장소명 data를 넣으세요',
 centerMarkerName = $('.store_name').text();
 centerMarkerJuso = $('.store_address').text();
 centerMarkerTel = $('.store_tel').text();
-
-
 
 
 // 지도 표시하기

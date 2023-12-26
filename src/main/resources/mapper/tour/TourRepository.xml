@@ -53,8 +53,8 @@
         select food_id
         from food
         where store_tel = #{storeTel}
-        ORder by food_id DESc
-        Limit 1
+        ORDER BY food_id DESC
+        LIMIT 1
     </select>
 
 </mapper>

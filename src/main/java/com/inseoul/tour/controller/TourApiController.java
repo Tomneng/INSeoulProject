@@ -34,40 +34,35 @@ public class TourApiController {
         tourApiService.getTourApi(item2);
     }
 
+    //전화번호
     @PostMapping("/getThree")
     public List<String> getThree(HttpServletRequest request) {
         String[] arrayParam = request.getParameterValues("tel[]");
-        System.out.println("너의 타입은" + arrayParam.getClass().getName());
         var c = tourService.foodList(arrayParam);
-
+        System.out.println("매치된 전화번호 : " + c);
         return c;
     }
-
+    // 음식점 정보 보여주기
     @PostMapping("/tourDetail1")
     public FoodRow foodDetail(@RequestParam("food_id") Long foodId) {
         FoodRow row = foodService.selectById(foodId);
-        System.out.println("row" + row);
         return row;
     }
-
+    //리뷰 카테고리 보여주기
     @PostMapping("/tourDetail2")
     public String foodReview(@RequestParam("food_id") Long foodId) {
         String review = reviewService.showCategory(foodId);
-        System.out.println("review" + review);
         return review;
     }
-
+    //전화번호로 음식점 아이디 찾기
     @GetMapping("/tourDetail3")
     public Long foodID(@RequestParam("store_tel") String storeTel) {
-        System.out.println("투어api컨트롤러 foodID storeTel = " + storeTel);
         Long foodid = tourService.findByFoodId(storeTel);
-        System.out.println("rr" + foodid);
         return foodid;
     }
-
+    //리뷰 평점 보여주기
     @PostMapping("/tourDetail4")
     public Double foodReviewstar(@RequestParam("food_id") Long foodId) {
         return reviewService.getScore(foodId);
     }
-
 }

@@ -49,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
             reviewRepository.reviewSave(review); // 여기서 추가해야할 userid가 null이라서 바티스가 꺼지라고 하는거임
             reviewRepository.updateAvg(review.getFoodId());
         } else {
-            reviewRepository.updateRating(review.getFoodId(), review.getUserId(), review.getReviewStar());
+            reviewRepository.updateRating(review);
             reviewRepository.updateAvg(review.getFoodId());
         }
         return 0;

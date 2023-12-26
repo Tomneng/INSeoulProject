@@ -46,35 +46,4 @@
         SELECT review_avg FROM food
         WHERE food_id = #{foodId}
     </select>
-
-
-    <!--    <select id="compare" resultType="java.lang.Integer">-->
-<!--        SELECT count(distinguish)-->
-<!--        FROM inseoul_food-->
-<!--        WHERE distinguish = #{distinguish}-->
-<!--    </select>-->
-
-
-    <!-- 음식점 정보 api db 작성(저장)  -->
-<!--    <insert id="write" flushCache="true" parameterType="com.inseoul.food.domain.FoodRow"-->
-<!--            useGeneratedKeys="true" keyColumn="foodId" keyProperty="foodId">-->
-<!--        INSERT INTO inseoul_food(storeName, storeAddress, storeTel, langCodeId)-->
-<!--        VALUES (#{storeName}, #{storeAddress}, #{storeTel}, #{langCodeId})-->
-<!--    </insert>-->
-<!--    &lt;!&ndash;  리뷰 insert  &ndash;&gt;-->
-<!--    <insert id="reviewWrite" flushCache="true" parameterType="com.inseoul.food.domain.Review"-->
-<!--            useGeneratedKeys="true" keyColumn="reviewId" keyProperty="reviewId">-->
-<!--        INSERT INTO food_review(reviewId, reviewStar, reviewCategory, reviewContent)-->
-<!--        VALUES (#{reviewId}, #{reviewStar}, #{reviewCategory}, #{reviewContent})-->
-<!--    </insert>-->
-<!--&lt;!&ndash;    &ndash;&gt;-->
-<!--    <select id="find">-->
-<!--        SELECT r.*, f.storeName, f.storeAddress, f.storeTel, f.langCodeId FROM food_review r, inseoul_food f-->
-<!--        WHERE r.foodId = f.foodId-->
-<!--    </select>-->
-
-<!--&lt;!&ndash; 별점 평균 &ndash;&gt;-->
-<!--    <select id="ratingStar" resultType="Double">-->
-<!--        SELECT AVG(reviewStar) FROM food_review GROUP BY foodId;-->
-<!--    </select>-->
 </mapper>
