@@ -66,10 +66,10 @@ const makeTrandingSlider = () => {
         loop: true,
         slidesPerView: 'auto',
         coverflowEffect: {
-            rotate: 90,
+            rotate: 0,
             stretch: 0,
-            depth: 200,
-            modifier: 1.5,
+            depth: 150,
+            modifier: 3.0,
         },
         pagination: {
             el: '.swiper-pagination',
@@ -79,11 +79,11 @@ const makeTrandingSlider = () => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        // autoplay: {
-        //   delay: 1500,
-        //   disableOnInteraction: false,
-        //   // pauseOnMouseEnter: true,
-        // },
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+            // pauseOnMouseEnter: true,
+        },
         // freeMode: {
         //   enabled: true,
         //   momentum: false,

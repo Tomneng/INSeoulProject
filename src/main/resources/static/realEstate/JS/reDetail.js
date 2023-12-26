@@ -79,7 +79,7 @@ $(document).ready(function () {
         console.log("주소를 좌표로 변환 후 toggleRoadview(position)의 position는 " + position);
 
         //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
-        rvClient.getNearestPanoId(position, 50, function (panoId) {
+        rvClient.getNearestPanoId(position, 200, function (panoId) {
 
             if (panoId === null) {
                 rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
