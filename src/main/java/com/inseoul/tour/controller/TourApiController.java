@@ -4,10 +4,7 @@ import com.inseoul.tour.domain.Item;
 import com.inseoul.tour.service.TourApiService;
 import com.inseoul.tour.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/apisave")
@@ -15,6 +12,10 @@ public class TourApiController {
 
     @Autowired
     public TourApiService tourApiService;
+
+    @Autowired
+    public TourService tourService;
+
     @GetMapping("/apisave")
     @ResponseBody
     public void getTourApi(Item item2) {
@@ -35,5 +36,13 @@ public class TourApiController {
 //        } else {
 //            return "데이터가 이미 최신입니다.";
 //        }
+    }
+
+    @GetMapping("/mbtiOrder")
+    public Object[] giveTop3(
+            @RequestParam("tourId") Long tourId
+    ){
+        Object[] hmap = tourService.getTop(tourId);
+        return hmap;
     }
 }

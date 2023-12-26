@@ -77,26 +77,7 @@ public class UserScraptedServiceImpl implements UserScraptedService {
 
 //    @Override
 //    public List<Item> noMbtiTourCard() {
-//
-//        List<UserScraptedTour> userScraptedTours = userScraptedRepository.findAllNoMbti();
-//
-//        List<Item> noMbtiList = new ArrayList<>();
-//        Collections.shuffle(userScraptedTours);
-//        int cnt = Math.min(4, userScraptedTours.size());
-//        for (int i = 0; i < cnt; i++) {
-//            UserScraptedTour userScraptedTour = userScraptedTours.get(i);
-//            Tour tour = tourRepository.findById(userScraptedTour.getTourId()).orElse(null);
-//            if (tour != null) {
-//                // Create a new Item directly without using Tour constructor
-//                Item item = new Item();
-//                item.setTourName(item.getTourName());
-//                item.setTourImage1(item.getTourImage1());
-//                item.setTourAddr1(item.getTourAddr1());
-//                item.setTourAddr2(item.getTourAddr2());
-//                noMbtiList.add(item);
-//            }
-//        }
-//        return null;
+//        return userScraptedRepository.noMbtiTourCard();
 //    }
 
 

@@ -5,6 +5,25 @@
 
 <mapper namespace="com.inseoul.user.repository.UserScraptedRepository">
 
+    <resultMap id="mapTour" type="com.inseoul.tour.domain.Item">
+        <result column="tour_id" property="tourId"/>
+        <result column="tour_name" property="tourName"/>
+        <result column="tour_addr1" property="tourAddr1"/>
+        <result column="tour_addr2" property="tourAddr2"/>
+        <result column="tour_image1" property="tourImage1"/>
+        <result column="tour_image2" property="tourImage2"/>
+        <result column="tour_contentid" property="tourContentid"/>
+        <result column="tour_sigungucode" property="tourSigungucode"/>
+        <result column="tour_mapx" property="tourMapx"/>
+        <result column="tour_mapy" property="tourMapy"/>
+    </resultMap>
+
+    <resultMap id="mapTourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
+        <result column="tour_scrapted_id" property="tourScraptedId"/>
+        <result column="tour_id" property="tourId"/>
+        <result column="id" property="userId"/>
+    </resultMap>
+
     <insert id="addHouseScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedHouse"
             useGeneratedKeys="true" keyColumn="house_scrapted_id" keyProperty="houseScraptedId">
        INSERT INTO houseinfosaved(user_id, house_id)
@@ -27,6 +46,23 @@
         WHERE user_id = #{userId} AND house_id = #{houseId}
     </select>
 
+    <select id="noMbtiTourCard" resultMap="mapTour">
+        SELECT
+            t.tour_id AS "tourId",
+            t.tour_name AS "tourName",
+            t.tour_image1 AS "tourImage1",
+            t.tour_addr1 AS "tourAddr1",
+            t.tour_addr2 AS "tourAddr2"
+        FROM
+            tour t
+                JOIN
+            tourinfosaved ts ON t.tour_id = ts.tour_id
+        GROUP BY
+            t.tour_id
+        ORDER BY
+            COUNT(ts.tour_id) DESC
+            LIMIT 4
+    </select>
     <delete id="deleteScrap" flushCache="true">
         DELETE FROM houseinfosaved WHERE user_id = #{userId} AND house_id = ${houseId}
     </delete>
@@ -60,4 +96,6 @@
     <delete id="deleteScrapTour" flushCache="true">
         DELETE FROM tourinfosaved WHERE id = #{userId} AND tour_id = ${tourId}
     </delete>
+
+
 </mapper>

@@ -181,6 +181,35 @@ public class TourServiceImpl implements TourService {
         return tourRepository.getRandomTourCard();
     }
 
+    @Override
+    public Object[] getTop(Long tourId) {
+        List<String> list1 = tourRepository.top3mbti(tourId);
+        List<Integer> list2 = tourRepository.top3Prop(tourId);
+        Object[] mixedArray = new Object[6];
+        if (list1.isEmpty()) {
+            return mixedArray;
+        } else if (list1.size() == 1) {
+
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            return mixedArray;
+        } else if (list1.size() == 2) {
+
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            mixedArray[2] = list1.get(1);
+            mixedArray[3] = list2.get(1);
+            return mixedArray;
+        } else {
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            mixedArray[2] = list1.get(1);
+            mixedArray[3] = list2.get(1);
+            mixedArray[4] = list1.get(2);
+            mixedArray[5] = list2.get(2);
+            return mixedArray;
+        }
+    }
 
 }
 

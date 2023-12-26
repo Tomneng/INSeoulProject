@@ -33,7 +33,57 @@ $(document).ready(function () {
         $("#demoJSON_tour").html(table.join('\n'));
     }
 
-    // });
+    const tourId = $("#tourId").val();
+    const data = {
+        "tourId": tourId
+    }
+
+    const chart2 = []
+    $.ajax({
+        url: "/apisave/mbtiOrder",
+        type: "GET",
+        data: data,
+        cache: false,
+        success: function (data, status) {
+            if (status == "success") {
+                chart2.push(data[1])
+                chart2.push(data[3])
+                chart2.push(data[5])
+            }
+            const ctx = document.getElementById('myChart2');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [data[0], data[2], data[4]],
+                    datasets: [{
+                        label: 'MBTI유형별 스크랩 순위 TOP3 (단위 : %)',
+                        data: chart2,
+                        borderWidth: 1,
+                        backgroundColor: [
+                            'rgb(255, 215, 00)',
+                            'rgb(192, 192, 192)',
+                            'rgb(205, 127, 50)',
+                        ]
+                    }],
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            stepSize: 10,
+                        }
+                    }
+
+                }
+            });
+        },
+        error :function (error){
+            console.log(error);
+        }
+    })
 });
 
 

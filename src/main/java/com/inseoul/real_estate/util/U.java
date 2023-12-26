@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+
 public class U {
     // 현재 request를 구하려는 메소드
 
@@ -39,7 +41,7 @@ public class U {
         return getRequest().getSession();
     }
 
-    public static User getLoggedUser(){
+    public static User getLoggedUser() {
         // 현재 로그인 한 사용자
         PrincipalDetails userDetails = (PrincipalDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDetails.getUser();

@@ -23,4 +23,5 @@ public interface TourService {
 
     List<Item> getRandomTourCard();
 
+    Object[] getTop(Long tourId);
 }

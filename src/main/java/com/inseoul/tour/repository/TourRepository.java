@@ -24,5 +24,9 @@ public interface TourRepository {
 
     List<Item> getRandomTourCard();
 
-    Item findById(Long tourId);
+//    Item findById(Long tourId);
+
+    List<String> top3mbti(Long tourId);
+
+    List<Integer> top3Prop(Long tourId);
 }

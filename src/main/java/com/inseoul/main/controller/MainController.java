@@ -36,6 +36,7 @@ public class MainController {
 
 //        List<Item> noMbtiTourCard = userScraptedService.noMbtiTourCard();
 //        model.addAttribute("noMbtiTourCard", noMbtiTourCard);
+//        model.addAttribute("noMbtiCard", userScraptedService.noMbtiTourCard());
 
         return "home/main";
     }
