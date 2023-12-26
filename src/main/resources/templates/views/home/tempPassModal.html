@@ -47,8 +47,8 @@
         <div class="modal-content">
             <button type="button" class="close" onclick="closeModal()">&times;</button>
                 <input id="password" placeholder="새 비밀번호 입력">
-                <input id="userId" th:value="${logged_user.userId}">
-                <button type="button" id="changed" onclick="closeModal()">완료</button>
+                <input id="userId" th:value="${logged_user.userId}" style="display: none">
+                <button type="button" id="changed">완료</button>
         </div>
     </div>
 

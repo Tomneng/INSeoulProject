@@ -135,7 +135,7 @@
                 <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
                 <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
                 <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
-                <div class="bordered-div">* 계약점수는 현재 조회한 주거지의 계약에 대한 점수입니다.<br>* 주거지점수는 현재 조회한 집에 대한 점수입니다.</div>
+                <div class="bordered-div">* 계약점수는 현재 조회한 주거지의 계약에 대한 점수입니다.</div>
             </div>
         </div>
     </section>
@@ -149,6 +149,8 @@
             <div id="roadview"></div> <!-- 로드뷰를 표시할 div 입니다 -->
         </div>
     </div>
+
+    <a class="btn btn-outline-dark" th:href="@{/realEstate/infoList}">목록</a>
 
     <!--  푸터 블럭 by 철희 12/20  -->
     <th:block th:insert="~{common/footer::footer}"></th:block>
