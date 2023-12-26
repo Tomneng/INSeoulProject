@@ -13,7 +13,7 @@
         <!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/tourMap.css}">
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <!-- 여기부터 철희가 추가함() 12/18 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -28,6 +28,14 @@
         <title>관광 상세정보</title>
     </head>
 
+    <style>
+        #myChart2 {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+
     <body>
     <!--  헤더 블럭 by 철희 12/18  -->
     <th:block th:insert="~{common/header::header}"></th:block>
@@ -35,6 +43,7 @@
     <!--  관광 설명  -->
     <div>
         <div id="container_tourdetail">
+            <input type="hidden" id="tourId" name="tourId" th:value="${item.tourId}"/>
             <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
                  class="img-fluid" id="tourImage1">
             <p th:text="${item.tourName}" id="tourName"></p><br>
@@ -43,6 +52,14 @@
             <input type="hidden" id="centralLatitude" name="centralLatitude" th:value="${item.tourMapy}"/>
             <input type="hidden" id="centralLongitude" name="centralLongitude" th:value="${item.tourMapx}"/>
             <input type="hidden" id="tourContentid" name="tourContentid" th:value="${item.tourContentid}"/>
+
+            <section>
+                <div class="container wrap-chart" style="display: flex; justify-content: space-between">
+                    <div class="chart-container">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </section>
 
             <!--  추천음식점  -->
             <!-- 여기 아래 아직 손대지 않음. -->
