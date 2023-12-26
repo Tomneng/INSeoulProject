@@ -1,18 +1,4 @@
-/* .modal{
-    position: absolute;
-    display: none;
-
-    justify-content: center;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background-color: antiquewhite;
-} */
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: roboto;
@@ -21,7 +7,7 @@
 /* 모달 */
 #modal.modal-overlay {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     position: absolute;
     left: 0;
     top: 0;
@@ -30,25 +16,27 @@
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    /*box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);*/
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
 #modal .modal-window {
     background: rgba(0, 92, 61, 0.7);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border: 1px solid rgba(255, 255, 255, 0.18);
     width: 400px;
     height: 100%;
     position: relative;
     /* top: -100px; */
     padding: 10px;
 }
+
 #modal .title {
     padding-left: 10px;
     display: inline;
@@ -57,14 +45,17 @@
     font-size: 20px;
     font-weight: bold;
 }
+
 #modal .title h2 {
     display: inline;
 }
-#modal .title span{
+
+#modal .title span {
     font-size: 20px;
     color: black;
     font-weight: bold;
 }
+
 #modal .close-area {
     display: inline;
     float: right;
@@ -80,89 +71,96 @@
     /* text-shadow: 1px 1px 2px gray; */
     color: white;
 }
-#modal #content img{
+
+#modal #content img {
     width: 380px;
     height: 240px;
     text-align: center;
     align-items: center;
 }
 
-input[type="button"]{
+input[type="button"] {
     background-color: rgb(141, 190, 223);
     width: 100px;
 }
 
 /* 리뷰 이미지 */
-.foodImage{
+.foodImage {
     cursor: pointer;
 }
-.real-upload{
+
+.real-upload {
     display: none;
 }
-.upload{
-    width: 100%;
-    height: 150px;
-    background-color: rgb(19, 192, 85);
+
+.upload {
+    /*width: 100%;*/
+    /*height: 150px;*/
+    background-color: rgb(187, 219, 198);
     color: #444;
 }
-#foodImage img{
-    /*width: 400px;*/
-    /*height: 200px;*/
-}
-.image-preview{
-    width: 100px;
-    height: 150px;
-    background-color: #FD4;
+
+.image-preview {
+    /*width: 100px;*/
+    /*height: 150px;*/
+    background-color: #777463;
     display: flex;
     margin-right: 5px;
-    gap:20px;
+    gap: 20px;
 }
 
-.mid{
+.mid {
     margin-top: 5px;
 }
-/* 회원 아이디 */
 
-#userId{
+/* 회원 아이디 */
+#userId {
     float: left;
     /* display: inline-block; */
     /* margin-right: 50px; */
 }
-#userId input{
+
+#userId input {
     margin-top: 5px;
     width: 50px;
     height: 20px;
     background-color: #bebebe;
-    border-color: 1px solid black;
+    border: 1px solid black;
 }
-span{
+
+span {
     font-weight: 550;
     color: black;
     font-size: 17px;
 }
-.userId{
+
+.userId {
+    float: left;
     background-color: grey;
 }
 
 /* 평점 */
-#reviewStar{
+#reviewStar {
     float: right;
 }
 
 /* 평점 별*/
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 .rate {
-    display: inline-block; 
-    border: 0; 
+    display: inline-block;
+    border: 0;
     margin-right: 15px;
 }
+
 .rate input {
     display: none;
 }
+
 .rate label {
     float: right;
     color: #000000
 }
+
 .rate label:before {
     display: inline-block;
     font-size: 1rem;
@@ -172,44 +170,51 @@ span{
     font-family: FontAwesome;
     content: "\f005 ";
 }
+
 .rate .half:before {
     content: "\f089 ";
     position: absolute;
     padding-right: 0;
 }
-.rate input:checked ~ label, 
-.rate label:hover,.rate label:hover ~ label { 
+
+.rate input:checked ~ label,
+.rate label:hover, .rate label:hover ~ label {
     color: #fbff00 !important;
-} 
+}
+
 .rate input:checked + .rate label:hover,
 .rate input input:checked ~ label:hover,
-.rate input:checked ~ .rate label:hover ~ label,  
+.rate input:checked ~ .rate label:hover ~ label,
 .rate label:hover ~ input:checked ~ label {
     color: #fbff00 !important;
-} 
+}
+
+
 
 /* 리뷰 카테코리 */
-#reviewCat{
+#reviewCat {
     display: block;
-    /* float: left; */
+    /* float: left;*/
     min-height: 21px;
     font-size: 1.5rem;
-    color: rgba(var(--place-color-text1), 1);
+    /*color: rgba(var(--place-color-text1), 1);*/
     font-weight: 600;
     line-height: 2.1rem;
     text-align: left;
 }
+
 /* .category{
     margin-top:15px;
     text-align: left;
     float: left;
 } */
-.keyword{
+.keyword {
     float: left;
     /*margin-left: 50px;*/
 }
+
 /* ul */
-.category{
+.category {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -219,7 +224,8 @@ span{
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-.category .category-comment .label-comment{
+
+.category .category-comment .label-comment {
     display: inline-block;
     vertical-align: top;
     margin-top: 5px;
@@ -232,10 +238,12 @@ span{
     white-space: nowrap;
     width: 140px;
 }
-.category-comment{
-    
+
+.category-comment {
+
 }
-#reviewCat .checkComment{
+
+#reviewCat .checkComment {
     overflow: hidden;
     position: absolute;
     width: 1px;
@@ -243,23 +251,29 @@ span{
     margin: -1px;
     padding: 0;
     border: 0;
-    clip: rlect(0,0,0,0);
+    /*clip: rlect(0, 0, 0, 0);*/
 }
+
 /* 리뷰 입력창 */
-.category-content{
+.category-content {
     /* display: inline-block; */
     float: right;
     /* margin-top: 20px; */
-     margin-left: 20px;
+    /* margin-left: 20px;*/
     /* margin-bottom: 1500px; */
 }
-.reviewComment{
-    
+
+.reviewComment {
+    height: 200px;
+    /*width: 300px;*/
+    /*height: 400px;*/
+
     /* float: left; */
     /* margin-bottom: 500px; */
 }
+
 /* 버튼들 */
-input{
+input {
     font-size: 15px;
     letter-spacing: -.3px;
     line-height: 2rem;
@@ -267,6 +281,7 @@ input{
     border-radius: 5px;
     margin-right: 5px;
 }
+
 /*input[type="checkbox"]{*/
 /*    box-sizing: border-box;*/
 /*    display: none;*/
@@ -287,30 +302,50 @@ input{
 /*    background: rgb(0, 192, 112);*/
 /*}*/
 /* 선택시 색상 변경 */
-input[type="checkbox"]:checked + label{
+input[type="checkbox"]:checked + label {
     background: rgb(141, 190, 223);
 }
+
 /*input[type="radio"]:checked + label{*/
 /*    background: rgb(141, 190, 223);*/
 /*}*/
 
-input[type="submit"]{
-    background-color: rgb(141, 190, 223);
-    border-radius: 5px;
-    border: 1px solid black;
-    /* size: 600px; */
-    /* display: inline-block; */
+/*input[type="submit"] {*/
+/*    background-color: rgb(141, 190, 223);*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid black;*/
+/*    !* size: 600px; *!*/
+/*    !* display: inline-block; *!*/
+/*    float: left;*/
+/*    !* margin-left: 90px; *!*/
+/*}*/
+button{
     float: left;
-    /* margin-left: 90px; */
-}
-
-
-#foodmap{
-    /*margin-top:100px;*/
     border-radius: 5px;
     border: 1px solid black;
-    height: 200px;
-
-     width: 200px;
+    margin-left: 5px;
+    background-color: rgb(141, 190, 223);
 }
 
+.foodmap {
+    margin-top:500px;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 500px;
+    width: 200px;
+}
+.map{
+    margin-top: 500px;
+}
+
+.card{
+    display: inline-block;
+    /*float: left;*/
+    margin-left: 15px;
+    margin-top: 20px;
+
+}
+.cardsee{
+    float: left;
+    border-radius: 5px;
+}

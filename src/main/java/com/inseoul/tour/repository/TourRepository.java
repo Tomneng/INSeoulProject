@@ -13,7 +13,7 @@ public interface TourRepository {
     // 특정 id 글 내용 읽기 (SELECT)
     Item selectById(Long tourId);
 
-//     전체 글의 개수
+    //     전체 글의 개수
     int countAll(Item item);
 //    int countAll();
 
@@ -29,4 +29,10 @@ public interface TourRepository {
     List<String> top3mbti(Long tourId);
 
     List<Integer> top3Prop(Long tourId);
+
+
+    //음식점
+    List<String> selectByFood();
+
+    Long selectByFoodId(String storeTel);
 }

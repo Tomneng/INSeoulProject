@@ -38,11 +38,12 @@ public class TourServiceImpl implements TourService {
     private UserScraptedRepository userScraptedRepository;
 
     @Autowired
-    public TourServiceImpl(SqlSession sqlSession){
+    public TourServiceImpl(SqlSession sqlSession) {
         tourRepository = sqlSession.getMapper(TourRepository.class);
         userScraptedRepository = sqlSession.getMapper(UserScraptedRepository.class);
         System.out.println("Service 생성 완료");
     }
+
     @Override
     public int save(Item item) {
         return tourRepository.save(item);
@@ -133,7 +134,7 @@ public class TourServiceImpl implements TourService {
 
         long cnt = tourRepository.countAll(item);   // 글 목록 전체의 개수
 //        long cnt = tourRepository.countAll();   // 글 목록 전체의 개수
-        int totalPage = (int)Math.ceil(cnt / (double)pageRows);   // 총 몇 '페이지'
+        int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지'
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'
         int startPage = 0;
@@ -142,9 +143,9 @@ public class TourServiceImpl implements TourService {
         // 해당 페이지의 글 목록
         List<Item> list = null;
 
-        if(cnt > 0){  // 데이터가 최소 1개 이상 있는 경우만 페이징
+        if (cnt > 0) {  // 데이터가 최소 1개 이상 있는 경우만 페이징
             //  page 값 보정
-            if(page > totalPage) page = totalPage;
+            if (page > totalPage) page = totalPage;
 
             // 몇번째 데이터부터 fromRow
             int fromRow = (page - 1) * pageRows;
@@ -162,16 +163,16 @@ public class TourServiceImpl implements TourService {
             page = 0;
         }
 
-            model.addAttribute("cnt", cnt);  // 전체 글 개수
-            model.addAttribute("page", page); // 현재 페이지
-            model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
-            model.addAttribute("pageRows", pageRows);  // 한 '페이지' 에 표시할 글 개수
+        model.addAttribute("cnt", cnt);  // 전체 글 개수
+        model.addAttribute("page", page); // 현재 페이지
+        model.addAttribute("totalPage", totalPage);  // 총 '페이지' 수
+        model.addAttribute("pageRows", pageRows);  // 한 '페이지' 에 표시할 글 개수
 
-            // [페이징]
-            model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
-            model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
-            model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
-            model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
+        // [페이징]
+        model.addAttribute("url", U.getRequest().getRequestURI());  // 목록 url
+        model.addAttribute("writePages", writePages); // [페이징] 에 표시할 숫자 개수
+        model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
+        model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
 
         return list;
     }
@@ -209,6 +210,24 @@ public class TourServiceImpl implements TourService {
             mixedArray[5] = list2.get(2);
             return mixedArray;
         }
+    }
+
+
+    @Override
+    public List<String> foodList(String[] list) {
+        List<String> b = new ArrayList<>();
+        List<String> a = tourRepository.selectByFood();
+        for (int i = 0; i < list.length; i++) {
+            if (a.contains(list[i])) {
+                b.add(list[i]);
+            }
+        }
+        return b;
+    }
+
+    @Override
+    public Long findByFoodId(String storeTel) {
+        return tourRepository.selectByFoodId(storeTel);
     }
 
 }

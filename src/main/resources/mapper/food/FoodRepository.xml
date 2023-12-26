@@ -3,61 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.inseoul.food.repository.FoodRepository">
-<!--    음식점 정보, 리뷰정보 따로 sele-->
+    <!--    음식점 정보, 리뷰정보 따로 sele-->
     <sql id="SELECT_BASE">
         SELECT food_id "foodId", store_name "storeName", store_address "storeAddress", store_tel "storeTel", langcodeId
-            FROM food
+        FROM food
     </sql>
     <!--  작성(저장)  -->
     <insert id="write" flushCache="true" parameterType="com.inseoul.food.domain.FoodRow"
-    useGeneratedKeys="true" keyColumn="food_id" keyProperty="foodId">
-        INSERT INTO food(store_name, store_address, store_tel, langcodeId)
-        VALUES (#{storeName}, #{storeAddress}, #{storeTel}, #{langcodeId})
+            useGeneratedKeys="true" keyColumn="food_id" keyProperty="foodId">
+        INSERT
+        IGNORE INTO food(store_name, store_address, store_tel, langcodeId)
+        VALUES (
+        #{storeName},
+        #{storeAddress},
+        #{storeTel},
+        #{langcodeId}
+        )
     </insert>
     <!--  전체 글 -->
     <select id="findAll" resultType="com.inseoul.food.domain.FoodRow">
         <include refid="SELECT_BASE"/>
-            ORDER BY food_id ASC
+        ORDER BY food_id ASC
     </select>
 
     <!--   특정 아이디 -->
+    <!--    <select id="findById" resultType="com.inseoul.food.domain.FoodRow">-->
+    <!--        <include refid="SELECT_BASE"/>-->
+    <!--        WHERE food_id = #{foodId}-->
+    <!--        AND langcodeId = 'ko'-->
+    <!--    </select>-->
+
     <select id="findById" resultType="com.inseoul.food.domain.FoodRow">
-        <include refid="SELECT_BASE"/>
+        SELECT DISTINCT food_id       "foodId",
+                        store_name    "storeName",
+                        store_address "storeAddress",
+                        store_tel     "storeTel",
+                        langcodeId
+        FROM food
         WHERE food_id = #{foodId}
-        AND langcodeId = 'ko'
+          AND langcodeId = 'ko'
     </select>
 
 
+    <!-- 평점 불러오기 -->
+    <!--    <update id="updateRating">-->
+    <!--        UPDATE food-->
+    <!--        SET review_avg = #{reviewAvg}-->
+    <!--        WHERE food_id = #{foodId}-->
+    <!--    </update>-->
 
-
-
-<!--    <select id="compare" resultType="java.lang.Integer">-->
-<!--        SELECT count(distinguish)-->
-<!--        FROM inseoul_food-->
-<!--        WHERE distinguish = #{distinguish}-->
-<!--    </select>-->
-
-
-    <!-- 음식점 정보 api db 작성(저장)  -->
-<!--    <insert id="write" flushCache="true" parameterType="com.inseoul.food.domain.FoodRow"-->
-<!--            useGeneratedKeys="true" keyColumn="foodId" keyProperty="foodId">-->
-<!--        INSERT INTO inseoul_food(storeName, storeAddress, storeTel, langCodeId)-->
-<!--        VALUES (#{storeName}, #{storeAddress}, #{storeTel}, #{langCodeId})-->
-<!--    </insert>-->
-<!--    &lt;!&ndash;  리뷰 insert  &ndash;&gt;-->
-<!--    <insert id="reviewWrite" flushCache="true" parameterType="com.inseoul.food.domain.Review"-->
-<!--            useGeneratedKeys="true" keyColumn="reviewId" keyProperty="reviewId">-->
-<!--        INSERT INTO food_review(reviewId, reviewStar, reviewCategory, reviewContent)-->
-<!--        VALUES (#{reviewId}, #{reviewStar}, #{reviewCategory}, #{reviewContent})-->
-<!--    </insert>-->
-<!--&lt;!&ndash;    &ndash;&gt;-->
-<!--    <select id="find">-->
-<!--        SELECT r.*, f.storeName, f.storeAddress, f.storeTel, f.langCodeId FROM food_review r, inseoul_food f-->
-<!--        WHERE r.foodId = f.foodId-->
-<!--    </select>-->
-
-<!--&lt;!&ndash; 별점 평균 &ndash;&gt;-->
-<!--    <select id="ratingStar" resultType="Double">-->
-<!--        SELECT AVG(reviewStar) FROM food_review GROUP BY foodId;-->
-<!--    </select>-->
+    <select id="findByRating" resultType="java.lang.Double">
+        SELECT review_avg
+        FROM food
+        WHERE food_id = #{foodId}
+    </select>
 </mapper>

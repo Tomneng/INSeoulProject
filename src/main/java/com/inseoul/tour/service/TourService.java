@@ -24,4 +24,8 @@ public interface TourService {
     List<Item> getRandomTourCard();
 
     Object[] getTop(Long tourId);
+
+    List<String> foodList(String[] list);
+
+    Long findByFoodId(String storeTel);
 }
