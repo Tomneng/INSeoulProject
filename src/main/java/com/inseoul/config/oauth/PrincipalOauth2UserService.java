@@ -52,7 +52,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         // 후처리: 회원 가입 진행
         String provider = userRequest.getClientRegistration().getRegistrationId(); // "google", "facebook"...
-
         OAuth2UserInfo oAuth2UserInfo = switch (provider.toLowerCase()){
             case "google" -> new GoogleUserInfo(oAuth2User.getAttributes());
             case "naver" -> new NaverUserInfo(oAuth2User.getAttributes());
@@ -68,6 +67,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
         // 회원 가입 진행하기 전에
         // 이미 가입한 회원인지, 혹은 비가입자인지 체크하여야 한다
+
         User newUser = User.builder()
                 .username(username)
                 .nickname(nickname)
@@ -75,10 +75,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                 .provider(provider)
                 .providerId(providerId)
                 .build();
+        User user = userService.findByUsername(username); // 여기서 문제 발생!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        User user = userService.findByUsername(username);
         if (user == null) {  // 비가입자인 경우에만 회원 가입 진행
-            user = newUser;
+           user = newUser;
             int cnt = userService.register(user);  // 회원 가입!
             if (cnt > 0) {
                 System.out.println("[OAuth2 인증 회원가입 성공]");
@@ -89,7 +89,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         } else {
             System.out.println("[OAuth2 인증. 이미 가입된 회원입니다]");
         }
-
         PrincipalDetails principalDetails = new PrincipalDetails(user, oAuth2User.getAttributes());
         principalDetails.setUserService(userService);  // 잊지말자!
 
