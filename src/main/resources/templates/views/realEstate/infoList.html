@@ -34,7 +34,7 @@
     <th:block th:insert="~{common/header::header}"></th:block>
 
     <div id="realEstateSearchContainer" class="container">
-        <form th:action="@{/realEstate/infoList}" method="post">
+        <form th:action="@{/realEstate/infoList}" method="post" name="houseForm">
             <select id="selectYear" name="accYear">
             </select>
             <select id="selectSSG" name="ssgName">
@@ -46,6 +46,44 @@
             <select id="selectHouseKind" name="houseKindName">
             </select>
             <button type="submit">검색하기</button>
+
+            <div id="wrapper">
+                <div id="selectMbti">
+                    <input type="radio" class="mbties" id="ESFP" name="mbti" th:value="ESFP">
+                    <label for="ESFP">ESFP</label>
+                    <input type="radio" class="mbties" id="ENFP" name="mbti" th:value="ENFP">
+                    <label for="ENFP">ENFP</label>
+                    <input type="radio" class="mbties" id="ISFP" name="mbti" th:value="ISFP">
+                    <label for="ISFP">ISFP</label>
+                    <input type="radio" class="mbties" id="INFP" name="mbti" th:value="INFP">
+                    <label for="INFP">INFP</label>
+                    <input type="radio" class="mbties" id="ESFJ" name="mbti" th:value="ESFJ">
+                    <label for="ESFJ">ESFJ</label>
+                    <input type="radio" class="mbties" id="ENFJ" name="mbti" th:value="ENFJ">
+                    <label for="ENFJ">ENFJ</label>
+                    <input type="radio" class="mbties" id="ISFJ" name="mbti" th:value="ISFJ">
+                    <label for="ISFJ">ISFJ</label>
+                    <input type="radio" class="mbties" id="INFJ" name="mbti" th:value="INFJ">
+                    <label for="INFJ">INFJ</label>
+                    <input type="radio" class="mbties" id="ESTP" name="mbti" th:value="ESTP">
+                    <label for="ESTP">ESTP</label>
+                    <input type="radio" class="mbties" id="ENTP" name="mbti" th:value="ENTP">
+                    <label for="ENTP">ENTP</label>
+                    <input type="radio" class="mbties" id="ISTP" name="mbti" th:value="ISTP">
+                    <label for="ISTP">ISTP</label>
+                    <input type="radio" class="mbties" id="INTP" name="mbti" th:value="INTP">
+                    <label for="INTP">INTP</label>
+                    <input type="radio" class="mbties" id="ESTJ" name="mbti" th:value="ESTJ">
+                    <label for="ESTJ">ESTJ</label>
+                    <input type="radio" class="mbties" id="ENTJ" name="mbti" th:value="ENTJ">
+                    <label for="ENTJ">ENTJ</label>
+                    <input type="radio" class="mbties" id="ISTJ" name="mbti" th:value="ISTJ">
+                    <label for="ISTJ">ISTJ</label>
+                    <input type="radio" class="mbties" id="INTJ" name="mbti" th:value="INTJ">
+                    <label for="INTJ">INTJ</label>
+                    <button id="done" type="button">완료</button>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -57,6 +95,23 @@
 
     <div class="divider-containerParents justify-content-center row">
         <div th:each="row : ${list}" class="divider-container" id="container1">
+            <div class="divider">
+                <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
+                       th:value="${row.houseId}"><br>
+                <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                    <span th:text="${row.ssgName}"></span><br>
+                    <span th:text="${row.dongName}"></span><br>
+                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
+                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
+                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
+                    <!--            <span th:text="${row.contractScore}"></span>-->
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider-containerParents justify-content-center row">
+        <div th:each="row : ${top3List}" class="divider-container" id="container2">
             <div class="divider">
                 <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
                        th:value="${row.houseId}"><br>

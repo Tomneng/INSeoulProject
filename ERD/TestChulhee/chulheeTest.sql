@@ -41,4 +41,10 @@ LIMIT 4;
 
 SELECT * FROM tourinfosaved;
 
+SELECT u.mbti
+FROM houseinfosaved h, user u
+WHERE h.house_id = 200
+Group by u.mbti
+ORDER BY count(u.mbti) DESC
+    LIMIT 3;
 

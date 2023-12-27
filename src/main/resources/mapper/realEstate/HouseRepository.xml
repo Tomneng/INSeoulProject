@@ -107,4 +107,20 @@
         ORDER BY count(s.user_id) DESC
         LIMIT 4
     </select>
+    <select id="includeTop3" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT u.user_id, u.mbti, h.*
+        FROM houseinfosaved h
+                 JOIN user u ON h.user_id = u.user_id
+        WHERE h.house_id = #{houseId}
+          AND u.mbti IN (
+            SELECT u.mbti
+            FROM houseinfosaved h
+                     JOIN user u ON h.user_id = u.user_id
+            WHERE h.house_id = #{houseId}
+            GROUP BY u.mbti
+            ORDER BY COUNT(h.house_id) DESC
+            LIMIT 3
+            )
+        ORDER BY u.mbti, h.house_id;
+    </select>
 </mapper>

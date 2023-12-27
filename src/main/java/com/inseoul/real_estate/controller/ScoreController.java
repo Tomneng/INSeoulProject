@@ -3,8 +3,10 @@ package com.inseoul.real_estate.controller;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.service.HouseService;
 import com.inseoul.real_estate.util.U;
+import com.inseoul.tour.domain.Item;
 import com.inseoul.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -44,6 +46,11 @@ public class ScoreController {
     ){
         Object[] hmap = houseService.getTop(houseId);
         return hmap;
+    }
+
+    @RequestMapping("/mbtiFilter")
+    public void mbtiList(Row row, User user, Integer page, Model model) {
+        houseService.top3List(row, user, page, model);
     }
 
 }

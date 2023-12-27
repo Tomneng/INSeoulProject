@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $("#done").click(function (){
+        let form = document.forms['houseForm'];
+        form.submit();
+    })
     // 여기 철희가 추가 12/19
     // 헤더에 active class 추가
     $("#tabRealEstate").addClass("active");

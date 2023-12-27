@@ -38,4 +38,5 @@ public interface HouseRepository {
 
     List<Row> houseOnmain();
 
+    List<Row> includeTop3(String accYear, String ssgName, Integer dongCode, String houseKindName, String mbti, int fromRow, Integer pageRows);
 }
