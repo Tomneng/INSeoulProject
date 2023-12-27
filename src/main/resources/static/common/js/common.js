@@ -35,13 +35,13 @@ $(document).ready(function () {
     $('#clickTourTab').click(function () {
         $('#cardPart2').css("display", "none");
         $('#cardPart1').css("display", "");
-        $('#clickTourTab').attr("href", "/tour/tourList");
+        $('#clickReadMore').attr("href", "/tour/tourList");
     })
 
     $('#clickRealTab').click(function () {
         $('#cardPart1').css("display", "none");
         $('#cardPart2').css("display", "");
-        $('#clickRealTab').attr("href", "/realEstate/infoList");
+        $('#clickReadMore').attr("href", "/realEstate/infoList");
     })
 
 
