@@ -11,14 +11,14 @@ body {
     box-sizing: border-box;
 }
 
-header {
-    background-color: #3498db;
-    padding: 10px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/*header {*/
+/*    background-color: #3498db;*/
+/*    padding: 10px;*/
+/*    color: #fff;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
 
 header .logo {
     font-size: 24px;
@@ -52,7 +52,6 @@ header .icons i {
 
 .container {
     display: flex;
-    /*max-width: 800px;*/
     margin: 50px auto;
     text-align: center;
     justify-content: space-around;
@@ -61,17 +60,16 @@ header .icons i {
 .container select,
 .container input[type="text"],
 .container button {
-    /*width: calc(33.33% - 20px); !* 10px은 간격을 나타냅니다. *!*/
     padding: 10px;
     margin: 0 5px;
 }
 
-.container button {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
+/*.container button {*/
+/*    background-color: #3498db;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*}*/
 
 hr {
     margin-top: 20px;
@@ -83,7 +81,6 @@ hr {
     justify-content: center;
     align-items: center; /* 중앙 정렬을 위해 추가 */
     margin-bottom: 20px;
-    border: red solid;
     width: 420px;
 }
 
@@ -122,9 +119,6 @@ p {
 
 /* 여기부터 철희가 추가 12/19 */
 #realEstateSearchContainer {
-    border: red solid;
-    /*text-align: center;*/
-    /*width: 100%;*/
     max-width: var(--realEstateMaxWidth);
     margin-top: 20px;
     margin-bottom: 20px;
@@ -132,7 +126,6 @@ p {
 
 /* select, 검색버튼이 들어있음 */
 #realEstateSearchContainer form {
-    border: orange solid;
 }
 
 /* select들 */
@@ -158,17 +151,11 @@ p {
 }
 
 #cntRealEstate {
-    border: orange solid;
-    /*max-width: var(--realEstateMaxWidth);*/
-    /*margin: auto;*/
     padding-left: 10vh;
 }
 
 .divider-containerParents {
-    /*justify-content: center;*/
     align-items: center; /* 중앙 정렬을 위해 추가 */
-    border: black solid;
-    /*float: left;*/
     max-width: var(--realEstateMaxWidth);
     min-height: 674px;
     margin: auto;
