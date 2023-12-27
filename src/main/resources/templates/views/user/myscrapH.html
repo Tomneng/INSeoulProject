@@ -5,7 +5,7 @@
 <th:block th:fragment="myscrapH" th:with="logged_user=${#authentication.principal.user}">
     <div th:each="row : ${myrowlist}" class="divider-container" id="container1">
         <div class="divider">
-            <input type="checkbox" th:id="${row.houseId}" th:value="${row.houseId}" checked>
+            <input class="house" type="checkbox" th:id="${row.houseId}" th:value="${row.houseId}" checked>
             <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
                 <span th:text="${row.ssgName}"></span>
                 <span th:text="${row.dongName}"></span>

@@ -28,11 +28,17 @@ $(document).ready(function () {
                         data: chart,
                         borderWidth: 1,
                         backgroundColor: [
-                            (data[0] < data[1]) ? 'rgb(255, 0, 0)' : 'rgb(051, 000, 255)',
-                            'rgb(128, 128, 128)',
-                            (data[2] < data[3]) ? 'rgb(255, 0, 0)' : 'rgb(051, 000, 255)',
-                            'rgb(128, 128, 128)',
-                        ]
+                            (data[0] < data[1]) ? 'rgba(255, 99, 132, 0.2)' : 'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)',
+                            (data[2] < data[3]) ? 'rgba(255, 99, 132, 0.2)' : 'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(201, 203, 207)',
+                            'rgb(153, 102, 255)',
+                            'rgb(201, 203, 207)'
+                        ],
                     }],
 
                 },
@@ -72,10 +78,15 @@ $(document).ready(function () {
                         data: chart2,
                         borderWidth: 1,
                     backgroundColor: [
-                        'rgb(255, 215, 00)',
-                        'rgb(192, 192, 192)',
-                        'rgb(205, 127, 50)',
-                    ]
+                        'rgba(255, 215, 00, 0.2)',
+                        'rgba(192, 192, 192, 0.2)',
+                        'rgba(205, 127, 50, 0.2)',
+                    ],
+                        borderColor: [
+                            'rgb(255, 215, 0)',
+                            'rgb(192, 192, 192)',
+                            'rgb(205, 127, 50)'
+                        ]
                     }],
                 },
                 options: {

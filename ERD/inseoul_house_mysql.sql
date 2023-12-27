@@ -474,6 +474,7 @@ SELECT * FROM houseinfosaved NATURAL JOIN user;
 INSERT INTO houseInfoSaved(user_id, house_id)
 values(6, 351);
 SELECT * from user;
+SELECT * from tour;
 
 
 
