@@ -1,14 +1,7 @@
-$(function () {
-    // 글 [삭제] 버튼
-    $("#btnDel").click(function () {
-        let answer = confirm("삭제하시겠습니까?");
-        if (answer) {
-            $("form[name='frmDelete']").submit();
-        }
-    });
 
+$(function () {
     // 현재 글의 id 값
-    const postId = $("input[name='postId']").val().trim();
+    const postId = $("input[name='postId']").val();
     console.log("input[name='postId'] = " + postId) // 확인완료
 
 
@@ -66,6 +59,14 @@ $(function () {
 
     });
 
+}   );
+
+// 글 [삭제] 버튼
+$("#btnDel").click(function () {
+    let answer = confirm("삭제하시겠습니까?");
+    if (answer) {
+        $("form[name='frmDelete']").submit();
+    }
 });
 
 // 특정 글(post_id) 의 댓글 목록 읽어오기
