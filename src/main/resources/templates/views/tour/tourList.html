@@ -22,7 +22,10 @@
         <link rel="stylesheet" type="text/css" th:href="@{/tour/css/tour.css}">
 
         <title>관광리스트</title>
+
     </head>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <body>
@@ -33,7 +36,7 @@
     <form th:action="@{/tour/tourList}" method="post">
         <div id="container_tourlist">
             <select name="tourSigungucode" id="tourSigungucode">
-                <option value="">전체</option>
+                <option value="">구를 선택하세요</option>
                 <option value="1">강남구</option>
                 <option value="2">강동구</option>
                 <option value="3">강북구</option>
@@ -98,7 +101,7 @@
     <!-- pagination -->
 
     <!--  푸터 블럭 by 철희 12/19  -->
-    <th:block th:insert="~{common/footer::footer}"></th:block>
+    <th:block th:insert="~{common/footer::footer}" id="footer"></th:block>
 
     </body>
     <script th:inline="javascript">
