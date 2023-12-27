@@ -52,6 +52,8 @@
                  class="img-fluid" id="tourImage1">
             <p th:text="${item.tourName}" id="tourName"></p><br>
             <p th:text="${item.tourAddr1 + ' ' + item.tourAddr2}" id="tourAddress"></p><br>
+            <input type="hidden" id="tourAddr1" name="tourAddr1" th:value="${item.tourAddr1}"/>
+            <input type="hidden" id="tourAddr2" name="tourAddr2" th:value="${item.tourAddr2}"/>
             <table id="demoJSON_tour"></table>
             <input type="hidden" id="centralLatitude" name="centralLatitude" th:value="${item.tourMapy}"/>
             <input type="hidden" id="centralLongitude" name="centralLongitude" th:value="${item.tourMapx}"/>

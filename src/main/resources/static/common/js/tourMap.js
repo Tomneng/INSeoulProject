@@ -15,11 +15,11 @@ let centralLongitude = $("#centralLongitude").val(); // 지도의 중심이 될 
 
 
 // 지도 중심에 표시되는 마커의 정보들
-var centerMarkerName = '장소명 data를 넣으세요',
+var centerMarkerName = $("#tourName").text(),
     centerMarkerImg = 'https://firebasestorage.googleapis.com/v0/b/inseoul-bcec2.appspot.com/o/free-icon-heart-4551298.png?alt=media&token=f5c167ae-87ab-4401-863b-7c974a859b06', // 장소 이미지 url를 넣으세요.
-    centerMarkerJuso = '주소 data를 넣으세요.', // 예) 제주특별자치도 제주시 첨단로 242
-    centerMarkerJibun = '상세주소(지번) data를 넣으세요', // 예) (우) 63309 (지번) 영평동 2181
-    centerMarkerWeb = '홈페이지link를 넣으세요.'; // 예) https://www.kakaocorp.com/main
+    centerMarkerJuso = $("#tourAddr1").val(), // 예) 제주특별자치도 제주시 첨단로 242
+    centerMarkerJibun = $("#tourAddr2").val(); // 예) (우) 63309 (지번) 영평동 2181
+    // centerMarkerWeb = '홈페이지link를 넣으세요.'; // 예) https://www.kakaocorp.com/main
 
 
 // 지도 표시하기
@@ -288,7 +288,7 @@ var content =
     '           <div class="desc">' +
     '                <div class="ellipsis">' + centerMarkerJuso + '</div>' +
     '                <div class="jibun ellipsis">' + centerMarkerJibun + '</div>' +
-    '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
+    // '                <div><a href="' + centerMarkerWeb + '" target="_blank" class="link">홈페이지</a></div>' +
     '           </div>' +
     '        </div>' +
     '    </div>' +
