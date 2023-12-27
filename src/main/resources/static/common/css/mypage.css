@@ -1,0 +1,82 @@
+.container {
+    margin-top: 50px;
+    width: 80%;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: var(--white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.mypageupdate {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mypageupdate button, a.btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 120px;
+}
+
+.mypageupdate button:hover, a.btn:hover {
+    background-color: var(--skycoral);
+    color: var(--white);
+    border: var(--skycoral) solid;
+}
+
+.container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mypagelist,
+.userinfo {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    margin: 0;
+}
+
+.userinfo form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.username,
+.nickname,
+.mbti {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.overFlowAuto {
+    border: red solid;
+    display: grid;
+    justify-content: left;
+    max-width: 650px;
+    margin: auto;
+}
+
+.divider-container {
+    border: green solid;
+}
+
+.divider-container .divider {
+    border: orange solid;
+    padding-left: 30px;
+    text-align: left !important;
+}

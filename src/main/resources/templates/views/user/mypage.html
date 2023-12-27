@@ -4,88 +4,6 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:with="logged_user=${#authentication.principal.user}">
-
-    <style>
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            margin-top: 50px;
-            width: 80%;
-            height: auto;
-            border: 1px solid black;
-            border-radius: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .mypageupdate {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .mypageupdate button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: var(--white);
-            color: var(--skycoral);
-            border: var(--skycoral) solid;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-right: 20px;
-        }
-
-        .mypageupdate button:hover {
-            background-color: var(--skycoral);
-            color: var(--white);
-            border: var(--skycoral) solid;
-        }
-
-        .container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .mypagelist,
-        .userinfo {
-            display: flex;
-            flex-direction: column;
-        }
-
-        form {
-            margin: 0;
-        }
-
-        .userinfo form {
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-        }
-
-        .username,
-        .nickname,
-        .mbti {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .btn-outline-dark {
-            background-color: #007bff;
-            color: #fff;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-    </style>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,6 +23,7 @@
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mypage.css}">
         <title>Mypage</title>
     </head>
 
@@ -124,16 +43,21 @@
     </div>
 
     <div class="container">
-        <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px;">
+
         <div class="mypagelist">
             <form action name="frm1">
-                <th:block th:insert="~{user/myscrapH::myscrapH}"></th:block>
-                <th:block th:insert="~{user/myscrapT::myscrapT}"></th:block>
+                <div id="tourScrapPart" class="overFlowAuto">
+                    <th:block th:insert="~{user/myscrapT::myscrapT}"></th:block>
+                </div>
+                <div id="realScrapPart" class="overFlowAuto">
+                    <th:block th:insert="~{user/myscrapH::myscrapH}"></th:block>
+                </div>
             </form>
         </div>
 
         <div class="userinfo" style="display: flex">
             <form name="frm2" style="display: none; margin-left: 20px;">
+                <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px;">
                 <div class="username" style="width: unset">
                     <label>
                         <span>이메일</span>
@@ -146,23 +70,17 @@
                         <input type="text" class="nickname" disabled th:value="${user.nickname}">
                     </label>
                 </div>
-                <!--    <div class="password" style="width: unset">-->
-                <!--      <label>-->
-                <!--        <span>비밀번호</span>-->
-                <!--                <input type="password" class="password" readonly th:value="${user.password}">-->
-                <!--      </label>-->
-                <!--    </div>-->
                 <div class="mbti" style="width: unset">
                     <label>
                         <span>MBTI</span>
                         <input type="text" class="mbti" disabled th:value="${user.mbti}">
                     </label>
                 </div>
-                <a class="btn btn-outline-dark ms-2" th:href="@{'/user/userinfo/' + ${user.userId}}">수정</a>
+                <a class="btn ms-2" th:href="@{'/user/userinfo/' + ${user.userId}}">수정</a>
             </form>
         </div>
-    </div>
 
+    </div>
     </body>
 </th:block>
 </html>
