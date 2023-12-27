@@ -13,7 +13,7 @@ public interface ReviewRepository {
     int reviewSave(Review review);
 
     //리뷰 조회(음식점아이디로 카테고리를 보여줌)
-    String swCategory(Long foodId);
+    List<String> swCategory(Long foodId);
 
     // 리뷰 존재 유무
     int countReview(Long userId, Long foodId);
@@ -25,7 +25,7 @@ public interface ReviewRepository {
 
     Double getScore(Long foodId);
 
-
+    // 리뷰 5개 뽑는거 만들어야지
 
     //평점 평균 구하기
 //    double getRatingAvg(Long foodId);

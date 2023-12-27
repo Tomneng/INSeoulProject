@@ -78,8 +78,8 @@ public class TourApiController {
 
     //리뷰 카테고리 보여주기
     @PostMapping("/tourDetail2")
-    public String foodReview(@RequestParam("food_id") Long foodId) {
-        String review = reviewService.showCategory(foodId);
+    public List<String> foodReview(@RequestParam("food_id") Long foodId) {
+        List<String> review = reviewService.showCategory(foodId);
         return review;
     }
 

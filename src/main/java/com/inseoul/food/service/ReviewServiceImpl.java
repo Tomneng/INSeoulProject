@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -35,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     //리뷰 카테고리 보여주기
     @Override
-    public String showCategory(Long foodId) {
+    public List<String> showCategory(Long foodId) {
         return reviewRepository.swCategory(foodId);
     }
 

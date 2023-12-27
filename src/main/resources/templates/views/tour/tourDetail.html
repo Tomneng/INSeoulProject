@@ -68,19 +68,22 @@
 
             <div class="card getreview gfi" id="foodImage1"
                  style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+                <span class="gfititle"></span>
                 <input style="display: none">
             </div>
             <div class="card getreview gfi" id="foodImage2"
                  style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+                <span class="gfititle"></span>
                 <input style="display: none">
             </div>
             <div class="card getreview gfi" id="foodImage3"
                  style="width: 20rem; height: 20rem; border: 2px solid black;" referrerpolicy="no-referrer">
+                <span class="gfititle"></span>
                 <input style="display: none">
             </div>
             <div id="modal" class="modal-overlay" style="display: none;">
                 <div class="modal-window">
-                    <div class="close-area">X</div>
+                    <div class="close-area"><span>X</span></div>
                     <div class="title">
                         <div id="store_name"></div>
                         <div id="store_address"></div>
@@ -88,28 +91,37 @@
                     </div>
                     <hr>
                     <div id="showContent">
-                        <div id="foodImage">음식점 이미지</div>
+                        <div id="foodImage"></div>
                         <div id="reviewShowStar">
                             <span>평점</span>
                             <div id="reviewStarOne"></div>
+<!--                            <div class="star-ratings">-->
+<!--                                <div class="star-ratings-fill space-x-2 text-lg" style="width: calc(20% + 1.5%)">-->
+<!--                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
+<!--                                </div>-->
+<!--                                <div class="star-ratings-base space-x-2 text-lg">-->
+<!--                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                         <!-- 하나 -->
                         <div id="reviewShowCategory">
                             <span>리뷰</span>
-                            <div id="reviewCategory"></div>
+                            <div id="reviewCat1"></div>
+                            <div id="reviewCat2"></div>
+                            <div id="reviewCat3"></div>
+                            <div id="reviewCat4"></div>
+                            <div id="reviewCat5"></div>
                         </div>
                         <input type="button" value="리뷰남기기" id="getShow">
                     </div>
                     <input type="hidden" name="reviewId" th:value="${reviewId}">
                     <input id="foodid" type="hidden" name="foodId" th:value="${foodId}">
                     <div id="content" style="display: none;">
-                        <!--                        <div class="container mt-3 mb-3 border rounded">-->
-                        <!--                            <label>첨부파일</label>-->
-                        <!--                        </div>-->
                         <div class="mid">
                             <div id="userId">
                                 <span>회원ID</span>
-                                <input type="hidden" name="userId" th:value="${logged_user.userId}">
+                                <input type="text" name="userId" th:value="${logged_user.userId}" readonly>
                             </div>
                             <div id="reviewStar">
                                 <fieldset class="rate">
@@ -178,9 +190,46 @@
                                         </label>
                                     </li>
                                 </ul>
+                                <ul class="category2">
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory6"
+                                               name="reviewCategory" value="맛이 없어요">
+                                        <label for="reviewCategory6" class="label-comment">
+                                            😓 맛이 없어요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory7"
+                                               name="reviewCategory" value="매장이 좁아요">
+                                        <label for="reviewCategory7" class="label-comment">
+                                            😬 매장이 좁아요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory8"
+                                               name="reviewCategory" value="친절하지 않아요">
+                                        <label for="reviewCategory8" class="label-comment">
+                                            😡 친절하지 않아요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory9"
+                                               name="reviewCategory" value="너무 비싸요">
+                                        <label for="reviewCategory9" class="label-comment">
+                                            💰 너무 비싸요
+                                        </label>
+                                    </li>
+                                    <li class="category-comment">
+                                        <input type="checkbox" class="checkComment" id="reviewCategory10"
+                                               name="reviewCategory" value="위생이 별로예요">
+                                        <label for="reviewCategory10" class="label-comment">
+                                            😷 위생이 별로예요
+                                        </label>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="category-content">
-                            <textarea class="reviewComment" name="reviewContent" cols="15" rows="10"
+                            <textarea class="reviewComment" name="reviewContent" cols="25" rows="20"
                                       placeholder="직접 후기를 작성해주세요" th:value="${reviewContent}"></textarea>
                             </div>
                             <button type="button" id="cancel" class="btn btn-outline-dark" value="취소">취소</button>
@@ -195,9 +244,6 @@
             </div>
             <!--<th:block th:insert="~{common/commonMap::commonMap}"></th:block>-->
         </div>
-
-        <!--  추천음식점  -->
-        <!-- 여기 아래 아직 손대지 않음. -->
     </div>
     </div>
 
@@ -231,4 +277,12 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script th:src="@{/common/js/common.js}"></script>
 
+
+
+<script>
+    function ratingToPercent(averageScore) {
+        const score = +averageScore * 20;
+        return score + 1.5;
+    }
+</script>
 </html>
