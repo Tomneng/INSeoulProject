@@ -26,6 +26,6 @@ SELECT store_tel FROM food WHERE langcodeId = 'ko';
 SELECT * FROM user;
 
 SELECT * FROM tour;
-
+SELECT * FROM houseinfosaved NATURAL JOIN user WHERE house_id=351;
 # SELECT * FROM reviewimage;
 
