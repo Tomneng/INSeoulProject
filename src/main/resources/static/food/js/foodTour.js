@@ -43,12 +43,11 @@ $(document).ready(function () {
                             },
                             data: {
                                 query: data[0],
-                                sort: 'accuracy'
+                                // sort: 'accuracy'
                             },
                         })
                             .done(function (res) {
-                                $("div#foodImage1").append('<img style="width:20rem; height:20rem;" class="cardsee"  ' +
-                                    'src="' + res.documents[1].thumbnail_url + '"/>');
+                                $("div#foodImage1").append('<img class="cardsee"  ' + 'src="' + res.documents[1].thumbnail_url + '"/>');
                             })
                         $.ajax({
                             type: "POST",
@@ -62,7 +61,7 @@ $(document).ready(function () {
                             },
                         })
                             .done(function (res) {
-                                $("div#foodImage2").append('<img style="width:20rem; height:20rem;" class="cardsee" src="' + res.documents[1].thumbnail_url + '"/>');
+                                $("div#foodImage2").append('<img class="cardsee" src="' + res.documents[1].thumbnail_url + '"/>');
                             })
                         $.ajax({
                             type: "POST",
@@ -76,7 +75,7 @@ $(document).ready(function () {
                             },
                         })
                             .done(function (res) {
-                                $("div#foodImage3").append('<img style="width:20rem; height:20rem;" class="cardsee" src="' + res.documents[1].thumbnail_url + '"/>');
+                                $("div#foodImage3").append('<img class="cardsee" src="' + res.documents[1].thumbnail_url + '"/>');
                             })
                     }
                 }
@@ -122,7 +121,7 @@ $(document).ready(function () {
                     .done(function (res) {
                         $("#modalFoodImageTag").remove();
                         $("div#foodImage").append('<img id="modalFoodImageTag" referrerpolicy="no-referrer" ' +
-                            'src="' + res.documents[1].image_url + '" style="width:380px; height:250px;" />')
+                            'src="' + res.documents[1].image_url + '" style="width:380px; height:300px;" />')
                     })
                 // 리뷰 키워드 보여주기
                 const foodId2 = {
@@ -134,7 +133,17 @@ $(document).ready(function () {
                     data: foodId2,
                     cache: false,
                     success: function (data, status) {
-                        $('#reviewCategory').text(data)
+
+                        // $('#reviewCat1').text(data.get(0))
+                        // $('#reviewCat2').text(data.get(1))
+                        // $('#reviewCat3').text(data.get(2))
+                        // $('#reviewCat4').text(data.get(3))
+                        // $('#reviewCat5').text(data.get(4))
+                        $('#reviewCat1').text(data[0])
+                        $('#reviewCat2').text(data[1])
+                        $('#reviewCat3').text(data[2])
+                        $('#reviewCat4').text(data[3])
+                        $('#reviewCat5').text(data[4])
                     }, error: function (error) {
                         console.log(error);
                     }

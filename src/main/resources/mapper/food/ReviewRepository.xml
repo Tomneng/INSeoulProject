@@ -32,12 +32,14 @@
 
     <!-- 저장된 리뷰카테고리 최신순 하나 보여주기-->
     <select id="swCategory" resultType="java.lang.String">
-        SELECT review_category
+        SELECT review_content
         FROM food_reviews
         WHERE food_id = #{foodId}
         ORDER BY review_id DESC
-            LIMIT 1
+            LIMIT 5
     </select>
+
+
 
     <!-- 리뷰의 존재유무 1/0 -->
     <select id="countReview" resultType="Integer">
@@ -67,7 +69,7 @@
     <!--평점을 업데이트-->
     <update id="updateAvg">
         UPDATE food
-        SET review_avg = (SELECT AVG(review_star) "reviewAvg" FROM food_reviews WHERE food_id = #{foodId})
+        SET review_avg = (SELECT ROUND(AVG(review_star),1) "reviewAvg" FROM food_reviews WHERE food_id = #{foodId})
         WHERE food_id = #{foodId}
     </update>
 

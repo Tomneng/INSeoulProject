@@ -4,6 +4,7 @@ import com.inseoul.food.domain.FoodRow;
 import com.inseoul.food.domain.Review;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ReviewService {
@@ -14,7 +15,7 @@ public interface ReviewService {
 //    int write(Review review);
 
     //리뷰 카테고리
-    String showCategory(Long foodId);
+    List<String> showCategory(Long foodId);
 
     // 리뷰 존재 유무
     int countRw(Review review);

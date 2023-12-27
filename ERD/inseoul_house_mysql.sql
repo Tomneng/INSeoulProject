@@ -119,7 +119,6 @@ CREATE TABLE foodInfoSaved
     UNIQUE (id)
 ) COMMENT = '음식점정보스크랩테이블';
 
-select * from post;
 -- 음식점리뷰테이블
 -- 첨부이미지 제거
 CREATE TABLE food_reviews
