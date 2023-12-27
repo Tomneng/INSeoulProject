@@ -28,3 +28,9 @@
     margin-left: 50px;
     width: 50%;
 }
+
+.btn-pink {
+    color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+    background-color: #e83e8c; /* 배경 색상을 분홍색으로 설정 */
+    border-color: #e83e8c; /* 테두리 색상을 분홍색으로 설정 */
+}

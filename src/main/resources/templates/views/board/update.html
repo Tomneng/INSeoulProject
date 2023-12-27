@@ -14,7 +14,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" th:href="@{/board/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/board/css/update.css}">
 
         <!--        썸머노트        -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -85,10 +85,10 @@
 
             <!-- 하단 링크 -->
             <div class="d-flex">
-                <button type="submit" class="btn btn-outline-dark" th:if="${logged_user.userId == post.user.userId}">수정완료
+                <button type="submit" class="btn btn-outline-dark btn-pink" th:if="${logged_user.userId == post.user.userId}">수정완료
                 </button>
-                <button type="button" class="btn btn-outline-dark ms-1" onclick="history.back()">이전으로</button>
-                <a class="btn btn-outline-dark ms-1" th:href="@{/board/list(page=${session.page})}">목록</a>
+                <button type="button" class="btn btn-outline-dark ms-1 btn-pink" onclick="history.back()">이전으로</button>
+                <a class="btn btn-outline-dark ms-1 btn-pink" th:href="@{/board/list(page=${session.page})}">목록</a>
             </div>
             <!-- 하단 링크 -->
 
