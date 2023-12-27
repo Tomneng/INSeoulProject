@@ -126,6 +126,8 @@ p {
     /*text-align: center;*/
     /*width: 100%;*/
     max-width: var(--realEstateMaxWidth);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* select, 검색버튼이 들어있음 */
@@ -136,8 +138,8 @@ p {
 /* select들 */
 #realEstateSearchContainer form select {
     border: black solid;
-    border-radius: 10px;
-    width: 300px;
+    border-radius: var(--selectRadius);
+    width: var(--selectWidth);
 }
 
 /* 검색버튼 */
@@ -145,15 +147,14 @@ p {
     background-color: var(--white);
     color: var(--skycoral);
     border: var(--skycoral) solid;
-    border-radius: 10px;
-    width: 300px;
+    border-radius: var(--selectRadius);
+    width: var(--selectWidth);
 }
 
 #realEstateSearchContainer form button:hover {
     background-color: var(--skycoral);
     color: var(--white);
     border: var(--white) solid;
-    border-radius: 10px;
 }
 
 #cntRealEstate {
@@ -206,7 +207,7 @@ a.page-link:hover {
     border-color: var(--skycoral);
 }
 
-.active>.page-link, .page-link.active {
+.active > .page-link, .page-link.active {
     background-color: var(--skycoral);
     border-color: var(--skycoral);
 }

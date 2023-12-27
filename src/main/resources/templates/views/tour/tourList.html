@@ -33,7 +33,7 @@
     <th:block th:insert="~{common/header::header}"></th:block>
 
 
-    <form th:action="@{/tour/tourList}" method="post">
+    <form id="tourListForm" th:action="@{/tour/tourList}" method="post">
         <div id="container_tourlist">
             <select name="tourSigungucode" id="tourSigungucode">
                 <option value="">구를 선택하세요</option>
