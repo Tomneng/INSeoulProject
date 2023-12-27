@@ -1,4 +1,5 @@
 SET SESSION FOREIGN_KEY_CHECKS = 0;
+select * from post;
 
 /* Drop Tables */
 

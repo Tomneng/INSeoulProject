@@ -34,7 +34,7 @@
         <h2>조회 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-<!--            <span class="float-start me-2">id : [[${post.postId}]]</span>-->
+            <span class="float-start me-2">id : [[${post.postId}]]</span>
             <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
             <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
@@ -45,22 +45,24 @@
             </form>
 
             <div class="mb-3">
-                <label>작성자:</label>
+                <label>Writer : </label>
                 <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
+                <label>MBTI : </label>
+                <span class="form-control bg-light" th:text="${post.user.mbti}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label>제목:</label>
+                <label>Title : </label>
                 <span class="form-control bg-light" th:text="${post.title}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label>내용:</label>
-                <div class="border rounded p-2" th:text="${post.content}"></div>
+                <label>Content : </label>
+                <div class="border rounded p-2" th:utext="${post.content}"></div>
             </div>
 
             <!-- 첨부파일목록 -->
             <div class="container mt-3 mb-3 border rounded">
                 <div class="mb-3 mt-3">
-                    <label>첨부파일:</label>
+                    <label>첨부 파일:</label>
                     <ul class="list-group mb-1">
                         <li class="list-group-item" th:each="attachment : ${post.fileList}">
                             <a th:href="@{/board/download(id=${attachment.id})}" th:text="${attachment.sourcename}"></a>

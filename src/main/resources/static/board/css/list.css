@@ -5,7 +5,7 @@
 
 .title-layout {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     height: 170px;
     font-size: 2em;
@@ -16,14 +16,11 @@
     text-align: center;
 }
 
-.search-bar {
-    display: flex;
-    justify-content: center;
-}
-
 .form-control {
     border-radius: 20px;
     width: 300px;
     margin-left: 20px;
     margin-right: 60px;
 }
+
+

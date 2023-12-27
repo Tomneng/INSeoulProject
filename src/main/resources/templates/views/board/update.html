@@ -38,18 +38,20 @@
         <form name="frm" th:action="@{/board/update}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="postId" th:value="${post.postId}"/>
             <div class="mb-3">
-                <label>작성자:</label>
+                <label>Writer : </label>
                 <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
                 <input type="hidden" name="postId" th:value="${post.postId}"> <!-- validation 땜에 필요 -->
+                <label>MBTI : </label>
+                <span class="form-control bg-light" th:text="${post.user.mbti}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label for="title">제목:</label>
+                <label for="title">Title : </label>
                 <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title"
                        th:value="${title} ? ${title} : ${post.title}">
                 <span class="text-danger" th:if="${error_title}" th:utext="${error_title}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label for="content">내용:</label>
+                <label for="content">Content : </label>
                 <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content"
                           th:utext="${content} ? ${content} : ${post.content}"></textarea>
             </div>
