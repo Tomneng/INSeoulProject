@@ -28,5 +28,7 @@ public interface HouseService {
 
     List<Row> houseOnmain();
 
-    List<Row> top3List(Row row, User user, Integer page, Model model);
+    void getOredered(Row row);
+
+    List<Row> listDefault(Row row2, Integer page, Model model);
 }

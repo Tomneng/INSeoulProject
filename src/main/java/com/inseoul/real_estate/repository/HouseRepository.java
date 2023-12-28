@@ -12,7 +12,11 @@ public interface HouseRepository {
 
 
     // from에서 rows만큼 필터링해서 select
-    List<Row> filteredSearch(String accYear, String ssgName, int dongCode, String houseKindName, int from, int rows);
+    List<Row> filteredSearch(Row row, int from, int rows);
+
+    List<Row> defaultSearch(Row row, int from, int rows);
+
+    int countAllwithMbti(Row row);
 
     int countAll(Row row);
 
@@ -34,9 +38,10 @@ public interface HouseRepository {
 
     List<String> top3mbti(Long houseId);
 
+    int putTop1(String mbtiH, Long houseId);
+
     List<Integer> top3Prop(Long houseId);
 
     List<Row> houseOnmain();
 
-    List<Row> includeTop3(String accYear, String ssgName, Integer dongCode, String houseKindName, String mbti, int fromRow, Integer pageRows);
 }

@@ -1,6 +1,7 @@
 package com.inseoul.tour.service;
 
 
+import com.inseoul.real_estate.domain.Row;
 import com.inseoul.tour.domain.Item;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public interface TourService {
 
 //    List<Item> list(Item item, Model model, Integer page);
     List<Item> list(Item item, Integer page, Model model);
+    List<Item> listDefault(Item item, Integer page, Model model);
 
     List<Item> getRandomTourCard();
 
@@ -28,4 +30,8 @@ public interface TourService {
     List<String> foodList(String[] list);
 
     Long findByFoodId(String storeTel);
+
+    void getOrederedTour(Item item);
+
+
 }

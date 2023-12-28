@@ -48,3 +48,6 @@ Group by u.mbti
 ORDER BY count(u.mbti) DESC
     LIMIT 3;
 
+delete from tour where tour_image1 = '';
+
+select * from tour;

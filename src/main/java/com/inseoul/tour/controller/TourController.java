@@ -46,6 +46,18 @@ public class TourController {
 
     @RequestMapping("/tourList")
     public void list(Item item, Integer page, Model model) {
+        tourService.getOrederedTour(item);
+        if (item.getMbtiT() == null){
+            return;
+        }
+        else if (item.getMbtiT().equals("MBTI")){
+            tourService.getOrederedTour(item);
+            tourService.listDefault(item, page, model);
+        }
+        else {
+            tourService.getOrederedTour(item);
+            tourService.list(item, page, model);
+        }
         tourService.list(item, page, model);
     }
 

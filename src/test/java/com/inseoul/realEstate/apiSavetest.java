@@ -52,8 +52,10 @@ public class apiSavetest {
         row.setDongCode(10200);
         row.setHouseKindName("아파트");
 
-        System.out.println(houseRepository.filteredSearch(row.getAccYear(), row.getSsgName(), row.getDongCode(), row.getHouseKindName(), 1, 10));
+        System.out.println(houseRepository.filteredSearch(row, 1, 10));
     }
+
+
 
     @Test
     void test5() {

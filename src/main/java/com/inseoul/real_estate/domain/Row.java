@@ -56,5 +56,6 @@ public class Row {
     private String address;
     private Integer contractScore;
     private Integer placeScore;
+    private String mbtiH;
 }
 

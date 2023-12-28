@@ -31,4 +31,5 @@ public class Item {
     private double tourMapx;
     @JsonProperty("mapy")
     private double tourMapy;
+    private String mbtiT;
 }

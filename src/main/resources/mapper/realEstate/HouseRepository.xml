@@ -32,7 +32,7 @@
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
         SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address", acc_year "accYear", ssg_name "ssgName", dong_code "dongCode", house_kind_name "houseKindName",
                rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
-               contract_period "contractPeriod", new_ron_secd "newRonSecd", contract_score "contractScore", place_score "placeScore"
+               contract_period "contractPeriod", new_ron_secd "newRonSecd", contract_score "contractScore", place_score "placeScore", mbtiTop "mbtiH"
         FROM house_Contract
         WHERE house_id = #{houseId}
     </select>
@@ -44,12 +44,26 @@
     </update>
 
 
-    <select id="filteredSearch" resultType="com.inseoul.real_estate.domain.Row">
-        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee"
+    <select id="filteredSearch" parameterType="com.inseoul.real_estate.domain.Row" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee", mbtiTop "mbtiH"
         FROM house_contract
-        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
+        WHERE acc_year = #{row.accYear} AND ssg_name = #{row.ssgName} AND dong_code = #{row.dongCode} AND house_kind_name = #{row.houseKindName} AND mbtiTop = #{row.mbtiH}
         ORDER BY house_id DESC
-        LIMIT #{param5}, #{param6}
+        LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="defaultSearch" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee", mbtiTop "mbtiH"
+        FROM house_contract
+        WHERE acc_year = #{row.accYear} AND ssg_name = #{row.ssgName} AND dong_code = #{row.dongCode} AND house_kind_name = #{row.houseKindName}
+        ORDER BY house_id DESC
+            LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="countAllwithMbti" resultType="java.lang.Integer">
+        SELECT count(house_id)
+        FROM house_contract
+        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName} AND mbtiTop = #{mbtiH}
     </select>
 
     <select id="countAll" resultType="java.lang.Integer">
@@ -67,6 +81,11 @@
     <update id="updateRealScore">
         UPDATE house_Contract
         SET place_score = ROUND((SELECT avg(place_score) FROM housecontractscore WHERE housecontractscore.house_id = #{houseId}), 0), contract_score = ROUND((SELECT avg(contract_score) FROM housecontractscore WHERE housecontractscore.house_id = #{houseId}), 0)
+        WHERE house_id = #{houseId}
+    </update>
+    <update id="putTop1">
+        UPDATE house_Contract
+        SET mbtiTop = #{mbtiH}
         WHERE house_id = #{houseId}
     </update>
 
@@ -106,21 +125,5 @@
         GROUP BY h.house_id
         ORDER BY count(s.user_id) DESC
         LIMIT 4
-    </select>
-    <select id="includeTop3" resultType="com.inseoul.real_estate.domain.Row">
-        SELECT u.user_id, u.mbti, h.*
-        FROM houseinfosaved h
-                 JOIN user u ON h.user_id = u.user_id
-        WHERE h.house_id = #{houseId}
-          AND u.mbti IN (
-            SELECT u.mbti
-            FROM houseinfosaved h
-                     JOIN user u ON h.user_id = u.user_id
-            WHERE h.house_id = #{houseId}
-            GROUP BY u.mbti
-            ORDER BY COUNT(h.house_id) DESC
-            LIMIT 3
-            )
-        ORDER BY u.mbti, h.house_id;
     </select>
 </mapper>

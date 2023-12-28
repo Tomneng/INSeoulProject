@@ -48,9 +48,4 @@ public class ScoreController {
         return hmap;
     }
 
-    @RequestMapping("/mbtiFilter")
-    public void mbtiList(Row row, User user, Integer page, Model model) {
-        houseService.top3List(row, user, page, model);
-    }
-
 }

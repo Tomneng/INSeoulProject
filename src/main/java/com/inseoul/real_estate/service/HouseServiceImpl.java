@@ -18,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URL;
 import java.util.*;
 
+import static java.lang.Long.parseLong;
+
 @Service
 public class HouseServiceImpl implements HouseService {
 
@@ -49,11 +51,13 @@ public class HouseServiceImpl implements HouseService {
             row.setSsgName((String) session.getAttribute("ssgname"));
             row.setDongCode((Integer) session.getAttribute("dongcode"));
             row.setHouseKindName((String) session.getAttribute("hkind"));
+            row.setMbtiH((String) session.getAttribute("mbti"));
         } else {
             session.setAttribute("accyear", row.getAccYear());
             session.setAttribute("ssgname", row.getSsgName());
             session.setAttribute("dongcode", row.getDongCode());
             session.setAttribute("hkind", row.getHouseKindName());
+            session.setAttribute("mbti", row.getMbtiH());
         }
         return houseRepository.countAll(row);
     }
@@ -107,7 +111,7 @@ public class HouseServiceImpl implements HouseService {
         // 현재 페이지 번호 -> session 에 저장
         session.setAttribute("page", page);
 
-        long cnt = houseRepository.countAll(row);   //row를 매개변수로 전달해 필터링 된 글 목록 전체의 개수를 구함
+        long cnt = houseRepository.countAllwithMbti(row);   //row를 매개변수로 전달해 필터링 된 글 목록 전체의 개수를 구함
         int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지' ?
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'
@@ -131,7 +135,7 @@ public class HouseServiceImpl implements HouseService {
 
             // 해당페이지의 글 목록 읽어오기 + 필터링 인자들
 
-            list = houseRepository.filteredSearch(row.getAccYear(), row.getSsgName(), row.getDongCode(), row.getHouseKindName(), fromRow, pageRows);
+            list = houseRepository.filteredSearch(row, fromRow, pageRows);
             model.addAttribute("list", list);
         } else {
             page = 0;
@@ -201,6 +205,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Object[] getTop(Long houseId) {
         List<String> list1 = houseRepository.top3mbti(houseId);
+        houseRepository.putTop1(list1.get(0) ,houseId);
         List<Integer> list2 = houseRepository.top3Prop(houseId);
         Object[] mixedArray = new Object[6];
         if (list1.isEmpty()){
@@ -237,10 +242,29 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<Row> top3List(Row row, User user, Integer page, Model model) {
-        if (page == null) page = 1; // 디폴트 1page
+    public void getOredered(Row row) {
+        Integer all = houseRepository.countAll(row);
+        if (all != 0){
+            for (int i = 1; i <= all; i++) {
+                Long num = Long.valueOf(i);
+                List<String> list1 = houseRepository.top3mbti(num);
+                if (list1.size() == 0){
+                    houseRepository.putTop1("MBTI" ,num);
+                }else {
+                    houseRepository.putTop1(list1.get(0) ,num);
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Row> listDefault(Row row2, Integer page, Model model) {
+        if (page == null) page = 1;  // 디폴트는 1page
         if (page < 1) page = 1;
 
+        // 페이징
+        // writePages: 한 [페이징] 당 몇개의 페이지가 표시되나
+        // pageRows: 한 '페이지'에 몇개의 글을 리스트 할것인가?
         HttpSession session = U.getSession();
         Integer writePages = (Integer) session.getAttribute("writePages");
         if (writePages == null) writePages = WRITE_PAGES;  // 만약 session 에 없으면 기본값으로 동작
@@ -250,7 +274,7 @@ public class HouseServiceImpl implements HouseService {
         // 현재 페이지 번호 -> session 에 저장
         session.setAttribute("page", page);
 
-        long cnt = houseRepository.countAll(row);   //row를 매개변수로 전달해 필터링 된 글 목록 전체의 개수를 구함
+        long cnt = houseRepository.countAll(row2);   //row를 매개변수로 전달해 필터링 된 글 목록 전체의 개수를 구함
         int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지' ?
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'
@@ -258,7 +282,7 @@ public class HouseServiceImpl implements HouseService {
         int endPage = 0;
 
         // 해당 페이지의 글 목록
-        List<Row> top3List = null;
+        List<Row> list = null;
 
         if (cnt > 0) {  // 데이터가 최소 1개 이상 있는 경우만 페이징
             //  page 값 보정
@@ -274,8 +298,8 @@ public class HouseServiceImpl implements HouseService {
 
             // 해당페이지의 글 목록 읽어오기 + 필터링 인자들
 
-            top3List = houseRepository.includeTop3(row.getAccYear(), row.getSsgName(), row.getDongCode(), row.getHouseKindName(), user.getMbti(), fromRow, pageRows);
-            model.addAttribute("top3List", top3List);
+            list = houseRepository.defaultSearch(row2, fromRow, pageRows);
+            model.addAttribute("list", list);
         } else {
             page = 0;
         }
@@ -291,8 +315,7 @@ public class HouseServiceImpl implements HouseService {
         model.addAttribute("startPage", startPage);  // [페이징] 에 표시할 시작 페이지
         model.addAttribute("endPage", endPage);   // [페이징] 에 표시할 마지막 페이지
 
-        return top3List;
+        return list;
     }
-
 
 }

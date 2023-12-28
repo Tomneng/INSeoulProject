@@ -35,55 +35,71 @@
 
     <div id="realEstateSearchContainer" class="container">
         <form th:action="@{/realEstate/infoList}" method="post" name="houseForm">
-            <select id="selectYear" name="accYear">
+            <select id="selectYear" name="accYear" style="width: 100px;">
             </select>
-            <select id="selectSSG" name="ssgName">
+            <select id="selectSSG" name="ssgName" style="width: 150px;">
                 <option selected>자치구를 먼저 선택해주세요</option>
             </select>
-            <select id="selectBJDONG" name="dongCode">
+            <select id="selectBJDONG" name="dongCode" style="width: 150px;">
                 <option>자치구를 먼저 선택해주세요</option>
             </select>
-            <select id="selectHouseKind" name="houseKindName">
+            <select id="selectHouseKind" name="houseKindName" style="width: 150px;">
             </select>
-            <button type="submit">검색하기</button>
-
-            <div id="wrapper">
-                <div id="selectMbti">
-                    <input type="radio" class="mbties" id="ESFP" name="mbti" th:value="ESFP">
+            <select id="selectMbti" name="mbtiH" style="width: 100px">
+                <option class="mbties" id="MBTI" value="MBTI">
+                    <label for="MBTI">MBTI</label>
+                </option>
+                <option class="mbties" id="ESFP" value="ESFP">
                     <label for="ESFP">ESFP</label>
-                    <input type="radio" class="mbties" id="ENFP" name="mbti" th:value="ENFP">
-                    <label for="ENFP">ENFP</label>
-                    <input type="radio" class="mbties" id="ISFP" name="mbti" th:value="ISFP">
-                    <label for="ISFP">ISFP</label>
-                    <input type="radio" class="mbties" id="INFP" name="mbti" th:value="INFP">
-                    <label for="INFP">INFP</label>
-                    <input type="radio" class="mbties" id="ESFJ" name="mbti" th:value="ESFJ">
-                    <label for="ESFJ">ESFJ</label>
-                    <input type="radio" class="mbties" id="ENFJ" name="mbti" th:value="ENFJ">
-                    <label for="ENFJ">ENFJ</label>
-                    <input type="radio" class="mbties" id="ISFJ" name="mbti" th:value="ISFJ">
-                    <label for="ISFJ">ISFJ</label>
-                    <input type="radio" class="mbties" id="INFJ" name="mbti" th:value="INFJ">
-                    <label for="INFJ">INFJ</label>
-                    <input type="radio" class="mbties" id="ESTP" name="mbti" th:value="ESTP">
-                    <label for="ESTP">ESTP</label>
-                    <input type="radio" class="mbties" id="ENTP" name="mbti" th:value="ENTP">
-                    <label for="ENTP">ENTP</label>
-                    <input type="radio" class="mbties" id="ISTP" name="mbti" th:value="ISTP">
-                    <label for="ISTP">ISTP</label>
-                    <input type="radio" class="mbties" id="INTP" name="mbti" th:value="INTP">
-                    <label for="INTP">INTP</label>
-                    <input type="radio" class="mbties" id="ESTJ" name="mbti" th:value="ESTJ">
-                    <label for="ESTJ">ESTJ</label>
-                    <input type="radio" class="mbties" id="ENTJ" name="mbti" th:value="ENTJ">
-                    <label for="ENTJ">ENTJ</label>
-                    <input type="radio" class="mbties" id="ISTJ" name="mbti" th:value="ISTJ">
+                </option>
+                <option class="mbties" id="ISTJ" value="ISTJ">
                     <label for="ISTJ">ISTJ</label>
-                    <input type="radio" class="mbties" id="INTJ" name="mbti" th:value="INTJ">
+                </option>
+                <option class="mbties" id="ISFJ" value="ISFJ">
+                    <label for="ISFJ">ISFJ</label>
+                </option>
+                <option class="mbties" id="INFJ" value="INFJ">
+                    <label for="INFJ">INFJ</label>
+                </option>
+                <option class="mbties" id="INTJ" value="INTJ">
                     <label for="INTJ">INTJ</label>
-                    <button id="done" type="button">완료</button>
-                </div>
-            </div>
+                </option>
+                <option class="mbties" id="ISTP" value="ISTP">
+                    <label for="ISTP">ISTP</label>
+                </option>
+                <option class="mbties" id="ISFP" value="ISFP">
+                    <label for="ISFP">ISFP</label>
+                </option>
+                <option class="mbties" id="INFP" value="INFP">
+                    <label for="INFP">INFP</label>
+                </option>
+                <option class="mbties" id="INTP" value="INTP">
+                    <label for="INTP">INTP</label>
+                </option>
+                <option class="mbties" id="ESTP" value="ESTP">
+                    <label for="ESTP">ESTP</label>
+                </option>
+                <option class="mbties" id="ENFP" value="ENFP">
+                    <label for="ENFP">ENFP</label>
+                </option>
+                <option class="mbties" id="ENTP" value="ENTP">
+                    <label for="ENTP">ENTP</label>
+                </option>
+                <option class="mbties" id="ESTJ" value="ESTJ">
+                    <label for="ESTJ">ESTJ</label>
+                </option>
+                <option class="mbties" id="ESFJ" value="ESFJ">
+                    <label for="ESFJ">ESFJ</label>
+                </option>
+                <option class="mbties" id="ENFJ" value="ENFJ">
+                    <label for="ENFJ">ENFJ</label>
+                </option>
+                <option class="mbties" id="ENTJ" value="ENTJ">
+                    <label for="ENTJ">ENTJ</label>
+                </option>
+            </select>
+            <button type="submit" style="width: 150px;">검색하기</button>
+
         </form>
     </div>
 
@@ -104,24 +120,7 @@
                     <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
                     <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
                     <span>월세: </span><span th:text="${row.rentFee}"></span><br>
-                    <!--            <span th:text="${row.contractScore}"></span>-->
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="divider-containerParents justify-content-center row">
-        <div th:each="row : ${top3List}" class="divider-container" id="container2">
-            <div class="divider">
-                <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
-                       th:value="${row.houseId}"><br>
-                <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
-                    <span th:text="${row.ssgName}"></span><br>
-                    <span th:text="${row.dongName}"></span><br>
-                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
-                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
-                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
-                    <!--            <span th:text="${row.contractScore}"></span>-->
+                    <span>가장 많이 스크랩한 MBTI : </span><span th:text="${row.mbtiH}"></span>
                 </a>
             </div>
         </div>
