@@ -16,12 +16,14 @@ public interface TourRepository {
     //     전체 글의 개수
     int countAll(Item item);
     int countAllDefault(Item item);
+
+    int countAllForReal();
 //    int countAll();
 
     // 페이징
     // from 부터 rows 개 만큼 SELECT
 //    List<Item> selectFromRow(String tourName, String tourSigungucode, int fromRow, int pageRows);
-    List<Item> selectFromRow(String tourSigungucode, String tourName, int fromRow, int pageRows);
+    List<Item> selectFromRow(String tourSigungucode, String tourName, int fromRow, int pageRows, String mbtiT);
     List<Item> selectFromRowDefault(String tourSigungucode, String tourName, int fromRow, int pageRows);
 
     List<Item> getRandomTourCard();

@@ -35,7 +35,7 @@ public class TourRepositoryTest {
     void test3() {
         TourRepository tourRepository = sqlSession.getMapper(TourRepository.class);
 
-        System.out.println(tourRepository.selectFromRow("23", "광화문", 10, 12));
+        System.out.println(tourRepository.selectFromRow("23", "광화문", 10, 12, "INTJ"));
     }
 
     @Test
@@ -63,6 +63,6 @@ public class TourRepositoryTest {
     @Test
     void test7(){
         TourRepository tourRepository = sqlSession.getMapper(TourRepository.class);
-        System.out.println(tourRepository.selectFromRow("1", "향기억", 10, 12));
+        System.out.println(tourRepository.selectFromRow("1", "향기억", 10, 12, "INTJ"));
     }
 }

@@ -89,3 +89,21 @@ tbody {
     margin-left: 40px;
     margin-right: 40px;
 }
+
+a.page-link {
+    color: var(--skycoral);
+    display: flex;
+    align-items: center;
+    height: 56px;
+}
+
+a.page-link:hover {
+    color: var(--white);
+    background-color: var(--skycoral);
+    border-color: var(--skycoral);
+}
+
+.active > .page-link, .page-link.active {
+    background-color: var(--skycoral);
+    border-color: var(--skycoral);
+}

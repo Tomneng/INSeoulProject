@@ -126,4 +126,9 @@
         ORDER BY count(s.user_id) DESC
         LIMIT 4
     </select>
+
+    <select id="countAllForReal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM house_contract;
+    </select>
 </mapper>

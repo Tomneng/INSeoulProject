@@ -42,14 +42,14 @@
 
     <select id="selectFromRow" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
-        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
+        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%") AND tour_mbtiTop = #{mbtiT}
         ORDER BY tour_id DESC
         LIMIT #{param3}, #{param4}
     </select>
 
     <select id="selectFromRowDefault" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
-        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%") AND tour_mbtiTop = #{mbtiT}
+        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
         ORDER BY tour_id DESC
         LIMIT #{param3}, #{param4}
     </select>
@@ -58,14 +58,13 @@
         SELECT count(tour_id)
         FROM tour
         WHERE tour_sigungucode = #{tourSigungucode}
-          AND tour_name LIKE concat("%", #{tourName}, "%") AND tour_mbtiTop = #{mbtiT}
+          AND tour_name LIKE concat('%', #{tourName}, '%') AND tour_mbtiTop = #{mbtiT}
     </select>
 
     <select id="countAllDefault" resultType="java.lang.Integer">
         SELECT count(tour_id)
         FROM tour
-        WHERE tour_sigungucode = #{tourSigungucode}
-          AND tour_name LIKE concat("%", #{tourName}, "%")
+        WHERE tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat('%', #{tourName}, '%')
     </select>
 
     <select id="getRandomTourCard" resultType="com.inseoul.tour.domain.Item">
@@ -110,6 +109,10 @@
         from food
         where store_tel = #{storeTel}
         ORDER BY food_id DESC LIMIT 1
+    </select>
+    <select id="countAllForReal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM tour
     </select>
 
 

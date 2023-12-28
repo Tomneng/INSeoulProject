@@ -158,7 +158,7 @@ public class TourServiceImpl implements TourService {
             if (endPage >= totalPage) endPage = totalPage;
 
             // 해당페이지의 글 목록 읽어오기 + 필터링 인자들
-            list = tourRepository.selectFromRow(item.getTourSigungucode(), item.getTourName(), fromRow, pageRows);
+            list = tourRepository.selectFromRow(item.getTourSigungucode(), item.getTourName(), fromRow, pageRows, item.getMbtiT());
 //            list = tourRepository.selectFromRow(fromRow, pageRows);
             model.addAttribute("list", list);
         } else {
@@ -304,9 +304,8 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public void getOrederedTour(Item item) {
-        Integer all = tourRepository.countAll(item);
-        if (all != 0){
+    public void getOrederedTour() {
+        Integer all = tourRepository.countAllForReal();
             for (int i = 1; i <= all; i++) {
                 Long num = Long.valueOf(i);
                 List<String> list1 = tourRepository.top3mbti(num);
@@ -316,7 +315,6 @@ public class TourServiceImpl implements TourService {
                     tourRepository.putTop1(list1.get(0) ,num);
                 }
             }
-        }
     }
 
 }

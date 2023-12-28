@@ -39,19 +39,17 @@ public class HouseInfoCardController {
      */
     @RequestMapping("/infoList")
     public void getApi(@Valid Row row2, Model model, Integer page) {
+        houseService.getOredered();
         if (houseService.moreThanOnce(row2) <= 0){
             houseService.getapi(row2, model, page);
-            houseService.getOredered(row2);
         }
         if (row2.getMbtiH() == null){
             return;
         }
         else if (row2.getMbtiH().equals("MBTI")){
-            houseService.getOredered(row2);
             houseService.listDefault(row2, page, model);
         }
         else {
-            houseService.getOredered(row2);
             houseService.list(row2, page, model);
         }
     }

@@ -42,6 +42,7 @@ public class HouseServiceImpl implements HouseService {
     public int save(Row row) {
         return houseRepository.write(row);
     }
+
     //
     @Override
     public int moreThanOnce(Row row) {
@@ -69,11 +70,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public int putScore(Long houseId,Long userId, int contractScore, int placeScore) {
-        if (houseRepository.checkScore(houseId, userId) == 0){
+    public int putScore(Long houseId, Long userId, int contractScore, int placeScore) {
+        if (houseRepository.checkScore(houseId, userId) == 0) {
             houseRepository.initScore(houseId, userId, contractScore, placeScore);
             houseRepository.updateRealScore(houseId);
-        }else {
+        } else {
             houseRepository.updateScore(houseId, userId, contractScore, placeScore);
             houseRepository.updateRealScore(houseId);
         }
@@ -193,7 +194,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<Integer> getAvgScores(Row row) {
         Integer pScore = houseRepository.avgPScore(row);
-        Integer cScore =houseRepository.avgCScore(row);
+        Integer cScore = houseRepository.avgCScore(row);
         List<Integer> list = new ArrayList<>();
         list.add(row.getContractScore());
         list.add(cScore);
@@ -205,24 +206,24 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Object[] getTop(Long houseId) {
         List<String> list1 = houseRepository.top3mbti(houseId);
-        houseRepository.putTop1(list1.get(0) ,houseId);
+        houseRepository.putTop1(list1.get(0), houseId);
         List<Integer> list2 = houseRepository.top3Prop(houseId);
         Object[] mixedArray = new Object[6];
-        if (list1.isEmpty()){
+        if (list1.isEmpty()) {
             return mixedArray;
         } else if (list1.size() == 1 && list2.size() == 1) {
 
-        mixedArray[0] = list1.get(0);
-        mixedArray[1] = list2.get(0);
-        return mixedArray;
-        }else if (list1.size() == 2 && list2.size() == 2) {
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            return mixedArray;
+        } else if (list1.size() == 2 && list2.size() == 2) {
 
-        mixedArray[0] = list1.get(0);
-        mixedArray[1] = list2.get(0);
-        mixedArray[2] = list1.get(1);
-        mixedArray[3] = list2.get(1);
-        return mixedArray;
-        }else if (list1.size() == 3 && list2.size() == 3){
+            mixedArray[0] = list1.get(0);
+            mixedArray[1] = list2.get(0);
+            mixedArray[2] = list1.get(1);
+            mixedArray[3] = list2.get(1);
+            return mixedArray;
+        } else if (list1.size() == 3 && list2.size() == 3) {
             mixedArray[0] = list1.get(0);
             mixedArray[1] = list2.get(0);
             mixedArray[2] = list1.get(1);
@@ -230,8 +231,7 @@ public class HouseServiceImpl implements HouseService {
             mixedArray[4] = list1.get(2);
             mixedArray[5] = list2.get(2);
             return mixedArray;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -242,17 +242,15 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void getOredered(Row row) {
-        Integer all = houseRepository.countAll(row);
-        if (all != 0){
-            for (int i = 1; i <= all; i++) {
-                Long num = Long.valueOf(i);
-                List<String> list1 = houseRepository.top3mbti(num);
-                if (list1.size() == 0){
-                    houseRepository.putTop1("MBTI" ,num);
-                }else {
-                    houseRepository.putTop1(list1.get(0) ,num);
-                }
+    public void getOredered() {
+        Integer all = houseRepository.countAllForReal();
+        for (int i = 1; i <= all; i++) {
+            Long num = Long.valueOf(i);
+            List<String> list1 = houseRepository.top3mbti(num);
+            if (list1.size() == 0) {
+                houseRepository.putTop1("MBTI", num);
+            } else {
+                houseRepository.putTop1(list1.get(0), num);
             }
         }
     }

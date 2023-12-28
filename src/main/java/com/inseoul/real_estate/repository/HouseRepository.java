@@ -44,4 +44,5 @@ public interface HouseRepository {
 
     List<Row> houseOnmain();
 
+    int countAllForReal();
 }

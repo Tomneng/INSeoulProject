@@ -28,7 +28,7 @@ public interface HouseService {
 
     List<Row> houseOnmain();
 
-    void getOredered(Row row);
+    void getOredered();
 
     List<Row> listDefault(Row row2, Integer page, Model model);
 }

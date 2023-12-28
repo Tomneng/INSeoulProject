@@ -31,7 +31,7 @@ public interface TourService {
 
     Long findByFoodId(String storeTel);
 
-    void getOrederedTour(Item item);
+    void getOrederedTour();
 
 
 }
