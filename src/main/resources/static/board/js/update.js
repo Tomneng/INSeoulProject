@@ -20,7 +20,7 @@ $(function(){
 
 // 썸머노트
 $("#content").summernote({
-    height: 300,
+    height: 150,
     // width: 1000,
     // minHeight: null,
     // focus: true,

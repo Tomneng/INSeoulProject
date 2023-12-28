@@ -22,6 +22,9 @@ public interface BoardService {
     // 페이징 리스트
     List<Post> list(Integer page, Model model);
 
+    // 리스트 타입 별 필터
+    List<Post> list(Map<String,String> mbti, Model model);
+
     @Transactional
     Post detail(long postId);
     int write(Post post, Map<String, MultipartFile> files);

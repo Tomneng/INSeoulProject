@@ -1,5 +1,5 @@
 SET SESSION FOREIGN_KEY_CHECKS = 0;
-select * from post;
+select * from user;
 
 /* Drop Tables */
 

@@ -30,21 +30,21 @@
         <hr>
 
         <form th:action="@{/board/write}" method="post" enctype="multipart/form-data">
-            <div class="my-3">
+            <div class="my-3 border p-2 rounded" style="width: 19%;">
                 <label>Writer : </label>
-                <span class="form-control">[[${user.nickname}]]</span>
-                <label>mbti : </label>
-                <span class="form-control">[[${user.mbti}]]</span>
+                <span class="">[[${user.nickname}]]</span>
+                <label>&nbsp;&nbsp;mbti : </label>
+                <span class="">[[${user.mbti}]]</span>
             </div>
 
-            <div class="my-3">
+            <div class="my-3 mt-3">
                 <label for="subject">Title : </label>
                 <input type="text" class="form-control" id="subject" placeholder="제목을 입력하세요" name="title"
                        th:value="${title}">
                 <span class="text-danger" th:if="${error_title}" th:utext="${error_title}"></span>
             </div>
 
-            <div class="my-3">
+            <div class="my-3 mt-3">
                 <label for="content">Content : </label>
                 <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content"
                           th:utext="${content}"></textarea>

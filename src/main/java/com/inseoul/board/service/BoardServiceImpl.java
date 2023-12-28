@@ -197,6 +197,11 @@ public class BoardServiceImpl implements BoardService {
     public List<Post> list() {
         return postRepository.findAll();
     }
+    public List<Post> list(Map<String, String> mbti, Model model) {
+        String mbtifilter = mbti.get("data");
+       return null;
+    }
+
 
     // 페이징 리스트
     @Override
@@ -261,7 +266,6 @@ public class BoardServiceImpl implements BoardService {
 
         return list;
     }
-
 
     @Override
     public Post selectById(Long id) {

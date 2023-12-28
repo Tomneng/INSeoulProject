@@ -26,15 +26,15 @@
         </script>
 
 
-        <title>조회 - [[${post.postId}]]</title>
+        <title>조회</title>
     </head>
 
     <body>
     <div class="container mt-3">
-        <h2>조회 - [[${post.postId}]]</h2>
+        <h2>조회</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">id : [[${post.postId}]]</span>
+            <span class="float-start me-2"></span>
             <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
             <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
@@ -44,12 +44,13 @@
                 <input type="hidden" name="postId" th:value="${post.postId}">
             </form>
 
-            <div class="mb-3">
+            <div class="my-3 border p-2 rounded" style="width: 19%">
                 <label>Writer : </label>
-                <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
-                <label>MBTI : </label>
-                <span class="form-control bg-light" th:text="${post.user.mbti}"></span>
+                <span class="" th:text="${post.user.nickname}"></span>
+                <label>&nbsp;&nbsp;&nbsp;MBTI : </label>
+                <span class="" th:text="${post.user.mbti}"></span>
             </div>
+
             <div class="mb-3 mt-3">
                 <label>Title : </label>
                 <span class="form-control bg-light" th:text="${post.title}"></span>

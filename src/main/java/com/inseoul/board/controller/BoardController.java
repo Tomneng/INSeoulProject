@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/board")   // board url로 넘어가기
@@ -91,7 +92,16 @@ public class BoardController {
     // 페이징있는 리스트화면
     @GetMapping("/list")
     public void list(Integer page, Model model) {
+        System.out.println("페이지테스트"+page);
         boardService.list(page, model);
+    }
+
+    @PostMapping("/list")
+    @ResponseBody
+    public String filter(@RequestParam Map<String,String> mbti, Model model){
+        System.out.println(mbti);
+        boardService.list(mbti,model);
+        return "redirect:board/list";
     }
 
     @GetMapping("/update/{postId}")

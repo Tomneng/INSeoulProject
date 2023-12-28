@@ -96,11 +96,14 @@
     <select id="selectFromRow" resultMap="mapPost">
         <include refid="SELECT_JOIN_BASE"/>
         ORDER BY post_id DESC
-        LIMIT #{param1}, #{param2}
     </select>
 
     <select id="countAll" resultType="int">
         SELECT count(*)
         FROM post
+    </select>
+    <select id="filter" resultType="com.inseoul.board.domain.post.Post">
+        <include refid="SELECT_JOIN_BASE"></include>
+        AND user.mbti = #{mbtifilter}
     </select>
 </mapper>

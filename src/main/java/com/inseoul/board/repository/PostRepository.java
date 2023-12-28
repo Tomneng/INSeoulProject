@@ -3,6 +3,7 @@ package com.inseoul.board.repository;
 import com.inseoul.board.domain.post.Post;
 
 import java.util.List;
+import java.util.Map;
 
 // repository layer (aka. Data layer)
 // Datasource 에 직접 접근
@@ -34,4 +35,5 @@ public interface PostRepository {
     // 전체 글의 개수
     int countAll();
 
+    List<Post> filter(String mbtifilter,int from, int rows);
 }

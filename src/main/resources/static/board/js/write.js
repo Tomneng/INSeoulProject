@@ -14,7 +14,7 @@ $(function () {
         i++;
     });
     $("#content").summernote({
-        height: 300,
+        height: 200,
         // width: 1000,
         // minHeight: null,
         // focus: true,
