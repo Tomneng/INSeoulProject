@@ -65,7 +65,7 @@ form {
     align-items: center;
     text-align: center;
     flex-direction: column;
-    width: 300px;
+    width: 800px;
     /*margin-left: 20px;*/
 }
 
@@ -171,4 +171,42 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
     background-color: var(--skycoral);
 }
+
+.mbties {
+    display: none;
+}
+
+.mbties:checked + label {
+    background-color: #FF6F61; /* 선택되었을 때의 배경색 */
+    color: white; /* 선택되었을 때의 텍스트 색상 */
+}
+
+label {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid #FF6F61;
+    border-radius: 5px;
+    cursor: pointer;
+    /*width: 100%; !* 각 라벨이 그리드 셀을 채우도록 너비 조절 *!*/
+    text-align: center; /* 가운데 정렬 */
+}
+
+.mbti {
+    /*background-color: #fff;*/
+    /*box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);*/
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    animation: scaleIn 0.3s ease-in-out;
+    display: grid; /* 그리드 디자인 추가 */
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열로 나누기 */
+    gap: 10px; /* 열과 행 간격 설정 */
+}
+
+input[type="radio"] {
+    width: 250px;
+}
+
 

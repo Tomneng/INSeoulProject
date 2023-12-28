@@ -76,7 +76,7 @@ form {
 }
 
 input[type="text"]{
-    width: 200px;
+    width: 800px;
 }
 
 div > span{
@@ -87,7 +87,7 @@ div > span{
 .username,
 .nickname,
 .mbti {
-    width: 100%;
+    width: 600px;
     margin-bottom: 15px;
 }
 
@@ -170,5 +170,12 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
     background-color: var(--skycoral);
+}
+
+.userinfo a {
+    width: 350px;
+    height: 65px;
+    text-align: center;
+    font-size: 40px;
 }
 

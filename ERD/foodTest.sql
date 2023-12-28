@@ -29,3 +29,10 @@ SELECT * FROM tour;
 SELECT * FROM houseinfosaved NATURAL JOIN user WHERE house_id=351;
 # SELECT * FROM reviewimage;
 
+
+DROP TABLE house_Contract;
+
+DROP TABLE housecontractscore;
+
+drop table houseinfosaved;
+
