@@ -2,10 +2,12 @@
     margin-top: 50px;
     width: 80%;
     height: auto;
-    border: 1px solid black;
+    border: solid black;
     border-radius: 20px;
     background-color: var(--white);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 50px;
 }
 
 .mypageupdate {
@@ -65,10 +67,37 @@ form {
 
 .overFlowAuto {
     border: red solid;
+    border-radius: 10px;
     display: grid;
+    height: 300px;
     justify-content: left;
-    max-width: 650px;
     margin: auto;
+    margin-bottom: 30px;
+    max-width: 700px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.overFlowAuto::-webkit-scrollbar {
+    width: 10px;
+}
+
+.overFlowAuto::-webkit-scrollbar-thumb {
+    background-color: var(--skycoral);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.overFlowAuto::-webkit-scrollbar-track {
+    background-color: lightpink;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+
+#realScrapPart {
+    max-width: 420px;
 }
 
 .divider-container {
@@ -78,5 +107,22 @@ form {
 .divider-container .divider {
     border: orange solid;
     padding-left: 30px;
+    padding-right: 30px;
     text-align: left !important;
 }
+
+.scrapSubject {
+    color: black;
+    text-align: center;
+}
+
+
+#container1 .divider a {
+    text-decoration-line: none !important;
+    color: black;
+}
+
+
+
+
+
