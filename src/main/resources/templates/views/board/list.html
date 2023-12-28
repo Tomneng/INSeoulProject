@@ -33,11 +33,9 @@
             <h2 class="title" style="color: black;">PlayGround</h2>
         </div>
 
-        <div>
-
-        </div>
     </div>
 </div>
+
 <div>
     <!-- 페이징 헤더 -->
     <div class="mb-3 mt-3 clearfix">
@@ -46,6 +44,26 @@
         <span class="float-end">
                 <form name="frmPageRows">
                     <input type="hidden" name="page" th:value="${page}">
+                    <label for="mbti">Choose your MBTI type:</label>
+                    <select id="mbti" name="mbti">
+                        <option value="All">All</option>
+                        <option value="ISTJ">ISTJ</option>
+                        <option value="ISFJ">ISFJ</option>
+                        <option value="INFJ">INFJ</option>
+                        <option value="INTJ">INTJ</option>
+                        <option value="ISTP">ISTP</option>
+                        <option value="ISFP">ISFP</option>
+                        <option value="INFP">INFP</option>
+                        <option value="INTP">INTP</option>
+                        <option value="ESTP">ESTP</option>
+                        <option value="ESFP">ESFP</option>
+                        <option value="ENFP">ENFP</option>
+                        <option value="ENTP">ENTP</option>
+                        <option value="ESTJ">ESTJ</option>
+                        <option value="ESFJ">ESFJ</option>
+                        <option value="ENFJ">ENFJ</option>
+                        <option value="ENTJ">ENTJ</option>
+                    </select>
                     <select class="form-select" name="pageRows">
                         <option value="10" th:selected="${pageRows==10}">10</option>
                         <option value="15" th:selected="${pageRows==15}">15</option>
@@ -57,6 +75,7 @@
     </div>
     <!-- 페이징 헤더 -->
 </div>
+
 <!-- 목록 -->
 <table class="table table-hover">
     <thead class="table">

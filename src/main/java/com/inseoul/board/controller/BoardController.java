@@ -90,8 +90,10 @@ public class BoardController {
 
     // 페이징있는 리스트화면
     @GetMapping("/list")
-    public void list(Integer page, Model model) {
-        boardService.list(page, model);
+    public void list(Integer page, Model model, String mbti) {
+        System.out.println("보드컨트롤러 리스트 page, model, mbti = " + page + ", " + model + ", " + mbti); // 정상 출력 확인.
+
+        boardService.list(page, model, mbti);
     }
 
     @GetMapping("/update/{postId}")
@@ -144,9 +146,11 @@ public class BoardController {
     // 페이징
     // pageRows 변경시 동작
     @PostMapping("/pageRows")
-    public String pageRows(Integer page, Integer pageRows) {
-        System.out.println("역 있당" + page + pageRows);
+    public String pageRows(Integer page, Integer pageRows, String mbti) {
+        System.out.println("보드컨트롤러 페이지로우스의 page, pageRows, mbti = " + page + ", " + pageRows + ", " + mbti); // 정상 출력 확인.
+
         U.getSession().setAttribute("pageRows", pageRows);
-        return "redirect:/board/list?page=" + page;
+
+        return "redirect:/board/list?page=" + page + "&mbti=" + mbti;
     }
 }
