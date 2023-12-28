@@ -21,49 +21,27 @@
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/aboutus.css}">
 
     <style>
-        /*table, tr, td {*/
-        /*    border: 1px solid black;*/
-        /*}*/
-        /*td {*/
-        /*    width: 1000px;*/
-        /*}*/
-        /*.faqlist a {*/
-        /*    cursor: pointer;*/
-        /*}*/
-        /*.faqlist .hide {*/
-        /*    display: none;*/
-        /*}*/
-        /*ul {*/
-        /*    list-style: none;*/
-        /*}*/
-
-
-        /* 철희가 주석처리함(12/18) */
-        /*body {*/
-        /*    font-family: 'Arial', sans-serif;*/
-        /*    background-color: #f8f8f8;*/
-        /*    margin: 0;*/
-        /*    padding: 0;*/
-        /*}*/
-
         #aboutusOption {
-            background-color: #333;
-            color: white;
+            margin-top: 60px;
             text-align: center;
-            padding: 10px;
         }
 
         #aboutusOption input[type="button"] {
-            background-color: #555;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            margin: 5px;
+            padding: 10px 20px;
+            font-size: 24px;
+            background-color: var(--white);
+            color: var(--skycoral);
+            border: var(--skycoral) solid;
+            border-radius: 20px;
             cursor: pointer;
+            margin-right: 20px;
+            width: 120px;
         }
 
         #aboutusOption input[type="button"]:hover {
-            background-color: #777;
+            background-color: var(--skycoral);
+            color: var(--white);
+            border: lightpink solid;
         }
 
         form {
@@ -129,6 +107,26 @@
             margin-bottom: 5px;
             color: #333;
         }
+        .introduce .image-row {
+            display: flex;
+            justify-content: space-around; /* Adjust as needed */
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .introduce .image-row p{
+            margin: 0 20px 0 20px;
+        }
+
+        .introduce .image-item {
+            width: 300px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px; /* Adjust as needed */
+        }
+
     </style>
 </head>
 <body>
@@ -146,9 +144,14 @@
         <h3>"in 서울"은 서울에 사는 사람들뿐만 아니라, 서울로 이사를 계획하고 목표로 하는 사람들에게도 주거 정보와 다양한 문화 활동 정보를 제공하는 웹사이트입니다.
             또한, MBTI 성격 유형을 기반으로 한 사용자 커뮤니티를 구성하여 정보 교류와 의사 소통을 촉진하며, 사용자 맞춤 정보를 제공하기 위해 사용자의 추천 데이터와
             MBTI 성격 유형 정보를 활용합니다.</h3>
-        <img src="#" style="width: 250px; height: 350px;">
-        <img src="#" style="width: 250px; height: 350px">
-        <img src="#" style="width: 250px; height: 350px">
+        <div class="image-row">
+            <div><img th:src="@{/aboutus/image/tour.jpg}" class="image-item">
+                <p>서울의 관광지를 MBTI별 인기순으로 추천해주고 또한, 사용자가 직접 검색하여 관광지의 상세 정보를 볼 수 있는 서비스를 제공합니다.</p></div>
+            <div><img th:src="@{/aboutus/image/realestate.jpg}" class="image-item">
+                <p>서울 전역에 걸친 전 월세가 거래 내역을 제공함과 동시에 사용자들이 평가하여 정보를 교류함으로서 전반적인 서울의 부동산 시세 정보 서비스를 제공합니다.</p></div>
+            <div><img th:src="@{/aboutus/image/mbti.png}" class="image-item">
+                <p>사용자의 MBTI 정보를 기반으로 같은 유형을 가진 사람들과 자유로운 소통을 나눌 수 있는 서비스를 제공합니다.</p><br></div>
+        </div>
     </form>
 
     <form class="faq" name="frm2" style="display: none;">
