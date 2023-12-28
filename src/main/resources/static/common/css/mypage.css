@@ -34,7 +34,7 @@ body {
 .mypageupdate button:hover, a.btn:hover {
     background-color: var(--skycoral);
     color: var(--white);
-    border: var(--skycoral) solid;
+    border: lightpink solid;
 }
 
 .container img {
