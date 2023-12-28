@@ -8,6 +8,8 @@
     --realEstateMaxWidth: 1700px; /* 부동산 리스트의 검색결과들 container들 max-width값 */
     --selectWidth: 250px;
     --selectRadius: 10px;
+    --bodyBackgroundColor: #f8f9fa;
+    --mypageCardBackgroundColor: lightpink;
 }
 
 body {

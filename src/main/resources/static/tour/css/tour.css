@@ -39,6 +39,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     background: white;
+    margin: 10px;
 }
 
 .tour-item:hover {
@@ -88,4 +89,39 @@ tbody {
 #tourListPagingHeader {
     margin-left: 40px;
     margin-right: 40px;
+}
+
+.tourListCheckbox {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.tourListCheckbox:hover {
+    background-color: var(--skycoral) !important;
+}
+
+
+.tourListCheckbox:checked {
+    background-color: var(--skycoral) !important;
+    border: var(--skycoral) !important;
+}
+
+.divider a {
+    text-decoration-line: none;
+    color: var(--skycoral);
+}
+
+.active > .page-link {
+    background-color: var(--skycoral);
+    border-color: var(--skycoral);
+}
+
+.page-link {
+    color: var(--skycoral);
+}
+
+#tourListRow {
+    justify-content: center;
 }

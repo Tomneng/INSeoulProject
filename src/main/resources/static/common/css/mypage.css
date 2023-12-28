@@ -1,8 +1,11 @@
+body {
+    background-color: var(--bodyBackgroundColor);
+}
+
 .container {
     margin-top: 50px;
     width: 80%;
     height: auto;
-    border: solid black;
     border-radius: 20px;
     background-color: var(--white);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
@@ -66,16 +69,16 @@ form {
 }
 
 .overFlowAuto {
-    border: red solid;
-    border-radius: 10px;
+    border-radius: 20px;
     display: grid;
     height: 300px;
     justify-content: left;
     margin: auto;
     margin-bottom: 30px;
-    max-width: 700px;
+    max-width: 750px;
     overflow: auto;
     padding: 10px;
+    background-color: var(--skycoral);
 }
 
 .overFlowAuto::-webkit-scrollbar {
@@ -97,18 +100,28 @@ form {
 
 
 #realScrapPart {
-    max-width: 420px;
+    max-width: 480px;
 }
 
 .divider-container {
-    border: green solid;
+    transition: transform 0.3s ease-in-out;
 }
 
+.divider-container:hover {
+    transform: scale(1.05);
+}
+
+
 .divider-container .divider {
-    border: orange solid;
     padding-left: 30px;
     padding-right: 30px;
     text-align: left !important;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: var(--mypageCardBackgroundColor);
+
 }
 
 .scrapSubject {
@@ -119,10 +132,20 @@ form {
 
 #container1 .divider a {
     text-decoration-line: none !important;
-    color: black;
+    color: var(--white);
 }
 
 
+input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
-
+input[type="checkbox"]:checked {
+    background-color: var(--skycoral);
+}
 
