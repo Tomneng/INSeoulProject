@@ -44,7 +44,7 @@
 
     <div class="container">
 
-        <div class="mypagelist">
+        <div class="mypagelist">    <!--// mypagelist, userinfo flex같이 잡으면 안됨 안 움직임-->
             <form action name="frm1">
                 <div><h3 class="scrapSubject">관광 스크랩</h3></div>
                 <div id="tourScrapPart" class="overFlowAuto">
@@ -58,26 +58,21 @@
             </form>
         </div>
 
-        <div class="userinfo" style="display: flex">
-            <form name="frm2" style="display: none; margin-left: 20px;">
-                <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px;">
+        <div class="userinfo" style="display: flex;">
+            <form name="frm2" style="display: none;">
+                <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px; display: flex; justify-content: center">
                 <div class="username" style="width: unset">
-                    <label>
-                        <span>이메일</span>
+                    <span>이름</span>
                         <input type="text" class="username" disabled th:value="${user.username}">
-                    </label>
                 </div>
                 <div class="nickname" style="width: unset">
-                    <label>
-                        <span>이름</span>
+                    <span>닉네임</span>
                         <input type="text" class="nickname" disabled th:value="${user.nickname}">
-                    </label>
+
                 </div>
                 <div class="mbti" style="width: unset">
-                    <label>
-                        <span>MBTI</span>
-                        <input type="text" class="mbti" disabled th:value="${user.mbti}">
-                    </label>
+                    <span>MBTI</span>
+                        <input value="MBTI" type="text" class="mbti" disabled th:value="${user.mbti}">
                 </div>
                 <a class="btn ms-2" th:href="@{'/user/userinfo/' + ${user.userId}}">수정</a>
             </form>

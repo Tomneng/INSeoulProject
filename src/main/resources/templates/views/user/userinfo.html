@@ -8,6 +8,8 @@
     <style>
 
         .userinfo{
+            justify-content: center;
+            margin-left: 10%;
             margin-top: 50px;
             width: 80%;
             height: auto;
@@ -36,6 +38,8 @@
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/userInfo.css}">
+
 
         <title>Mypage</title>
     </head>
@@ -54,7 +58,7 @@
     </div>
 
     <div class="userinfo" style="display: flex">
-        <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px;">
+        <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px; margin-top: 60px">
         <form th:action="@{/user/userinfo}" method="POST" name="frm3" style="margin-left: 20px;">
             <input type="hidden" name="userId" th:value="${user.userId}"/>
             <div class="username" style="width: unset">
