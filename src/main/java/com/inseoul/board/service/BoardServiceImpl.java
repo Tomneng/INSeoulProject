@@ -222,7 +222,16 @@ public class BoardServiceImpl implements BoardService {
         // 현재 페이지 번호 -> session 에 저장
         session.setAttribute("page", page);
 
-        long cnt = postRepository.countAll();   // 글 목록 전체의 개수
+        long cnt = 0;
+
+        if (mbti == "All") {
+            cnt = postRepository.countAll();   // 글 목록 전체의 개수
+        } else {
+            cnt = postRepository.countMbti(mbti);
+        }
+        System.out.println("게시판에서 선택한 mbti가 작성한 글의 수는 " + cnt);
+
+
         int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지' ?
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'

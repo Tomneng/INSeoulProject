@@ -103,4 +103,14 @@
         SELECT count(*)
         FROM post
     </select>
+
+    <select id="countMbti" resultType="java.lang.Long">
+        select count(*)
+        from post p,
+             user u
+        where p.id = u.user_id
+          and u.mbti = #{mbti};
+    </select>
+
+
 </mapper>

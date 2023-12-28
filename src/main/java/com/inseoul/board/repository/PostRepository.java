@@ -34,4 +34,6 @@ public interface PostRepository {
     // 전체 글의 개수
     int countAll();
 
+    // 해당mbti글의 개수
+    long countMbti(String mbti);
 }
