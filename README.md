@@ -19,3 +19,6 @@
 <blockquote><h3>사용기술</h3></blockquote>
 <p>HTML5, CSS3, JavaScript, jQuery, JSON, Ajax, BootStrap5.0, Java, Spring5.0,</p>
 <p>Spring Security, Gradle, JDBC, MySQL, Chart.js, lombok, swiper, java.mail</p>
+
+<blockquote><h3>시연영상</h3></blockquote>
+<p dir="auto"><a href="https://youtu.be/2gtT-Kq7P9g" rel="nofollow">YouTube 보기</a></p>
