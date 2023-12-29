@@ -1,0 +1,29 @@
+.map_wrap {
+    overflow: hidden;
+    height: 600px;
+    border: red solid;
+    max-width: 83vw;
+    margin: auto;
+}
+
+#mapWrapper {
+    width: 50%;
+    height: 100%;
+    float: left
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+#rvWrapper {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#roadview {
+    width: 100%;
+    height: 100%;
+}

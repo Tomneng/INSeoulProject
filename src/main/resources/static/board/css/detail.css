@@ -1,0 +1,13 @@
+/*기존 스타일을 유지*/
+/* 댓글을 옆으로 나오게 하는 스타일 추가 */
+.comments-container {
+    display: flex;
+    flex-direction: row; /* 가로 방향으로 나열 */
+    overflow-x: auto; /* 가로 스크롤이 필요한 경우 스크롤을 추가 */
+}
+
+.comment {
+    width: 300px; /* 각 댓글의 폭을 조절하세요 */
+    margin-right: 10px; /* 각 댓글 사이에 간격을 두세요 */
+}
+

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:unless="${result > 0}">
+    alert("수정 실패");
+    history.back();
+</script>
+
+<script th:if="${result > 0}" th:inline="javascript">
+    alert("수정 성공");
+    location.href = `mypage`;
+</script>
+</html>

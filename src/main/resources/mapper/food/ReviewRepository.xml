@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inseoul.food.repository.ReviewRepository">
+
+    <!--    <resultMap id="mapUser" type="com.inseoul.food.domain.User">-->
+    <!--        <result column="user_id" property="userId"/>-->
+    <!--        <result column="nickName" property="nickName"/>-->
+    <!--        <result column="password" property="password"/>-->
+    <!--        <result column="email" property="email"/>-->
+    <!--        <result column="regDate" property="regDate"/>-->
+    <!--        <result column="mbti" property="mbti"/>-->
+    <!--    </resultMap>-->
+
+    <!--    <sql id="SELECT_BASE">-->
+    <!--        SELECT r.review_id "reviewId", f.food_id "foodId", u.user_id "userId"-->
+    <!--             , r.review_category "reviewCategory", r.review_star "reviewStar"-->
+    <!--        FROM review r, user u, food f-->
+    <!--        WHERE r.user_id = u.user_id-->
+    <!--        AND f.food_id = r.food_id-->
+    <!--    </sql>-->
+    <sql id="SELECT_BASE">
+        SELECT r.review_id "reviewId", f.food_id "foodId"
+             , r.review_category "reviewCategory", r.review_star "reviewStar"
+        FROM food_reviews r, food f
+        WHERE f.food_id = r.food_id
+    </sql>
+
+    <insert id="reviewSave" parameterType="com.inseoul.food.domain.Review">
+        INSERT INTO food_reviews (review_id,food_id, id, review_category, review_content, review_star)
+        VALUES (#{reviewId}, #{foodId}, #{userId}, #{reviewCategory}, #{reviewContent}, #{reviewStar})
+    </insert>
+
+    <!-- 저장된 리뷰카테고리 최신순 하나 보여주기-->
+    <select id="swCategory" resultType="java.lang.String">
+        SELECT review_content
+        FROM food_reviews
+        WHERE food_id = #{foodId}
+        ORDER BY review_id DESC
+            LIMIT 5
+    </select>
+
+
+
+    <!-- 리뷰의 존재유무 1/0 -->
+    <select id="countReview" resultType="Integer">
+        SELECT count(*)
+        FROM food_reviews
+        WHERE id = #{userId} AND food_id = #{foodId}
+    </select>
+
+    <select id="getScore" resultType="java.lang.Double">
+        SELECT review_avg
+        FROM food
+        WHERE food_id = #{foodId}
+    </select>
+
+
+    <!--    <insert id="insertRating" parameterType="com.inseoul.food.domain.Review">-->
+    <!--        INSERT INTO food_reviews (review_star)-->
+    <!--        VALUES (#{reviewStar})-->
+    <!--    </insert>-->
+
+    <!-- 평점 구하기 -->
+    <!--    <select id="getRatingAvg" resultType="double">-->
+    <!--        SELECT AVG(review_star)-->
+    <!--        FROM food_reviews-->
+    <!--        WHERE food_id = #{foodId}-->
+    <!--    </select>-->
+    <!--평점을 업데이트-->
+    <update id="updateAvg">
+        UPDATE food
+        SET review_avg = (SELECT ROUND(AVG(review_star),1) "reviewAvg" FROM food_reviews WHERE food_id = #{foodId})
+        WHERE food_id = #{foodId}
+    </update>
+
+    <!-- 별점을 업데이트 -->
+    <update id="updateRating" parameterType="com.inseoul.food.domain.Review">
+        UPDATE food_reviews
+        SET review_star = #{reviewStar}, review_category = #{reviewCategory}, review_content = #{reviewContent}
+        WHERE food_id = #{foodId} AND id = #{userId}
+    </update>
+    <!--  리뷰 업데이트  -->
+    <!--    <update id="updateRating">-->
+    <!--        UPDATE food_reviews-->
+    <!--        SET review_star = #{reviewStar},-->
+    <!--            review_category = #{reviewCategory},-->
+    <!--            review_content = #{reviewContent}-->
+    <!--        WHERE food_id = #{foodId} AND id = #{userId}-->
+    <!--    </update>-->
+</mapper>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="mainCardH">
+    <div id="cardPart2" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 mx-4 mb-5">
+        <div th:each="row : ${houseCard}" class="divider-container col" id="container1">
+            <div class="divider card">
+                <a id="realCardAtag" th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                    <h3 th:text="${row.ssgName}"></h3>
+                    <h3 th:text="${row.dongName}"></h3>
+                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
+                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
+                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
+                </a>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

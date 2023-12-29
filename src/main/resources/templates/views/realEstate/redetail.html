@@ -3,129 +3,187 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script th:unless="${row}">
-alert("해당 정보가 삭제되거나 없습니다")
-history.back();
+    alert("해당 정보가 삭제되거나 없습니다")
+    history.back();
 </script>
-<th:block th:if="${row}">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조회 - [[${row.houseId}]]</title>
-</head>
+<th:block th:if="${row}" th:with="logged_user=${#authentication.getPrincipal()?.getUser()}">
+    <script th:src="@{/realEstate/JS/reDetail.js}"></script>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>조회 - [[${row.houseId}]]</title>
+    </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>조회 - [[${row.houseId}]]</title>
 
+        <!--  철희 추가 12/20  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/realMap.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/reDetail.css}">
 
+    </head>
 
-<style>
-    td {
-        border: black 2px solid;
-    }
-</style>
-<body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+    <script th:inline="javascript">
+        const logged_id = [[${logged_user.userId}]];
+    </script>
+    <style>
+        td {
+            border: black 2px solid;
+        }
+
+        #myChart, #myChart2 {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrap-chart {
+            flex-wrap: wrap; /* flex 요소들을 여러 줄로 나누기 */
+        }
+
+        .chart-container {
+            width: 49%; /* 각 차트의 폭을 49%로 조절 */
+            box-sizing: border-box; /* 요소의 내용을 포함한 전체 너비와 높이 지정 */
+            position: relative;
+        }
+
+        .score-inputs {
+            width: 100%; /* input 요소들을 차트 아래에 위치하도록 전체 폭 지정 */
+            margin-top: 10px; /* 간격 추가 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-top: 16px;
+            height: 65px;
+            text-align: center;
+        }
+
+        .score-inputs input{
+            border: 2px solid rgb(255, 38, 20);
+            width: 10%;
+            border-radius: 3%;
+            height: 32px;
+        }
+
+        .bordered-div {
+            width: 49%;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        .table{
+            margin-top: 5%;
+        }
+
+        #putScore{
+            height: 32px;
+        }
+
+        #listbtn{
+            margin-left: 7%;
+            margin-top: 2%;
+        }
+
+    </style>
+    <body>
+    <!--/* 공통 헤더 */-->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
+    <div class="container">
+        <table class="table table-hover" style="border: black 2px solid; text-align: center">
+            <thead>
+            </thead>
+            <tbody>
+            <tr class="table-active">
+                <td>건물명</td>
+                <td id="building_name">[[${row.buildingName}]]</td>
+                <td>계약일</td>
+                <td id="contract_date">[[${row.contractDate}]]</td>
+            </tr>
+            <tr>
+                <td>주소</td>
+                <td colspan="3" id="address">[[${row.address}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>전월세구분</td>
+                <td id="rent_kind">[[${row.rentKind}]]</td>
+                <td>임대면적</td>
+                <td id="rent_area">[[${row.rentArea}]]㎡</td>
+            </tr>
+            <tr class="table-primary">
+                <td>보증금 (단위 : 만)</td>
+                <td id="rent_deposit">[[${row.rentDeposit}]]</td>
+                <td>월세 (단위 : 만)</td>
+                <td id="rent_fee">[[${row.rentFee}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>건축년도</td>
+                <td id="built_year">[[${row.buildYear}]]년</td>
+                <td>건물용도</td>
+                <td id="house_kindNm">[[${row.houseKindName}]]</td>
+            </tr>
+            <tr class="table-primary">
+                <td>계약기간</td>
+                <td id="contract_period">[[${row.contractPeriod}]]</td>
+                <td>신규갱신여부</td>
+                <td id="new_Ron">[[${row.newRonSecd}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="container wrap-chart" style="display: flex; justify-content: space-between">
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class="score-inputs">
+                <label for="contract_ScorePut">계약 평가하기</label>
+                <input id="contract_ScorePut" name="contractScore" th:value="${contractScore}">
+                <label for="place_ScorePut">주거지 평가하기</label>
+                <input id="place_ScorePut" name="placeScore" th:value="${placeScore}">
+                <input id="houseId" name="houseId" th:value="${row.houseId}" style="display: none">
+                <button type="button" id="putScore" class="btn btn-outline-dark">작성완료</button>
+                <div class="bordered-div">* 계약점수는 현재 조회한 주거지의 계약에 대한 점수입니다.</div>
             </div>
         </div>
-    </nav>
-</header>
 
-<div class="container">
-    <table class="table table-hover" style="border: black 2px solid; text-align: center">
-        <thead>
-        fdsafa
-        </thead>
-        <tbody>
-        <tr class="table-active">
-            <td>건물명</td>
-            <td id="building_name">[[${row.buildingName}]]</td>
-            <td>계약일</td>
-            <td id="contract_date">[[${row.contractDate}]]</td>
-        </tr>
-        <tr>
-            <td>주소</td>
-            <td colspan="3" id="address">[[${row.address}]]</td>
-        </tr>
-        <tr class="table-primary">
-            <td>전월세구분</td>
-            <td id="rent_kind">[[${row.rentKind}]]</td>
-            <td>임대면적</td>
-            <td id="rent_area">[[${row.rentArea}]]</td>
-        </tr>
-        <tr class="table-primary">
-            <td>보증금</td>
-            <td id="rent_deposit">[[${row.rentDeposit}]]</td>
-            <td>월세</td>
-            <td id="rent_fee">[[${row.rentFee}]]</td>
-        </tr>
-        <tr class="table-primary">
-            <td>건축년도</td>
-            <td id="built_year">[[${row.buildYear}]]</td>
-            <td>건물용도</td>
-            <td id="house_kindNm">[[${row.houseKindName}]]</td>
-        </tr>
-        <tr class="table-primary">
-            <td>계약기간</td>
-            <td id="contract_period">[[${row.contractPeriod}]]</td>
-            <td>신규갱신여부</td>
-            <td id="new_Ron">[[${row.newRonSecd}]]</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<section>
-    <div class="container" style="display: flex">
-        <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.contractScore}]] / 100</div>
-        <div class="score" style="border: black 2px solid; width: 300px; height: 300px">[[${row.placeScore}]] / 100</div>
-        <form th:action="@{/realEstate/putScore}" method="post" enctype="multipart/form-data">
-        <input id="contract_ScorePut" th:value="${contractScore}">
-        <input id="place_ScorePut" th:value="${placeScore}">
-            <button type="submit" class="btn btn-outline-dark">작성완료</button>
-        </form>
+    <!-- 카카오로드뷰 section 추가 - 신철희 12/22 저녁 -->
+    <div class="map_wrap">
+        <div id="mapWrapper">
+            <div id="map"></div> <!-- 지도를 표시할 div 입니다 -->
+        </div>
+        <div id="rvWrapper">
+            <div id="roadview"></div> <!-- 로드뷰를 표시할 div 입니다 -->
+        </div>
     </div>
-</section>
 
+    <a class="btn btn-outline-dark" id="listbtn" th:href="@{/realEstate/infoList}">목록</a>
 
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</body>
+    <!--  푸터 블럭 by 철희 12/20  -->
+    <th:block th:insert="~{common/footer::footer}"></th:block>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </body>
 </th:block>
+
+<!-- 여기부터 추가 - 신철희 12/22 저녁 -->
+<!--/* kakaomap Javascript API */-->
+<!--/* appkey= 여기에 JavaScript 키를 입력하면 된다.(kakao deleopers -> 내 애플리케이션 -> 앱 키 -> JavaScript 키)*/-->
+<!--/* 라이브러리 추가, JavaScript 키 뒤에 services,clusterer,drawing 라이브러리를 추가함 */-->
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c1b1b874a51038bccf3ed41dd217837&libraries=services,clusterer,drawing"></script>
+<script th:src="@{/common/js/realMap.js}"></script>
+
+
 </html>

@@ -3,19 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.inseoul.food.repository.FoodRepository">
+    <!--    음식점 정보, 리뷰정보 따로 sele-->
     <sql id="SELECT_BASE">
-        SELECT f.foodId, f.storeName, f.storeAddr, f.storeTel, f.storeImage
-            FROM food f
+        SELECT food_id "foodId", store_name "storeName", store_address "storeAddress", store_tel "storeTel", langcodeId
+        FROM food
     </sql>
-    <insert id="save" flushCache="true" parameterType="com.inseoul.food.domain.FoodData"
-    useGeneratedKeys="true" keyColumn="foodId" keyProperty="foodId">
-        INSERT INTO food(storeName, storeAddr, storeTel)
-        VALUES (#{storeName}, #{storeAddr}, #{storeTel})
+    <!--  작성(저장)  -->
+    <insert id="write" flushCache="true" parameterType="com.inseoul.food.domain.FoodRow"
+            useGeneratedKeys="true" keyColumn="food_id" keyProperty="foodId">
+        INSERT
+        IGNORE INTO food(store_name, store_address, store_tel, langcodeId)
+        VALUES (
+        #{storeName},
+        #{storeAddress},
+        #{storeTel},
+        #{langcodeId}
+        )
     </insert>
-    <select id="findAll" resultType="com.inseoul.food.domain.FoodData">
+    <!--  전체 글 -->
+    <select id="findAll" resultType="com.inseoul.food.domain.FoodRow">
         <include refid="SELECT_BASE"/>
-            f.foodId = #{foodId}
-            ORDER BY f.foodId DESC
+        ORDER BY food_id ASC
     </select>
 
+    <!--   특정 아이디 -->
+    <!--    <select id="findById" resultType="com.inseoul.food.domain.FoodRow">-->
+    <!--        <include refid="SELECT_BASE"/>-->
+    <!--        WHERE food_id = #{foodId}-->
+    <!--        AND langcodeId = 'ko'-->
+    <!--    </select>-->
+
+    <select id="findById" resultType="com.inseoul.food.domain.FoodRow">
+        SELECT DISTINCT food_id       "foodId",
+                        store_name    "storeName",
+                        store_address "storeAddress",
+                        store_tel     "storeTel",
+                        langcodeId
+        FROM food
+        WHERE food_id = #{foodId}
+          AND langcodeId = 'ko'
+    </select>
+
+
+    <!-- 평점 불러오기 -->
+    <!--    <update id="updateRating">-->
+    <!--        UPDATE food-->
+    <!--        SET review_avg = #{reviewAvg}-->
+    <!--        WHERE food_id = #{foodId}-->
+    <!--    </update>-->
+
+    <select id="findByRating" resultType="java.lang.Double">
+        SELECT review_avg
+        FROM food
+        WHERE food_id = #{foodId}
+    </select>
 </mapper>

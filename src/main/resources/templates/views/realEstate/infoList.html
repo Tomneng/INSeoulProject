@@ -2,174 +2,163 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>간단한 웹페이지</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<th:block th:with="logged_user=${#authentication.getPrincipal().getUser()}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+              crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/infoList.css}">
 
-        header {
-            background-color: #3498db;
-            padding: 10px;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        <!--철희 추가 12/19-->
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCarousel.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCardTab.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script th:src="@{/realEstate/JS/infoList.js}"></script>
 
-        header .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+        <title>간단한 웹페이지</title>
 
-        header .menu {
-            display: flex;
-        }
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-        header .menu a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-        }
+    <body>
+    <!--  헤더 추가 철희 -->
+    <th:block th:insert="~{common/header::header}"></th:block>
 
-        header .menu a:hover {
-            text-decoration: underline;
-        }
+    <div id="realEstateSearchContainer" class="container">
+        <form th:action="@{/realEstate/infoList}" method="post" name="houseForm">
+            <select id="selectYear" name="accYear" style="width: 100px;">
+            </select>
+            <select id="selectSSG" name="ssgName" style="width: 150px;">
+                <option selected>자치구를 먼저 선택해주세요</option>
+            </select>
+            <select id="selectBJDONG" name="dongCode" style="width: 150px;">
+                <option>자치구를 먼저 선택해주세요</option>
+            </select>
+            <select id="selectHouseKind" name="houseKindName" style="width: 150px;">
+            </select>
+            <select id="selectMbti" name="mbtiH" style="width: 100px">
+                <option class="mbties" id="MBTI" value="MBTI">
+                    <label for="MBTI">MBTI</label>
+                </option>
+                <option class="mbties" id="ESFP" value="ESFP">
+                    <label for="ESFP">ESFP</label>
+                </option>
+                <option class="mbties" id="ISTJ" value="ISTJ">
+                    <label for="ISTJ">ISTJ</label>
+                </option>
+                <option class="mbties" id="ISFJ" value="ISFJ">
+                    <label for="ISFJ">ISFJ</label>
+                </option>
+                <option class="mbties" id="INFJ" value="INFJ">
+                    <label for="INFJ">INFJ</label>
+                </option>
+                <option class="mbties" id="INTJ" value="INTJ">
+                    <label for="INTJ">INTJ</label>
+                </option>
+                <option class="mbties" id="ISTP" value="ISTP">
+                    <label for="ISTP">ISTP</label>
+                </option>
+                <option class="mbties" id="ISFP" value="ISFP">
+                    <label for="ISFP">ISFP</label>
+                </option>
+                <option class="mbties" id="INFP" value="INFP">
+                    <label for="INFP">INFP</label>
+                </option>
+                <option class="mbties" id="INTP" value="INTP">
+                    <label for="INTP">INTP</label>
+                </option>
+                <option class="mbties" id="ESTP" value="ESTP">
+                    <label for="ESTP">ESTP</label>
+                </option>
+                <option class="mbties" id="ENFP" value="ENFP">
+                    <label for="ENFP">ENFP</label>
+                </option>
+                <option class="mbties" id="ENTP" value="ENTP">
+                    <label for="ENTP">ENTP</label>
+                </option>
+                <option class="mbties" id="ESTJ" value="ESTJ">
+                    <label for="ESTJ">ESTJ</label>
+                </option>
+                <option class="mbties" id="ESFJ" value="ESFJ">
+                    <label for="ESFJ">ESFJ</label>
+                </option>
+                <option class="mbties" id="ENFJ" value="ENFJ">
+                    <label for="ENFJ">ENFJ</label>
+                </option>
+                <option class="mbties" id="ENTJ" value="ENTJ">
+                    <label for="ENTJ">ENTJ</label>
+                </option>
+            </select>
+            <button type="submit" style="width: 150px;">검색하기</button>
 
-        header .icons {
-            display: flex;
-        }
-
-        header .icons i {
-            font-size: 20px;
-            color: #fff;
-            margin-left: 15px;
-            cursor: pointer;
-        }
-
-        .container {
-            display: flex;
-            max-width: 800px;
-            margin: 50px auto;
-            text-align: center;
-            justify-content: space-around;
-        }
-
-        .container select,
-        .container input[type="text"],
-        .container button {
-            width: calc(33.33% - 20px); /* 10px은 간격을 나타냅니다. */
-            padding: 10px;
-            margin: 0 5px;
-        }
-
-        .container button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        hr {
-            margin-top: 20px;
-        }
-
-        .divider-container {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 중앙 정렬을 위해 추가 */
-            margin-top: 20px;
-        }
-
-        /* .divider 스타일 추가 */
-        .divider {
-            width: 16%;
-            padding-bottom: 16px;
-            background-color: white;
-            margin: 0 15px;
-            border: 2px black solid;
-            border-radius: 3%;
-            overflow: hidden;
-            text-align: center;
-            position: relative; /* 상대 위치 지정 */
-        }
-        .divider img {
-            width: 100%;
-            height: 100%;
-            border-bottom: 2px black solid;
-        }
-
-        .divider p {
-            margin: 10px 0;
-            font-size: 14px;
-            color: #333;
-            bottom: 10px; /* 아래에서 10px 떨어진 위치에 텍스트 배치 */
-            width: 100%; /* 부모 요소에 맞게 너비 설정 */
-        }
-        p{
-            margin: 0px;
-            line-height: 1;
-        }
-
-    </style>
-</head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-<body>
-<header>
-    <div class="logo">로고</div>
-    <div class="menu">
-        <a href="#">About us</a>
-        <a href="#">FAQ</a>
-        <a href="#">Contact Us</a>
+        </form>
     </div>
-    <div class="icons">
-        <i class="far fa-user"></i>
-        <i class="fas fa-bars"></i>
+
+    <hr>
+    <div id="cntRealEstate" class="mb-3 mt-3 clearfix">
+        <span class="float-start me-2">총 [[${cnt}]]개</span>
+        <span class="float-start">[[${page}]]/[[${totalPage}]] page</span>
     </div>
-</header>
 
-<div class="container">
-    <select>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-    </select>
-    <input type="text" placeholder="검색">
-    <button>검색하기</button>
-</div>
+    <div class="divider-containerParents justify-content-center row">
+        <div th:each="row : ${list}" class="divider-container" id="container1">
+            <div class="divider">
+                <input class="scraptRealEstate form-check-input" type="checkbox" th:id="${row.houseId}"
+                       th:value="${row.houseId}"><br>
+                <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                    <span th:text="${row.ssgName}"></span><br>
+                    <span th:text="${row.dongName}"></span><br>
+                    <span>거래구분: </span><span th:text="${row.rentKind}"></span><br>
+                    <span>보증금: </span><span th:text="${row.rentDeposit}"></span><br>
+                    <span>월세: </span><span th:text="${row.rentFee}"></span><br>
+                    <span>가장 많이 스크랩한 MBTI : </span><span th:text="${row.mbtiH}"></span>
+                </a>
+            </div>
+        </div>
+    </div>
 
-<hr>
-<div class="divider-container" id="container1">
-    <div class="divider" id="card1"></div>
-    <div class="divider" id="card2"></div>
-    <div class="divider" id="card3"></div>
-    <div class="divider" id="card4"></div>
-</div><div class="divider-container" id="container2">
-    <div class="divider" id="card5"></div>
-    <div class="divider" id="card6"></div>
-    <div class="divider" id="card7"></div>
-    <div class="divider" id="card8"></div>
-</div><div class="divider-container" id="container3">
-    <div class="divider" id="card9"></div>
-    <div class="divider" id="card10"></div>
-    <div class="divider" id="card11"></div>
-    <div class="divider" id="card12"></div>
-</div>
+    <div th:unless="${list}" style="text-align: center;">
+        정보가 없어용
+    </div>
 
 
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</body>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- pagination -->
+    <th:block th:insert="~{realEstate/pagination::pagination}"></th:block>
+    <!-- pagination -->
+
+    <!--  푸터 블럭 by 철희 12/19  -->
+    <th:block th:insert="~{common/footer::footer}"></th:block>
+
+    </body>
+    <script th:inline="javascript">
+        // 나중에 댓글 작성시 필요.
+        const logged_id = [[${logged_user.userId}]];
+    </script>
+
+    <!-- 여기부터 철희가 추가 12/19 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+            integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+            crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:src="@{/realEstate/JS/infoList.js}"></script>
+</th:block>
 </html>

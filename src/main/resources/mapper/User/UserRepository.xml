@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.user.repository.UserRepository">
+    <sql id="SELECT_BASE">
+        SELECT user_id    "userId"
+             , username   "username"
+             , password   "password"
+             , nickname   "nickname"
+             , regdate    "regDate"
+             , provider   "provider"
+             , providerId "providerId"
+             , mbti "mbti"
+        FROM user
+        WHERE 1 = 1
+    </sql>
+
+    <select id="findById" resultType="com.inseoul.user.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND
+        user_id = #{userId}
+    </select>
+    <select id="findByUsername" resultType="com.inseoul.user.domain.User">
+        <include refid="SELECT_BASE"/>
+        AND
+        username = #{username}
+    </select>
+
+    <insert id="save" flushCache="true" parameterType="com.inseoul.user.domain.User"
+            keyProperty="userId" useGeneratedKeys="true" keyColumn="user_id">
+        INSERT INTO user(username, password, nickname, provider, providerId, mbti)
+        VALUES (#{username}, #{password}, #{nickname}, #{provider}, #{providerId}, #{mbti})
+    </insert>
+
+    <update id="update" flushCache="true" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET username = #{username}, nickname = #{nickname}, mbti = #{mbti}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="tempPass" flushCache="true" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET password = #{password}, providerId=1
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="chPass" parameterType="com.inseoul.user.domain.User">
+        UPDATE user
+        SET password = #{password}, providerId=0
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>

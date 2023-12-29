@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inseoul.tour.repository.TourRepository">
+
+    <insert id="save" parameterType="com.inseoul.tour.domain.Item"
+            useGeneratedKeys="true" keyColumn="tour_id" keyProperty="tourId">
+        INSERT INTO tour
+        (tour_name, tour_addr1, tour_addr2, tour_image1, tour_image2, tour_contentid, tour_sigungucode, tour_mapx,
+         tour_mapy)
+        VALUES (#{tourName}, #{tourAddr1}, #{tourAddr2}, #{tourImage1}, #{tourImage2}, #{tourContentid},
+                #{tourSigungucode}, #{tourMapx}, #{tourMapy})
+    </insert>
+    <update id="putTop1">
+        UPDATE tour
+        SET tour_mbtiTop = #{mbtiT}
+        WHERE tour_id = #{tourId}
+    </update>
+
+    <sql id="SELECT_BASE">
+        SELECT tour_id          "tourId",
+               tour_name        "tourName",
+               tour_addr1       "tourAddr1",
+               tour_addr2       "tourAddr2",
+               tour_image1      "tourImage1",
+               tour_image2      "tourImage2",
+               tour_contentid   "tourContentid",
+               tour_sigungucode "tourSigungucode",
+               tour_mapx        "tourMapx",
+               tour_mapy        "tourMapy",
+               tour_mbtiTop     "mbtiT"
+        FROM tour
+        WHERE 1 = 1
+    </sql>
+
+    <select id="selectById" resultType="com.inseoul.tour.domain.Item">
+        <include refid="SELECT_BASE"/>
+        AND tour_id = #{tourId}
+    </select>
+
+    <select id="selectFromRow" resultType="com.inseoul.tour.domain.Item">
+        <include refid="SELECT_BASE"/>
+        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%") AND tour_mbtiTop = #{mbtiT}
+        ORDER BY tour_id DESC
+        LIMIT #{param3}, #{param4}
+    </select>
+
+    <select id="selectFromRowDefault" resultType="com.inseoul.tour.domain.Item">
+        <include refid="SELECT_BASE"/>
+        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
+        ORDER BY tour_id DESC
+        LIMIT #{param3}, #{param4}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT count(tour_id)
+        FROM tour
+        WHERE tour_sigungucode = #{tourSigungucode}
+          AND tour_name LIKE concat('%', #{tourName}, '%') AND tour_mbtiTop = #{mbtiT}
+    </select>
+
+    <select id="countAllDefault" resultType="java.lang.Integer">
+        SELECT count(tour_id)
+        FROM tour
+        WHERE tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat('%', #{tourName}, '%')
+    </select>
+
+    <select id="getRandomTourCard" resultType="com.inseoul.tour.domain.Item">
+        SELECT t.tour_id     AS "tourId",
+               t.tour_name   AS "tourName",
+               t.tour_image1 AS "tourImage1",
+               t.tour_addr1  AS "tourAddr1",
+               t.tour_addr2  AS "tourAddr2"
+        FROM tour t
+                 JOIN
+             tourInfoSaved ts ON t.tour_id = ts.tour_id
+        GROUP BY t.tour_id
+        ORDER BY COUNT(ts.tour_id) DESC LIMIT 4
+    </select>
+
+    <select id="top3mbti" resultType="java.lang.String">
+        SELECT u.mbti
+        FROM tourInfoSaved t,
+             user u
+        WHERE t.tour_id = #{tourId}
+        Group by u.mbti
+        ORDER BY count(u.mbti) DESC LIMIT 3
+    </select>
+
+    <select id="top3Prop" resultType="java.lang.Integer">
+        SELECT round(100 * count(u.mbti) / (SELECT count(*) FROM tourInfoSaved WHERE tour_id = #{tourId}))
+        FROM tourInfoSaved t NATURAL JOIN user u
+        WHERE t.tour_id = #{tourId}
+        Group by u.mbti
+        ORDER BY 1 DESC LIMIT 3
+    </select>
+
+    <!--  희수 food  -->
+    <select id="selectByFood" resultType="String">
+        SELECT store_tel
+        FROM food
+        WHERE langcodeId = 'ko'
+    </select>
+
+    <select id="selectByFoodId" resultType="Long">
+        select food_id
+        from food
+        where store_tel = #{storeTel}
+        ORDER BY food_id DESC LIMIT 1
+    </select>
+    <select id="countAllForReal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM tour
+    </select>
+
+
+</mapper>

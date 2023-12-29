@@ -5,20 +5,15 @@
 
 .title-layout {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     height: 170px;
-    font-size: 35px;
+    font-size: 2em;
     padding-top: 30px;
 }
 
 .table {
     text-align: center;
-}
-
-.search-bar {
-    display: flex;
-    justify-content: center;
 }
 
 .form-control {
@@ -27,3 +22,5 @@
     margin-left: 20px;
     margin-right: 60px;
 }
+
+

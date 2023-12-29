@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="mainCultureSlider">
+    <section id="tranding">
+        <div class="container">
+            <h1 class="text-center section-heading">Click on the poster you are interested in.</h1>
+        </div>
+        <div class="container">
+            <div class="swiper tranding-slider">
+
+                <!--포스터 컨테이너-->
+                <div id="posterContainer" class="swiper-wrapper">
+                    <!-- Slide-start -->
+
+                    <!-- Slide-end -->
+                </div>
+
+                <!-- 버튼 & 아이콘 -->
+                <div class="tranding-slider-control">
+                    <div class="swiper-button-prev slider-arrow">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </div>
+                    <div class="swiper-button-next slider-arrow">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</th:block>
+</html>

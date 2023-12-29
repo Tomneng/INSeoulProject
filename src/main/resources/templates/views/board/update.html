@@ -6,62 +6,127 @@
     history.back();
 </script>
 
-<th:block th:if="${post}">
-
+<th:block th:if="${post}" th:with="logged_user=${#authentication.principal.user}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" th:href="@{/board/css/common.css}">
 
+        <!--        썸머노트        -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-        <script th:src="@{/js/update.js}"></script>
+        <!-- 신철희 추가 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
 
 
-        <title>수정</title>
+        <title>수정 - [[${post.postId}]]</title>
     </head>
 
     <body>
+    <!--  헤더 추가 - 신철희 -->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
     <div class="container mt-3">
-        <h2>수정</h2>
+        <h2>수정 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">id: [[${post.id}]]</span>
-            <span class="float-end ms-4">작성일: [[${#temporals.format(post.regDate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
-            <span class="float-end">조회수: [[${post.viewCnt}]]</span>
+            <span class="float-start me-2">id: [[${post.postId}]]</span>
+            <span class="float-end ms-4">작성일: [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+            <span class="float-end">조회수: [[${post.viewcnt}]]</span>
         </div>
 
-        <form name="frm" th:action="@{/board/update}" method="post">
-            <input type="hidden" name="id" th:value="${post.id}"/>
+        <form name="frm" th:action="@{/board/update}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="postId" th:value="${post.postId}"/>
             <div class="mb-3">
-                <label>작성자:</label>
-                <span class="form-control" readonly th:text="${post.user}"></span>
-                <input type="hidden" name="user" th:value="${post.user}"> <!-- validation 땜에 필요 -->
+                <label>Writer : </label>
+                <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
+                <input type="hidden" name="postId" th:value="${post.postId}"> <!-- validation 땜에 필요 -->
+                <label>MBTI : </label>
+                <span class="form-control bg-light" th:text="${post.user.mbti}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label for="subject">제목:</label>
-                <input type="text" class="form-control" id="subject" placeholder="제목을 입력하세요" name="subject" th:value="${subject} ? ${subject} : ${post.subject}">
-                <span class="text-danger" th:if="${error_subject}" th:utext="${error_subject}"></span>
+                <label for="title">Title : </label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title"
+                       th:value="${title} ? ${title} : ${post.title}">
+                <span class="text-danger" th:if="${error_title}" th:utext="${error_title}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label for="content">내용:</label>
-                <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content" th:utext="${content} ? ${content} : ${post.content}"></textarea>
+                <label for="content">Content : </label>
+                <textarea class="form-control" rows="5" id="content" placeholder="내용을 입력하세요" name="content"
+                          th:utext="${content} ? ${content} : ${post.content}"></textarea>
             </div>
+
+            <!-- 기존 첨부파일목록 (삭제 가능) -->
+            <div class="container mt-3 mb-3 border rounded"
+                 th:if="${post.fileList} and ${#lists.size(post.fileList) > 0}">
+                <div id="delFiles"></div>  <!-- 삭제할 file 의 id 값(들)을 담기위한 div -->
+                <div class="mb-3 mt-3">
+                    <label>기존 첨부파일:</label>
+                    <div class="input-group mb-2" th:each="attachment : ${post.fileList}">
+                        <input class="form-control col-xs-3" type="text" readonly th:value="${attachment.sourcename }">
+                        <button type="button" class="btn btn-outline-danger" th:data-fileid-del="${attachment.id}">삭제
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--기존 첨부파일목록 (삭제 가능) -->
+
+            <!-- 새로운 첨부파일 추가 -->
+            <div class="container mt-3 mb-3 border rounded">
+                <div class="mb-3 mt-3">
+                    <label>새로운 첨부파일:</label>
+                    <div id="files">
+
+                    </div>
+                    <button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
+                </div>
+            </div>
+            <!-- 새로운 첨부파일 추가 -->
 
             <!-- 하단 링크 -->
             <div class="d-flex">
-                <button type="submit" class="btn btn-outline-dark">수정완료</button>
+                <button type="submit" class="btn btn-outline-dark" th:if="${logged_user.userId == post.user.userId}">
+                    수정완료
+                </button>
                 <button type="button" class="btn btn-outline-dark ms-1" onclick="history.back()">이전으로</button>
-                <a class="btn btn-outline-dark ms-1" th:href="@{/board/list}">목록</a>
+                <a class="btn btn-outline-dark ms-1" th:href="@{/board/list(page=${session.page})}">목록</a>
             </div>
             <!-- 하단 링크 -->
 
         </form>
     </div>
 
+
+    <!--  푸터 추가 - 신철희  -->
+    <th:block th:insert="~{common/footer::footer}"></th:block>
+
     </body>
+    <script th:src="@{/board/js/update.js}"></script>
 </th:block>
 
+<!-- 신철희 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+        integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+        crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/common/js/common.js}"></script>
 </html>

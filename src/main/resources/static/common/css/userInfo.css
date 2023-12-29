@@ -1,0 +1,233 @@
+body {
+    background-color: var(--bodyBackgroundColor);
+}
+
+.container {
+    margin-top: 50px;
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    background-color: var(--white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.mypageupdate {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mypageupdate button, a.btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 120px;
+}
+
+.mypageupdate button:hover, a.btn:hover {
+    background-color: var(--skycoral);
+    color: var(--white);
+    border: lightpink solid;
+}
+
+.container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mypagelist {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userinfo {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    margin: 0;
+}
+
+.userinfo form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 800px;
+    /*margin-left: 20px;*/
+}
+
+.userinfo form > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+input[type="text"] {
+    width: 450px;
+}
+
+div > span {
+    width: 70px;
+    text-align: center;
+}
+
+.username,
+.nickname,
+.mbti {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.overFlowAuto {
+    border-radius: 20px;
+    display: grid;
+    height: 300px;
+    justify-content: left;
+    margin: auto;
+    margin-bottom: 30px;
+    max-width: 750px;
+    overflow: auto;
+    padding: 10px;
+    background-color: var(--skycoral);
+}
+
+.overFlowAuto::-webkit-scrollbar {
+    width: 10px;
+}
+
+.overFlowAuto::-webkit-scrollbar-thumb {
+    background-color: var(--skycoral);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.overFlowAuto::-webkit-scrollbar-track {
+    background-color: lightpink;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+
+#realScrapPart {
+    max-width: 480px;
+}
+
+.divider-container {
+    transition: transform 0.3s ease-in-out;
+}
+
+.divider-container:hover {
+    transform: scale(1.05);
+}
+
+
+.divider-container .divider {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: var(--mypageCardBackgroundColor);
+
+}
+
+.scrapSubject {
+    color: black;
+    text-align: center;
+}
+
+
+#container1 .divider a {
+    text-decoration-line: none !important;
+    color: var(--white);
+}
+
+
+input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--skycoral);
+}
+
+.mbties {
+    display: none;
+    width: 23%; /* 각 요소의 너비를 조정하여 간격을 만듭니다. */
+    margin-bottom: 10px; /* 요소 사이의 간격을 설정합니다. */
+}
+
+.mbties:checked + label {
+    background-color: var(--skycoral);
+    color: white; /* 선택되었을 때의 텍스트 색상 */
+}
+
+label {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center; /* 가운데 정렬 */
+}
+
+.mbti {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#mbtiradio {
+    width: 500px;
+}
+
+#mbtiradio label {
+    border: var(--skycoral) solid;
+    border-radius: 5px;
+    width: 100px;
+    height: 60px;
+}
+
+#updatecomplete {
+    padding: 0px 20px;
+    /*font-size: 24px;*/
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    /*width: 120px;*/
+    width: 450px;
+    height: 65px;
+    text-align: center;
+    font-size: 40px;
+    margin-left: 90px;
+}
+
+#updatecomplete:hover {
+    background-color: var(--skycoral);
+    color: var(--white);
+    border: lightpink solid;
+}

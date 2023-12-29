@@ -6,16 +6,30 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Item {
+
     private Long tourId;
-    private String title;
+    @JsonProperty("title")
+    private String tourName;
     @JsonProperty("addr1")
-    private String address;
+    private String tourAddr1;
+    @JsonProperty("addr2")
+    private String tourAddr2;
     @JsonProperty("firstimage")
-    private String image;
+    private String tourImage1;
+    @JsonProperty("firstimage2")
+    private String tourImage2;
+    @JsonProperty("contentid")
+    private int tourContentid;
+    @JsonProperty("sigungucode")
+    private String tourSigungucode;
+    @JsonProperty("mapx")
+    private double tourMapx;
+    @JsonProperty("mapy")
+    private double tourMapy;
+    private String mbtiT;
 }

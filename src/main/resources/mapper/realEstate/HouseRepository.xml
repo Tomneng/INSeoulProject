@@ -13,7 +13,7 @@
              bubn, floor, contract_date,
              rent_kind, rent_area, rent_deposit,
              rent_fee, building_name, build_year,
-             house_kind_name, contract_period, new_ron_secd, distinguish, address)
+             house_kind_name, contract_period, new_ron_secd, address)
         VALUES
             (#{accYear}, #{ssgCode},
              #{ssgName}, #{dongCode}, #{dongName},
@@ -21,27 +21,114 @@
              #{bubn}, #{floor}, #{contractDate},
              #{rentKind}, #{rentArea}, #{rentDeposit},
              #{rentFee}, #{buildingName}, #{buildYear},
-             #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{distinguish}, #{address})
+             #{houseKindName}, #{contractPeriod}, #{newRonSecd}, #{address})
     </insert>
 
-    <select id="compare" resultType="java.lang.Integer">
-        SELECT count(distinguish)
-        FROM house_Contract
-        WHERE distinguish = #{distinguish}
-    </select>
+    <insert id="initScore">
+        INSERT INTO houseContractScore(user_id, house_id, contract_score, place_score)
+        VALUES (#{userId}, #{houseId}, #{contractScore}, #{placeScore})
+    </insert>
 
     <select id="selectById" resultType="com.inseoul.real_estate.domain.Row">
-        SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address",
+        SELECT house_id "houseId", building_name "buildingName", contract_date "contractDate", address "address", acc_year "accYear", ssg_name "ssgName", dong_code "dongCode", house_kind_name "houseKindName",
                rent_kind "rentKind", rent_area "rentArea", rent_deposit "rentDeposit", rent_fee "rentFee", build_year "buildYear", house_kind_name "houseKindName",
-               contract_period "contractPeriod", new_ron_secd "newRonSecd"
+               contract_period "contractPeriod", new_ron_secd "newRonSecd", contract_score "contractScore", place_score "placeScore", mbtiTop "mbtiH"
         FROM house_Contract
         WHERE house_id = #{houseId}
     </select>
 
     <update id="updateScore">
-        UPDATE house_contract
-        SET contract_score = #{contractScore},
-            place_score = #{placeScore}
+        UPDATE houseContractScore
+        SET place_score = #{placeScore}, contract_score = #{contractScore}
+        WHERE house_id = #{houseId} AND user_id = #{userId}
+    </update>
+
+
+    <select id="filteredSearch" parameterType="com.inseoul.real_estate.domain.Row" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee", mbtiTop "mbtiH"
+        FROM house_Contract
+        WHERE acc_year = #{row.accYear} AND ssg_name = #{row.ssgName} AND dong_code = #{row.dongCode} AND house_kind_name = #{row.houseKindName} AND mbtiTop = #{row.mbtiH}
+        ORDER BY house_id DESC
+        LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="defaultSearch" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee", mbtiTop "mbtiH"
+        FROM house_Contract
+        WHERE acc_year = #{row.accYear} AND ssg_name = #{row.ssgName} AND dong_code = #{row.dongCode} AND house_kind_name = #{row.houseKindName}
+        ORDER BY house_id DESC
+            LIMIT #{param2}, #{param3}
+    </select>
+
+    <select id="countAllwithMbti" resultType="java.lang.Integer">
+        SELECT count(house_id)
+        FROM house_Contract
+        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName} AND mbtiTop = #{mbtiH}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT count(house_id)
+        FROM house_Contract
+        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
+    </select>
+
+    <select id="checkScore" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM houseContractScore
+        WHERE house_id =#{houseId} AND user_id = #{userId}
+    </select>
+
+    <update id="updateRealScore">
+        UPDATE house_Contract
+        SET place_score = ROUND((SELECT avg(place_score) FROM houseContractScore WHERE houseContractScore.house_id = #{houseId}), 0), contract_score = ROUND((SELECT avg(contract_score) FROM houseContractScore WHERE houseContractScore.house_id = #{houseId}), 0)
         WHERE house_id = #{houseId}
     </update>
+    <update id="putTop1">
+        UPDATE house_Contract
+        SET mbtiTop = #{mbtiH}
+        WHERE house_id = #{houseId}
+    </update>
+
+    <select id="avgCScore" resultType="Integer">
+        SELECT ROUND(avg(contract_score))
+        FROM house_Contract
+        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
+    </select>
+
+    <select id="avgPScore" resultType="Integer">
+        SELECT ROUND(avg(place_score))
+        FROM house_Contract
+        WHERE acc_year = #{accYear} AND ssg_name = #{ssgName} AND dong_code = #{dongCode} AND house_kind_name = #{houseKindName}
+    </select>
+
+    <select id="top3mbti" resultType="java.lang.String">
+        SELECT u.mbti
+        FROM houseInfoSaved h, user u
+        WHERE h.house_id = #{houseId}
+        Group by u.mbti
+        ORDER BY count(u.mbti) DESC
+        LIMIT 3
+    </select>
+
+    <select id="top3Prop" resultType="java.lang.Integer">
+        SELECT round(100*count(u.mbti) / (SELECT count(*) FROM houseInfoSaved WHERE house_id = #{houseId}))
+        FROM houseInfoSaved h NATURAL JOIN user u
+        WHERE h.house_id = #{houseId}
+        Group by u.mbti
+        ORDER BY 1 DESC
+        LIMIT 3;
+    </select>
+    <select id="houseOnmain" resultType="com.inseoul.real_estate.domain.Row">
+        SELECT h.house_id "houseId", h.ssg_name "ssgName", h.dong_name "dongName", h.rent_kind "rentKind", h.rent_deposit "rentDeposit", h.rent_fee "rentFee"
+        FROM house_Contract h, houseInfoSaved s
+        WHERE h.house_id = (SELECT s.house_id FROM houseInfoSaved GROUP BY s.house_id ORDER BY count(s.user_id) DESC LIMIT 4)
+        GROUP BY h.house_id
+        ORDER BY count(s.user_id) DESC
+        LIMIT 4
+    </select>
+
+    <select id="countAllForReal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM house_Contract;
+    </select>
 </mapper>

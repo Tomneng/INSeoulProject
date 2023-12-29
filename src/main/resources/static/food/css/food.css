@@ -1,14 +1,467 @@
-.modal{
-    position: absolute;
-    display: none;
+* {
+    margin: 0;
+    padding: 0;
+}
 
+ /*모달*/
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    /* height: 4100px;*/
+    /*position: absolute;*/
+     position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    background: rgba(94, 94, 94, 0.25);
+    /*box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);*/
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+#modal .modal-window {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 32px 0 rgba(115, 115, 115, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 850px;
+    /*width: 400px;*/
+    /*height: 100%;*/
+    height: 550px;
+    /*position: relative;*/
+    /*position: absolute;*/
+    top: 50%;
+    left: 50%;
+     /*top: 200px;*/
+    padding: 10px;
+    font-size: 15px;
+}
+
+#modal .title {
+    padding-left: 10px;
+    /*display: inline;*/
+    /*float: left;*/
+    /* text-shadow: 1px 1px 2px gray; */
+    color: #000000;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#modal .title h2 {
+    display: inline;
+}
+
+#modal .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: #000000;
+}
+
+#modal #content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    float: left;
+    /* text-shadow: 1px 1px 2px gray; */
+    color: #000000;
+}
+
+#modal #content img {
+    width: 380px;
+    height: 240px;
+    text-align: center;
+    align-items: center;
+}
+
+input[type="button"] {
+    background-color: #e4576e;
+    width: 100px;
+    font-size: 20px;
+}
+
+/* 리뷰 이미지 */
+.foodImage {
+    cursor: pointer;
+}
+
+/* 회원 아이디 */
+#userId {
+    float: right;
+    /* display: inline-block; */
+    /* margin-right: 50px; */
+}
+
+#userId input {
+    margin-top: 5px;
+    width: 100px;
+    height: 20px;
+    background-color: #e4576e;
+    text-align: center;
+    border: 1px solid black;
+    float: right;
+}
+#userId span{
+    font-size: 20px;
+    float: left;
+    margin-right: 5px;
+}
+/*span {*/
+/*    font-weight: 550;*/
+/*    color: black;*/
+/*    font-size: 25px;*/
+/*    float: right;*/
+/*}*/
+
+
+
+/* 평점 */
+#reviewStar {
+    float: right;
+}
+#reviewStar span{
+    float: left;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+#reviewShowStar span{
+    font-size: 20px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+#reviewStarOne{
+    float: left;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: #2b2a29;
+}
+
+.star-ratings-fill {
+    color: #ffdc00;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
     top: 0;
     left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background-color: antiquewhite;
+    overflow: hidden;
+    -webkit-text-fill-color: #ffdc00;
 }
+
+.star-ratings-base {
+    z-index: 0;
+    padding: 0;
+}
+
+
+/* 평점 별*/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input {display: none;}
+.rate > label {float: right;color: #000000}
+.rate > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.rate .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.rate input:checked ~ label,
+.rate
+.rate label:hover,.rate label:hover ~ label { color: #ffdc00 !important; }
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,
+.rate label:hover ~ input:checked ~ label { color: #ffdc00 !important;  }
+
+#reviewShowCategory{
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 리뷰 카테코리 */
+#reviewShowCategory span{
+    /*display: inline-block;*/
+    margin-bottom: 5px;
+    float: left;
+    margin-top: 10px;
+    font-size: 25px;
+}
+#reviewShowCategory div {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+/*#reviewCat{*/
+/*    display: flex;*/
+/*}*/
+#reviewCat span{
+    float: left;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+#reviewCat1 {
+    display: block;
+    /* float: left;*/
+    min-height: 21px;
+    font-size: 1.5rem;
+    /*color: rgba(var(--place-color-text1), 1);*/
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+    border: 1px solid black;
+}
+
+#reviewCat2 {
+    display: block;
+    /* float: left;*/
+    min-height: 21px;
+    font-size: 1.5rem;
+    /*color: rgba(var(--place-color-text1), 1);*/
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+    border: 1px solid black;
+}
+#reviewCat3 {
+    display: block;
+    /* float: left;*/
+    min-height: 21px;
+    font-size: 1.5rem;
+    /*color: rgba(var(--place-color-text1), 1);*/
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+    border: 1px solid black;
+}
+#reviewCat4 {
+    display: block;
+    /* float: left;*/
+    min-height: 21px;
+    font-size: 1.5rem;
+    /*color: rgba(var(--place-color-text1), 1);*/
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+    border: 1px solid black;
+}
+#reviewCat5 {
+    display: block;
+    /* float: left;*/
+    min-height: 21px;
+    font-size: 1.5rem;
+    /*color: rgba(var(--place-color-text1), 1);*/
+    font-weight: 600;
+    line-height: 2.1rem;
+    text-align: left;
+    border: 1px solid black;
+}
+
+
+/* .category{
+    margin-top:15px;
+    text-align: left;
+    float: left;
+} */
+.keyword {
+    float: left;
+    margin-top: 5px;
+    /*margin-left: 50px;*/
+}
+
+/* ul */
+.category {
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    /* margin-block-start: 1em; */
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.category2 {
+    float: left;
+    list-style: none;
+    margin: 0;
+    margin-left: 20px;
+    padding: 0;
+    display: block;
+    /* margin-block-start: 1em; */
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.category .category-comment .label-comment {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 5px;
+    padding: 0 17px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 2.6rem;
+    white-space: nowrap;
+    width: 140px;
+}
+.category2 .category-comment .label-comment {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 5px;
+    padding: 0 17px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 2.6rem;
+    white-space: nowrap;
+    width: 140px;
+}
+
+#reviewCat .checkComment {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    /*clip: rlect(0, 0, 0, 0);*/
+}
+
+/* 리뷰 입력창 */
+.category-content {
+    /* display: inline-block; */
+    float: right;
+    /* margin-top: 20px; */
+    /* margin-left: 20px;*/
+    /* margin-bottom: 1500px; */
+}
+
+.reviewComment {
+    height: 200px;
+    float: right;
+    width: 450px;
+    font-size: 20px;
+
+    /*height: 400px;*/
+
+    /* float: left; */
+    /* margin-bottom: 500px; */
+}
+
+/* 버튼들 */
+input {
+    font-size: 15px;
+    letter-spacing: -.3px;
+    line-height: 2rem;
+    width: 70px;
+    border-radius: 5px;
+    margin-right: 5px;
+    float: right;
+}
+
+/*input[type="checkbox"]{*/
+/*    box-sizing: border-box;*/
+/*    display: none;*/
+/*}*/
+/*input[type="checkbox"] + label{*/
+/*    cursor: pointer;*/
+/*    display: inline-block;*/
+/*    background: rgb(0, 192, 112);*/
+/*}*/
+
+/*input[type="radio"]{*/
+/*    box-sizing: border-box;*/
+/*    display: none;*/
+/*}*/
+/*input[type="radio"] + label{*/
+/*    cursor: pointer;*/
+/*    display: inline-block;*/
+/*    background: rgb(0, 192, 112);*/
+/*}*/
+/* 선택시 색상 변경 */
+input[type="checkbox"]:checked + label {
+    background: #e4576e;
+}
+
+/*input[type="radio"]:checked + label{*/
+/*    background: rgb(141, 190, 223);*/
+/*}*/
+
+/*input[type="submit"] {*/
+/*    background-color: rgb(141, 190, 223);*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid black;*/
+/*    !* size: 600px; *!*/
+/*    !* display: inline-block; *!*/
+/*    float: left;*/
+/*    !* margin-left: 90px; *!*/
+/*}*/
+button{
+    display: block;
+    /*float: right;*/
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 20px;
+    background-color: #e4576e;
+}
+#ok{
+    background-color: #e4576e;
+}
+#cancel{
+    background-color: #e4576e;
+}
+
+.foodmap {
+    margin-top:500px;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 500px;
+    width: 200px;
+}
+.map{
+    margin-top: 500px;
+}
+
+.card{
+    display: inline-block;
+    /*float: left;*/
+    margin-left: 15px;
+    margin-top: 20px;
+}
+.cardsee{
+    float: left;
+    border-radius: 5px;
+    /*object-fit: cover;*/
+    width: 100%;
+}
+#modalFoodImageTag{
+    float: left;
+    display: block;
+    border-radius: 5px;
+}
+

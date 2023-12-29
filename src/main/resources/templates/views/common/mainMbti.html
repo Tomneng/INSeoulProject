@@ -5,17 +5,21 @@
 
 <th:block th:fragment="mainMbti">
     <div id="mbtiPart" class="container">
-        <div class="row align-items-center">
-            <div class="col-12 col-lg-6 justify-content-lg-end">
-                <img th:src="@{/common/image/mbti/mbti_illustration.JPG}" class="d-block mx-lg-auto img-fluid mt-1" alt="Bootstrap Themes" width="700"
+        <div class="row">
+            <div class="col-12 col-lg-7 justify-content-lg-end justify-content-center">
+                <img id="mainMbtiBoardImg" th:src="@{/common/image/mbti/mbti_illustration.JPG}"
+                     class="d-block mx-lg-auto img-fluid mt-1" alt="Bootstrap Themes" width="700"
                      height="500" loading="lazy">
             </div>
-            <div class="col-12 col-lg-6 text-center text-lg-start">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">MBTI게시판</h1>
-                <p class="lead">나와 같은 MBTI성격유형을 가진 사람들의  'in 서울' 이야기</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-center justify-content-lg-start">
-                    <button id="MBTIboardBtn1" type="button" class="btn btn-lg px-4 me-md-2">보러가기</button>
-                    <button id="MBTIboardBtn2"  type="button" class="btn btn-lg px-4">전체 게시판</button>
+            <div class="col-12 col-lg-5 text-center ">
+                <div id="boardContent">
+                    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">MBTI게시판</h1>
+                    <p class="lead">나와 같은 MBTI성격유형을 가진 사람들의 'in 서울' 이야기</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                        <a th:href="@{/board/list}">
+                            <button id="MBTIboardBtn1" type="button" class="btn btn-lg px-4 me-md-2">보러가기</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>myscrapF</title>
+</head>
+<body>
+    <th:block th:fragment="myscrapF" th:with="logged_user=${#authentication.principal.user}">
+        <div th:each="foodrow : ${frList}" class="divider-container" id="container1">
+            <div class="divider">
+                <input type="checkbox" th:id="${foodrow.foodId}" th:value="${foodrow.foodId}" checked>
+                <a th:href="@{'/food/food_review' + ${foodrow.foodId}}">
+                    <span th:text="${foodrow.storeName}"></span>
+                    <span th:text="${foodrow.storeTel}"></span>
+                    <span th:text="${foodrow.storeAddress}"></span>
+                </a>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

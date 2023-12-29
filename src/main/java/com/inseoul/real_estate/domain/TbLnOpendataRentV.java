@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 public class TbLnOpendataRentV {
 
-
     @JsonProperty("row")
     private List<Row> row;
 

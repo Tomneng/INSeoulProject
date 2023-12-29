@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="putmbti">
+    <div th:each="row : ${myrowlist}" class="divider-container" id="container1">
+        <div class="divider">
+            <input type="checkbox" th:id="${row.houseId}" th:value="${row.houseId}" checked>
+            <a th:href="@{'/realEstate/redetail/' + ${row.houseId}}">
+                <span th:text="${row.ssgName}"></span>
+                <span th:text="${row.dongName}"></span>
+                <span th:text="${row.rentKind}"></span>
+                <span th:text="${row.rentDeposit}"></span>
+                <span th:text="${row.rentFee}"></span>
+                <!--            <span th:text="${row.contractScore}"></span>-->
+            </a>
+        </div>
+    </div>
+</th:block>
+</html>

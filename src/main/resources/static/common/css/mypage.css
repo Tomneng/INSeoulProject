@@ -1,0 +1,193 @@
+body {
+    background-color: var(--bodyBackgroundColor);
+}
+
+.container {
+    margin-top: 50px;
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    background-color: var(--white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.mypageupdate {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mypageupdate button, a.btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 120px;
+}
+
+a.btn {
+    padding: 0px 20px;
+    font-size: 24px;
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 120px;
+}
+
+.mypageupdate button:hover, a.btn:hover {
+    background-color: var(--skycoral);
+    color: var(--white);
+    border: lightpink solid;
+}
+
+.container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mypagelist {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userinfo {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    margin: 0;
+}
+
+.userinfo form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 300px;
+    /*margin-left: 20px;*/
+}
+
+.userinfo form > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+input[type="text"] {
+    width: 800px;
+}
+
+div > span {
+    width: 70px;
+    text-align: center;
+}
+
+.username,
+.nickname,
+.mbti {
+    width: 600px;
+    margin-bottom: 15px;
+}
+
+.overFlowAuto {
+    border-radius: 20px;
+    display: grid;
+    height: 300px;
+    justify-content: left;
+    margin: auto;
+    margin-bottom: 30px;
+    max-width: 750px;
+    overflow: auto;
+    padding: 10px;
+    background-color: var(--skycoral);
+}
+
+.overFlowAuto::-webkit-scrollbar {
+    width: 10px;
+}
+
+.overFlowAuto::-webkit-scrollbar-thumb {
+    background-color: var(--skycoral);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.overFlowAuto::-webkit-scrollbar-track {
+    background-color: lightpink;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.divider-container {
+    transition: transform 0.3s ease-in-out;
+    width: 720px;
+}
+
+.divider-container:hover {
+    transform: scale(1.05);
+}
+
+
+.divider-container .divider {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: var(--mypageCardBackgroundColor);
+
+}
+
+.scrapSubject {
+    color: black;
+    text-align: center;
+}
+
+
+#container1 .divider a {
+    text-decoration-line: none !important;
+    color: var(--white);
+}
+
+
+input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--skycoral);
+}
+
+.userinfo a {
+    width: 350px;
+    height: 65px;
+    text-align: center;
+    font-size: 40px;
+}
+
+#updatea span {
+    margin-bottom: 10px;
+}

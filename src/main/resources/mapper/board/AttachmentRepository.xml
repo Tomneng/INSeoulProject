@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inseoul.board.repository.AttachmentRepository">
+
+    <insert id="insert" flushCache="true" parameterType="arraylist">
+        INSERT INTO attachment(review_source_name, review_file_name, post_id)
+        VALUES
+        <foreach collection="list" item="e" separator=",">
+            (#{e.sourcename}, #{e.filename}, #{param2})
+        </foreach>
+    </insert>
+    <insert id="save" flushCache="true"
+            parameterType="com.inseoul.board.domain.post.Attachment">
+        INSERT INTO attachment(review_source_name, review_file_name, post_id)
+        VALUES
+            (#{sourcename}, #{filename}, #{postId})
+    </insert>
+
+    <!-- 반복해서 사용될 쿼리문은 sql 태그로 정의 include 태그로 가져다 쓸수 있다 -->
+    <sql id="SELECTFILE">
+        SELECT review_source_name "sourcename",
+               review_file_name "filename",
+               post_id "postId",
+               review_img_id "id"
+        FROM attachment
+        WHERE 1 = 1
+    </sql>
+
+    <select id="findByPost" resultType="com.inseoul.board.domain.post.Attachment">
+        <include refid="SELECTFILE"/>
+        AND
+        post_id = #{param1}
+        ORDER BY id ASC
+    </select>
+
+    <select id="findById" resultType="com.inseoul.board.domain.post.Attachment">
+        <include refid="SELECTFILE"/>
+        AND review_img_id = #{id}
+    </select>
+
+    <select id="findByIds" resultType="com.inseoul.board.domain.post.Attachment"
+            parameterType="arraylist">
+        <include refid="SELECTFILE"/>
+        AND review_img_id IN (<foreach collection="array" item="item" separator=",">
+        #{item}
+    </foreach>)
+        ORDER BY review_img_id ASC
+    </select>
+
+    <delete id="deleteByIds" flushCache="true"
+            parameterType="java.util.ArrayList">
+        DELETE FROM attachment
+        WHERE review_img_id IN (<foreach collection="array" item="item" separator=",">
+        #{item}
+    </foreach>)
+
+    </delete>
+
+    <delete id="delete" flushCache="true">
+        DELETE FROM attachment WHERE review_img_id = #{id}
+    </delete>
+
+</mapper>

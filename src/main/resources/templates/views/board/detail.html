@@ -1,64 +1,134 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<!--<script th:unless="${post}">-->
-<!--    alert("해당 정보가 삭제되거나 없습니다")-->
-<!--    history.back();-->
-<!--</script>-->
+<script th:unless="${post}">
+    alert("해당 정보가 삭제되거나 없습니다")
+    history.back();
+</script>
 
-<th:block>
-
+<th:block th:if="${post}" th:with="logged_user=${#authentication.principal.user}"> <!--댓글 쓸 때 필요함.-->
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!--        <link rel="stylesheet" th:href="@{/css/common.css}">-->
+        <link rel="stylesheet" type="text/css" th:href="@{/board/css/detail.css}">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script th:src="@{/board/js/detail.js}"></script>
 
-        <title>조회</title>
+        <!-- 신철희 추가 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+              integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
+
+
+        <script th:inline="javascript">
+            // 나중에 댓글 작성시 필요.
+            const logged_id = [[${logged_user.userId}]];
+        </script>
+
+
+        <title>조회 - [[${post.postId}]]</title>
     </head>
 
     <body>
+    <!--  헤더 추가 - 신철희 -->
+    <th:block th:insert="~{common/header::header}"></th:block>
+
     <div class="container mt-3">
-        <h2>조회</h2>
+        <h2>조회 - [[${post.postId}]]</h2>
         <hr>
         <div class="mb-3 mt-3 clearfix">
-            <span class="float-start me-2">id :</span>
-            <span class="float-start me-3">MBTI : </span>
-            <span class="float-end ms-4">작성일:</span>
-            <span class="float-end">조회수:</span>
+            <span class="float-start me-2">id : [[${post.postId}]]</span>
+            <span class="float-end ms-4">작성일 : [[${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}]]</span>
+            <span class="float-end">조회수 : [[${post.viewcnt}]]</span>
         </div>
 
         <section>
-            <form name="frmDelete" method="post">
-                <input type="hidden" name="id">
+            <form name="frmDelete" th:action="@{/board/delete}" method="post">  <!-- 안녕 -->
+                <input type="hidden" name="postId" th:value="${post.postId}">
             </form>
 
-            <div class="mb-3 mt-3">
-                <label>제목:</label>
-                <span class="form-control"></span>
+            <div class="mb-3">
+                <label>Writer : </label>
+                <span class="form-control bg-light" th:text="${post.user.nickname}"></span>
+                <label>MBTI : </label>
+                <span class="form-control bg-light" th:text="${post.user.mbti}"></span>
             </div>
             <div class="mb-3 mt-3">
-                <label>내용:</label>
-                <div class="border bg-light rounded p-2"></div>
+                <label>Title : </label>
+                <span class="form-control bg-light" th:text="${post.title}"></span>
             </div>
+            <div class="mb-3 mt-3">
+                <label>Content : </label>
+                <div class="border rounded p-2" th:utext="${post.content}"></div>
+            </div>
+
+            <!-- 첨부파일목록 -->
+            <div class="container mt-3 mb-3 border rounded">
+                <div class="mb-3 mt-3">
+                    <label>첨부 파일:</label>
+                    <ul class="list-group mb-1">
+                        <li class="list-group-item" th:each="attachment : ${post.fileList}">
+                            <a th:href="@{/board/download(id=${attachment.id})}" th:text="${attachment.sourcename}"></a>
+                        </li>
+                    </ul>
+                    <!--/* 이미지인 경우 보여주기 */-->
+                    <div th:each="attachment : ${post.fileList}" th:if="${attachment.image}">
+                        <img th:src="@{'/upload/' + ${attachment.filename}}" class="img-thumbnail" alt="Cinque Terre">
+                    </div>
+                </div>
+            </div>
+            <!-- 첨부파일목록 -->
 
             <!-- 하단 링크 -->
             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <a class="btn btn-outline-dark" th:href="@{/board/update}">수정</a>
+                <a class="btn btn-outline-dark" th:href="@{'/board/update/' + ${post.postId}}"
+                   th:if="${logged_user.userId == post.user.userId}">수정</a>
                 <a class="btn btn-outline-dark" th:href="@{/board/list}">목록</a>
-                <button type="button" class="btn btn-outline-primary">삭제</button>
+
+                <button type="button" class="btn btn-outline-danger ms-2" id="btnDel"
+                        th:if="${logged_user.userId == post.user.userId}">
+                    삭제
+                </button>
+
                 <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>
             </div>
+
+            <!-- 댓글 -->
+            <th:block th:insert="~{board/comment::comment}"></th:block>
+            <!-- 댓글 -->
 
         </section>
     </div>
 
+    <!--  푸터 추가 - 신철희  -->
+    <th:block th:insert="~{common/footer::footer}"></th:block>
+
+    <script th:src="@{/board/js/detail.js}"></script>
     </body>
 
 </th:block>
+
+<!-- 신철희 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+        integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY="
+        crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/common/js/common.js}"></script>
 </html>

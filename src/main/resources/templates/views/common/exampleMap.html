@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="exampleMap">
+    <div id="mapEX">
+        <h4>지도 바로가기</h4>
+        <h5>
+            좌표나 장소ID를 이용하여 Kakao 지도에서 해당 위치를 표시한 상태의 URL을 만들수 있습니다. <br>
+            장소ID는 키워드로 장소 검색 API 또는 카테고리로 장소 검색 API를 이용한 경우에 반환된 값에서 확인하실 수 있습니다.
+        </h5>
+        <a href="https://map.kakao.com/link/map/37.402056,127.108212">/link/tourMap/위도,경도 url 샘플과 이미지</a><br>
+        <img th:src="@{/common/image/tourMap/_link_map_위도경도.png}" alt="/link/tourMap/위도,경도"><br>
+        <a href="https://map.kakao.com/link/map/우리회사,37.402056,127.108212">/link/tourMap/이름,위도,경도 url 샘플</a><br>
+        <img th:src="@{/common/image/tourMap/_link_map_이름위도경도.png}" alt="/link/tourMap/이름,위도,경도"><br>
+        <a href="https://map.kakao.com/link/map/18577297">/link/tourMap/장소ID url 샘플</a><br>
+        <img th:src="@{/common/image/tourMap/_link_map_장소ID.png}" alt="/link/tourMap/장소ID"><br>
+
+        <br>
+
+        <h4>길찾기 바로가기</h4>
+        <h5>
+            좌표나 장소ID를 이용하여 해당 위치를 목적지로 지정한 상태의 길찾기 URL을 만들 수 있습니다.
+        </h5>
+        <a href="https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212">/link/to/이름,위도,경도 url 샘플</a><br>
+        <img th:src="@{/common/image/tourMap/_link_to_이름위도경도.png}" alt="/link/to/이름,위도,경도"><br>
+        <a href="https://map.kakao.com/link/to/18577297">/link/to/장소ID url 샘플</a><br>
+        <img th:src="@{/common/image/tourMap/_link_to_장소ID.png}" alt="/link/to/장소ID"><br>
+
+        <br>
+
+        <h4>로드뷰 바로가기</h4>
+        <h5>
+            좌표나 장소ID를 이용하여 해당 위치의 로드뷰를 바로 실행하는 URL을 만들 수 있습니다.
+        </h5>
+        <a href="https://map.kakao.com/link/roadview/37.402056,127.108212">/link/roadview/위도,경도</a><br>
+        <a href="https://map.kakao.com/link/roadview/18577297">/link/roadview/장소ID</a><br>
+
+        <br>
+
+        <h4>지도 검색결과 바로가기</h4>
+        <h5>
+            검색어를 이용하여 검색결과를 표시한 상태의 URL을 만들 수도 있습니다.
+        </h5>
+        <a href="https://map.kakao.com/link/search/카카오">/link/search/검색어</a><br>
+    </div>
+</th:block>
+</html>

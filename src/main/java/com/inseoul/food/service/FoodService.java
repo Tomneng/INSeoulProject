@@ -1,19 +1,25 @@
 package com.inseoul.food.service;
 
 import com.inseoul.food.domain.FoodData;
+import com.inseoul.food.domain.FoodRow;
+import com.inseoul.real_estate.domain.Row;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
 public interface FoodService {
 
-    //음식점 정보 조회
-    List<FoodData> list();
-    //리뷰 작성
-    //review category, star, comment, 첨부파일
-    int write();
+    //음식점 조회
+    //List<FoodRow>list(FoodRow foodRow, Integer page, Model model);
+    List<FoodRow> list(FoodRow foodRow, Model model);
+    //특정아이디 글(select)
+    FoodRow selectById(Long foodId);
 
-    int save(FoodData foodData);
+    double showRating(Long foodId);
 
-    //특정
 
+//    int save(FoodRow row);
+
+    //api 저장
+    void getapi(Model model);
 }
