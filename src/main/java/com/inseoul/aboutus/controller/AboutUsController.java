@@ -47,6 +47,6 @@ public class AboutUsController {
             return "redirect:/aboutus/aboutus";
         }
         model.addAttribute("result", aboutUsService.write(contactUs));
-        return "aboutus/contactUsOk";
+        return "aboutus/contactusOk";
     }
 }
