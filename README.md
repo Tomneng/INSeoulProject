@@ -3,12 +3,12 @@
 <h2>Team 희희낙락</h2>
 <br>
 
-<blockquote><h3>개요</h3></blockquote>
-<p>"in 서울"은 서울에 사는 사람들뿐만 아니라, 서울로 이사를 계획하고 목표로 하는 사람들에게도 주거 정보와 다양한 문화 활동 정보를 제공하는 웹사이트입니다. 또한, MBTI 성격 유형을 기반으로 한 사용자 커뮤니티를 구성하여 정보 교류와 의사 소통을 촉진하며, 사용자 맞춤 정보를 제공하기 위해 사용자의 추천 데이터와 MBTI 성격 유형 정보를 활용합니다.</p>
-<br>
-
 <blockquote><h3>시연 영상</h3></blockquote>
 <p dir="auto"><a href="https://www.youtube.com/watch?v=PpnqkfdnhoM&list=PLedGoSru7949HpjolTIj01PMIzOOTG6Yq&index=6" rel="nofollow">YouTube 보기</a></p>
+<br>
+
+<blockquote><h3>개요</h3></blockquote>
+<p>"in 서울"은 서울에 사는 사람들뿐만 아니라, 서울로 이사를 계획하고 목표로 하는 사람들에게도 주거 정보와 다양한 문화 활동 정보를 제공하는 웹사이트입니다. 또한, MBTI 성격 유형을 기반으로 한 사용자 커뮤니티를 구성하여 정보 교류와 의사 소통을 촉진하며, 사용자 맞춤 정보를 제공하기 위해 사용자의 추천 데이터와 MBTI 성격 유형 정보를 활용합니다.</p>
 <br>
 
 <blockquote><h3>팀원</h3></blockquote>
