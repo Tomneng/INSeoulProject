@@ -96,11 +96,9 @@
                 <a class="btn btn-outline-dark" th:href="@{/board/list}">목록</a>
 
                 <button type="button" class="btn btn-outline-danger ms-2" id="btnDel"
-                        th:if="${logged_user.userId == post.user.userId}">
-                    삭제
-                </button>
+                        th:if="${logged_user.userId == post.user.userId}">삭제</button>
 
-                <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>
+                <a class="btn" th:href="@{/board/write}">작성</a>
             </div>
 
             <!-- 댓글 -->

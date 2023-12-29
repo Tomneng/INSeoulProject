@@ -32,84 +32,82 @@
         <div>
             <h2 class="title" style="color: black;">PlayGround</h2>
         </div>
-
     </div>
-</div>
 
-<div>
-    <!-- 페이징 헤더 -->
-    <div class="mb-3 mt-3 clearfix">
-        <span class="float-start me-2">총 [[${cnt}]]개</span>
-        <span class="float-start">page [[${page}]]/[[${totalPage}]]</span>
-        <span class="float-end">
-                <form name="frmPageRows">
-                    <input type="hidden" name="page" th:value="${page}">
-                    <label for="mbti">Choose your MBTI type:</label>
-                    <select id="mbti" name="mbti" size="5">
-                        <option value="All" selected>All</option>
-                        <option value="ISTJ">ISTJ 거북이</option>
-                        <option value="ISFJ">ISFJ 사슴</option>
-                        <option value="INFJ">INFJ 부엉이</option>
-                        <option value="INTJ">INTJ 독수리</option>
-                        <option value="ISTP">ISTP 나무늘보</option>
-                        <option value="ISFP">ISFP 토끼</option>
-                        <option value="INFP">INFP 코알아</option>
-                        <option value="INTP">INTP 늑대</option>
-                        <option value="ESTP">ESTP 원숭이</option>
-                        <option value="ESFP">ESFP 펭귄</option>
-                        <option value="ENFP">ENFP 너구리</option>
-                        <option value="ENTP">ENTP 여우</option>
-                        <option value="ESTJ">ESTJ 호랑이</option>
-                        <option value="ESFJ">ESFJ 쿼카</option>
-                        <option value="ENFJ">ENFJ 강아지</option>
-                        <option value="ENTJ">ENTJ 사자</option>
-                    </select>
-                    <select class="form-select" name="pageRows">
-                        <option value="10" th:selected="${pageRows==10}">10</option>
-                        <option value="15" th:selected="${pageRows==15}">15</option>
-                        <option value="20" th:selected="${pageRows==20}">20</option>
-                        <option value="50" th:selected="${pageRows==50}">50</option>
-                    </select>
-                </form>
-            </span>
+    <div>
+        <!-- 페이징 헤더 -->
+        <div class="mb-3 mt-3 clearfix">
+            <span class="float-start me-2">총 [[${cnt}]]개</span>
+            <span class="float-start">page [[${page}]]/[[${totalPage}]]</span>
+            <span class="float-end">
+            <form id="boardSelectForm" name="frmPageRows">
+                <input type="hidden" name="page" th:value="${page}">
+                <label for="mbti">Choose your MBTI type</label>
+                <select class="form-select" id="mbti" name="mbti">
+                    <option value="All" selected>All</option>
+                    <option value="ISTJ">ISTJ</option>
+                    <option value="ISFJ">ISFJ</option>
+                    <option value="INFJ">INFJ</option>
+                    <option value="INTJ">INTJ</option>
+                    <option value="ISTP">ISTP</option>
+                    <option value="ISFP">ISFP</option>
+                    <option value="INFP">INFP</option>
+                    <option value="INTP">INTP</option>
+                    <option value="ESTP">ESTP</option>
+                    <option value="ESFP">ESFP</option>
+                    <option value="ENFP">ENFP</option>
+                    <option value="ENTP">ENTP</option>
+                    <option value="ESTJ">ESTJ</option>
+                    <option value="ESFJ">ESFJ</option>
+                    <option value="ENFJ">ENFJ</option>
+                    <option value="ENTJ">ENTJ</option>
+                </select>
+                <select class="form-select" name="pageRows">
+                    <option value="10" th:selected="${pageRows==10}">10</option>
+                    <option value="15" th:selected="${pageRows==15}">15</option>
+                    <option value="20" th:selected="${pageRows==20}">20</option>
+                    <option value="50" th:selected="${pageRows==50}">50</option>
+                </select>
+            </form>
+        </span>
+        </div>
+        <!-- 페이징 헤더 -->
     </div>
-    <!-- 페이징 헤더 -->
-</div>
 
-<!-- 목록 -->
-<table class="table table-hover">
-    <thead class="table">
-    <tr>
-        <th>No</th>
-        <th>Writer</th>
-        <th>MBTI</th>
-        <th>title</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="post : ${list}">
-        <td><span th:text="${post.postId}"></span></td>
-        <td><span th:text="${post.user.nickname}"></span></td>
-        <td><span th:text="${post.user.mbti}"></span></td>
-        <td><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span></td>
-        <td><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
-    </tr>
+    <!-- 목록 -->
+    <table class="table table-hover">
+        <thead class="table">
+        <tr>
+            <th>No</th>
+            <th>Writer</th>
+            <th>MBTI</th>
+            <th>title</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${list}">
+            <td><span th:text="${post.postId}"></span></td>
+            <td><span th:text="${post.user.nickname}"></span></td>
+            <td><span th:text="${post.user.mbti}"></span></td>
+            <td style="width: 600px;"><span><a th:href="@{'/board/detail/' + ${post.postId}}" th:text="${post.title}"></a></span></td>
+            <td style="width: 250px;"><span th:text="${#temporals.format(post.postRegdate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+        </tr>
 
-    </tbody>
-</table>
-<!-- 목록 -->
+        </tbody>
+    </table>
+    <!-- 목록 -->
 
-<div class="row">
-    <div class="col-12">
-        <a class="btn btn-outline-dark" th:href="@{/board/write}">작성</a>    <!--write 요청-->
+    <div class="row">
+        <div class="col-12">
+            <a class="btn" th:href="@{/board/write}">작성</a>    <!--write 요청-->
+        </div>
     </div>
-</div>
 </div>
 <!-- pagination -->
 <th:block th:insert="~{board/pagination::pagination}"></th:block>
 <!-- pagination -->
-
+</div>
 <!--  푸터 블럭 by 철희 12/19  -->
 <th:block th:insert="~{common/footer::footer}"></th:block>
 
