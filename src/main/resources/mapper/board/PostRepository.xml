@@ -103,4 +103,21 @@
         SELECT count(*)
         FROM post
     </select>
+
+    <select id="countMbti" resultType="java.lang.Long">
+        select count(*)
+        from post p,
+             user u
+        where p.id = u.user_id
+          and u.mbti = #{mbti};
+    </select>
+
+    <select id="selectMbtiFromRow" resultMap="mapPost">
+        <include refid="SELECT_JOIN_BASE"/>
+        and mbti = #{mbti}
+        ORDER BY post_id DESC
+        LIMIT #{param1}, #{param2}
+    </select>
+
+
 </mapper>
