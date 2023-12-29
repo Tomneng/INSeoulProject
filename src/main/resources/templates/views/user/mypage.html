@@ -74,7 +74,7 @@
                     <span>MBTI</span>
                         <input value="MBTI" type="text" class="mbti" disabled th:value="${user.mbti}">
                 </div>
-                <a class="btn ms-2" th:href="@{'/user/userinfo/' + ${user.userId}}">수정</a>
+                <a class="btn ms-2" id="updatea" th:href="@{'/user/userinfo/' + ${user.userId}}"><span>수정</span></a>
             </form>
         </div>
 

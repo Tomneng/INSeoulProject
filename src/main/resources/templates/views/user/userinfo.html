@@ -57,25 +57,22 @@
         <button type="button" class="userinfoupdate" name="button" value="회원정보">회원정보</button>
     </div>
 
+    <div class="container">
     <div class="userinfo" style="display: flex">
 <!--        <img th:src="@{/mypage/image/profile.png}" alt="profile" style="width: 100px; height: 100px; margin-top: 60px">-->
         <form th:action="@{/user/mypage}" method="POST" name="frm3" style="margin-left: 20px;">
             <input type="hidden" name="userId" class="inputadjust" th:value="${user.userId}"/>
 <!--            <div class="username" style="width: unset">-->
             <div class="username">
-                <label>
                     <span>이메일</span>
                     <input type="text" class="inputadjust" id="username" name="username" th:value="${username} ? ${username} : ${user.username}" th:readonly="${user.providerId}">
                     <span class="text-danger" th:if="${error_username}" th:utext="${error_username}"></span>
-                </label>
             </div>
 <!--            <div class="nickname" style="width: unset">-->
             <div class="nickname">
-                <label>
                     <span>이름</span>
                     <input type="text" id="nickname" name="nickname" th:value="${nickname} ? ${nickname} : ${user.nickname}" th:readonly="${user.providerId}">
                     <span class="text-danger" th:if="${error_nickname}" th:utext="${error_nickname}"></span>
-                </label>
             </div>
 <!--            <div class="currentpassword" style="width: unset">-->
 <!--                <label>-->
@@ -90,8 +87,8 @@
 <!--                </label>-->
 <!--            </div>-->
             <div class="mbti" style="width: unset">
-                <label>
-                    <span>MBTI</span>
+                    <span>MBTI</span><br>
+                    <div id="mbtiradio">
                     <input type="radio" class="mbties" id="ESFP" name="mbti" th:value="ESFP" th:checked="${user.mbti == 'ESFP'}">
                     <label for="ESFP">ESFP</label>
                     <input type="radio" class="mbties" id="ENFP" name="mbti" th:value="ENFP" th:checked="${user.mbti == 'ENFP'}">
@@ -124,10 +121,11 @@
                     <label for="ISTJ">ISTJ</label>
                     <input type="radio" class="mbties" id="INTJ" name="mbti" th:value="INTJ" th:checked="${user.mbti == 'INTJ'}">
                     <label for="INTJ">INTJ</label>
-                </label>
+                    </div>
             </div>
-            <button type="submit" class="btn btn-outline-dark" th:if="${logged_user.userId == user.userId}">수정완료</button>
+            <button type="submit" id="updatecomplete" class="btn btn-outline-dark" th:if="${logged_user.userId == user.userId}">수정완료</button>
         </form>
+    </div>
     </div>
     </body>
 </th:block>

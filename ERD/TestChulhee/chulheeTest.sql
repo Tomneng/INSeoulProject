@@ -41,4 +41,8 @@ LIMIT 4;
 
 SELECT * FROM tourinfosaved;
 
+DELETE FROM tour WHERE tour_image1 = '';
+
+SELECT * FROM tour;
+
 

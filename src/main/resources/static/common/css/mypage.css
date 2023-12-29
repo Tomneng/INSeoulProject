@@ -31,6 +31,18 @@ body {
     width: 120px;
 }
 
+a.btn {
+    padding: 0px 20px;
+    font-size: 24px;
+    background-color: var(--white);
+    color: var(--skycoral);
+    border: var(--skycoral) solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 120px;
+}
+
 .mypageupdate button:hover, a.btn:hover {
     background-color: var(--skycoral);
     color: var(--white);
@@ -179,3 +191,6 @@ input[type="checkbox"]:checked {
     font-size: 40px;
 }
 
+#updatea span {
+    margin-bottom: 10px;
+}
