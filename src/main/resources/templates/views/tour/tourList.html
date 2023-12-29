@@ -135,7 +135,7 @@
                 <div class="row row-cols-4">
                     <div th:each="item : ${list}" class="col mb-3 tours tour-item" id="container1">
                         <div class="divider">
-                            <input type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}">
+                            <input type="checkbox" class="seeScrapted" th:id="${item.tourId}" th:value="${item.tourId}">
                             <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">
                                 <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
                                      class="img-fluid" id="tourImage1">

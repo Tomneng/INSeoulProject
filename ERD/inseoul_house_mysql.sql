@@ -484,4 +484,6 @@ SELECT * FROM tourinfosaved NATURAL JOIN user;
 INSERT INTO tourInfoSaved(user_id, tour_id)
 values(4, 100);
 
-SELECT * FROM tour
+SELECT * FROM tour;
+
+DELETE * FROM tour WHERE tourimage1='';

@@ -52,7 +52,7 @@ public class TourController {
             item.setMbtiT("MBTI");
             tourService.listDefault(item, page, model);
         }
-        if (item.getMbtiT().equals("MBTI")){
+        else if (item.getMbtiT().equals("MBTI")){
             tourService.listDefault(item, page, model);
 
         }
