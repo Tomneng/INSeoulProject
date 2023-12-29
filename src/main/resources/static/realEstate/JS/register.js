@@ -26,8 +26,7 @@ $(document).ready(function (){
                 cache: false,
                 success: function(data, status) {
                     if(status == "success"){
-                        value = data.authCode;
-                        console.log(data);
+                        return;
                     }
                 }
             })

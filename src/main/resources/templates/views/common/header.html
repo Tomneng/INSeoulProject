@@ -46,7 +46,7 @@
                         </li>
                         <!-- 권한이 관리자인 경우에 보여주는 관리자페이지 탭 -->
                         <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a id="tabAdminAnswer" class="nav-link" th:href="@{/admin/adminanswer}">관리자답변</a>
+                            <a id="tabAdminAnswer" class="nav-link" th:href="@{/admin/complains}">관리자답변</a>
                         </li>
                     </ul>
 
