@@ -21,7 +21,7 @@
     <resultMap id="mapTourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
         <result column="tour_scrapted_id" property="tourScraptedId"/>
         <result column="tour_id" property="tourId"/>
-        <result column="id" property="userId"/>
+        <result column="user_id" property="userId"/>
     </resultMap>
 
     <insert id="addHouseScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedHouse"

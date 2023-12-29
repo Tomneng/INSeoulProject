@@ -20,7 +20,7 @@ public interface BoardService {
     int deleteById(Long postId);
 
     // 페이징 리스트
-    List<Post> list(Integer page, Model model);
+    List<Post> list(Integer page, Model model, String mbti);
 
     @Transactional
     Post detail(long postId);

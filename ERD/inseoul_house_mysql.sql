@@ -472,16 +472,12 @@ SELECT *
 FROM post;
 
 
-SELECT * FROM houseinfosaved Natural join user;
+SELECT * FROM houseinfosaved NATURAL JOIN user;
 INSERT INTO houseInfoSaved(user_id, house_id)
-values(4, 111);
+values(6, 351);
 SELECT * from user;
-SELECT * from tour WHERE tour_id = 100;
-SELECT * FROM house_Contract;
+SELECT * from tour;
 
-SELECT * FROM tourinfosaved NATURAL JOIN user;
 
-INSERT INTO tourInfoSaved(user_id, tour_id)
-values(4, 100);
 
-SELECT * FROM tour
+

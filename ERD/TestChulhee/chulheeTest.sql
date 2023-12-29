@@ -1,5 +1,5 @@
 alter table user
-add column mbti varchar(4);
+    add column mbti varchar(4);
 
 
 UPDATE post
