@@ -57,7 +57,7 @@ a.btn {
     margin-bottom: 10px;
 }
 
-.mypagelist{
+.mypagelist {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -67,6 +67,7 @@ a.btn {
     display: flex;
     justify-content: center;
 }
+
 form {
     margin: 0;
 }
@@ -87,11 +88,11 @@ form {
     flex-direction: row;
 }
 
-input[type="text"]{
+input[type="text"] {
     width: 800px;
 }
 
-div > span{
+div > span {
     width: 70px;
     text-align: center;
 }
@@ -133,13 +134,9 @@ div > span{
     box-shadow: inset 0px 0px 5px white;
 }
 
-
-#realScrapPart {
-    max-width: 480px;
-}
-
 .divider-container {
     transition: transform 0.3s ease-in-out;
+    width: 720px;
 }
 
 .divider-container:hover {

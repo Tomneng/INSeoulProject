@@ -45,7 +45,7 @@ body {
     margin-bottom: 10px;
 }
 
-.mypagelist{
+.mypagelist {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -55,6 +55,7 @@ body {
     display: flex;
     justify-content: center;
 }
+
 form {
     margin: 0;
 }
@@ -75,11 +76,11 @@ form {
     flex-direction: row;
 }
 
-input[type="text"]{
+input[type="text"] {
     width: 450px;
 }
 
-div > span{
+div > span {
     width: 70px;
     text-align: center;
 }
@@ -230,5 +231,3 @@ label {
     color: var(--white);
     border: lightpink solid;
 }
-
-
