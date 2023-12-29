@@ -22,6 +22,27 @@
 				},
 				"auth-model": "native"
 			}
+		},
+		"mysql8-18cb3a65d00-7a9aaf76a26a310b": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "inseoul-rds.cx3q6uc4pan5.ap-northeast-2.rds.amazon",
+			"save-password": true,
+			"configuration": {
+				"host": "inseoul-rds.cx3q6uc4pan5.ap-northeast-2.rds.amazonaws.com",
+				"port": "3306",
+				"url": "jdbc:mysql://inseoul-rds.cx3q6uc4pan5.ap-northeast-2.rds.amazonaws.com:3306/",
+				"configurationType": "MANUAL",
+				"home": "C:\\Program Files\\MySQL\\MySQL Server 8.0",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"rewriteBatchedStatements": "true",
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
+					"allowPublicKeyRetrieval": "TRUE"
+				},
+				"auth-model": "native"
+			}
 		}
 	},
 	"connection-types": {

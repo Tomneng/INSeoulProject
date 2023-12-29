@@ -18,7 +18,7 @@
         <result column="tour_mapy" property="tourMapy"/>
     </resultMap>
 
-    <resultMap id="mapTourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
+    <resultMap id="maptourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
         <result column="tour_scrapted_id" property="tourScraptedId"/>
         <result column="tour_id" property="tourId"/>
         <result column="user_id" property="userId"/>
@@ -26,23 +26,23 @@
 
     <insert id="addHouseScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedHouse"
             useGeneratedKeys="true" keyColumn="house_scrapted_id" keyProperty="houseScraptedId">
-       INSERT INTO houseinfosaved(user_id, house_id)
+       INSERT INTO houseInfoSaved(user_id, house_id)
        VALUES (#{userId}, #{houseId})
     </insert>
 
     <select id="selectScrapted" resultType="com.inseoul.real_estate.domain.Row">
         SELECT house_id "houseId", ssg_name "ssgName", dong_name "dongName", rent_kind "rentKind", rent_deposit "rentDeposit", rent_fee "rentFee"
-        FROM house_contract
+        FROM house_Contract
         WHERE house_id = #{houseId}
     </select>
     <select id="getids" resultType="java.lang.Long">
         SELECT house_id "houseId"
-        FROM houseinfosaved
+        FROM houseInfoSaved
         WHERE user_id = #{userId}
     </select>
     <select id="scrapCheck" resultType="java.lang.Integer">
         SELECT count(*)
-        FROM houseinfosaved
+        FROM houseInfoSaved
         WHERE user_id = #{userId} AND house_id = #{houseId}
     </select>
 
@@ -56,7 +56,7 @@
         FROM
             tour t
                 JOIN
-            tourinfosaved ts ON t.tour_id = ts.tour_id
+            tourInfoSaved ts ON t.tour_id = ts.tour_id
         GROUP BY
             t.tour_id
         ORDER BY
@@ -64,12 +64,12 @@
             LIMIT 4
     </select>
     <delete id="deleteScrap" flushCache="true">
-        DELETE FROM houseinfosaved WHERE user_id = #{userId} AND house_id = ${houseId}
+        DELETE FROM houseInfoSaved WHERE user_id = #{userId} AND house_id = ${houseId}
     </delete>
 
     <insert id="addTourScrapt" flushCache="true" parameterType="com.inseoul.user.domain.UserScraptedTour"
     useGeneratedKeys="true" keyColumn="tour_scrapted_id" keyProperty="tourScraptedId">
-        INSERT INTO tourinfosaved
+        INSERT INTO tourInfoSaved
             (user_id, tour_id)
         VALUES
             (#{userId}, #{tourId})
@@ -77,13 +77,13 @@
 
     <select id="getIdsTour" resultType="java.lang.Long">
         SELECT tour_id "tourId"
-        FROM tourinfosaved
+        FROM tourInfoSaved
         WHERE user_id = #{userId}
     </select>
 
     <select id="scrapCheckTour" resultType="java.lang.Integer">
         SELECT count(*)
-        FROM tourinfosaved
+        FROM tourInfoSaved
         WHERE user_id = #{userId} AND tour_id = #{tourId}
     </select>
 
@@ -94,7 +94,7 @@
     </select>
 
     <delete id="deleteScrapTour" flushCache="true">
-        DELETE FROM tourinfosaved WHERE user_id = #{userId} AND tour_id = ${tourId}
+        DELETE FROM tourInfoSaved WHERE user_id = #{userId} AND tour_id = ${tourId}
     </delete>
 
 

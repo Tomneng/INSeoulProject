@@ -1,5 +1,8 @@
+USE inseouldb;
+
 SET SESSION FOREIGN_KEY_CHECKS = 0;
-select * from post;
+
+SHOW tables;
 
 /* Drop Tables */
 
@@ -38,8 +41,8 @@ CREATE TABLE attachment
 -- 권한테이블
 CREATE TABLE authority
 (
-    authority_id   int PRIMARY KEY AUTO_INCREMENT, #column명 다름 비버에 있는걸로 할듯
-    authority_name varchar(80) NOT NULL UNIQUE     #column명 다름 비버에 있는걸로 할듯 + 길이제한 다름
+    authority_id   int PRIMARY KEY AUTO_INCREMENT, 
+    authority_name varchar(80) NOT NULL UNIQUE     
 ) COMMENT = '권한테이블';
 
 
@@ -89,7 +92,7 @@ CREATE TABLE contact_us
     email       varchar(100) NOT NULL,
     content     longtext     NOT NULL,
     answer      longtext,
-    is_answered boolean      NOT NULL DEFAULT false # 비버에 디폴트 설정 잘못됨 (고쳐야함)
+    is_answered boolean      NOT NULL DEFAULT false 
 ) COMMENT = '문의사항테이블';
 
 
@@ -141,27 +144,27 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     house_id        int PRIMARY KEY AUTO_INCREMENT,
     acc_year        VARCHAR(4)  NOT NULL,
     ssg_code        int         NOT NULL,
-    ssg_name        VARCHAR(10) NOT NULL, #colum 명 다름 name으로 할것임
+    ssg_name        VARCHAR(10) NOT NULL, 
     dong_code       int         NOT NULL,
     dong_name       VARCHAR(10) NOT NULL,
     land_kind       int,
     land_kind_name  varchar(5),
     bobn            varchar(4),
     bubn            varchar(4),
-    floor           int,                  #타입이 다름
+    floor           int,                  
     contract_date   varchar(10) NOT NULL,
     rent_kind       varchar(2)  NOT NULL,
-    rent_area       DOUBLE      NOT NULL, #area가 맞음 are는 오타
+    rent_area       DOUBLE      NOT NULL, 
     rent_deposit    int         NOT NULL,
     rent_fee        int         NOT NULL,
     building_name   varchar(50),
     build_year      int,
     house_kind_name varchar(20),
-    contract_period varchar(20),          #이거 null 허용으로 바꿈
+    contract_period varchar(20),          
     place_score     int,
     contract_score  int,
     new_ron_secd    varchar(2),
-    address         varchar(100),         # column명이 다름 이걸로 갈듯
+    address         varchar(100),         
     mbtiTop         varchar(4) DEFAULT 'MBTI'
 ) COMMENT = '부동산계약데이터테이블';
 
@@ -169,11 +172,11 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
 -- 부동산 점수테이블
 CREATE TABLE houseContractScore
 (
-    user_id        int REFERENCES user (user_id),            #column명 다름 이걸로 갈듯
-    house_id       int REFERENCES house_contract (house_id), #외래키설정 비버에 안되있음
+    user_id        int REFERENCES user (user_id),           
+    house_id       int REFERENCES house_contract (house_id), 
     contract_score int DEFAULT 0,
     place_score    int,
-    PRIMARY KEY (user_id, house_id)                          #비버에 pk설정 안되있음
+    PRIMARY KEY (user_id, house_id)                          
 ) COMMENT = '부동산 점수테이블';
 
 
@@ -181,8 +184,8 @@ CREATE TABLE houseContractScore
 CREATE TABLE houseInfoSaved
 (
     house_scrapted_id int PRIMARY KEY AUTO_INCREMENT,
-    user_id           int REFERENCES user (user_id),           #이거도 다름
-    house_id          int REFERENCES house_contract (house_id) #이거 굳이 NOTNULL필요없을거 같긴함
+    user_id           int REFERENCES user (user_id),           
+    house_id          int REFERENCES house_contract (house_id) 
 ) COMMENT = '부동산정보스크랩테이블';
 
 
@@ -194,7 +197,7 @@ CREATE TABLE post
     title        varchar(50) NOT NULL COMMENT '게시글제목',
     content      longtext COMMENT '게시글내용',
     viewcnt      int      default 0 COMMENT '조회수',
-    post_regdate datetime default now(), #NOT NULL에서 default now()로 변경 - 신철희 12/21 16:00
+    post_regdate datetime default now(), 
     PRIMARY KEY (post_id),
     UNIQUE (post_id)
 ) COMMENT = '게시글테이블';
@@ -253,12 +256,12 @@ CREATE TABLE tourInfoSaved
 -- 회원테이블
 CREATE TABLE user
 (
-    user_id    int PRIMARY KEY AUTO_INCREMENT, #이건 둘다 똑같은데 user_id로 갈듯
-    username   varchar(100) NOT NULL UNIQUE,   #column명 다름 email임이게
-    password   varchar(200) NOT NULL,          #길이제한 다름 (수정함)
-    nickname   varchar(80)  NOT NULL,          #column명 다름, nickname으로 갈듯(수정함)
-    regdate    datetime DEFAULT now(),         #column명 다름, 비버에 디폴트값없음(수정함)
-    providerId varchar(200),                   #비버에 이거랑 provider 둘다 추가되야됨
+    user_id    int PRIMARY KEY AUTO_INCREMENT, 
+    username   varchar(100) NOT NULL UNIQUE,   
+    password   varchar(200) NOT NULL,          
+    nickname   varchar(80)  NOT NULL,         
+    regdate    datetime DEFAULT now(),         
+    providerId varchar(200),                   
     provider   varchar(40),
     mbti       varchar(4)
 ) COMMENT = '회원테이블';
@@ -267,9 +270,9 @@ CREATE TABLE user
 -- 회원권한테이블
 CREATE TABLE user_authority
 (
-    user_id      int NOT NULL,          #column명 다름 이걸로 갈듯
+    user_id      int NOT NULL,          
     authority_id int NOT NULL,
-    PRIMARY KEY (user_id, authority_id) #Unique 설정 필요없긴함
+    PRIMARY KEY (user_id, authority_id) 
 ) COMMENT = '회원권한테이블';
 
 
@@ -343,7 +346,7 @@ ALTER TABLE comment
     ADD FOREIGN KEY (post_id)
         REFERENCES post (post_id)
         ON UPDATE RESTRICT
-        ON DELETE CASCADE # RESTRICT에서 CASCADE로 변경 - 신철희 12/21 16:00
+        ON DELETE CASCADE 
 ;
 
 
@@ -351,7 +354,7 @@ ALTER TABLE post_like
     ADD FOREIGN KEY (post_id)
         REFERENCES post (post_id)
         ON UPDATE RESTRICT
-        ON DELETE CASCADE # RESTRICT에서 CASCADE로 변경 - 신철희 12/21 16:00
+        ON DELETE CASCADE 
 ;
 
 
@@ -449,34 +452,6 @@ FROM authority;
 INSERT INTO authority (authority_name)
 VALUES ('ROLE_MEMBER'),
        ('ROLE_ADMIN');
-
-SELECT *
-FROM houseContractScore;
-SELECT *
-FROM user;
-SELECT contract_score, place_score
-FROM house_Contract
-WHERE acc_year = '2023'
-  AND ssg_name = '관악구'
-  AND dong_code = 10200
-  AND house_kind_name = '아파트';
-SELECT *
-FROM contact_us;
-
-
-SELECT *
-FROM comment;
-SELECT *
-FROM attachment;
-SELECT *
-FROM post;
-
-
-SELECT * FROM houseinfosaved NATURAL JOIN user;
-INSERT INTO houseInfoSaved(user_id, house_id)
-values(6, 351);
-SELECT * from user;
-SELECT * from tour;
 
 
 
