@@ -21,4 +21,4 @@
 <p>Spring Security, Gradle, JDBC, MySQL, Chart.js, lombok, swiper, java.mail</p>
 
 <blockquote><h3>시연영상</h3></blockquote>
-<p dir="auto"><a href="[https://youtu.be/2gtT-Kq7P9g](https://www.youtube.com/watch?v=PpnqkfdnhoM&list=PLedGoSru7949HpjolTIj01PMIzOOTG6Yq&index=6)https://www.youtube.com/watch?v=PpnqkfdnhoM&list=PLedGoSru7949HpjolTIj01PMIzOOTG6Yq&index=6" rel="nofollow">YouTube 보기</a></p>
+<p dir="auto"><a href="www.youtube.com/watch?v=PpnqkfdnhoM&list=PLedGoSru7949HpjolTIj01PMIzOOTG6Yq&index=6" rel="nofollow">YouTube 보기</a></p>
