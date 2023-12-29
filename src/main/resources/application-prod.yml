@@ -28,7 +28,7 @@ spring:
 # datasource 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${rds.hostnmae}:${rds.host}/${rds.db.name}?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${rds.hostname}:${rds.host}/${rds.db.name}?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: ${user}
     password: ${password}
 
