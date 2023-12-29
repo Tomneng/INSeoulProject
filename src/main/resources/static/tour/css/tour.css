@@ -20,19 +20,6 @@ body {
     border-radius: 8px;
 }
 
-/*#btn_tour {*/
-/*    background-color: #007bff;*/
-/*    color: #fff;*/
-/*    border: none;*/
-/*    padding: 8px 16px;*/
-/*    border-radius: 4px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#btn_tour:hover {*/
-/*    background-color: #0056b3;*/
-/*}*/
-
 .tour-item {
     border-radius: 8px;
     overflow: hidden;
@@ -45,12 +32,6 @@ body {
 .tour-item:hover {
     transform: scale(1.05);
 }
-
-/*#footer {*/
-/*    position: fixed;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*}*/
 
 tbody {
     width: 100%;
@@ -124,4 +105,8 @@ tbody {
 
 #tourListRow {
     justify-content: center;
+}
+
+input[type="checkbox" i] {
+    text-align: right;
 }
