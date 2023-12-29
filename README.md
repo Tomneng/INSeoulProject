@@ -17,4 +17,4 @@
 <br>
 
 <blockquote><h3>사용기술</h3></blockquote>
-
+<p>HTML5, CSS3, JavaScript, jQuery, JSON, Ajax, BootStrap5.0, Java, Spring5.0, Spring Security, Gradle, JDBC, MySQL, Chart.js, lombok, swiper, java.mail</p>
