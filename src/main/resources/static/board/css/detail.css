@@ -11,3 +11,33 @@
     margin-right: 10px; /* 각 댓글 사이에 간격을 두세요 */
 }
 
+a.btn, #btn_comment {
+    border: solid 1px var(--skycoral);
+    color: var(--skycoral);
+    font-size: 1.5rem;
+    width: 77px;
+}
+
+a.btn:hover, #btn_comment:hover {
+    border: solid 1px var(--skycoral);
+    color: var(--white);
+    background-color: var(--skycoral);
+}
+
+#btnDel {
+    border: solid 1px red;
+    color: var(--white);
+    background-color: red;
+    font-size: 1.5rem;
+    width: 77px;
+}
+
+#btnDel:hover {
+    border: solid 1px var(--skycoral);
+    color: var(--skycoral);
+    background-color: var(--white);
+}
+
+.form-control {
+    font-size: 2rem !important;
+}

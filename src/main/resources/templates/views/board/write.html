@@ -63,19 +63,19 @@
             </div>
 
             <!-- 첨부파일 -->
-            <div class="container mt-3 mb-3 border rounded">
+            <div class="container mt-3 mb-3 border rounded" id="attachment" >
                 <div class="mb-3 mt-3">
                     <label>첨부파일:</label>
                     <div id="files">
 
                     </div>
-                    <button type="button" id="btnAdd" class="btn btn-secondary">추가</button>
+                    <button type="button" id="btnAdd" class="btn">추가</button>
                 </div>
             </div>
             <!-- 첨부파일 -->
 
-            <button type="submit" class="btn btn-outline-dark">작성완료</button>
-            <a class="btn btn-outline-dark" th:href="@{/board/list(page=${session.page})}">목록</a>
+            <button type="submit" class="btn">작성완료</button>
+            <a class="btn" th:href="@{/board/list(page=${session.page})}">목록</a>
         </form>
 
     </div>

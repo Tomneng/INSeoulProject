@@ -224,9 +224,11 @@ public class BoardServiceImpl implements BoardService {
 
         long cnt = 0;
 
-        if (mbti == null || mbti == "All") {
+        if (mbti == null || mbti.equals("All")) {
             cnt = postRepository.countAll();   // 글 목록 전체의 개수
+            System.out.println("mbtiSelect가 null 또는 All일때 출력, mbti값은" + mbti);
         } else {
+            System.out.println("mbtiSelect가 else일때 출력, mbti값은 " + mbti);
             cnt = postRepository.countMbti(mbti);
         }
         System.out.println("게시판에서 선택한 mbti가 작성한 글의 수는 " + cnt);
@@ -255,7 +257,7 @@ public class BoardServiceImpl implements BoardService {
             if (endPage >= totalPage) endPage = totalPage;
 
             // 해당페이지의 글 목록 읽어오기
-            if (mbti == null || mbti == "All") {
+            if (mbti == null || mbti.equals("All")) {
                 list = postRepository.selectFromRow(fromRow, pageRows);
             } else {
                 list = postRepository.selectMbtiFromRow(fromRow, pageRows, mbti);

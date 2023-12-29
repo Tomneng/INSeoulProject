@@ -14,7 +14,7 @@
       <!-- ROLE_MEMBER 권한 가진 사용자만 댓글 작성 가능 -->
       <div class="input-group my-2" sec:authorize="hasAnyRole('ADMIN', 'MEMBER')">
         <input type="text" class="form-control" id="input_comment">
-        <button type="button" class="btn btn-outline-primary" id="btn_comment">작성</button>
+        <button type="button" class="btn" id="btn_comment">작성</button>
       </div>
 
       <table class="table table-hover mt-3" id="cmt_table">

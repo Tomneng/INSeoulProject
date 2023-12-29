@@ -112,7 +112,7 @@ function buildComment(result) {
         let regdate = comment.regdate;
 
         let userId = comment.user.userId;   // 댓글 테이블에 있는 유저의 유저아이디
-        let username = comment.user.username;
+        let nickname = comment.user.nickname;
         let name = comment.user.name;
 
         // 삭제버튼 여부: 작성자 본인인 경우만 삭제 버튼 보이게 하기
@@ -124,7 +124,7 @@ function buildComment(result) {
 
         const row = `
             <tr>
-            <td><span><strong>${username}</strong><br><small class="text-secondary">(${name})</small></span></td>
+            <td><span><strong>${nickname}</strong></span></td>
             <td>
                <span>${content}</span>${delBtn}
             </td>

@@ -9,25 +9,17 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
               crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
         <link rel="stylesheet" type="text/css" th:href="@{/realEstate/CSS/infoList.css}">
 
         <!--철희 추가 12/19-->
         <link rel="stylesheet" type="text/css" th:href="@{/common/css/common.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCarousel.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCardTab.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCard.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainCultureSlider.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/common/css/mainMbti.css}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script th:src="@{/realEstate/JS/infoList.js}"></script>
 
         <title>간단한 웹페이지</title>
 
     </head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <body>
     <!--  헤더 추가 철희 -->
@@ -37,8 +29,8 @@
         <form th:action="@{/realEstate/infoList}" method="post" name="houseForm">
             <select id="selectYear" name="accYear" style="width: 100px;">
             </select>
-            <select id="selectSSG" name="ssgName" style="width: 150px;">
-                <option selected>자치구를 먼저 선택해주세요</option>
+            <select id="selectSSG" name="ssgName" style="width: 150px;" required>
+                <option selected value="">자치구를 먼저 선택해주세요</option>
             </select>
             <select id="selectBJDONG" name="dongCode" style="width: 150px;">
                 <option>자치구를 먼저 선택해주세요</option>
@@ -109,6 +101,10 @@
         <span class="float-start">[[${page}]]/[[${totalPage}]] page</span>
     </div>
 
+    <div th:unless="${list}" style="text-align: center;">
+        자치구를 선택해 주세요.
+    </div>
+
     <div class="divider-containerParents justify-content-center row">
         <div th:each="row : ${list}" class="divider-container" id="container1">
             <div class="divider">
@@ -125,11 +121,6 @@
             </div>
         </div>
     </div>
-
-    <div th:unless="${list}" style="text-align: center;">
-        정보가 없어용
-    </div>
-
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

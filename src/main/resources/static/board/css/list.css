@@ -24,3 +24,67 @@
 }
 
 
+.form-select {
+    width: 70px;
+    height: 50px;
+    font-size: 1.7rem;
+}
+
+
+#boardSelectForm {
+    display: flex;
+}
+
+a {
+    color: #212529;
+    text-decoration-line: none;
+}
+
+a.page-link {
+    background-color: var(--white);
+    border: solid 1px var(--skycoral);
+    color: var(--skycoral);
+
+}
+
+a.page-link:hover {
+    background-color: var(--skycoral);
+    border: solid 1px var(--skycoral);
+    color: var(--white);
+}
+
+.active > a.page-link {
+    background-color: var(--skycoral);
+    border: solid 1px var(--skycoral);
+}
+
+a.btn {
+    border: solid 1px var(--skycoral);
+    color: var(--skycoral);
+    font-size: 1.5rem;
+    width: 77px;
+}
+
+a.btn:hover {
+    border: solid 1px var(--skycoral);
+    color: var(--white);
+    background-color: var(--skycoral);
+}
+
+@media (min-width: 1200px)
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1140px;
+}
+@media (min-width: 992px)
+.container, .container-lg, .container-md, .container-sm {
+    max-width: 960px;
+}
+@media (min-width: 768px)
+.container, .container-md, .container-sm {
+    max-width: 720px;
+}
+
+@media (min-width: 576px)
+.container, .container-sm {
+    max-width: 540px;
+}

@@ -19,23 +19,23 @@ $(function(){
 });
 
 // 썸머노트
-$("#content").summernote({
-    height: 300,
-    // width: 1000,
-    // minHeight: null,
-    // focus: true,
-    // lang: "ko-KR",
-    // placeholder: '최대 2000자까지 쓸 수 있습니다',
-    // toolbar: [
-    //     ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-    //     ['insert', ['picture', 'link']],
-    //     ['para', ['ul', 'ol', 'paragraph']],
-    //     ['height', ['height']]
-    // ],
-    // fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
-    // // 추가한 폰트사이즈
-    // fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-});
+// $("#content").summernote({
+//     height: 300,
+//     // width: 1000,
+//     // minHeight: null,
+//     // focus: true,
+//     // lang: "ko-KR",
+//     // placeholder: '최대 2000자까지 쓸 수 있습니다',
+//     // toolbar: [
+//     //     ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+//     //     ['insert', ['picture', 'link']],
+//     //     ['para', ['ul', 'ol', 'paragraph']],
+//     //     ['height', ['height']]
+//     // ],
+//     // fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+//     // // 추가한 폰트사이즈
+//     // fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+// });
 
 function deleteFiles(fileId) {
     $("#delFiles").append(`<input type='hidden' name='delfile' value='${fileId}'>`);

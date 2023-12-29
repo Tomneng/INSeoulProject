@@ -1,0 +1,16 @@
+.form-control {
+    font-size: 2rem !important;
+}
+
+a.btn, button.btn {
+    border: solid 1px var(--skycoral);
+    color: var(--skycoral);
+    font-size: 1.5rem;
+    width: 77px;
+}
+
+a.btn:hover, button.btn:hover {
+    border: solid 1px var(--skycoral);
+    color: var(--white);
+    background-color: var(--skycoral);
+}
