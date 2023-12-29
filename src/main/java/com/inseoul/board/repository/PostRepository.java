@@ -36,4 +36,7 @@ public interface PostRepository {
 
     // 해당mbti글의 개수
     long countMbti(String mbti);
+
+    List<Post> selectMbtiFromRow(int from, int rows, String mbti);
+    
 }

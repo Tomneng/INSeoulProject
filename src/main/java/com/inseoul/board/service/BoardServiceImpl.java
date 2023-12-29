@@ -201,7 +201,7 @@ public class BoardServiceImpl implements BoardService {
     // 페이징 리스트
     @Override
     public List<Post> list(Integer page, Model model, String mbti) {
-        System.out.println("보드서비스임플 리스트 page, model, mbti = " + page + ", " + model + ", " + mbti); // 정상 출력 확인
+        System.out.println("보드서비스임플 리스트 page, model, mbti은 " + page + ", " + model + ", " + mbti); // 정상 출력 확인
 
         // 현재 페이지 parameter
         if (page == null) page = 1; // 디폴트는 1page
@@ -211,7 +211,7 @@ public class BoardServiceImpl implements BoardService {
         // writePages: 한 [페이징] 당 몇개의 페이지가 표시되나
         // pageRows: 한 '페이지'에 몇개의 글을 리스트 할것인가?
         HttpSession session = U.getSession();
-        System.out.println("보드서비스임플 리스트 session = " + session);
+        System.out.println("보드서비스임플 리스트 session은 " + session);
 
         Integer writePages = (Integer) session.getAttribute("writePages");
         if (writePages == null) writePages = WRITE_PAGES;  // 만약 session 에 없으면 기본값으로 동작
@@ -224,7 +224,7 @@ public class BoardServiceImpl implements BoardService {
 
         long cnt = 0;
 
-        if (mbti == "All") {
+        if (mbti == null || mbti == "All") {
             cnt = postRepository.countAll();   // 글 목록 전체의 개수
         } else {
             cnt = postRepository.countMbti(mbti);
@@ -232,7 +232,8 @@ public class BoardServiceImpl implements BoardService {
         System.out.println("게시판에서 선택한 mbti가 작성한 글의 수는 " + cnt);
 
 
-        int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지' ?
+        int totalPage = (int) Math.ceil(cnt / (double) pageRows);   // 총 몇 '페이지' ?, 총 페이지의 수 정상 출력 확인
+
 
         // [페이징] 에 표시할 '시작페이지' 와 '마지막페이지'
         int startPage = 0;
@@ -254,8 +255,12 @@ public class BoardServiceImpl implements BoardService {
             if (endPage >= totalPage) endPage = totalPage;
 
             // 해당페이지의 글 목록 읽어오기
-            list = postRepository.selectFromRow(fromRow, pageRows);
-            System.out.println("보드서비스임플 페이징리스트함수 list값 == " + list);
+            if (mbti == null || mbti == "All") {
+                list = postRepository.selectFromRow(fromRow, pageRows);
+            } else {
+                list = postRepository.selectMbtiFromRow(fromRow, pageRows, mbti);
+            }
+            System.out.println("보드서비스임플 페이징리스트 list값은 " + list);
 
             model.addAttribute("list", list);
         } else {

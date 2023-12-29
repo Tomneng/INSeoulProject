@@ -112,5 +112,12 @@
           and u.mbti = #{mbti};
     </select>
 
+    <select id="selectMbtiFromRow" resultMap="mapPost">
+        <include refid="SELECT_JOIN_BASE"/>
+        and mbti = #{mbti}
+        ORDER BY post_id DESC
+        LIMIT #{param1}, #{param2}
+    </select>
+
 
 </mapper>
