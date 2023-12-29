@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $("#done").click(function (){
+        let form = document.forms['houseForm'];
+        form.submit();
+    })
     // 여기 철희가 추가 12/19
     // 헤더에 active class 추가
     $("#tabRealEstate").addClass("active");
@@ -27,11 +32,10 @@ $(document).ready(function () {
             cache: false,
             success: function (data, status) {
                 if (status == "success") {
-                    const init = document.querySelector("#container1").firstElementChild
-                    const val = parseInt(init.firstElementChild.value);
-                    for (i = val; i > val - 12; i--) {
-                        if (data.includes(i)) {
-                            document.getElementById(`${i}`).checked = true;
+                    for (i = 0; i < 12; i++) {
+                        var id = parseInt(document.getElementsByClassName("form-check-input").item(i).id);
+                        if(data.includes(id)){
+                            document.getElementById(`${id}`).checked = true;
                         }
                     }
                 }

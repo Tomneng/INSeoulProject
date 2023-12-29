@@ -60,7 +60,60 @@
                 <option value="25">중랑구</option>
             </select>
             <input type="text" name="tourName" id="tourName" placeholder="관광지명을 검색하세요.">
-            <button type="submit" id="btn_tour">검색</button>
+            <select id="selectMbti" name="mbtiT" style="width: 100px">
+                <option class="mbties" id="MBTI" value="MBTI">
+                    <label for="MBTI">MBTI</label>
+                </option>
+                <option class="mbties" id="ESFP" value="ESFP">
+                    <label for="ESFP">ESFP</label>
+                </option>
+                <option class="mbties" id="ISTJ" value="ISTJ">
+                    <label for="ISTJ">ISTJ</label>
+                </option>
+                <option class="mbties" id="ISFJ" value="ISFJ">
+                    <label for="ISFJ">ISFJ</label>
+                </option>
+                <option class="mbties" id="INFJ" value="INFJ">
+                    <label for="INFJ">INFJ</label>
+                </option>
+                <option class="mbties" id="INTJ" value="INTJ">
+                    <label for="INTJ">INTJ</label>
+                </option>
+                <option class="mbties" id="ISTP" value="ISTP">
+                    <label for="ISTP">ISTP</label>
+                </option>
+                <option class="mbties" id="ISFP" value="ISFP">
+                    <label for="ISFP">ISFP</label>
+                </option>
+                <option class="mbties" id="INFP" value="INFP">
+                    <label for="INFP">INFP</label>
+                </option>
+                <option class="mbties" id="INTP" value="INTP">
+                    <label for="INTP">INTP</label>
+                </option>
+                <option class="mbties" id="ESTP" value="ESTP">
+                    <label for="ESTP">ESTP</label>
+                </option>
+                <option class="mbties" id="ENFP" value="ENFP">
+                    <label for="ENFP">ENFP</label>
+                </option>
+                <option class="mbties" id="ENTP" value="ENTP">
+                    <label for="ENTP">ENTP</label>
+                </option>
+                <option class="mbties" id="ESTJ" value="ESTJ">
+                    <label for="ESTJ">ESTJ</label>
+                </option>
+                <option class="mbties" id="ESFJ" value="ESFJ">
+                    <label for="ESFJ">ESFJ</label>
+                </option>
+                <option class="mbties" id="ENFJ" value="ENFJ">
+                    <label for="ENFJ">ENFJ</label>
+                </option>
+                <option class="mbties" id="ENTJ" value="ENTJ">
+                    <label for="ENTJ">ENTJ</label>
+                </option>
+            </select>
+            <button type="submit" id="btn_tour" style="width: 150px; margin-left: 10px;">검색</button>
         </div>
     </form>
 
@@ -78,11 +131,12 @@
                 <div id="tourListRow" class="row row-cols-4">
                     <div th:each="item : ${list}" class="col mb-3 tours tour-item" id="container1">
                         <div class="divider">
-                            <input class="tourListCheckbox" type="checkbox" th:id="${item.tourId}" th:value="${item.tourId}">
+                            <input type="checkbox" class="seeScrapted" th:id="${item.tourId}" th:value="${item.tourId}">
                             <a th:href="@{'/tour/tourDetail/' + ${item.tourId}}">
                                 <img th:src="${item.tourImage1 != null && item.tourImage1 != '' ? item.tourImage1 : '/tour/image/img_none_01.png'}"
                                      class="img-fluid" id="tourImage1">
                                 <span th:text="${item.tourName}"></span>
+                                <span>가장 많이 스크랩한 MBTI : </span><span th:text="${item.mbtiT}"></span>
                             </a>
                         </div>
                     </div>

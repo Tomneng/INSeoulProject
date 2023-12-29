@@ -3,6 +3,7 @@ package com.inseoul.real_estate.service;
 import com.inseoul.real_estate.domain.Housedata;
 import com.inseoul.real_estate.domain.Row;
 import com.inseoul.real_estate.domain.TbLnOpendataRentV;
+import com.inseoul.user.domain.User;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface HouseService {
 
     List<Row> houseOnmain();
 
+    void getOredered();
+
+    List<Row> listDefault(Row row2, Integer page, Model model);
 }

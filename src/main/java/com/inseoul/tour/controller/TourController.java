@@ -4,6 +4,7 @@ import com.inseoul.real_estate.domain.Housedata;
 import com.inseoul.tour.domain.*;
 import com.inseoul.tour.service.TourService;
 import com.inseoul.tour.util.U;
+import jakarta.mail.Session;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -45,8 +46,19 @@ public class TourController {
 //    }
 
     @RequestMapping("/tourList")
-    public void list(Item item, Integer page, Model model) {
-        tourService.list(item, page, model);
+    public void list(@Valid Item item, Integer page, Model model) {
+        tourService.getOrederedTour();
+        if (item.getMbtiT() == null){
+            item.setMbtiT("MBTI");
+            tourService.listDefault(item, page, model);
+        }
+        else if (item.getMbtiT().equals("MBTI")){
+            tourService.listDefault(item, page, model);
+
+        }
+        else {
+            tourService.list(item, page, model);
+        }
     }
 
     @GetMapping("/tourDetail/{tourId}")
@@ -57,10 +69,10 @@ public class TourController {
 
     // 페이징
     // pageRows 변경시 동작
-    @PostMapping("/pageRows")
-    public String pageRows(Integer page, Integer pageRows) {
-        U.getSession().setAttribute("pageRows", pageRows);
-        return "redirect:/tour/tourList?page=" + page;
-    }
+//    @PostMapping("/pageRows")
+//    public String pageRows(Integer page, Integer pageRows) {
+//        U.getSession().setAttribute("pageRows", pageRows);
+//        return "redirect:/tour/tourList?page=" + page;
+//    }
 
 }

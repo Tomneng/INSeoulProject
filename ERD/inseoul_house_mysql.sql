@@ -161,7 +161,8 @@ CREATE TABLE house_Contract #테이블명 다름, 이걸로 갈듯
     place_score     int,
     contract_score  int,
     new_ron_secd    varchar(2),
-    address         varchar(100)          # column명이 다름 이걸로 갈듯
+    address         varchar(100),         # column명이 다름 이걸로 갈듯
+    mbtiTop         varchar(4) DEFAULT 'MBTI'
 ) COMMENT = '부동산계약데이터테이블';
 
 
@@ -234,18 +235,18 @@ CREATE TABLE tour
     tour_contentid   int,
     tour_sigungucode varchar(10),
     tour_mapx        double,
-    tour_mapy        double
+    tour_mapy        double,
+    tour_mbtiTop     varchar(4) DEFAULT 'MBTI'
 ) COMMENT = '관광테이블';
 
 
 -- 관광정보스크랩테이블
 CREATE TABLE tourInfoSaved
 (
-    tour_scrapted_id int NOT NULL AUTO_INCREMENT COMMENT '관광정보스크랩아이디',
+    tour_scrapted_id int AUTO_INCREMENT COMMENT '관광정보스크랩아이디',
     tour_id          int NOT NULL COMMENT '관광지아이디',
-    id               int NOT NULL COMMENT '회원아이디',
-    PRIMARY KEY (tour_scrapted_id),
-    UNIQUE (tour_id)
+    user_id               int NOT NULL COMMENT '회원아이디',
+    PRIMARY KEY (tour_scrapted_id)
 ) COMMENT = '관광정보스크랩테이블';
 
 
@@ -427,7 +428,7 @@ ALTER TABLE post_like
 
 
 ALTER TABLE tourInfoSaved
-    ADD FOREIGN KEY (id)
+    ADD FOREIGN KEY (user_id)
         REFERENCES user (user_id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
@@ -471,12 +472,18 @@ SELECT *
 FROM post;
 
 
-SELECT * FROM houseinfosaved NATURAL JOIN user;
+SELECT * FROM houseinfosaved Natural join user;
 INSERT INTO houseInfoSaved(user_id, house_id)
-values(6, 351);
+values(4, 111);
 SELECT * from user;
-SELECT * from tour;
+SELECT * from tour WHERE tour_id = 100;
+SELECT * FROM house_Contract;
 
+SELECT * FROM tourinfosaved NATURAL JOIN user;
 
+INSERT INTO tourInfoSaved(user_id, tour_id)
+values(4, 100);
 
+SELECT * FROM tour;
 
+DELETE * FROM tour WHERE tourimage1='';

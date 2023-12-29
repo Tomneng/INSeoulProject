@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     // 페이지 크기 변경 시, 폼을 제출하는 코드 (기존 코드 유지)
     $("[name='pageRows']").change(function () {
         let frm = $("[name='frmPageRows']");
@@ -19,17 +20,12 @@ $(document).ready(function () {
         data: userId,
         cache: false,
         success: function (data, status) {
-            const those = [];
-            for (let i = 0; i < document.getElementsByClassName("tours").length; i++) {
-                those.push(document.getElementsByClassName("tours")[i].querySelector("input").value);
-            }
             // console.log(those);
             if (status === "success") {
-                for (let i = 0; i < those.length; i++) {
-                    if (data.includes(parseInt(those[i]))) {
-                        const val = those[i]
-                        console.log(val);
-                        document.getElementById(`${val}`).checked = true;
+                for (i = 0; i < 12; i++) {
+                    var id = parseInt(document.getElementsByClassName("seeScrapted").item(i).id);
+                    if(data.includes(id)){
+                        document.getElementById(`${id}`).checked = true;
                     }
                 }
             }

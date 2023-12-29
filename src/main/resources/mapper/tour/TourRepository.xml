@@ -13,6 +13,11 @@
         VALUES (#{tourName}, #{tourAddr1}, #{tourAddr2}, #{tourImage1}, #{tourImage2}, #{tourContentid},
                 #{tourSigungucode}, #{tourMapx}, #{tourMapy})
     </insert>
+    <update id="putTop1">
+        UPDATE tour
+        SET tour_mbtiTop = #{mbtiT}
+        WHERE tour_id = #{tourId}
+    </update>
 
     <sql id="SELECT_BASE">
         SELECT tour_id          "tourId",
@@ -24,29 +29,11 @@
                tour_contentid   "tourContentid",
                tour_sigungucode "tourSigungucode",
                tour_mapx        "tourMapx",
-               tour_mapy        "tourMapy"
+               tour_mapy        "tourMapy",
+               tour_mbtiTop     "mbtiT"
         FROM tour
         WHERE 1 = 1
     </sql>
-
-    <resultMap id="mapTourInfoSaved" type="com.inseoul.user.domain.UserScraptedTour">
-        <result column="tour_scrapted_id" property="tourScraptedId"/>
-        <result column="tour_id" property="tourId"/>
-        <result column="id" property="userId"/>
-    </resultMap>
-
-    <resultMap id="mapTour" type="com.inseoul.tour.domain.Item">
-        <result column="tour_id" property="tourId"/>
-        <result column="tour_name" property="tourName"/>
-        <result column="tour_addr1" property="tourAddr1"/>
-        <result column="tour_addr2" property="tourAddr2"/>
-        <result column="tour_image1" property="tourImage1"/>
-        <result column="tour_image2" property="tourImage2"/>
-        <result column="tour_contentid" property="tourContentid"/>
-        <result column="tour_sigungucode" property="tourSigungucode"/>
-        <result column="tour_mapx" property="tourMapx"/>
-        <result column="tour_mapy" property="tourMapy"/>
-    </resultMap>
 
     <select id="selectById" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
@@ -54,6 +41,13 @@
     </select>
 
     <select id="selectFromRow" resultType="com.inseoul.tour.domain.Item">
+        <include refid="SELECT_BASE"/>
+        AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%") AND tour_mbtiTop = #{mbtiT}
+        ORDER BY tour_id DESC
+        LIMIT #{param3}, #{param4}
+    </select>
+
+    <select id="selectFromRowDefault" resultType="com.inseoul.tour.domain.Item">
         <include refid="SELECT_BASE"/>
         AND tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat("%", #{tourName}, "%")
         ORDER BY tour_id DESC
@@ -64,7 +58,13 @@
         SELECT count(tour_id)
         FROM tour
         WHERE tour_sigungucode = #{tourSigungucode}
-          AND tour_name LIKE concat("%", #{tourName}, "%")
+          AND tour_name LIKE concat('%', #{tourName}, '%') AND tour_mbtiTop = #{mbtiT}
+    </select>
+
+    <select id="countAllDefault" resultType="java.lang.Integer">
+        SELECT count(tour_id)
+        FROM tour
+        WHERE tour_sigungucode = #{tourSigungucode} AND tour_name LIKE concat('%', #{tourName}, '%')
     </select>
 
     <select id="getRandomTourCard" resultType="com.inseoul.tour.domain.Item">
@@ -91,8 +91,7 @@
 
     <select id="top3Prop" resultType="java.lang.Integer">
         SELECT round(100 * count(u.mbti) / (SELECT count(*) FROM tourinfosaved WHERE tour_id = #{tourId}))
-        FROM tourinfosaved t
-                 NATURAL JOIN user u
+        FROM tourinfosaved t NATURAL JOIN user u
         WHERE t.tour_id = #{tourId}
         Group by u.mbti
         ORDER BY 1 DESC LIMIT 3
@@ -110,6 +109,10 @@
         from food
         where store_tel = #{storeTel}
         ORDER BY food_id DESC LIMIT 1
+    </select>
+    <select id="countAllForReal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM tour
     </select>
 
 
