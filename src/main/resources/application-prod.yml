@@ -56,7 +56,7 @@ spring:
               - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://ec2-3-39-37-180.ap-northeast-2.compute.amazonaws.com/login/oauth2/code/naver
         # provider 제공(google 과 facebook는 기본으로 제공함)
         provider:
           naver:
@@ -86,7 +86,7 @@ app:
 
     kakao:
       client-id: ${k.clientId}
-      redirect-uri: http://localhost:8080/oauth2/kakao/callback
+      redirect-uri: http://ec2-3-39-37-180.ap-northeast-2.compute.amazonaws.com/oauth2/kakao/callback
       token-uri: https://kauth.kakao.com/oauth/token
       user-info-uri: https://kapi.kakao.com/v2/user/me
 
