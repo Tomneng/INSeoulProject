@@ -1,8 +1,5 @@
 <h1>"in 서울"</h1>
 
-<h2>서비스 배포 URL</h2>
-<a href="http://ec2-3-39-37-180.ap-northeast-2.compute.amazonaws.com/user/login2">http://ec2-3-39-37-180.ap-northeast-2.compute.amazonaws.com/user/login2</a>
-
 <h2>Team 희희낙락</h2>
 <br>
 
