@@ -23,6 +23,9 @@
 <br>
 
 <blockquote><h3>사용기술</h3></blockquote>
-<p>HTML5, CSS3, JavaScript, jQuery, JSON, Ajax, BootStrap5.0, Java, Spring5.0,</p>
-<p>Spring Security, Gradle, JDBC, MySQL, Chart.js, lombok, swiper, java.mail</p>
+<p>JAVA, Spring Framework, Spring Boot, Spring Security, Lombok, </p>
+<p>ORM, RDBMS, JPA, JDBC, MyBatis, MySQL, Java.mail, Gradle, </p>
+<p>Git, GitHub, AWS, AWS EC2, AWS RDS, </p>
+<p>ReactJS, JavaScript, jQuery, JSON, Ajax, HTML5, CSS3, Chart.js, Swiper, API</p>
+
 <br>
