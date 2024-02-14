@@ -26,6 +26,6 @@
 <p>JAVA, Spring Framework, Spring Boot, Spring Security, Lombok, </p>
 <p>ORM, RDBMS, JPA, JDBC, MyBatis, MySQL, Java.mail, Gradle, </p>
 <p>Git, GitHub, AWS, AWS EC2, AWS RDS, </p>
-<p>ReactJS, JavaScript, jQuery, JSON, Ajax, HTML5, CSS3, Chart.js, Swiper, API</p>
+<p>ReactJS, JavaScript, jQuery, JSON, Ajax, HTML5, CSS3, Chart.js, Swiper.js, API</p>
 
 <br>
